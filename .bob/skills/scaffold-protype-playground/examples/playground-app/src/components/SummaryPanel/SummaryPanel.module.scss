@@ -1,0 +1,43 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+.summaryPanel {
+  display: grid;
+  align-content: start;
+  gap: $spacing-05;
+  padding: $spacing-05;
+  background: $layer-selected-inverse;
+  color: $text-inverse;
+  border-block-end: 1px solid $border-subtle;
+}
+
+.summaryPanelStatus {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+.summaryPanelButton {
+  width: fit-content;
+}
+
+.summaryPanelStatusText,
+.summaryPanelTerm {
+  color: $text-inverse;
+  opacity: 0.78;
+}
+
+.summaryPanelList {
+  display: grid;
+  gap: $spacing-04;
+  margin: 0;
+}
+
+.summaryPanelDescription {
+  display: block;
+  margin: $spacing-02 0 0;
+  overflow-wrap: anywhere;
+  color: $text-inverse;
+}

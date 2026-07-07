@@ -15,11 +15,15 @@ Do not generate a giant shell installer. Build the repository files directly.
 ## Non-Negotiables
 
 - Use npm workspaces, not Git submodules.
-- Use `packages/` for stable shared packages.
-- Use `apps-prototypes/` for experimental full-stack prototypes.
-- Use `playground-app/` for the isolated management and documentation dashboard.
+- Use `packages/` for stable shared packages, providers, and code that's shared between prototypes.
+- Use `hooks` for hooks that should be shared across prototypes
+- Use `prototypes/` for experimental full-stack prototypes.
+- Use `hub/` for the isolated management and documentation dashboard.
 - Use IBM Carbon v11 through `@carbon/react`.
-- Use Dart Sass with `@use '@carbon/react'`.
+- Use Dart Sass with `@use '@carbon/react'`
+- Use SCSS Modules
+- Build and maintain custom components as self-contained barel exported components (including tests, storybooks stories, etc.)
+- Build and maintain custom hooks directly in prototypes, and allow to be migrated to `hooks/`
 - Include `@carbon-labs/mdx-components` in `playground-app`.
 - Include docs, Box or OneDrive storage links, and stubbed Context fields in the registry.
 - Build both the hub/index and detail UI.
@@ -72,8 +76,8 @@ Create a private ESM package with:
   "type": "module",
   "workspaces": [
     "packages/*",
-    "apps-prototypes/*",
-    "playground-app"
+    "prototypes/*",
+    "hub"
   ],
   "engines": {
     "node": ">=20.18.0",
@@ -179,20 +183,7 @@ Create `src/carbon.scss`:
 
 Create `src/styles.scss` with a runtime Carbon spacing bridge:
 
-```scss
-:root {
-  --cds-spacing-01: 0.125rem;
-  --cds-spacing-02: 0.25rem;
-  --cds-spacing-03: 0.5rem;
-  --cds-spacing-04: 0.75rem;
-  --cds-spacing-05: 1rem;
-  --cds-spacing-06: 1.5rem;
-  --cds-spacing-07: 2rem;
-  --cds-spacing-08: 2.5rem;
-  --cds-spacing-09: 3rem;
-  --cds-spacing-10: 4rem;
-}
-```
+Always import style tokens from Carbon, DO NOT recreate carbon tokens as custom variables in a css file. Only create custom css variables with mappings to carbon tokens when requested or ABSOLUTELY necessecary.
 
 Export these React components:
 
@@ -278,6 +269,9 @@ Behavior:
 ```bash
 node --check packages/business-logic/src/index.js
 ```
+
+Use Playwright to capture and share walkthroughs and screenshots of the UI.
+
 
 ## Phase 4: Express API Prototype
 
@@ -438,7 +432,7 @@ Every registry object includes:
 - `rootLaunchCommand`
 - `docs`
 - `storageLinks`
-- `context`
+- `context` optional
 
 Seed entries:
 
@@ -471,6 +465,13 @@ npm run build -w @platform/playground-app
 ```
 
 ## Phase 7: Playground Hub and Detail UI
+
+### Example Implementation
+
+Leverage the example UI's from the examples directory in this skill.
+You can copy them, use them as reference for future screens, etc.
+
+Do not work from scratch. These are the baseline, not the finished product.
 
 ### Files
 
@@ -525,7 +526,61 @@ Include:
 - Context section for future LLM wiki integration
 - Resources grid
 - metadata aside
-- screenshot anchor placeholder
+- `MediaGallery` — screenshots and recordings gallery (see Media Gallery spec below)
+
+### Media Gallery Spec
+
+Located at `playground-app/src/components/MediaGallery/`.
+
+#### Behaviour
+
+- **Main stage**: 4:3 aspect-ratio preview with `object-fit: contain` letterboxing for non-4:3 content.
+- **Thumbnail rail**: horizontally scrollable strip below the stage, `scroll-snap-type: x mandatory`, `scroll-behavior: smooth`. Active thumb scrolled into view automatically.
+- **Lightbox**: full-screen overlay (`position: fixed`, `z-index: 9000`). Opens on stage click or thumb click-then-confirm. Keyboard: `←`/`→` navigate, `Esc` closes. Click outside inner panel also closes.
+- **Video items**: shown with poster image and play-badge in both stage and thumbnails; `<video controls autoPlay>` rendered inside lightbox.
+- **Placeholder fallback**: when `items` prop is empty or omitted, renders 5 `placehold.co` placeholder items so the gallery is never blank.
+
+#### Props
+
+```ts
+interface MediaItem {
+  id:       string;            // unique key
+  type:     'image' | 'video';
+  src:      string;            // image URL or video file URL
+  poster?:  string;            // video poster image URL
+  alt:      string;            // image alt text / video title
+  caption?: string;            // optional caption shown in lightbox
+}
+
+interface MediaGalleryProps {
+  items?: MediaItem[];         // falls back to placeholders when empty/omitted
+  title?: string;              // gallery section heading (default: "Screenshots & Recordings")
+}
+```
+
+#### Registry integration
+
+The `media` field on each registry entry should be typed `MediaItem[]`. The Detail view passes `activePrototype.media ?? []` to the component.
+
+#### Playwright inject contract
+
+A Playwright script can populate the gallery without modifying source code:
+
+```ts
+// In a Playwright test or prompt-driven capture script:
+await page.evaluate((items) => {
+  window.__MEDIA_GALLERY_ITEMS__ = items;
+}, capturedItems);
+await page.reload();
+// The gallery reads window.__MEDIA_GALLERY_ITEMS__ at mount and uses it
+// instead of the prop value or the built-in placeholders.
+```
+
+Typical Playwright-populate workflow:
+1. Navigate to each prototype route.
+2. Take `page.screenshot({ path })` or record a video.
+3. Build a `MediaItem[]` from the captured paths/URLs.
+4. Write a JSON sidecar next to the registry entry (`media.json`) or inject via `window.__MEDIA_GALLERY_ITEMS__` for in-session preview.
 
 ### Carbon Visual Rules
 

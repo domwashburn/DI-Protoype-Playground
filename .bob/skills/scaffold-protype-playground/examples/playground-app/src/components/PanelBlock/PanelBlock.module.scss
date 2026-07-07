@@ -1,0 +1,50 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+$header-height: 3rem;
+
+.panelBlock {
+  display: grid;
+  gap: $spacing-06;
+  padding: $spacing-06;
+  background: $layer;
+  border: 1px solid $border-subtle;
+  // Ensure anchored sections are visible below the fixed header
+  scroll-margin-block-start: calc(#{$header-height} + #{$spacing-05});
+}
+
+.panelBlockAccent {
+  border-inline-start: 0.25rem solid $border-interactive;
+}
+
+.panelBlock h2 {
+  @include type-style('heading-03');
+
+  margin: 0;
+}
+
+.panelHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-05;
+
+  @include breakpoint-down('md') {
+    display: grid;
+  }
+}
+
+.panelHeading p {
+  @include type-style('body-01');
+
+  max-width: 44rem;
+  margin-block: $spacing-03 0;
+  color: $text-secondary;
+  overflow-wrap: anywhere;
+}
+
+.panelBadge {
+  flex-shrink: 0;
+}

@@ -1,0 +1,194 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Hero band — full-bleed (Product and docs model)
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// .hubHeroBand is the full-bleed outer wrapper — its background fills edge to
+// edge across the entire content area. The inner Grid + Column aligns the
+// content type to the same column padding as the body grid below.
+
+.hubHeroBand {
+  background: $layer;
+  border-block-end: 1px solid $border-subtle;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Main content stack
+// ─────────────────────────────────────────────────────────────────────────────
+
+// .managementPage is now a child of a Carbon Grid Column — no max-width or
+// margin-inline needed; the Grid owns horizontal spacing.
+.managementPage {
+  display: grid;
+  gap: $spacing-08;
+  padding-block-start: $spacing-07;
+}
+
+.docsEyebrow {
+  @include type-style('label-01');
+
+  margin-block-end: $spacing-04;
+  color: $text-secondary;
+  text-transform: uppercase;
+}
+
+// Hero (inside the band) -----------------------------------------------------
+
+.hubHero {
+  display: grid;
+  gap: $spacing-07;
+  padding-block: $spacing-07;
+
+  @include breakpoint('lg') {
+    grid-template-columns: minmax(0, 1fr) 24rem;
+    align-items: start;
+  }
+}
+
+.hubHeroCopy {
+  min-width: 0;
+}
+
+.hubHero h1 {
+  @include type-style('heading-07');
+
+  max-width: 12ch;
+  margin: 0;
+}
+
+.hubHero p {
+  @include type-style('body-01');
+
+  max-width: 50rem;
+  margin-block: $spacing-04 0;
+  color: $text-secondary;
+}
+
+// Toolbar --------------------------------------------------------------------
+
+.hubToolbar {
+  display: grid;
+  gap: $spacing-05;
+  padding-block: $spacing-05;
+  border-block: 1px solid $border-subtle;
+}
+
+.hubToolbarSearch {
+  max-width: 45rem;
+}
+
+.hubStatusFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-03;
+}
+
+.statusFilter {
+  min-width: 6.25rem;
+}
+
+// Registry board -------------------------------------------------------------
+
+.hubList {
+  display: grid;
+  gap: $spacing-06;
+}
+
+.registryBoard {
+  display: grid;
+  background: $layer;
+  border: 1px solid $border-subtle;
+}
+
+.registryBoardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-06;
+  padding: $spacing-06;
+  border-block-end: 1px solid $border-subtle;
+}
+
+.registryBoardHeader h2 {
+  @include type-style('heading-03');
+
+  margin: 0;
+}
+
+.registryBoardHeader p {
+  @include type-style('body-01');
+
+  max-width: 42rem;
+  margin: $spacing-03 0 0;
+  color: $text-secondary;
+}
+
+.registryBoardHeaderMeta {
+  @include type-style('label-01');
+
+  display: block;
+  color: $text-secondary;
+}
+
+.registryBoardColumns {
+  display: none;
+
+  @include breakpoint('lg') {
+    display: grid;
+    grid-template-columns: minmax(22rem, 1.25fr) minmax(20rem, 0.95fr) minmax(10rem, 0.5fr) 8.5rem;
+    gap: $spacing-06;
+    padding: $spacing-03 $spacing-06;
+    background: $layer-hover;
+    border-block-end: 1px solid $border-subtle;
+  }
+}
+
+.registryBoardColumn {
+  @include type-style('label-01');
+
+  display: block;
+  color: $text-secondary;
+}
+
+.registryList {
+  display: grid;
+}
+
+// Empty state ----------------------------------------------------------------
+
+.emptyState {
+  display: grid;
+  gap: $spacing-03;
+  background: $layer;
+}
+
+.emptyState h2 {
+  @include type-style('heading-03');
+
+  margin: 0;
+}
+
+.emptyState p {
+  @include type-style('body-01');
+
+  margin: 0;
+  color: $text-secondary;
+}
+
+// Responsive -----------------------------------------------------------------
+
+@include breakpoint-down('lg') {
+  .managementPage {
+    gap: $spacing-06;
+    padding-block-start: $spacing-06;
+  }
+
+  .registryBoardHeader {
+    display: grid;
+    padding: $spacing-05;
+  }
+}

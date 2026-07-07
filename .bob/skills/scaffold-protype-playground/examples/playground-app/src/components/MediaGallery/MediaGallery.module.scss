@@ -1,0 +1,420 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Gallery shell
+// ─────────────────────────────────────────────────────────────────────────────
+
+.gallery {
+  display: grid;
+  gap: $spacing-06; // 1.5rem — one clear step between header, stage, and rail
+}
+
+.galleryHeader {
+  display: flex;
+  align-items: baseline;
+  gap: $spacing-04; // 1rem
+  flex-wrap: wrap;
+  border-block-end: 1px solid $border-subtle-01; // paired with $layer-01
+  padding-block-end: $spacing-04;
+}
+
+.galleryEyebrow {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.galleryTitle {
+  @include type-style('heading-03');
+
+  margin: 0;
+  flex: 1;
+  color: $text-primary;
+}
+
+.galleryCount {
+  @include type-style('label-01');
+
+  color: $text-helper; // $text-helper = Gray 60, one step lighter than secondary
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Main stage — 4:3 aspect ratio with letterboxing for non-4:3 content
+// ─────────────────────────────────────────────────────────────────────────────
+
+.stage {
+  background: $layer-02; // White on Gray 10 page
+  border: 1px solid $border-subtle-01;
+}
+
+.stageButton {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+}
+
+.stageButton:focus-visible .stageFrame {
+  outline: 2px solid $focus;
+  outline-offset: 2px;
+}
+
+// 4:3 aspect-ratio box; object-fit: contain provides letterboxing
+.stageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: $layer-02;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stageFrame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; // letterbox non-4:3 content
+  object-position: center;
+}
+
+.stageVideoPoster {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stageVideoPoster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.playBadge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $spacing-09; // 48px — Carbon standard touch target
+  height: $spacing-09;
+  background: $overlay; // $overlay = #161616 @ 50% — Carbon token
+  border-radius: 50%;
+  color: $icon-on-color; // white on interactive bg
+  pointer-events: none;
+}
+
+.stageCaption {
+  @include type-style('label-01');
+
+  margin: 0;
+  padding: $spacing-03 $spacing-05; // $spacing-03 = 0.5rem, $spacing-05 = 1rem
+  color: $text-helper;
+  border-block-start: 1px solid $border-subtle-01;
+  background: $layer-01; // Gray 10 — one layer up from stage surface
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Thumbnail rail — horizontal scroll, scroll-snap, centred when short
+// ─────────────────────────────────────────────────────────────────────────────
+
+.thumbRailWrapper {
+  position: relative;
+}
+
+.thumbRail {
+  display: flex;
+  justify-content: center; // centre short sets; overflow takes over on long sets
+  gap: $spacing-03; // 0.5rem between thumbs
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: $border-strong-01 transparent;
+  padding-block-end: $spacing-03; // room for the thin scrollbar
+
+  // WebKit scrollbar
+  &::-webkit-scrollbar { height: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: $border-strong-01; // Gray 50
+    border-radius: 2px;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Individual thumbnail (stage rail)
+// ─────────────────────────────────────────────────────────────────────────────
+
+.thumb {
+  all: unset;
+  flex: 0 0 auto;
+  width: 6rem;
+  height: 4.5rem; // 4:3 ratio
+  background: $layer-02;
+  border: 1px solid $border-subtle-01;
+  cursor: pointer;
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+  transition: border-color 80ms ease;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // crop to fill in thumbnail; stage does the letterboxing
+  }
+
+  &:hover { border-color: $border-strong-01; }
+
+  &:focus-visible {
+    outline: 2px solid $focus;
+    outline-offset: 2px;
+  }
+}
+
+.thumbActive {
+  border: 2px solid $border-interactive; // $border-interactive = Blue 60
+}
+
+.thumbVideoWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.thumbPlayBadge {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $spacing-07; // 2rem
+  height: $spacing-07;
+  background: $overlay;
+  border-radius: 50%;
+  color: $icon-on-color;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Lightbox — frameless full-screen overlay
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// Grid layout:
+//   col 1 (auto) | col 2 (1fr) | col 3 (auto)
+//   row 1 (1fr)  — prev  | media | next
+//   row 2 (auto) — ────── footer ──────
+//
+// Close button floats outside the grid via position: absolute.
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: auto 1fr auto;
+  background: $overlay; // Carbon $overlay = #161616 @ 50%
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+// ── Close — absolute top-right, $spacing-09 (48px) touch target ──────────────
+.lightboxClose {
+  position: absolute;
+  top: $spacing-05; // 1rem from top
+  right: $spacing-05;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $spacing-09; // 48px — Carbon standard interactive target
+  height: $spacing-09;
+  padding: 0;
+  border: none;
+  background: rgb(0 0 0 / 36%);
+  color: $icon-on-color;
+  cursor: pointer;
+  transition: background 100ms ease;
+
+  &:hover { background: rgb(0 0 0 / 60%); }
+
+  &:focus-visible {
+    outline: 2px solid $focus-inverse; // white focus ring on dark overlay
+    outline-offset: 2px;
+  }
+}
+
+// ── Prev / Next — full-height side columns ────────────────────────────────────
+.lightboxArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 1;
+  width: $spacing-10; // 4rem — wide enough for comfortable click targets
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: $icon-on-color;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 100ms ease, background 100ms ease;
+
+  &:hover {
+    opacity: 1;
+    background: rgb(255 255 255 / 6%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $focus-inverse;
+    outline-offset: -2px;
+  }
+}
+
+.lightboxArrowPrev { grid-column: 1; }
+.lightboxArrowNext { grid-column: 3; }
+
+// ── Media — floats directly on the blurred scrim, no frame ───────────────────
+.lightboxMedia {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  // $spacing-09 top = clear the 48px close btn + $spacing-05 above it + breathing room
+  // $spacing-06 bottom = comfortable separation from footer
+  padding: $spacing-09 0 $spacing-06;
+}
+
+.lightboxMediaEl {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+
+// ── Footer — meta label + counter + full-width centred thumbnail strip ────────
+.lightboxFooter {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  gap: $spacing-03; // 0.5rem — label and rail are both compact
+  padding-block: $spacing-04 $spacing-05; // $spacing-04 = 1rem top, $spacing-05 = 1rem bottom
+  background: rgb(0 0 0 / 38%); // semi-transparent dark band
+  border-block-start: 1px solid rgb(255 255 255 / 8%);
+}
+
+.lightboxMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: $spacing-06; // 1.5rem — align with thumb rail inset
+  gap: $spacing-05;
+}
+
+.lightboxLabel {
+  @include type-style('label-01');
+
+  color: $text-on-color; // $text-on-color = white — readable on dark overlay
+  opacity: 0.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lightboxCaption {
+  @include type-style('body-compact-01'); // one step up from label for captions
+
+  color: $text-on-color;
+  opacity: 0.85;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lightboxCounter {
+  @include type-style('label-01');
+
+  flex-shrink: 0;
+  color: $text-on-color;
+  opacity: 0.45;
+}
+
+// ── Lightbox thumbnail rail — full width, centred ─────────────────────────────
+.lightboxThumbRail {
+  display: flex;
+  justify-content: center; // centre short sets
+  gap: $spacing-02; // 0.25rem — tighter than stage rail, thumbnails are smaller
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-inline: $spacing-06; // 1.5rem inset matches .lightboxMeta
+  padding-block-end: $spacing-02;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 20%) transparent;
+
+  &::-webkit-scrollbar { height: 3px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 20%);
+    border-radius: 2px;
+  }
+}
+
+.lightboxThumb {
+  all: unset;
+  flex: 0 0 auto;
+  width: 5rem;
+  height: 3.75rem; // 4:3
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+  opacity: 0.45;
+  transition: opacity 100ms ease;
+  position: relative;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover { opacity: 0.75; }
+
+  &:focus-visible {
+    outline: 2px solid $focus-inverse;
+    outline-offset: 2px;
+    opacity: 1;
+  }
+}
+
+.lightboxThumbActive {
+  opacity: 1;
+  outline: 2px solid $focus-inverse; // white — consistent with close/arrow focus
+  outline-offset: 2px;
+}

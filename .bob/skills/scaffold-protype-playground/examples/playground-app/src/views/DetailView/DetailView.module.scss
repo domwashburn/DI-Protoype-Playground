@@ -1,0 +1,322 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Layout constants
+// ─────────────────────────────────────────────────────────────────────────────
+
+$header-height: 3rem;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Outer shell — wraps hero + Carbon Grid
+// ─────────────────────────────────────────────────────────────────────────────
+
+.detailShell {
+  min-height: calc(100vh - #{$header-height});
+  // Ensure the full-bleed hero band and body grid share the same left edge
+  // inside the Carbon Content wrapper — no extra horizontal inset needed.
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Carbon Grid row that holds the split body
+// ─────────────────────────────────────────────────────────────────────────────
+
+.detailGrid {
+  align-items: start;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Right aside — sticky, independently scrollable
+// ─────────────────────────────────────────────────────────────────────────────
+
+.detailAside {
+  display: grid;
+  align-content: start;
+  background: $layer;
+  border-inline-start: 1px solid $border-subtle;
+
+  @include breakpoint('lg') {
+    position: sticky;
+    top: $header-height;
+    max-height: calc(100vh - #{$header-height});
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  @include breakpoint-down('lg') {
+    border-inline-start: none;
+    border-block-start: 1px solid $border-subtle;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Hero band — full-bleed container (Product and docs model)
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// .detailHeroBand stretches edge-to-edge across the full content area.
+// Its background colour fills the entire horizontal span (no grid margins).
+// The inner Grid + Column inside it aligns the actual content to the same
+// column padding as the body grid below — this is the Product and docs
+// model pattern: full-bleed band, type on the grid.
+
+.detailHeroBand {
+  background: $layer;
+  border-block-end: 1px solid $border-subtle;
+}
+
+// .detailHero is now purely a content layout inside the band — no background,
+// no border (those live on .detailHeroBand), just spacing and type rhythm.
+.detailHero {
+  display: grid;
+  justify-items: start;
+  gap: $spacing-04;
+  padding-block: $spacing-07;
+}
+
+.docsEyebrow {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+  text-transform: uppercase;
+}
+
+.detailHero h1 {
+  @include type-style('heading-07');
+
+  max-width: 20ch;
+  margin: 0;
+}
+
+.detailHero p {
+  @include type-style('body-01');
+
+  max-width: 50rem;
+  margin: 0;
+  color: $text-secondary;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Panel stack inside main
+// ─────────────────────────────────────────────────────────────────────────────
+
+// .detailPanels lives inside a narrow Grid Column — inline padding is provided
+// by the grid gutters. Only a top spacing token is needed for section rhythm.
+.detailPanels {
+  display: grid;
+  gap: $spacing-06;
+  padding-block-start: $spacing-06;
+
+  @include breakpoint-down('lg') {
+    gap: $spacing-05;
+  }
+}
+
+.tabsHeader {
+  width: 100%;
+  margin-block-start: $spacing-05;
+}
+
+.docsPageSection {
+  display: grid;
+  gap: $spacing-07;
+  padding-block: $spacing-07 0;
+}
+
+.docsSectionHeader {
+  display: grid;
+  gap: $spacing-04;
+  padding-block-end: $spacing-06;
+  border-block-end: 1px solid $border-subtle;
+}
+
+.docsSectionEyebrow {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+  text-transform: uppercase;
+}
+
+.docsSectionHeader h2,
+.docsPageSection h3 {
+  margin: 0;
+}
+
+.docsSectionHeader h2 {
+  @include type-style('heading-05');
+}
+
+.docsSectionHeader p,
+.docsLeadSpace p {
+  @include type-style('body-01');
+
+  max-width: 48rem;
+  margin: 0;
+  color: $text-secondary;
+}
+
+.docsLeadSpace {
+  display: grid;
+  gap: $spacing-05;
+}
+
+.docsTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-03;
+}
+
+.docsTwoColumn {
+  display: grid;
+  gap: $spacing-06;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @include breakpoint-down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docsList {
+  @include type-style('body-01');
+
+  display: grid;
+  gap: $spacing-03;
+  margin: $spacing-04 0 0;
+  padding-inline-start: $spacing-05;
+  color: $text-secondary;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DocsSection — doc list + card layout
+// ─────────────────────────────────────────────────────────────────────────────
+
+.docList {
+  display: grid;
+  border-block-start: 1px solid $border-subtle;
+}
+
+.docCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: $spacing-04;
+  padding-block: $spacing-05;
+  border-block-end: 1px solid $border-subtle;
+
+  @include breakpoint-down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docCard:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.docCardIcon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  background: $layer-hover;
+}
+
+.docCardHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-04;
+  margin-block-end: $spacing-03;
+}
+
+.docCard h3 {
+  @include type-style('heading-01');
+
+  margin: 0;
+}
+
+.docCard p {
+  @include type-style('body-01');
+
+  margin: 0;
+  color: $text-secondary;
+  overflow-wrap: anywhere;
+}
+
+.docCardMeta {
+  display: grid;
+  gap: $spacing-03;
+  margin-block-start: $spacing-04;
+  color: $text-secondary;
+}
+
+.docCardMeta span {
+  @include type-style('label-01');
+
+  font-weight: 600;
+}
+
+.docCardMetaCode {
+  @include type-style('code-01');
+
+  display: block;
+  max-width: 100%;
+  width: fit-content;
+  padding: $spacing-02 $spacing-03;
+  background: $layer-hover;
+  color: $text-primary;
+  overflow-wrap: anywhere;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Health panel — MetricTile row
+// ─────────────────────────────────────────────────────────────────────────────
+
+.metricRow {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  background: $border-subtle;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FilesSection / Resources — resource grid wrapper
+// ─────────────────────────────────────────────────────────────────────────────
+
+.resourceGrid {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  background: $border-subtle;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ContextSection — summary + source list
+// ─────────────────────────────────────────────────────────────────────────────
+
+.contextSummary {
+  display: grid;
+  gap: $spacing-04;
+}
+
+.contextSummary p {
+  @include type-style('body-01');
+
+  max-width: 44rem;
+  margin: 0;
+  color: $text-secondary;
+  overflow-wrap: anywhere;
+}
+
+.contextSourceList {
+  @include type-style('body-01');
+
+  display: grid;
+  gap: $spacing-03;
+  margin: 0;
+  padding-inline-start: $spacing-06;
+  color: $text-primary;
+}
+

@@ -1,0 +1,33 @@
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/spacing' as *;
+
+.metricTile {
+  min-height: 9rem;
+  background: $layer-hover;
+  padding: $spacing-05;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-02;
+}
+
+.label {
+  @include type-style('label-01');
+
+  margin: 0;
+  color: $text-secondary;
+}
+
+.value {
+  @include type-style('heading-02');
+
+  color: $text-primary;
+}
+
+.helper {
+  @include type-style('helper-text-01');
+
+  margin: 0;
+  margin-block-start: auto;
+  color: $text-secondary;
+}

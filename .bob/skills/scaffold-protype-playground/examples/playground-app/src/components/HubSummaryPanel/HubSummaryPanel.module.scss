@@ -1,0 +1,39 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+.hubSummaryPanel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  align-content: start;
+  padding: 0;
+  background: $border-subtle;
+  border: 1px solid $border-subtle;
+}
+
+.hubSummaryPanel > div {
+  min-height: 7rem;
+  padding: $spacing-05;
+  background: $layer;
+
+  @include breakpoint-down('lg') {
+    min-height: 5.75rem;
+  }
+}
+
+.hubSummaryLabel {
+  @include type-style('label-01');
+
+  display: block;
+  color: $text-secondary;
+}
+
+.hubSummaryValue {
+  @include type-style('heading-06');
+
+  display: block;
+  margin-block-start: $spacing-03;
+  color: $text-primary;
+}

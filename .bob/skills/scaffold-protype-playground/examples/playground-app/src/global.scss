@@ -1,0 +1,46 @@
+// global.scss — theme tokens only, applied before Carbon styles.
+// @carbon/react is imported in styles.scss which loads after this file.
+@use '@carbon/react/scss/themes' as themes;
+@use '@carbon/react/scss/theme' as *;
+
+// Default theme: Gray 10 (light)
+:root {
+  @include theme(themes.$g10, true);
+}
+
+// OS dark mode preference → Gray 90, unless explicitly overridden to g10
+@media (prefers-color-scheme: dark) {
+  :root:not([data-carbon-theme='g10']) {
+    @include theme(themes.$g90, true);
+  }
+}
+
+// Explicit data-carbon-theme attribute overrides (set by the header toggle)
+[data-carbon-theme='g10'] {
+  @include theme(themes.$g10, true);
+}
+
+[data-carbon-theme='g90'] {
+  @include theme(themes.$g90, true);
+}
+
+// color-scheme tells the browser which system UI colours to use
+html {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-carbon-theme='g10']) {
+    color-scheme: dark;
+  }
+}
+
+[data-carbon-theme='g90'] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: $background;
+  color: $text-primary;
+}

@@ -1,0 +1,61 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+
+.asideNav {
+  padding: $spacing-05;
+  border-block-end: 1px solid $border-subtle;
+}
+
+.asideNavLabel {
+  @include type-style('label-01');
+
+  margin: 0 0 $spacing-03;
+  color: $text-secondary;
+  text-transform: uppercase;
+}
+
+// Force AnchorLinks into a vertical single-column list inside the aside.
+.asideNav :global([data-anchor-links-list]) {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.asideNav :global([data-anchor-links-container]) {
+  max-width: none;
+  padding-inline: 0;
+}
+
+// Override the horizontal-scroll grid Carbon-labs wraps AnchorLinks in
+.asideNav :global(.cds--grid),
+.asideNav :global(.cds--row) {
+  display: contents;
+}
+
+// Individual link items
+.asideNav :global([data-anchor-link]) {
+  display: block;
+  padding-block: $spacing-03;
+  padding-inline: $spacing-04;
+  border-inline-start: 2px solid transparent;
+  @include type-style('body-01');
+  color: $text-secondary;
+  text-decoration: none;
+  transition: color 70ms ease, border-color 70ms ease, background 70ms ease;
+}
+
+.asideNav :global([data-anchor-link]:hover) {
+  color: $text-primary;
+  background: $layer-hover;
+}
+
+.asideNav :global([data-anchor-link][aria-current='location']),
+.asideNav :global([data-anchor-link].active) {
+  color: $text-primary;
+  border-inline-start-color: $border-interactive;
+  background: $layer-hover;
+}

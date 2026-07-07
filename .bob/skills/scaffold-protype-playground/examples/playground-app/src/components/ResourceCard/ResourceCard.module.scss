@@ -1,0 +1,25 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+
+.resourceCard {
+  display: grid;
+  min-height: 9rem;
+  align-content: space-between;
+  gap: $spacing-04;
+  padding: $spacing-05;
+  background: $layer-hover;
+}
+
+.resourceCard h3 {
+  @include type-style('heading-01');
+
+  margin: 0;
+}
+
+.resourceCard span {
+  @include type-style('body-01');
+
+  color: $text-secondary;
+  overflow-wrap: anywhere;
+}

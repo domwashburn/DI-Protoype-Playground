@@ -1,0 +1,83 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+// Global resets --------------------------------------------------------------
+
+:global(body) {
+  margin: 0;
+  background: $background;
+  color: $text-primary;
+}
+
+:global(*) {
+  box-sizing: border-box;
+}
+
+// Carbon shell overrides -----------------------------------------------------
+// Header is always Gray 100 (#161616) regardless of active theme.
+// Using the literal value keeps it constant across g10 ↔ g90 switches.
+
+:global(.cds--header) {
+  background: #161616;
+  border-block-end: 1px solid #393939;
+}
+
+:global(.cds--header__name),
+:global(.cds--header__name:hover),
+:global(.cds--header__name:focus),
+:global(.cds--header__action),
+:global(.cds--header__menu-trigger) {
+  // $text-inverse = #ffffff, constant across all themes
+  color: #ffffff;
+}
+
+:global(.cds--header__action:hover),
+:global(.cds--header__menu-trigger:hover) {
+  // Gray 100 hover = #2d2d2d
+  background: #2d2d2d;
+}
+
+:global(.cds--side-nav) {
+  background: $layer;
+  border-inline-end: 1px solid $border-subtle;
+  // Ensure the side-nav appears under the fixed header at 3rem (48px).
+  top: 3rem;
+  block-size: calc(100% - 3rem);
+}
+
+:global(.cds--side-nav__items) {
+  padding-block-start: $spacing-03;
+}
+
+// Shell layout ---------------------------------------------------------------
+//
+// The shell is a flex column so Header (fixed) + SideNav (persistent) and
+// Content sit in the standard Carbon product shell arrangement.
+// Carbon's own .cds--content applies margin-inline-start when the SideNav is
+// persistent — we only supplement what Carbon doesn't handle.
+
+.managementShell {
+  min-height: 100vh;
+}
+
+// .managementContent is applied on the same element as .cds--content.
+// cds--content padding/margin is zeroed in styles.scss (compiled after Carbon).
+// We only add block-end breathing room; inline spacing is owned by the Grids.
+.managementContent {
+  min-height: 100vh;
+  background: $background;
+  padding-block-end: $spacing-10;
+  overflow-x: hidden;
+}
+
+// Side-nav search ------------------------------------------------------------
+
+.registrySearch {
+  padding: $spacing-05 $spacing-04;
+  border-block-end: 1px solid $border-subtle;
+}
+
+// Responsive -----------------------------------------------------------------
+
+// No change needed at sm/md — padding-block-start stays 3rem at all breakpoints.

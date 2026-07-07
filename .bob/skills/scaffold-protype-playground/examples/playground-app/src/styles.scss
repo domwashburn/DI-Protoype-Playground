@@ -1,0 +1,45 @@
+// All @use statements must appear before any rules.
+@use '@carbon/react/scss/themes' as themes;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Shell overrides — compiled after Carbon's own tokens
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Header is pinned to Gray 100 regardless of active theme.
+.cds--header {
+  background: #161616;
+  border-block-end: 1px solid #393939;
+}
+
+.cds--side-nav {
+  background: $layer;
+  border-inline-end: 1px solid $border-subtle;
+}
+
+.cds--side-nav__items {
+  padding-block-start: $spacing-03;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Content shell — compiled after @carbon/react so these win
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Carbon's .cds--content by default adds:
+//   margin-block-start: 3rem  (header clearance)
+//   padding-block-start: 3rem (more clearance — doubled when combined)
+//   padding-inline: 2rem      (horizontal inset that prevents full-bleed)
+//
+// We zero inline padding and all block spacing here.
+// .managementContent (same element) re-adds padding-block-start: 3rem
+// so the hero band sits exactly flush below the fixed header.
+.cds--content {
+  // Zero the default inline padding — Grids inside each view own inline spacing.
+  padding-inline: 0;
+  // Zero the extra block padding (Carbon adds both margin + padding for the header
+  // clearance which doubles the offset). Keep margin-block-start so the content
+  // area still starts below the fixed header.
+  padding-block-start: 0;
+}

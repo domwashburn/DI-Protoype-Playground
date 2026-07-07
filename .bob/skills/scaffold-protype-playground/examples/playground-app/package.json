@@ -1,0 +1,27 @@
+{
+  "name": "@platform/playground-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Isolated Management Control Center for prototype documentation and launch metadata.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "check": "npm run build"
+  },
+  "_note": "@platform/business-logic and @platform/ui-components have been intentionally removed. This example is self-contained — the business logic and UI components those packages provided are inlined in src/App.jsx and SCSS is imported from local src/ files.",
+  "dependencies": {
+    "@carbon-labs/mdx-components": "^0.26.0",
+    "@carbon/icons-react": "^11.0.0",
+    "@carbon/react": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sass": "^1.77.0",
+    "vite": "^5.4.0"
+  }
+}
