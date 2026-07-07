@@ -1,0 +1,27 @@
+// All @use statements must appear before any rules.
+@use '@carbon/react/scss/themes' as themes;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+
+// Shell overrides — compiled after Carbon's own tokens
+
+.cds--header {
+  background: #161616;
+  border-block-end: 1px solid #393939;
+}
+
+.cds--side-nav {
+  background: $layer;
+  border-inline-end: 1px solid $border-subtle;
+}
+
+.cds--side-nav__items {
+  padding-block-start: $spacing-03;
+}
+
+// Zero Carbon's default .cds--content inline padding — Grids inside each view
+// own the horizontal spacing.
+.cds--content {
+  padding-inline: 0;
+  padding-block-start: 0;
+}

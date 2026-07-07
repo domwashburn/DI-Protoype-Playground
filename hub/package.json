@@ -1,0 +1,26 @@
+{
+  "name": "@platform/playground-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Decision Intelligence prototype registry and Management Control Center.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "check": "npm run build"
+  },
+  "dependencies": {
+    "@carbon-labs/mdx-components": "^0.26.0",
+    "@carbon/icons-react": "^11.0.0",
+    "@carbon/react": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sass": "^1.77.0",
+    "vite": "^5.4.0"
+  }
+}

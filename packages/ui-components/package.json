@@ -1,0 +1,37 @@
+{
+  "name": "@platform/ui-components",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Stable Carbon v11 UI primitives shared across Decision Intelligence prototypes.",
+  "exports": {
+    ".": "./src/index.js",
+    "./carbon.scss": "./src/carbon.scss",
+    "./styles.scss": "./src/styles.scss"
+  },
+  "scripts": {
+    "build": "vite build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "check": "npm run build"
+  },
+  "dependencies": {
+    "@carbon/icons-react": "^11.0.0",
+    "@carbon/react": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.0",
+    "@storybook/addon-interactions": "^8.6.0",
+    "@storybook/react-vite": "^8.6.0",
+    "@storybook/test": "^8.6.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sass": "^1.77.0",
+    "vite": "^5.4.0"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

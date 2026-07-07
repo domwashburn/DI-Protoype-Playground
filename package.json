@@ -1,0 +1,29 @@
+{
+  "name": "di-prototype-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "prototypes/*",
+    "hub"
+  ],
+  "engines": {
+    "node": ">=20.18.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "npm run dev:hub",
+    "dev:hub": "npm run dev -w @platform/playground-app",
+    "dev:ui": "npm run storybook -w @platform/ui-components",
+    "storybook:ui": "npm run storybook -w @platform/ui-components",
+    "build": "npm run build --workspaces --if-present",
+    "build:hub": "npm run build -w @platform/playground-app",
+    "build:ui": "npm run build -w @platform/ui-components",
+    "check": "npm run check --workspaces --if-present",
+    "verify:ui": "node scripts/capture-artifacts.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}

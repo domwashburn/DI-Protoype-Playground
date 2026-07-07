@@ -1,0 +1,243 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+$header-height: 3rem;
+
+.detailShell {
+  min-height: calc(100vh - #{$header-height});
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.detailGrid { align-items: start; }
+
+.detailAside {
+  display: grid;
+  align-content: start;
+  background: $layer;
+  border-inline-start: 1px solid $border-subtle;
+
+  @include breakpoint('lg') {
+    position: sticky;
+    top: $header-height;
+    max-height: calc(100vh - #{$header-height});
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  @include breakpoint-down('lg') {
+    border-inline-start: none;
+    border-block-start: 1px solid $border-subtle;
+  }
+}
+
+.detailHeroBand {
+  background: $layer;
+  border-block-end: 1px solid $border-subtle;
+}
+
+.detailHero {
+  display: grid;
+  justify-items: start;
+  gap: $spacing-04;
+  padding-block: $spacing-07;
+}
+
+.docsEyebrow {
+  @include type-style('label-01');
+  color: $text-secondary;
+  text-transform: uppercase;
+}
+
+.detailHero h1 {
+  @include type-style('heading-07');
+  max-width: 20ch;
+  margin: 0;
+}
+
+.detailHero p {
+  @include type-style('body-01');
+  max-width: 50rem;
+  margin: 0;
+  color: $text-secondary;
+}
+
+.detailPanels {
+  display: grid;
+  gap: $spacing-06;
+  padding-block-start: $spacing-06;
+
+  @include breakpoint-down('lg') {
+    gap: $spacing-05;
+  }
+}
+
+.tabsHeader {
+  width: 100%;
+  margin-block-start: $spacing-05;
+}
+
+.docsPageSection {
+  display: grid;
+  gap: $spacing-07;
+  padding-block: $spacing-07 0;
+}
+
+.docsSectionHeader {
+  display: grid;
+  gap: $spacing-04;
+  padding-block-end: $spacing-06;
+  border-block-end: 1px solid $border-subtle;
+}
+
+.docsSectionEyebrow {
+  @include type-style('label-01');
+  color: $text-secondary;
+  text-transform: uppercase;
+}
+
+.docsSectionHeader h2,
+.docsPageSection h3 {
+  margin: 0;
+}
+
+.docsSectionHeader h2 {
+  @include type-style('heading-05');
+}
+
+.docsSectionHeader p,
+.docsLeadSpace p {
+  @include type-style('body-01');
+  max-width: 48rem;
+  margin: 0;
+  color: $text-secondary;
+}
+
+.docsLeadSpace {
+  display: grid;
+  gap: $spacing-05;
+}
+
+.docsTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-03;
+}
+
+.metricRow {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  background: $border-subtle;
+}
+
+.resourceGrid {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  background: $border-subtle;
+}
+
+.docList {
+  display: grid;
+  border-block-start: 1px solid $border-subtle;
+}
+
+.docCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: $spacing-04;
+  padding-block: $spacing-05;
+  border-block-end: 1px solid $border-subtle;
+
+  @include breakpoint-down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docCard:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.docCardIcon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  background: $layer-hover;
+}
+
+.docCardHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-04;
+  margin-block-end: $spacing-03;
+}
+
+.docCard h3 {
+  @include type-style('heading-01');
+  margin: 0;
+}
+
+.docCard p {
+  @include type-style('body-01');
+  margin: 0;
+  color: $text-secondary;
+  overflow-wrap: anywhere;
+}
+
+.docCardMeta {
+  display: grid;
+  gap: $spacing-03;
+  margin-block-start: $spacing-04;
+  color: $text-secondary;
+}
+
+.docCardMeta span {
+  @include type-style('label-01');
+  font-weight: 600;
+}
+
+.docCardMetaCode {
+  @include type-style('code-01');
+  display: block;
+  max-width: 100%;
+  width: fit-content;
+  padding: $spacing-02 $spacing-03;
+  background: $layer-hover;
+  color: $text-primary;
+  overflow-wrap: anywhere;
+}
+
+.contextSummary {
+  display: grid;
+  gap: $spacing-04;
+}
+
+.contextSummary p {
+  @include type-style('body-01');
+  max-width: 44rem;
+  margin: 0;
+  color: $text-secondary;
+  overflow-wrap: anywhere;
+}
+
+.contextSourceList {
+  @include type-style('body-01');
+  display: grid;
+  gap: $spacing-03;
+  margin: 0;
+  padding-inline-start: $spacing-06;
+  color: $text-primary;
+}
+
+.emptyNote {
+  @include type-style('body-01');
+  margin: 0;
+  color: $text-secondary;
+  font-style: italic;
+}

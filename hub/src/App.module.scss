@@ -1,0 +1,58 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+:global(body) {
+  margin: 0;
+  background: $background;
+  color: $text-primary;
+}
+
+:global(*) {
+  box-sizing: border-box;
+}
+
+:global(.cds--header) {
+  background: #161616;
+  border-block-end: 1px solid #393939;
+}
+
+:global(.cds--header__name),
+:global(.cds--header__name:hover),
+:global(.cds--header__name:focus),
+:global(.cds--header__action),
+:global(.cds--header__menu-trigger) {
+  color: #ffffff;
+}
+
+:global(.cds--header__action:hover),
+:global(.cds--header__menu-trigger:hover) {
+  background: #2d2d2d;
+}
+
+:global(.cds--side-nav) {
+  background: $layer;
+  border-inline-end: 1px solid $border-subtle;
+  top: 3rem;
+  block-size: calc(100% - 3rem);
+}
+
+:global(.cds--side-nav__items) {
+  padding-block-start: $spacing-03;
+}
+
+.managementShell {
+  min-height: 100vh;
+}
+
+.managementContent {
+  min-height: 100vh;
+  background: $background;
+  padding-block-end: $spacing-10;
+  overflow-x: hidden;
+}
+
+.registrySearch {
+  padding: $spacing-05 $spacing-04;
+  border-block-end: 1px solid $border-subtle;
+}

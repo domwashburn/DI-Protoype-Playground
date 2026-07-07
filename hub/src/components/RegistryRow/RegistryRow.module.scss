@@ -1,0 +1,136 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+.registryRow {
+  display: grid;
+  gap: $spacing-06;
+  align-items: stretch;
+  padding: $spacing-06;
+  border-block-end: 1px solid $border-subtle;
+
+  @include breakpoint-down('md') {
+    grid-template-columns: 1fr;
+    gap: $spacing-05;
+    padding: $spacing-05;
+  }
+
+  @include breakpoint('lg') {
+    grid-template-columns: minmax(22rem, 1.25fr) minmax(20rem, 0.95fr) minmax(10rem, 0.5fr) 8.5rem;
+  }
+}
+
+.registryRow:last-child { border-block-end: 0; }
+.registryRow:hover { background: $layer-hover; }
+
+.registryRowIdentity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: $spacing-04;
+  min-width: 0;
+}
+
+.registryRowIcon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  background: $layer-hover;
+  color: $icon-primary;
+}
+
+.registryRowCopy {
+  display: grid;
+  justify-items: start;
+  min-width: 0;
+  gap: $spacing-03;
+}
+
+.registryRowCopy h3 {
+  @include type-style('heading-03');
+  margin: 0;
+  color: $text-primary;
+}
+
+.registryRowCopy p {
+  @include type-style('body-01');
+  max-width: 38rem;
+  margin: 0;
+  color: $text-secondary;
+}
+
+.registryRowCode {
+  @include type-style('code-01');
+  max-width: 100%;
+  margin-block-start: $spacing-02;
+  padding: $spacing-02 $spacing-03;
+  background: $layer-hover;
+  color: $text-primary;
+  overflow-wrap: anywhere;
+}
+
+.registryRowEvidence {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  align-self: stretch;
+  background: $border-subtle;
+}
+
+.registryRowEvidence > div {
+  display: grid;
+  min-height: 4rem;
+  align-content: start;
+  gap: $spacing-02;
+  padding: $spacing-04;
+  background: $layer-hover;
+}
+
+.registryRowEvidenceValue {
+  @include type-style('heading-03');
+  color: $text-primary;
+  overflow-wrap: anywhere;
+}
+
+.registryRowEvidenceLabel {
+  @include type-style('label-01');
+  display: block;
+  color: $text-secondary;
+}
+
+.registryRowMeta {
+  display: grid;
+  align-content: start;
+  gap: $spacing-03;
+  color: $text-secondary;
+}
+
+.registryRowMetaLabel {
+  @include type-style('label-01');
+  display: block;
+  color: $text-secondary;
+}
+
+.registryRowMetaValue {
+  @include type-style('heading-01');
+  color: $text-primary;
+}
+
+.registryRowActions {
+  display: grid;
+  align-content: start;
+  justify-items: end;
+
+  @include breakpoint-down('md') {
+    justify-items: start;
+  }
+}
+
+.registryActionButton {
+  min-width: 7.5rem;
+
+  @include breakpoint-down('md') {
+    width: fit-content;
+  }
+}
