@@ -1,0 +1,19 @@
+{
+  "name": "carbon-prototype-platform-bob-skill",
+  "displayName": "Carbon Prototype Platform Bob Skill",
+  "version": "0.1.0",
+  "tool": "ibm-bob",
+  "selfContained": true,
+  "entry": "carbon-prototype-platform-bob-skill.md",
+  "purpose": "Scaffold a functioning IBM Carbon v11 npm-workspaces full-stack prototype platform without generating a giant shell installer.",
+  "validation": [
+    "npm install",
+    "npm run check",
+    "npm run verify:ui"
+  ],
+  "workspaceBoundaries": {
+    "packages": "stable shared packages",
+    "apps-prototypes": "raw experimental full-stack prototypes",
+    "playground-app": "isolated management and documentation dashboard"
+  }
+}
