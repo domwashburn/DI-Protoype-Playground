@@ -6,6 +6,18 @@ Use this as a single self-contained IBM Bob skill/prompt. It contains the full d
 
 Act as IBM Bob operating as a Principal Software Architect and Full-Stack Platform Engineer specializing in JavaScript/TypeScript npm-workspaces monorepos and IBM Carbon v11.
 
+## Before You Begin
+
+Before writing a single file, ask the user:
+
+> **What would you like to name this repository?**
+> This becomes the `name` field in the root `package.json` and the title used throughout the `README.md`.
+> Examples: `optim-prototypes`, `mdm-protos`, `doms-playground`.
+
+Wait for the answer. Use the provided name (converted to a lowercase kebab-case slug) wherever `di-prototype-platform` appears in the skill. If the user provides a display title (e.g. "Optim Prototypes"), use the slugified form for `package.json` and the original casing for `README.md` headings and the hub `Header` label.
+
+Do not proceed to Phase 1 until the repo name is confirmed.
+
 ## Goal
 
 Scaffold a functioning full-stack monorepo directly in the current empty directory.
@@ -15,18 +27,17 @@ Do not generate a giant shell installer. Build the repository files directly.
 ## Non-Negotiables
 
 - Use npm workspaces, not Git submodules.
-- Use `packages/` for stable shared packages, providers, and code that's shared between prototypes.
-- Use `hooks` for hooks that should be shared across prototypes
+- Use `packages/` for stable shared packages used across prototypes.
 - Use `prototypes/` for experimental full-stack prototypes.
-- Use `hub/` for the isolated management and documentation dashboard.
+- Use `hub/` for the isolated management and documentation dashboard (`@platform/playground-app`).
 - Use IBM Carbon v11 through `@carbon/react`.
-- Use Dart Sass with `@use '@carbon/react'`
-- Use SCSS Modules
-- Build and maintain custom components as self-contained barel exported components (including tests, storybooks stories, etc.)
-- Build and maintain custom hooks directly in prototypes, and allow to be migrated to `hooks/`
-- Include `@carbon-labs/mdx-components` in `playground-app`.
-- Include docs, Box or OneDrive storage links, and stubbed Context fields in the registry.
-- Build both the hub/index and detail UI.
+- Use Dart Sass with `@use '@carbon/react'`; use `modern-compiler` API in all Vite/Storybook SCSS config.
+- Use SCSS Modules for all component-level styles.
+- Build and maintain custom components as self-contained barrel-exported components.
+- Business logic utilities live directly in the hub (`hub/src/lib/utils.js`); a separate `@platform/business-logic` package is **not** required and not present in this repo.
+- Include `@carbon-labs/mdx-components` in `hub/` for docs anchor navigation.
+- Include docs, Box/OneDrive storage links, and stubbed Context fields in the registry.
+- Build both the Hub view and the Detail view.
 - Use Carbon visual language: IBM Plex, Carbon shell, gray/white workbench surfaces, Carbon spacing, Carbon icons, and operational density.
 - Do not create a marketing landing page.
 - Do not publish packages.
@@ -66,11 +77,11 @@ npm run build-storybook -w @platform/ui-components
 
 ### Root `package.json` Contract
 
-Create a private ESM package with:
+Create a private ESM package using the repo name the user provided:
 
 ```json
 {
-  "name": "carbon-prototype-platform",
+  "name": "<repo-name>",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -84,20 +95,15 @@ Create a private ESM package with:
     "npm": ">=10.0.0"
   },
   "scripts": {
-    "dev": "npm run dev:playground",
-    "dev:playground": "npm run dev -w @platform/playground-app",
-    "dev:frontend": "npm run dev -w @platform/frontend-react-1",
-    "dev:api": "npm run dev -w @platform/backend-api",
+    "install:all": "npm install --workspaces --include-workspace-root",
+    "dev": "npm run dev:hub",
+    "dev:hub": "npm run dev -w @platform/playground-app",
     "dev:ui": "npm run storybook -w @platform/ui-components",
-    "prototype:frontend-1": "npm run dev -w @platform/frontend-react-1",
-    "prototype:backend-api": "npm run dev -w @platform/backend-api",
     "storybook:ui": "npm run storybook -w @platform/ui-components",
     "build": "npm run build --workspaces --if-present",
-    "build:playground": "npm run build -w @platform/playground-app",
-    "build:frontend": "npm run build -w @platform/frontend-react-1",
+    "build:hub": "npm run build -w @platform/playground-app",
     "build:ui": "npm run build -w @platform/ui-components",
     "check": "npm run check --workspaces --if-present",
-    "start:api": "npm run start -w @platform/backend-api",
     "verify:ui": "node scripts/capture-artifacts.mjs"
   },
   "devDependencies": {
@@ -125,6 +131,7 @@ Create a private ESM package with:
 - install command
 - root scripts
 - Carbon Sass entry
+- how to add a new prototype
 - local workspace links
 
 ### Validation
@@ -142,12 +149,10 @@ node --check package.json
 - `packages/ui-components/src/carbon.scss`
 - `packages/ui-components/src/styles.scss`
 - `packages/ui-components/src/index.js`
-- `packages/ui-components/src/components/PrototypeShell.jsx`
-- `packages/ui-components/src/components/MetricTile.jsx`
-- `packages/ui-components/src/components/StatusTag.jsx`
-- `packages/ui-components/src/components/PrototypeShell.stories.jsx`
 - `packages/ui-components/.storybook/main.ts`
 - `packages/ui-components/.storybook/preview.tsx`
+
+> Note: This package currently has no React components exported from `src/index.js`. Component exports should be added here as shared primitives are needed. The hub-specific components live directly in `hub/src/components/`.
 
 ### Package Contract
 
@@ -155,6 +160,16 @@ Name:
 
 ```text
 @platform/ui-components
+```
+
+Exports:
+
+```json
+{
+  ".": "./src/index.js",
+  "./carbon.scss": "./src/carbon.scss",
+  "./styles.scss": "./src/styles.scss"
+}
 ```
 
 Dependencies:
@@ -169,38 +184,62 @@ Dev dependencies:
 - `@storybook/react-vite`
 - `@storybook/addon-essentials`
 - `@storybook/addon-interactions`
+- `@storybook/test`
 - `@vitejs/plugin-react`
 - `vite`
 - `sass`
 
+Peer dependencies: `react >=18`, `react-dom >=18`.
+
 ### Required Implementation
 
-Create `src/carbon.scss`:
+`src/carbon.scss`:
 
 ```scss
 @use '@carbon/react';
 ```
 
-Create `src/styles.scss` with a runtime Carbon spacing bridge:
+`src/styles.scss` — Carbon shell overrides using Carbon tokens (no custom CSS variables for tokens that Carbon already provides):
 
-Always import style tokens from Carbon, DO NOT recreate carbon tokens as custom variables in a css file. Only create custom css variables with mappings to carbon tokens when requested or ABSOLUTELY necessecary.
+```scss
+@use '@carbon/react/scss/themes' as themes;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
 
-Export these React components:
+.cds--header {
+  background: #161616;
+  border-block-end: 1px solid #393939;
+}
 
-- `PrototypeShell`
-- `MetricTile`
-- `StatusTag`
+.cds--side-nav {
+  background: $layer;
+  border-inline-end: 1px solid $border-subtle;
+}
 
-`StatusTag` mapping:
+.cds--side-nav__items {
+  padding-block-start: $spacing-03;
+}
 
-- `Active` -> green
-- `Draft` -> purple
-- `Blocked` -> red
-- `Paused` -> warm-gray
-- `Archived` -> gray
-- unknown -> gray
+.cds--content {
+  padding-inline: 0;
+  padding-block-start: 0;
+}
+```
 
-Storybook preview must import:
+`vite.config.js` must:
+
+- Use `@vitejs/plugin-react`.
+- Resolve `~@ibm/plex` alias using `createRequire` + `@ibm/plex/package.json`.
+- Set `css.preprocessorOptions.scss.api: 'modern-compiler'`.
+- Build as ESM library with entry `./src/index.js`, externalising `react`, `react-dom`, `@carbon/react`, `@carbon/icons-react`.
+
+`.storybook/main.ts` must:
+
+- Use `@storybook/react-vite` framework.
+- Add the same `~@ibm/plex` alias and `modern-compiler` SCSS config in `viteFinal`.
+- Glob stories at `../src/**/*.stories.@(jsx|tsx)`.
+
+Storybook `preview.tsx` must import:
 
 ```ts
 import '../src/carbon.scss';
@@ -214,269 +253,171 @@ npm run build -w @platform/ui-components
 npm run build-storybook -w @platform/ui-components
 ```
 
-## Phase 3: Stable Business Logic Package
+## Phase 3: Hub — Playground App
+
+The hub is the management control centre at `hub/`. It is package `@platform/playground-app`.
 
 ### Files
 
-- `packages/business-logic/package.json`
-- `packages/business-logic/src/index.js`
+- `hub/package.json`
+- `hub/index.html`
+- `hub/vite.config.js`
+- `hub/src/main.jsx`
+- `hub/src/global.scss`
+- `hub/src/styles.scss`
+- `hub/src/App.jsx`
+- `hub/src/App.module.scss`
+- `hub/src/data/registry.js`
+- `hub/src/lib/utils.js`
+- `hub/src/lib/useNavigationMode.js`
+- `hub/src/views/HubView/HubView.jsx`
+- `hub/src/views/HubView/HubView.module.scss`
+- `hub/src/views/HubView/index.js`
+- `hub/src/views/DetailView/DetailView.jsx`
+- `hub/src/views/DetailView/DetailView.module.scss`
+- `hub/src/views/DetailView/ContextSection.jsx`
+- `hub/src/views/DetailView/DocsSection.jsx`
+- `hub/src/views/DetailView/FilesSection.jsx`
+- `hub/src/views/DetailView/index.js`
+- `hub/src/components/AsideNav/`
+- `hub/src/components/HubSummaryPanel/`
+- `hub/src/components/MediaGallery/`
+- `hub/src/components/MetadataPanel/`
+- `hub/src/components/MetricTile/`
+- `hub/src/components/PanelBlock/`
+- `hub/src/components/RegistryRow/`
+- `hub/src/components/ResourceCard/`
+- `hub/src/components/StatusTag/`
+- `hub/src/components/StorageIcon/`
+- `hub/src/components/SummaryPanel/`
 
 ### Package Contract
-
-Name:
-
-```text
-@platform/business-logic
-```
-
-This package must be node-safe. Do not import React, Carbon, Express, browser globals, Vite, or Storybook.
-
-### Required Exports
-
-- `validatePrototypeMetadata(prototype)`
-- `normalizePrototypeMetadata(prototype)`
-- `createLaunchDescriptor(prototype)`
-
-Required registry fields:
-
-- `id`
-- `title`
-- `description`
-- `lastUpdated`
-- `designOwner`
-- `contributors`
-- `statusTag`
-- `epicTrackingUrl`
-- `figmaSpecUrl`
-- `rootLaunchCommand`
-
-Optional fields preserved by normalization:
-
-- `docs`
-- `storageLinks`
-- `context`
-
-Behavior:
-
-- `validatePrototypeMetadata` returns `{ valid, errors }`.
-- Missing required fields appear in `errors`.
-- `contributors` must be an array.
-- `normalizePrototypeMetadata` returns original metadata plus `validation`.
-- `createLaunchDescriptor` returns `command`, `canLaunch`, and `workspaceRootHint`.
-
-### Validation
-
-```bash
-node --check packages/business-logic/src/index.js
-```
-
-Use Playwright to capture and share walkthroughs and screenshots of the UI.
-
-
-## Phase 4: Express API Prototype
-
-### Files
-
-- `apps-prototypes/backend-api/package.json`
-- `apps-prototypes/backend-api/src/server.js`
-
-### Package Contract
-
-Name:
-
-```text
-@platform/backend-api
-```
-
-Dependencies:
-
-- `@platform/business-logic`
-- `cors`
-- `express`
-
-Scripts:
 
 ```json
 {
-  "dev": "node --watch src/server.js",
-  "start": "node src/server.js",
-  "check": "node --check src/server.js"
+  "name": "@platform/playground-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Decision Intelligence prototype registry and Management Control Center.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "check": "npm run build"
+  },
+  "dependencies": {
+    "@carbon-labs/mdx-components": "^0.26.0",
+    "@carbon/icons-react": "^11.0.0",
+    "@carbon/react": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sass": "^1.77.0",
+    "vite": "^5.4.0"
+  }
 }
 ```
 
-### Required Implementation
+`hub/vite.config.js` must:
 
-- Use Express JSON middleware and CORS.
-- Default port: `4000`, overridable by `process.env.PORT`.
-- Implement:
-  - `GET /health`
-  - `GET /api/prototypes`
-  - `GET /api/prototypes/:id`
-- Use `normalizePrototypeMetadata` from `@platform/business-logic`.
+- Use `@vitejs/plugin-react`.
+- Resolve `~@ibm/plex` alias using `createRequire` + `@ibm/plex/package.json`.
+- Set `css.preprocessorOptions.scss.api: 'modern-compiler'`.
+- Set `server.port: 5173`.
 
-### Validation
+> Note: The hub does **not** depend on `@platform/ui-components` at runtime. Carbon is imported directly in the hub's own SCSS files.
 
-```bash
-npm run check -w @platform/backend-api
-```
+### Entry Point: `main.jsx`
 
-## Phase 5: Vite React Prototype
-
-### Files
-
-- `apps-prototypes/frontend-react-1/package.json`
-- `apps-prototypes/frontend-react-1/index.html`
-- `apps-prototypes/frontend-react-1/vite.config.js`
-- `apps-prototypes/frontend-react-1/src/main.jsx`
-- `apps-prototypes/frontend-react-1/src/App.jsx`
-- `apps-prototypes/frontend-react-1/src/styles.scss`
-
-### Package Contract
-
-Name:
-
-```text
-@platform/frontend-react-1
-```
-
-Dependencies:
-
-- `@carbon/react`
-- `@platform/ui-components`
-- `react`
-- `react-dom`
-
-Dev dependencies:
-
-- `@vitejs/plugin-react`
-- `sass`
-- `vite`
-
-### Required Implementation
-
-`src/main.jsx` import order:
+Import order:
 
 ```js
-import '@platform/ui-components/carbon.scss';
-import '@platform/ui-components/styles.scss';
+import '@carbon-labs/mdx-components/scss/index.scss';
+import './global.scss';
 import './styles.scss';
 ```
 
-Render a lightweight prototype using:
+### Theme Setup: `global.scss`
 
-- `PrototypeShell`
-- `MetricTile`
-- `StatusTag`
+`global.scss` sets up Carbon theme tokens at the root:
 
-This app is a raw prototype sandbox. It is not the management dashboard.
+```scss
+@use '@carbon/react/scss/themes' as themes;
+@use '@carbon/react/scss/theme' as *;
 
-### Validation
+:root {
+  @include theme(themes.$g10, true);
+}
 
-```bash
-npm run build -w @platform/frontend-react-1
+@media (prefers-color-scheme: dark) {
+  :root:not([data-carbon-theme='g10']) {
+    @include theme(themes.$g90, true);
+  }
+}
+
+[data-carbon-theme='g10'] { @include theme(themes.$g10, true); }
+[data-carbon-theme='g90'] { @include theme(themes.$g90, true); }
 ```
 
-## Phase 6: Playground Registry
+`styles.scss` imports `@carbon/react` and applies the same shell overrides described in Phase 2.
 
-### Files
+### Theme Toggle
 
-- `playground-app/package.json`
-- `playground-app/index.html`
-- `playground-app/vite.config.js`
-- `playground-app/src/main.jsx`
-- `playground-app/src/data/registry.js`
+`App.jsx` reads the OS preference with `window.matchMedia('(prefers-color-scheme: dark)')` and toggles between `g10` / `g90` by setting `data-carbon-theme` on `document.documentElement`. Use `Asleep` and `Light` icons from `@carbon/icons-react` for the toggle button.
 
-### Package Contract
-
-Name:
-
-```text
-@platform/playground-app
-```
-
-Dependencies:
-
-- `@carbon-labs/mdx-components`
-- `@carbon/icons-react`
-- `@carbon/react`
-- `@platform/business-logic`
-- `@platform/ui-components`
-- `react`
-- `react-dom`
-
-Dev dependencies:
-
-- `@vitejs/plugin-react`
-- `sass`
-- `vite`
-
-### Required Registry Shape
-
-`playground-app/src/data/registry.js` exports:
+### Registry: `hub/src/data/registry.js`
 
 ```js
 export const prototypeRegistry = [];
 ```
 
-Every registry object includes:
+Required fields per registry entry:
 
-- `id`
+- `id` — unique slug
 - `title`
 - `description`
-- `lastUpdated`
+- `lastUpdated` — ISO date string
 - `designOwner`
-- `contributors`
-- `statusTag`
+- `contributors` — array of strings
+- `statusTag` — `'Active' | 'Draft' | 'Blocked' | 'Paused' | 'Archived'`
 - `epicTrackingUrl`
 - `figmaSpecUrl`
-- `rootLaunchCommand`
-- `docs`
-- `storageLinks`
-- `context` optional
+- `rootLaunchCommand` — e.g. `npm run dev -w @platform/my-prototype`
 
-Seed entries:
+Optional fields:
 
-- `frontend-react-1`
-- `backend-api`
-- `ui-components`
+- `iconType` — `'app' | 'api' | 'ui'` (defaults to `Application` icon)
+- `docs[]` — `{ title, description, type, href, status }`
+- `storageLinks[]` — `{ label, href, provider }` where `provider` is `'Box'`, `'OneDrive'`, or other
+- `context` — `{ status, summary, sources[] }`
+- `media[]` — `MediaItem[]` (see MediaGallery spec)
 
-Each seed entry must include:
+### Library Utilities: `hub/src/lib/utils.js`
 
-- at least two embedded docs records
-- one Box-style storage link
-- one OneDrive-style storage link
-- `context.status: "Stubbed"`
-- `context.summary`
-- `context.sources`
+All business logic helpers live here — **not** in a separate package. Exports:
 
-`src/main.jsx` import order:
+- `normalizePrototypeMetadata(prototype)` — adds `docs`, `storageLinks`, `context`, and `validation` fields. Validates `id` and `title`.
+- `createLaunchDescriptor(prototype)` — returns `{ command, canLaunch }`.
+- `getPrototypeIcon(prototype)` — maps `iconType` to `Application`, `DataStructured`, or `Package` from `@carbon/icons-react`.
+- `statusTagType(status)` — maps status strings to Carbon Tag types.
+  - `Active` → `green`
+  - `Draft` → `blue`
+  - `Blocked` → `red`
+  - `Paused` → `warm-gray`
+  - `Archived` → `gray`
+  - unknown → `outline`
+- `isExternalHref(href)` — returns true for `http(s)://` URLs.
+- `filterRegistry(registry, query)` — case-insensitive text search across title, description, statusTag, designOwner, contributors, and context.summary.
+- `getStatusOptions(prototypes)` — returns `['All', ...unique statusTags]`.
+- `getStatusCount(prototypes, status)` — count for a given status string.
 
-```js
-import '@platform/ui-components/carbon.scss';
-import '@platform/ui-components/styles.scss';
-import '@carbon-labs/mdx-components/scss/index.scss';
-import './styles.scss';
-```
+### Responsive Navigation Hook: `hub/src/lib/useNavigationMode.js`
 
-### Validation
-
-```bash
-npm run build -w @platform/playground-app
-```
-
-## Phase 7: Playground Hub and Detail UI
-
-### Example Implementation
-
-Leverage the example UI's from the examples directory in this skill.
-You can copy them, use them as reference for future screens, etc.
-
-Do not work from scratch. These are the baseline, not the finished product.
-
-### Files
-
-- `playground-app/src/App.jsx`
-- `playground-app/src/styles.scss`
+Tracks the `(min-width: 66rem)` breakpoint with `matchMedia`. Returns `{ isPersistent, isExpanded, setExpanded }`. When the breakpoint is met, the nav is both persistent and expanded by default.
 
 ### Required Information Architecture
 
@@ -484,133 +425,167 @@ The first screen is the usable dashboard, not a landing page.
 
 Views:
 
-- Hub/index view
-- Detail view for selected registry item
+- Hub/index view (`HubView`)
+- Detail view for selected registry item (`DetailView`)
 
-State:
+App-level state:
 
-- active view: hub or detail
-- active prototype ID
-- nav expanded
-- desktop persistent nav detection
-- search query
-- status filter
+- `activeView`: `'hub'` or `'detail'`
+- `activeId`: selected prototype ID
+- `isExpanded` / `isPersistent`: from `useNavigationMode`
+- `query`: search string
+- `statusFilter`: selected status string
+
+## Phase 4: Hub View
 
 ### Hub Requirements
 
 Include:
 
-- Carbon `Header`
-- Carbon `SideNav`
-- registry search in side nav
-- hero/title area
-- summary metric panel
-- main search control
-- status filter controls
-- registry board generated from `prototypeRegistry`
-- evidence cells for docs, files, context, and launch readiness
-- Details action for each registry row
+- Carbon `Header` with menu button, app name ("IBM | Decision Intelligence"), search icon, and theme toggle
+- Carbon `SideNav` with search field and per-prototype `SideNavLink` entries
+- Hero band with eyebrow + h1 + description + `HubSummaryPanel` (metric tiles)
+- Main search control (`Search lg`)
+- Status filter controls (ghost/primary toggle buttons) — hidden when only one status value exists
+- Registry board generated from `prototypeRegistry`:
+  - Board header row (workspace object / evidence / ownership / action)
+  - One `RegistryRow` per prototype showing identity, evidence counts, ownership, and a Details button
+- Empty state `Tile` when registry is empty
+- Search empty state when a query returns no results
+
+### Hub Components
+
+All components in `hub/src/components/`. Each has its own `.jsx`, `.module.scss`, and `index.js` barrel:
+
+#### `HubSummaryPanel`
+
+Props: `stats: Array<{ label: string; value: number }>`. Renders a Carbon `Tile` with the stat grid (Registry objects, Active, Docs, Storage links).
+
+#### `RegistryRow`
+
+Props: `prototype`, `launch`, `PrototypeIcon`, `onSelectPrototype`.
+
+Columns rendered inside each row:
+1. **Identity**: icon, `StatusTag`, title (h3), description, launch command in `<code>`.
+2. **Evidence**: docs count, storage links count, context status, launch readiness.
+3. **Ownership**: design owner, last updated.
+4. **Action**: tertiary `Details` button with `Launch` icon.
+
+#### `StatusTag`
+
+Props: `status`. Wraps Carbon `Tag` using `statusTagType()` from `utils.js`.
+
+#### `MetricTile`
+
+Props: `label`, `value`, `helperText`. Wraps Carbon `Tile`.
+
+## Phase 5: Detail View
 
 ### Detail Requirements
 
 Include:
 
-- back to hub action
-- hero/title area
-- active status summary
-- Carbon Labs MDX anchor links
-- launch command `CodeSnippet`
-- Docs section
-- Health section
-- Meeting Recordings and Files section
-- Context section for future LLM wiki integration
-- Resources grid
-- metadata aside
-- `MediaGallery` — screenshots and recordings gallery (see Media Gallery spec below)
+- Back to Hub ghost button (top left, `ArrowLeft` icon)
+- Hero band with eyebrow + h1 + description
+- Carbon `Tabs` / `TabList` (contained, lg) in hero for Overview / Flows & Demos / Prototype Details sections
+- `Column lg={12}` main content area
+- `Column lg={4}` aside with `SummaryPanel`, `AsideNav`, `MetadataPanel`
 
-### Media Gallery Spec
+Sections in main content:
 
-Located at `playground-app/src/components/MediaGallery/`.
+- **Overview** (`id="overview-tab"`)
+  - Tag row (status, validation, docs count)
+  - `Health` PanelBlock with three `MetricTile` instances
+  - `Resources` PanelBlock with epic, Figma, and workspace `ResourceCard` instances
+- **Flows & Demos** (`id="flows-demos-tab"`)
+  - `Launch` PanelBlock with `CodeSnippet`
+  - `FilesSection` (storage links)
+  - `MediaGallery`
+- **Prototype Details** (`id="prototype-details-tab"`)
+  - `DocsSection`
+  - `ContextSection`
+
+### Detail Components
+
+All in `hub/src/components/` or `hub/src/views/DetailView/`:
+
+#### `SummaryPanel`
+
+Props: `status`, `lastUpdated`, `launchReady`, `figmaSpecUrl`. Shows `StatusTag`, a description list, and a tertiary Figma button.
+
+#### `AsideNav`
+
+Uses `@carbon-labs/mdx-components` `AnchorLinks` and `AnchorLink` components to render section anchor links. Props: `sections: Array<{ id, label }>`.
+
+#### `MetadataPanel`
+
+Props: `heading?`, `items: Array<{ term, description }>`. Renders a `<dl>` of key/value pairs.
+
+#### `PanelBlock`
+
+Props: `id`, `title`, `description?`, `badge?`, `accent?`, `children`. Wraps Carbon `Tile`. `accent` applies a secondary accent style.
+
+#### `ResourceCard`
+
+Props: `icon`, `heading`, `subText?`, `children`. Simple `<article>` with icon, heading, optional sub-text, and child content (typically a `Link`).
+
+#### `StorageIcon`
+
+Props: `provider`. Maps `'Box'` → `BoxIcon`, `'OneDrive'` → `Cloud`, fallback → `FolderShared` (all from `@carbon/icons-react`).
+
+#### `DocsSection`
+
+Renders a `PanelBlock` listing doc cards. Each doc card shows: `Documentation` icon, title, status `Tag`, description, type, and either an external `Link` or an inline `<code>` path.
+
+#### `FilesSection`
+
+Renders a `PanelBlock` with a resource card grid for each `storageLink`. Uses `StorageIcon` and Carbon `Link` to open the folder. Shows an empty-state paragraph when no links.
+
+#### `ContextSection`
+
+Renders a `PanelBlock` (with `accent` flag) showing a `Tag` (purple) for context status, a summary paragraph, and an optional sources list. Icon badge: `Wikis` from `@carbon/icons-react`.
+
+### MediaGallery Spec
+
+Located at `hub/src/components/MediaGallery/`.
 
 #### Behaviour
 
-- **Main stage**: 4:3 aspect-ratio preview with `object-fit: contain` letterboxing for non-4:3 content.
-- **Thumbnail rail**: horizontally scrollable strip below the stage, `scroll-snap-type: x mandatory`, `scroll-behavior: smooth`. Active thumb scrolled into view automatically.
-- **Lightbox**: full-screen overlay (`position: fixed`, `z-index: 9000`). Opens on stage click or thumb click-then-confirm. Keyboard: `←`/`→` navigate, `Esc` closes. Click outside inner panel also closes.
-- **Video items**: shown with poster image and play-badge in both stage and thumbnails; `<video controls autoPlay>` rendered inside lightbox.
-- **Placeholder fallback**: when `items` prop is empty or omitted, renders 5 `placehold.co` placeholder items so the gallery is never blank.
+- **Main stage**: 4:3 aspect-ratio preview with `object-fit: contain` letterboxing.
+- **Thumbnail rail**: horizontally scrollable strip with `scroll-snap-type: x mandatory`. Active thumb scrolled into view automatically.
+- **Lightbox**: full-screen overlay (`position: fixed`, `z-index: 9000`). Opens on stage click. Keyboard: `←`/`→` navigate, `Esc` closes. Click outside inner panel also closes. Focus is trapped on the close button when opened.
+- **Video items**: shown with poster image and `PlayOutline` badge in stage and thumbnails; `<video controls autoPlay>` in lightbox.
+- **Placeholder fallback**: when `items` is empty or omitted, renders 5 `placehold.co` placeholder items so the gallery is never blank.
+- **Playwright inject contract**: reads `window.__MEDIA_GALLERY_ITEMS__` at mount and uses it instead of props or placeholders.
 
 #### Props
 
 ```ts
 interface MediaItem {
-  id:       string;            // unique key
+  id:       string;
   type:     'image' | 'video';
-  src:      string;            // image URL or video file URL
-  poster?:  string;            // video poster image URL
-  alt:      string;            // image alt text / video title
-  caption?: string;            // optional caption shown in lightbox
+  src:      string;
+  poster?:  string;
+  alt:      string;
+  caption?: string;
 }
 
 interface MediaGalleryProps {
-  items?: MediaItem[];         // falls back to placeholders when empty/omitted
-  title?: string;              // gallery section heading (default: "Screenshots & Recordings")
+  items?: MediaItem[];
+  title?: string;  // default: "Screenshots & Recordings"
 }
 ```
 
-#### Registry integration
-
-The `media` field on each registry entry should be typed `MediaItem[]`. The Detail view passes `activePrototype.media ?? []` to the component.
-
 #### Playwright inject contract
 
-A Playwright script can populate the gallery without modifying source code:
-
 ```ts
-// In a Playwright test or prompt-driven capture script:
 await page.evaluate((items) => {
   window.__MEDIA_GALLERY_ITEMS__ = items;
 }, capturedItems);
 await page.reload();
-// The gallery reads window.__MEDIA_GALLERY_ITEMS__ at mount and uses it
-// instead of the prop value or the built-in placeholders.
 ```
 
-Typical Playwright-populate workflow:
-1. Navigate to each prototype route.
-2. Take `page.screenshot({ path })` or record a video.
-3. Build a `MediaItem[]` from the captured paths/URLs.
-4. Write a JSON sidecar next to the registry entry (`media.json`) or inject via `window.__MEDIA_GALLERY_ITEMS__` for in-session preview.
-
-### Carbon Visual Rules
-
-- Use `@carbon/react` primitives.
-- Use `@carbon/icons-react` icons.
-- Use Carbon Labs MDX components only for docs/navigation primitives where useful.
-- Use IBM Plex through Carbon.
-- Use Carbon spacing through a local CSS custom-property bridge if runtime spacing variables are not emitted.
-- Use IBM Carbon gray/white workbench surfaces:
-  - page: `#f4f4f4`
-  - surface: `#ffffff`
-  - subtle surface: `#f4f4f4`
-  - border: `#e0e0e0`
-  - inverse header: `#161616`
-- Do not use decorative gradients, marketing hero art, or nested cards.
-- Keep the layout dense, scannable, and operational.
-
-### Responsive Rules
-
-- Desktop: persistent side nav, two-column hero/detail layout, board-style registry.
-- Mobile: collapsed nav, single-column detail, two-column evidence metrics where readable.
-- Text must not overlap, clip, or depend on viewport-width font sizing.
-
-### Validation
-
-```bash
-npm run build -w @platform/playground-app
-```
-
-## Phase 8: Verification Artifacts
+## Phase 6: Verification Artifacts
 
 ### Files
 
@@ -620,7 +595,6 @@ npm run build -w @platform/playground-app
 - generated `docs/screenshots/playground-backend-selected.png`
 - generated `docs/screenshots/playground-mobile-hub.png`
 - generated `docs/screenshots/playground-mobile-detail.png`
-- generated `docs/screenshots/repository-structure.png`
 - generated `docs/repository-structure.svg`
 - generated `docs/repository-structure.txt`
 
@@ -628,85 +602,70 @@ npm run build -w @platform/playground-app
 
 `scripts/capture-artifacts.mjs` must:
 
-1. Start `playground-app` with Vite on a strict free localhost port when `PLAYGROUND_URL` is not provided.
+1. Start the hub with Vite on a free localhost port when `PLAYGROUND_URL` is not provided (spawns from `hub/` directory).
 2. Reuse `PLAYGROUND_URL` when provided.
 3. Launch Playwright Chromium.
-4. Verify visible hub content.
-5. Capture hub screenshot.
-6. Click the first Details action.
-7. Verify Docs, Box, OneDrive, and Context are visible.
-8. Capture detail screenshot.
-9. Select Backend API Prototype in the side nav.
-10. Verify backend command and docs are visible.
-11. Capture backend-selected screenshot.
-12. Capture mobile hub and mobile detail screenshots.
-13. Generate repository tree text, SVG, and PNG.
+4. Capture hub screenshot after verifying `[aria-label="Decision Intelligence Prototype Hub"]` is visible.
+5. Click the first Details button and capture a detail screenshot.
+6. Click a "backend" nav link and capture a backend-selected screenshot.
+7. Capture mobile hub and mobile detail screenshots at 375×812 viewport.
+8. Generate a repository tree as both plain text and SVG (capped at 50 lines for SVG).
 
-Tree ignore directories:
+Tree ignore directories: `.git`, `dist`, `node_modules`, `screenshots`, `storybook-static`.  
+Tree ignore files: `.DS_Store`.
 
-- `.git`
-- `dist`
-- `node_modules`
-- `screenshots`
-- `storybook-static`
-
-Tree ignore files:
-
-- `.DS_Store`
-
-For full-page captures, inject screenshot-only CSS that makes Carbon fixed shell elements absolute. Do not change application runtime behavior for users.
+Full-page captures should inject screenshot-only CSS to make Carbon fixed shell elements absolute, without changing application runtime behaviour.
 
 ### Validation
 
 ```bash
-npm run verify:ui
+node scripts/capture-artifacts.mjs
 ```
+
+## Carbon Visual Rules
+
+- Use `@carbon/react` primitives exclusively for UI components.
+- Use `@carbon/icons-react` icons.
+- Use Carbon Labs MDX components (`@carbon-labs/mdx-components`) only for docs/navigation: `AnchorLinks` and `AnchorLink` in `AsideNav`.
+- Import IBM Plex through Carbon (via `@ibm/plex` alias in Vite config).
+- Always import style tokens from Carbon — do not recreate Carbon tokens as custom CSS variables unless a runtime bridge is absolutely required.
+- Surface palette:
+  - page/band background: `$background` (g10: `#f4f4f4`)
+  - surface tile: `$layer` (g10: `#ffffff`)
+  - border: `$border-subtle`
+  - inverse header: `#161616`
+- Do not use decorative gradients, marketing hero art, or deeply nested card patterns.
+- Keep the layout dense, scannable, and operational.
+
+## Responsive Rules
+
+- Desktop (≥ 66rem): persistent side nav, two-column detail layout (lg=12 + lg=4), board-style registry.
+- Mobile (< 66rem): collapsed nav (hamburger), single-column detail, stacked evidence metrics.
+- Text must not overlap, clip, or depend on viewport-width font sizing.
 
 ## Final Acceptance Checklist
 
-Confirm these files exist:
-
-- `package.json`
-- `packages/ui-components/src/carbon.scss`
-- `packages/ui-components/src/styles.scss`
-- `packages/business-logic/src/index.js`
-- `apps-prototypes/backend-api/src/server.js`
-- `apps-prototypes/frontend-react-1/src/App.jsx`
-- `playground-app/src/data/registry.js`
-- `playground-app/src/App.jsx`
-- `playground-app/src/styles.scss`
-- `scripts/capture-artifacts.mjs`
-- `docs/screenshots/playground-hub.png`
-- `docs/screenshots/playground-detail-frontend.png`
-- `docs/screenshots/playground-mobile-hub.png`
-- `docs/screenshots/playground-mobile-detail.png`
-- `docs/screenshots/repository-structure.png`
-- `docs/repository-structure.txt`
-
-Run:
-
-```bash
-npm install
-npm run check
-npm run verify:ui
-```
-
-Optional:
-
-```bash
-npm audit --omit=dev
-```
+- [ ] Root `package.json` workspaces include `packages/*`, `prototypes/*`, and `hub`.
+- [ ] `npm install` completes without errors.
+- [ ] `npm run build -w @platform/ui-components` succeeds.
+- [ ] `npm run build -w @platform/playground-app` succeeds.
+- [ ] `npm run check` passes for all workspaces.
+- [ ] Hub opens at `http://localhost:5173` and shows the prototype registry.
+- [ ] Registry search filters the side nav and main board simultaneously.
+- [ ] Status filter buttons appear and filter correctly when multiple statuses exist.
+- [ ] Detail view opens on Details click and shows Health, Resources, Launch, Files, Docs, Context sections.
+- [ ] Back to Hub navigates back to HubView.
+- [ ] Theme toggle switches between g10 and g90.
+- [ ] Storybook builds for `@platform/ui-components` (when stories exist).
+- [ ] `node scripts/capture-artifacts.mjs` captures all screenshots and generates repository tree files.
+- [ ] No console errors at runtime.
 
 ## Final Bob Response
 
-Return:
+After completing all phases, report:
 
-- current working directory
-- install command
-- dev command and local URL
-- validation command results
-- screenshot artifact paths
-- repository tree artifact paths
-- any skipped validation and reason
-
-Keep the final response concise and evidence-based.
+1. Files created or modified (with paths).
+2. Validation results for each phase.
+3. Any deviations from the spec and why.
+4. How to start the hub: `npm run dev`.
+5. How to add a new prototype: create `prototypes/<slug>/` and add an entry to `hub/src/data/registry.js`.
