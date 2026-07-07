@@ -13,6 +13,7 @@
     "npm": ">=10.0.0"
   },
   "scripts": {
+    "install:all": "npm install --workspaces --include-workspace-root",
     "dev": "npm run dev:hub",
     "dev:hub": "npm run dev -w @platform/playground-app",
     "dev:ui": "npm run storybook -w @platform/ui-components",
