@@ -5,12 +5,14 @@ description: >
   Detects and repairs all known issues: duplicate pnpm-alias dependency keys,
   reserved package names (@figma/…), stale pnpm/registry metadata fields,
   conflicting pnpm-workspace.yaml, missing react/react-dom peer dependencies,
-  Figma-only import aliases (figma:asset/…), workspace name collisions, and
-  missing root dev scripts. Proposes a clean, standards-compliant package.json,
-  wires the prototype into the root workspace scripts, and validates the install.
-  Use when a Figma Make project fails npm install with EINVALIDPACKAGENAME,
-  workspace warnings, or other package.json errors; or when a user says
-  "fix figma make", "figma make npm errors", or "import figma prototype".
+  Figma-only import aliases (figma:asset/…), workspace name collisions, missing
+  root dev scripts, dead shadcn/ui scaffolding (components/ui/), Carbon re-export
+  wrappers (components/Carbon/), unused Figma image helpers (components/figma/),
+  and superseded page files. Includes Carbon MCP and Context7 guidance for
+  migrating shadcn/ui components to Carbon Design System. Use when a Figma Make
+  project fails npm install with EINVALIDPACKAGENAME, workspace warnings, or
+  other package.json errors; or when a user says "fix figma make",
+  "figma make npm errors", "import figma prototype", or "clean up figma make".
 ---
 
 # Fix Figma Make — Skill
@@ -163,6 +165,137 @@ manually.
 
 ---
 
+### Issue J — Dead shadcn/ui scaffolding (`components/ui/`)
+
+**Pattern:** A `components/ui/` directory exists containing 40–50 shadcn/ui component files
+(`button.tsx`, `dialog.tsx`, `sidebar.tsx`, `utils.ts`, `use-mobile.ts`, etc.).
+
+Figma Make generates this directory as a shadcn/ui component library. Once a prototype migrates to
+Carbon Design System (`@carbon/react`), the entire directory becomes dead code.
+
+**Detection rule:** Check whether any file **outside** `components/ui/` imports from it:
+
+```tool
+grep(
+  pattern: "from ['\"](\.\./|\./)?(components/)?ui/",
+  include: "*.ts,*.tsx",
+  path: "<prototype-dir>/src"
+)
+```
+
+- **If zero matches:** the entire `components/ui/` directory is dead — mark for deletion (see Step 3).
+- **If matches exist:** the prototype has NOT fully migrated to Carbon. Use Carbon MCP and Context7
+  to plan the migration (see Issue J-migration below).
+
+#### Issue J-migration — Incomplete Carbon migration (components/ui/ still in use)
+
+If `components/ui/` is still imported by active code, the prototype needs Carbon components to
+replace the shadcn/ui ones before the directory can be deleted. Use these tools:
+
+1. **Carbon MCP** (`mcp__carbon-mcp__docs_search`, `mcp__carbon-mcp__code_search`) — look up the
+   Carbon equivalent for each shadcn/ui component that is still imported. Common mappings:
+
+   | shadcn/ui component | Carbon (`@carbon/react`) equivalent |
+   |---|---|
+   | `Button` | `Button` |
+   | `Dialog` / `AlertDialog` | `Modal` |
+   | `Select` / `DropdownMenu` | `Dropdown` |
+   | `Tabs` | `Tabs` |
+   | `Checkbox` | `Checkbox` |
+   | `Input` / `Textarea` | `TextInput` / `TextArea` |
+   | `Table` | `DataTable` |
+   | `Tooltip` | `Tooltip` |
+   | `Badge` | `Tag` |
+   | `Breadcrumb` | `Breadcrumb` |
+   | `Accordion` | `Accordion` |
+   | `Popover` | `Popover` |
+   | `Switch` | `Toggle` |
+   | `Progress` | `ProgressBar` |
+   | `Skeleton` | `SkeletonText` / `SkeletonPlaceholder` |
+   | `Separator` | `Divider` (or CSS `border`) |
+   | `Avatar` | No direct equivalent — use Carbon `UserAvatar` from `@carbon/ibm-products` |
+   | `Sidebar` | Carbon `SideNav` (from `@carbon/react`) |
+
+2. **Context7** (`mcp__context7__resolve-library-id` → `mcp__context7__query-docs`) — fetch
+   up-to-date Carbon React API docs and code examples for each target component:
+
+   ```tool
+   mcp__context7__resolve-library-id(libraryName: "@carbon/react", query: "Button component props")
+   mcp__context7__query-docs(libraryId: "/carbon-design-system/carbon", query: "Modal component API")
+   ```
+
+3. Create a sub-task plan for each shadcn/ui consumer file that needs updating, replacing each
+   import and usage with the Carbon equivalent before deleting `components/ui/`.
+
+---
+
+### Issue K — Dead Carbon re-export wrapper (`components/Carbon/index.ts`)
+
+**Pattern:** A file `components/Carbon/index.ts` (or `components/Carbon/index.tsx`) exists that
+re-exports Carbon components:
+
+```ts
+export { Button } from '@carbon/react';
+export { OverflowMenu, OverflowMenuItem } from '@carbon/react';
+export { Breadcrumb, BreadcrumbItem } from '@carbon/react';
+```
+
+This is a migration stepping-stone — it was created so existing code could import from a local
+path while Carbon was being adopted, then never cleaned up.
+
+**Detection rule:** Check for any inbound imports:
+
+```tool
+grep(pattern: "from ['\"][./]+Carbon['\"]", include: "*.ts,*.tsx", path: "<prototype-dir>/src")
+```
+
+- **If zero matches:** the wrapper is dead — mark for deletion.
+- **If matches exist:** the wrapper is still in use. Use Carbon MCP to confirm each re-exported
+  symbol exists directly in `@carbon/react`, then update each consumer to import directly before
+  deleting the wrapper.
+
+---
+
+### Issue L — Dead Figma image helper (`components/figma/ImageWithFallback.tsx`)
+
+**Pattern:** A `components/figma/` directory exists containing `ImageWithFallback.tsx` (a custom
+component for handling Figma-generated image imports with a fallback).
+
+**Detection rule:**
+
+```tool
+grep(pattern: "ImageWithFallback", include: "*.ts,*.tsx", path: "<prototype-dir>/src")
+```
+
+- **If only self-references (the definition file itself):** dead — mark for deletion.
+- **If imported elsewhere:** keep it, but note the consumer files.
+
+After deleting `ImageWithFallback.tsx`, if `components/figma/` is now empty, delete the directory.
+
+---
+
+### Issue M — Superseded page files
+
+**Pattern:** A page component exists in `components/pages/` that has been replaced by a newer
+equivalent but was never deleted. Common examples from Figma Make migrations:
+
+- `DecisionAssistantPage.tsx` — replaced by `ChatLayoutTemplate`
+- `SidePanelDemoPage.tsx` — dev scratch page never added to routes
+
+**Detection rule:** For every file in `components/pages/`, check:
+
+1. Is it imported in `routes.tsx` (or equivalent router config)?
+2. Is it imported by any other active component?
+
+```tool
+grep(pattern: "DecisionAssistantPage|SidePanelDemoPage", include: "*.ts,*.tsx", path: "<prototype-dir>/src")
+```
+
+Any page file with zero inbound imports and no route entry is a dead file — mark for deletion.
+Also check for an accompanying `.module.css` file and delete it alongside the `.tsx`.
+
+---
+
 ### Issue I — Root workspace dev script missing
 
 **Pattern:** The root `package.json` has no `"dev:<slug>"` script for this prototype.
@@ -205,10 +338,64 @@ F       ❌ n/a  typescript not needed (no tsconfig / type-checking)
 G       ❌ n/a  figmaAssetResolver present, all assets confirmed
 H       ❌ n/a  Name "figma-make-di-nav-ia" is unique
 I       ✅ yes  Add "dev:di-nav-ia" script to root package.json
+J       ✅ yes  Delete components/ui/ (zero external imports — shadcn/ui fully superseded)
+K       ✅ yes  Delete components/Carbon/index.ts (zero inbound imports)
+L       ✅ yes  Delete components/figma/ImageWithFallback.tsx (zero imports)
+M       ✅ yes  Delete DecisionAssistantPage.tsx, SidePanelDemoPage.tsx (no routes, no imports)
 ```
 
 Ask for confirmation before applying if the user wants to review. For routine fixes (all issues
 A–E), proceed without asking.
+
+---
+
+## Step 3b — Dead component scan (always run)
+
+**Run this scan on every Figma Make import, even if Issues A–I all pass.** Figma Make always
+generates `components/ui/` and often generates the other scaffolding directories. They may be
+harmless on day one but become dead weight as the prototype evolves.
+
+### Scan procedure
+
+```tool
+// 1. Check for components/ui/ with no external consumers
+grep(pattern: "from ['\"](\.\./|\./)?(components/)?ui/", include: "*.ts,*.tsx", path: "<prototype-dir>/src")
+
+// 2. Check for components/Carbon/ wrapper
+glob(pattern: "<prototype-dir>/src/**/components/Carbon/index.{ts,tsx}")
+
+// 3. Check for components/figma/ helpers
+glob(pattern: "<prototype-dir>/src/**/components/figma/*.{ts,tsx}")
+
+// 4. Check each file in components/pages/ for inbound imports
+grep(pattern: "<PageComponentName>", include: "*.ts,*.tsx", path: "<prototype-dir>/src")
+```
+
+If any dead code is found, add it to the issues table and include deletion in Step 4.
+
+### Dependency audit (after deleting components/ui/)
+
+After removing `components/ui/`, check `package.json` for dependencies that were only used by that
+directory. These are now dead and can be uninstalled:
+
+| Package | Used only by `components/ui/` |
+|---|---|
+| `class-variance-authority` | ✅ likely — CVA is shadcn/ui's variant utility |
+| `clsx` | ⚠️ check — may also be used in app code |
+| `tailwind-merge` | ✅ likely — only used by `cn()` in `utils.ts` |
+| `@radix-ui/*` (all packages) | ✅ likely — Radix is shadcn/ui's primitive layer |
+| `vaul` | ✅ likely — shadcn/ui Drawer primitive |
+| `cmdk` | ✅ likely — shadcn/ui Command primitive |
+| `input-otp` | ✅ likely — shadcn/ui OTP input |
+| `recharts` | ⚠️ check — may be used directly in app charts |
+| `next-themes` | ⚠️ check — may be used in theme provider |
+| `sonner` | ✅ likely — shadcn/ui toast primitive |
+
+For each package, run:
+```tool
+grep(pattern: "from ['\"]<package-name>['\"]", include: "*.ts,*.tsx", path: "<prototype-dir>/src/app")
+```
+If zero matches: add to `npm uninstall` list. Run the uninstall **after** the build confirms clean.
 
 ---
 
@@ -251,6 +438,31 @@ Key rules for the rewrite:
 - **Remove `peerDependencies` entirely** for prototype apps (they're not consumed as libraries).
   If it is needed (library mode), keep it but remove `peerDependenciesMeta`.
 
+### 4b-extra — Delete dead scaffolding (Issues J, K, L, M)
+
+For each dead directory or file confirmed in the scan:
+
+```tool
+// Issue J — entire shadcn/ui library
+execute_command("rm -rf <prototype-dir>/src/app/components/ui")
+
+// Issue K — Carbon re-export wrapper
+execute_command("rm -rf <prototype-dir>/src/app/components/Carbon")
+
+// Issue L — Figma image helper
+execute_command("rm -rf <prototype-dir>/src/app/components/figma")
+
+// Issue M — superseded page files (adjust names as found)
+execute_command("rm <prototype-dir>/src/app/components/pages/DecisionAssistantPage.tsx")
+execute_command("rm <prototype-dir>/src/app/components/pages/DecisionAssistantPage.module.css")
+```
+
+After each deletion, verify with a targeted grep that zero references remain in `*.ts`/`*.tsx`
+files. Markdown doc references (e.g. `MIGRATION_EXECUTION_PLAN.md`) are acceptable to leave.
+
+If Issue J-migration applies (shadcn/ui still in use), do NOT delete `components/ui/` yet — create
+a sub-task plan for the Carbon migration first (see Issue J-migration guidance above).
+
 ### 4b — Delete `pnpm-workspace.yaml` (Issue D)
 
 ```tool
@@ -274,6 +486,19 @@ Insert the new entry directly after the last existing `"dev:…"` line in root `
 ```json
 "dev:di-nav-ia": "npm run dev -w figma-make-di-nav-ia"
 ```
+
+---
+
+## Step 4c — Uninstall dead dependencies (post-deletion)
+
+After all dead directories are deleted and the build is confirmed clean, uninstall packages that
+were only used by `components/ui/`. Run the dependency audit from Step 3b, then:
+
+```tool
+execute_command("npm uninstall -w <package-name> <pkg1> <pkg2> … 2>&1 | tail -10")
+```
+
+Confirm the build still passes after uninstall.
 
 ---
 
