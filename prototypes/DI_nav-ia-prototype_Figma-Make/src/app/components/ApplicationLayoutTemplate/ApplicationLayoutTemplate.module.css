@@ -21,8 +21,6 @@
   /* Content is pushed by navigation */
 }
 
-/* Navigation is now handled by Match360Navigation component */
-
 /* Main Content Area - fills available space inside applicationContent */
 .mainContent {
   flex: 1;
