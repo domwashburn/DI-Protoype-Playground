@@ -5,10 +5,10 @@ import {
   ColumnDef,
   flexRender,
 } from "@tanstack/react-table";
-import { usePanelManager, AssetDetailsPanel } from "./SidePanel";
-import type { AssetData } from "./SidePanel";
-import { useAssets } from "../data/hooks";
-import styles from "./DecisionAssetsTable.module.css";
+import { usePanelManager, AssetDetailsPanel } from "../SidePanel";
+import type { AssetData } from "../SidePanel";
+import { useAssets } from "../../data/hooks";
+import styles from "../DecisionAssetsTable/DecisionAssetsTable.module.css";
 
 // Type definitions
 type DataModelStatus = {

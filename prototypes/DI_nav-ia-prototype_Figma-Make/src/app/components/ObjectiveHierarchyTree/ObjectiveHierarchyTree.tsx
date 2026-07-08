@@ -12,7 +12,7 @@
 
 import React from 'react';
 import styles from './ObjectiveHierarchyTree.module.css';
-import { BusinessObjective } from '../data/objectives/types';
+import { BusinessObjective } from '../../data/objectives/types';
 
 interface ObjectiveHierarchyTreeProps {
   currentObjective: BusinessObjective;

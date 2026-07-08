@@ -24,18 +24,18 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useParams } from "react-router";
-import DecisionAutomationSideNav from "./DecisionAutomationSideNav";
-import PageHeader from "./PageHeader";
-import BreadcrumbActionBar from "./BreadcrumbActionBar";
+import DecisionAutomationSideNav from "../DecisionAutomationSideNav";
+import PageHeader from "../PageHeader";
+import BreadcrumbActionBar from "../BreadcrumbActionBar";
 import { Settings, Information, Document } from "@carbon/icons-react";
-import { 
-  PanelManagerProvider, 
+import {
+  PanelManagerProvider,
   usePanelManager,
   ServiceDetailsPanel,
   SettingsPanel,
   SectionInfluencedLayout,
   AutomationShellPanelRenderer
-} from "./SidePanel";
+} from "../SidePanel";
 import {
   InboxLayoutTemplate,
   InboxPanelHeader,
@@ -43,32 +43,32 @@ import {
   InboxPanelToolbar,
   InboxPanelList,
   AddIcon,
-} from "./InboxLayout";
-import LargeListItem from "./LargeListItem";
-import PlaceholderContent from "./PlaceholderContent";
-import LinkedAutomationCard from "./LinkedAutomationCard";
-import CardGrid from "./CardLayout/CardGrid";
-import ObjectiveHierarchyTree from "./ObjectiveHierarchyTree";
-import DecisionAssetsTable from "./DecisionAssetsTable";
-import DataModelsTable from "./DataModelsTable";
-import BranchesPage from "./pages/BranchesPage";
-import HistoryPage from "./pages/HistoryPage";
-import UpdatesPage from "./pages/UpdatesPage";
-import TestAutomationPage from "./pages/TestAutomationPage";
-import DeployAutomationPage from "./pages/DeployAutomationPage";
-import MonitorAutomationPage from "./pages/MonitorAutomationPage";
-import AutomationOverviewPage from "./pages/AutomationOverviewPage";
-import VersionsPage from "./pages/VersionsPage";
-import AutomationSettingsPage from "./pages/AutomationSettingsPage";
-import DecisionModelPage from "./pages/DecisionModelPage";
-import TaskModelPage from "./pages/TaskModelPage";
-import PredictiveModelPage from "./pages/PredictiveModelPage";
-import OptimizationModelPage from "./pages/OptimizationModelPage";
-import GenAINodePage from "./pages/GenAINodePage";
-import RulesAndPoliciesPage from "./pages/RulesAndPoliciesPage";
-import DecisionOutcomesPage from "./pages/DecisionOutcomesPage";
-import { useServices, useAssets, useObjectives, useGoals, useAutomations } from "../data/hooks";
-import svgPaths from "../imports/svg-nx4jc4uvwt";
+} from "../InboxLayout";
+import LargeListItem from "../LargeListItem";
+import PlaceholderContent from "../PlaceholderContent";
+import LinkedAutomationCard from "../LinkedAutomationCard";
+import CardGrid from "../CardLayout/CardGrid";
+import ObjectiveHierarchyTree from "../ObjectiveHierarchyTree";
+import DecisionAssetsTable from "../DecisionAssetsTable";
+import DataModelsTable from "../DataModelsTable";
+import BranchesPage from "../pages/BranchesPage";
+import HistoryPage from "../pages/HistoryPage";
+import UpdatesPage from "../pages/UpdatesPage";
+import TestAutomationPage from "../pages/TestAutomationPage";
+import DeployAutomationPage from "../pages/DeployAutomationPage";
+import MonitorAutomationPage from "../pages/MonitorAutomationPage";
+import AutomationOverviewPage from "../pages/AutomationOverviewPage";
+import VersionsPage from "../pages/VersionsPage";
+import AutomationSettingsPage from "../pages/AutomationSettingsPage";
+import DecisionModelPage from "../pages/DecisionModelPage";
+import TaskModelPage from "../pages/TaskModelPage";
+import PredictiveModelPage from "../pages/PredictiveModelPage";
+import OptimizationModelPage from "../pages/OptimizationModelPage";
+import GenAINodePage from "../pages/GenAINodePage";
+import RulesAndPoliciesPage from "../pages/RulesAndPoliciesPage";
+import DecisionOutcomesPage from "../pages/DecisionOutcomesPage";
+import { useServices, useAssets, useObjectives, useGoals, useAutomations } from "../../data/hooks";
+import svgPaths from "../../imports/svg-nx4jc4uvwt";
 import styles from "./ApplicationLayoutTemplate.module.css";
 
 // ============================================================================

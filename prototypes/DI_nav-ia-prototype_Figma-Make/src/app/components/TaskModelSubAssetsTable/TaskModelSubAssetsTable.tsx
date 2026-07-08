@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import type { Asset } from "../data/automations";
-import styles from "./DecisionAssetsTable.module.css";
+import type { Asset } from "../../data/automations";
+import styles from "../DecisionAssetsTable/DecisionAssetsTable.module.css";
 
 interface TaskModelSubAssetsTableProps {
   subAssets: Asset[];

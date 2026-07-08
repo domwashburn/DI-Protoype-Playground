@@ -13,7 +13,7 @@ import {
   Rule,
   ChartBubble
 } from '@carbon/icons-react';
-import { SideRailNavigation, SideRailNavSection } from './SideRailNavigation';
+import { SideRailNavigation, SideRailNavSection } from '../SideRailNavigation';
 
 interface DecisionAutomationSideNavProps {
   isExpanded?: boolean;

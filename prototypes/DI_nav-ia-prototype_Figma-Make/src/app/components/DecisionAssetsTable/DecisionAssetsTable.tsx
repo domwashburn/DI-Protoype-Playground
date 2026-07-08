@@ -9,10 +9,10 @@ import {
   ColumnResizeMode,
 } from "@tanstack/react-table";
 import { ChevronRight } from "@carbon/icons-react";
-import { usePanelManager, AssetDetailsPanel } from "./SidePanel";
-import type { AssetData } from "./SidePanel";
-import { useAssets, useSubAssets } from "../data/hooks";
-import type { Asset } from "../data/automations";
+import { usePanelManager, AssetDetailsPanel } from "../SidePanel";
+import type { AssetData } from "../SidePanel";
+import { useAssets, useSubAssets } from "../../data/hooks";
+import type { Asset } from "../../data/automations";
 import styles from "./DecisionAssetsTable.module.css";
 
 // Type definitions

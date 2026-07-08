@@ -9,7 +9,7 @@ import {
   PlaceholderSubViewA,
   PlaceholderSubViewB,
   PlaceholderSubViewC,
-} from './SidePanel';
+} from '../SidePanel';
 import { Button, Tabs, TabList, Tab } from '@carbon/react';
 
 interface StatusTag {

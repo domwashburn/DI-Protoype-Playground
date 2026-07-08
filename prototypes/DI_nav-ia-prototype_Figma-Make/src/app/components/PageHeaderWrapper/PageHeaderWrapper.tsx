@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Breadcrumb, BreadcrumbItem } from '@carbon/react';
 import styles from './PageHeaderWrapper.module.css';
-import PageHeader from './PageHeader';
+import PageHeader from '../PageHeader';
 
 interface Tab {
   id?: string;

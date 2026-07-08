@@ -1,6 +1,6 @@
 import { useState } from "react";
-import svgPaths from "../imports/svg-js2ltrbtsk";
-import { SideRailNavigation, SideRailNavSection, SideRailNavItem } from './SideRailNavigation';
+import svgPaths from "../../imports/svg-js2ltrbtsk";
+import { SideRailNavigation, SideRailNavSection, SideRailNavItem } from '../SideRailNavigation';
 
 // Exact SVG components from Figma import
 function SidePanelOpenFilled() {

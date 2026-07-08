@@ -2,7 +2,7 @@ import React from 'react';
 import { CloudUpload, Movement, Timer, OverflowMenuHorizontal } from '@carbon/icons-react';
 import styles from './BreadcrumbActionBar.module.css';
 import { Button, Breadcrumb, BreadcrumbItem, OverflowMenu, OverflowMenuItem } from '@carbon/react';
-import BranchSwitcher, { Branch } from './BranchSwitcher';
+import BranchSwitcher, { Branch } from '../BranchSwitcher';
 
 // Renamed from BreadcrumbItem to avoid clash with Carbon's BreadcrumbItem component
 interface BreadcrumbNavItem {

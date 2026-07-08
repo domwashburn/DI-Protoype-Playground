@@ -1,4 +1,4 @@
-import { CarbonDecisionAssistant } from './CarbonDecisionAssistant';
+import { CarbonDecisionAssistant } from '../CarbonDecisionAssistant';
 import styles from './ChatLayoutTemplate.module.css';
 
 interface ChatLayoutTemplateProps {

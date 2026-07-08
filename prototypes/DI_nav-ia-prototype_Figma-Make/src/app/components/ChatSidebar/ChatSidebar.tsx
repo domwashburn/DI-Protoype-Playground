@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Add, Chat, Upload, Book, Archive } from '@carbon/icons-react';
-import { SideRailNavigation, SideRailNavSection } from './SideRailNavigation';
-import { useConversations } from '../data/hooks';
+import { SideRailNavigation, SideRailNavSection } from '../SideRailNavigation';
+import { useConversations } from '../../data/hooks';
 import styles from './ChatSidebar.module.css';
 
 interface HistoryItem {

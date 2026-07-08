@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { SendAlt, ChatBot, UserAvatar } from '@carbon/icons-react';
-import { useConversation, useConversationMessages } from '../data/hooks';
-import type { Message as DataMessage } from '../data/chats/types';
+import { useConversation, useConversationMessages } from '../../data/hooks';
+import type { Message as DataMessage } from '../../data/chats/types';
 import styles from './ChatInterface.module.css';
 
 interface Message {

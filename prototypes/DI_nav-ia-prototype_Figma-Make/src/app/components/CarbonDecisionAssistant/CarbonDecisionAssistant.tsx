@@ -32,10 +32,10 @@ import {
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Add, ChatBot } from '@carbon/icons-react';
-import { AssistantCustomHeader } from './AssistantCustomHeader';
-import { ChatHistoryPanel } from './ChatHistoryPanel/ChatHistoryPanel';
-import SideRailNavigation from './SideRailNavigation/SideRailNavigation';
-import type { SideRailNavSection } from './SideRailNavigation/types';
+import { AssistantCustomHeader } from '../AssistantCustomHeader';
+import { ChatHistoryPanel } from '../ChatHistoryPanel';
+import SideRailNavigation from '../SideRailNavigation/SideRailNavigation';
+import type { SideRailNavSection } from '../SideRailNavigation/types';
 import styles from './CarbonDecisionAssistant.module.css';
 
 const ASSISTANT_RAIL_SECTIONS: SideRailNavSection[] = [

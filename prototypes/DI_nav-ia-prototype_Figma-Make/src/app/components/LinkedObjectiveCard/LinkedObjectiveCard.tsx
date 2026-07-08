@@ -1,5 +1,5 @@
 import styles from './LinkedObjectiveCard.module.css';
-import type { BusinessObjective } from '../data/objectives/types';
+import type { BusinessObjective } from '../../data/objectives/types';
 
 /**
  * LinkedObjectiveCard Component
