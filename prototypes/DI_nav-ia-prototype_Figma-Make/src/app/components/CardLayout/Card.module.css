@@ -1,0 +1,337 @@
+/* Card Component - Carbon Design System v11 */
+
+/* ============================================
+   BASE CARD STYLES
+   ============================================ */
+.card {
+  position: relative;
+  width: 100%;
+  height: 256px;
+  background-color: var(--cds-layer);
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  transition: background-color var(--cds-productive-02);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: left;
+  padding: 0 !important;
+  font-family: var(--cds-font-family);
+}
+
+.card:hover {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none;
+}
+
+/* Suppress ClickableTile's link-style text decoration on all descendants */
+.card,
+.card * {
+  text-decoration: none !important;
+}
+
+/* Inset focus ring — Carbon standard is 2px solid focus color, offset inward */
+.card:focus-visible {
+  outline: 2px solid var(--cds-focus) !important;
+  outline-offset: -2px !important;
+}
+
+/* Card Inner Container */
+.cardInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   STANDARD VARIANT
+   ============================================ */
+.standard {
+  background-color: #ffffff;
+  border-color: var(--cds-border-subtle-01, #e0e0e0);
+}
+
+
+/* ============================================
+   AI-GENERATED VARIANT
+   ============================================ */
+.aiGenerated {
+  background-color: #ffffff;
+  border-color: #78a9ff;
+  box-shadow: 0px 4px 8px 0px rgba(15, 98, 254, 0.1);
+}
+
+/* AI Background Layer with Gradient */
+.aiBackgroundLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.aiBackgroundLayer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(69, 137, 255, 0.1));
+  z-index: 3;
+}
+
+.aiBackgroundLayer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  z-index: 1;
+}
+
+/* AI Inset Glow */
+.aiBackgroundLayer::before {
+  box-shadow: 0px -80px 70px -65px inset rgba(15, 98, 254, 0.1);
+}
+
+/* AI Border */
+.aiBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid #78a9ff;
+  border-radius: inherit;
+  mix-blend-mode: multiply;
+}
+
+/* AI Shadow */
+.aiShadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  box-shadow: 0px 4px 8px 0px rgba(15, 98, 254, 0.1);
+  mix-blend-mode: multiply;
+}
+
+/* ============================================
+   CARD HEADER
+   ============================================ */
+.cardHeader {
+  position: relative;
+  padding: 16px 16px 8px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.headerContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.cardTitle {
+  font-family: 'IBM Plex Sans', var(--cds-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--cds-text-primary, #161616);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardResourceType {
+  font-family: 'IBM Plex Sans', var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary, #a8a8a8);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Overflow Menu Button */
+.overflowMenuButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #161616;
+  border-radius: var(--cds-radius);
+  transition: background-color var(--cds-productive-02);
+  z-index: 2;
+}
+
+.overflowMenuButton:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.overflowMenuButton:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: 2px;
+}
+
+.overflowMenuIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+/* Carbon Overflow Menu Wrapper - positioned in top right corner */
+.carbonOverflowMenu {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+/* ============================================
+   CARD CONTENT (Description - Flexible)
+   ============================================ */
+.cardContent {
+  flex: 1;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cardDescription {
+  font-family: 'IBM Plex Sans', var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-primary, #161616);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Based on typical 4 lines of description in the mock */
+  -webkit-box-orient: vertical;
+  white-space: normal; /* allow wrapping for descriptions */
+}
+
+/* ============================================
+   CARD FOOTER
+   ============================================ */
+.cardFooter {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Divider Variants - we hide the divider for standard to match the mock */
+.standardDivider {
+  display: none;
+}
+
+.aiDivider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(166, 200, 255, 0.64);
+  flex-shrink: 0;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 3fr);
+  gap: 16px;
+  align-items: flex-start;
+  color: var(--cds-text-secondary, #525252);
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.footerLabel {
+  font-family: 'IBM Plex Sans', var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  margin: 0;
+  height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.footerValue {
+  font-family: 'IBM Plex Sans', var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  margin: 0;
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================
+   RESPONSIVE & ACCESSIBILITY
+   ============================================ */
+
+/* Ensure proper focus styles */
+.card:focus-visible {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: 2px;
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .standard {
+    background-color: var(--cds-layer);
+    border-color: var(--cds-border-subtle);
+  }
+  
+  .cardTitle {
+    color: var(--cds-text-primary);
+  }
+  
+  .cardResourceType,
+  .cardDescription,
+  .footerLabel,
+  .footerValue {
+    color: var(--cds-text-secondary);
+  }
+}

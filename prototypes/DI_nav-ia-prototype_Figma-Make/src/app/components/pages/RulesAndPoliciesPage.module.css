@@ -1,0 +1,22 @@
+/* Rules and Policies Page - Carbon Design System v11 */
+
+.pageContainer {
+  background-color: var(--cds-background);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  /* overflow-y is intentionally absent here — scroll must live INSIDE
+     SectionInfluencedLayout so the absolute-positioned section panel
+     overlays the visible content area correctly. See .pageContent below. */
+}
+
+/* Scrollable content area — sits inside SectionInfluencedLayout so the
+   section panel overlay is scoped to this region. */
+.pageContent {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--cds-spacing-05);
+}

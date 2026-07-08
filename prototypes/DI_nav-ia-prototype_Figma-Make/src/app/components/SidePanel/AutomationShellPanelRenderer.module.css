@@ -1,0 +1,53 @@
+/**
+ * AutomationShellPanelRenderer - Panel rendering for automation shell
+ * Respects the side rail offset and positions panels correctly within the automation shell
+ */
+
+.automationShellPanel {
+  position: fixed;
+  top: var(--panel-top-offset, 88px); /* 48px header + 40px breadcrumb */
+  /* Shift left by the Assistant panel width when it's open & not expanded */
+  right: var(--assistant-panel-offset, 0);
+  bottom: 0;
+  width: var(--panel-width-standard, 320px);
+  background-color: var(--cds-layer);
+  border-left: 1px solid var(--cds-border-subtle);
+  z-index: var(--z-panel-automation-shell, 6000);
+  transform: translateX(100%);
+  transition:
+    transform var(--cds-productive-02) cubic-bezier(0.2, 0, 0.38, 0.9),
+    right var(--cds-productive-02) cubic-bezier(0.2, 0, 0.38, 0.9);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.automationShellPanel[data-panel-open="true"] {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.automationShellPanelInner {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Backdrop for page panels */
+.automationShellPanel::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--cds-overlay, rgba(22, 22, 22, 0.5));
+  opacity: 0;
+  transition: opacity var(--cds-productive-02);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.automationShellPanel[data-panel-open="true"]::before {
+  opacity: 1;
+  pointer-events: auto;
+}

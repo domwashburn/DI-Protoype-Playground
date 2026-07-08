@@ -1,0 +1,8 @@
+@import './fonts.css';
+@import '@carbon/ibm-products/css/carbon.css';
+@import '@carbon/ibm-products/css/index-without-carbon.min.css';
+@import 'tailwindcss' source(none);
+@source '../../**/*.{js,ts,jsx,tsx}';
+@import 'tw-animate-css';
+@import './default_theme.css';
+@import './globals.css';

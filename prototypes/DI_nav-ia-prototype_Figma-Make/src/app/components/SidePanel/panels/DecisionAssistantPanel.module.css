@@ -1,0 +1,35 @@
+/**
+ * DecisionAssistantPanel — Carbon-compliant CSS Module
+ * Phase 6B: removed hand-rolled .expandButton and .closeButton blocks
+ * (both had bare border: 1px solid transparent made visible by Tailwind's
+ * global border-color override, hardcoded border-radius: 4px, and bare
+ * transition: background-color 70ms). All button rendering now delegated
+ * to @carbon/react Button (ghost/sm/icon-only).
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--cds-layer);
+  border-left: 1px solid var(--cds-border-subtle);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--cds-spacing-03);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  /* 48px = var(--cds-spacing-09) — Carbon standard panel header height */
+  height: var(--cds-spacing-09);
+  background-color: var(--cds-layer);
+}
+
+.content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

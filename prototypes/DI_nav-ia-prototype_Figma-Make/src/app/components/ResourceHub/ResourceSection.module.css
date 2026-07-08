@@ -1,0 +1,68 @@
+/* ResourceSection - Carbon Design System v11
+   ─────────────────────────────────────────────────────────────────────────────
+   WHY grid-column: 1 / -1 DIRECTLY (no Carbon <Column> wrapper):
+   ResourceSection participates in the parent's CSS subgrid via
+   `grid-template-columns: subgrid`. Wrapping content in a Carbon <Column>
+   component would create a new, independent 16-column grid inside each section
+   rather than inheriting the parent's tracks — breaking subgrid alignment.
+
+   The correct pattern for subgrid children is to assign `grid-column` directly
+   on the child element, which is why both .sectionHeaderRow and .sectionContentRow
+   use `grid-column: 1 / -1` without any Carbon Column wrapper.
+
+   See /ai/docs/carbon-grid-implementation.md §ResourceHub for full rationale.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+.resourceSection {
+  display: grid;
+  grid-template-columns: subgrid;  /* Inherit parent's 16 column tracks */
+  grid-column: 1 / -1;             /* Span all 16 parent columns */
+  gap: 1px;                      /* One-pixel Carbon divider rhythm between header and cards */
+  /* Ensure rows pack to natural height; without this the subgrid distributes
+     any extra row height between the header and content rows. */
+  align-content: start;
+}
+
+/* Both header and content rows span the full parent grid width
+   via grid-column: 1 / -1 — no Carbon Column wrapper needed.
+   See file header for rationale. */
+.sectionHeaderRow {
+  grid-column: 1 / -1;
+}
+
+.sectionContentRow {
+  grid-column: 1 / -1;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: var(--cds-spacing-04) var(--cds-spacing-05);
+  background-color: var(--cds-layer);
+}
+
+.sectionTitle {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);
+  font-weight: var(--cds-heading-03-font-weight);
+  line-height: var(--cds-heading-03-line-height);
+  letter-spacing: var(--cds-heading-03-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.sectionDescription {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-01-font-size);
+  font-weight: var(--cds-body-01-font-weight);
+  line-height: var(--cds-body-01-line-height);
+  letter-spacing: var(--cds-body-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+}

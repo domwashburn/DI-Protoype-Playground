@@ -1,0 +1,470 @@
+/* Carbon Design System compiled CSS — loaded from the locally-installed
+   @carbon/ibm-products package which ships a pre-compiled carbon.css that
+   bundles the full @carbon/styles (shell, grid, typography, resets, tokens).
+   Using a bare-specifier @import (no url()) so Vite/PostCSS resolves it from
+   node_modules at build time instead of the browser fetching a CDN URL at
+   runtime (CDN is blocked in this sandbox environment). 
+   (Imports moved to index.css to avoid @charset issues) */
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  
+  /* Carbon Design System Variables - Manual Definition */
+  --cds-font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  
+  /* Carbon Spacing */
+  --cds-spacing-01: 2px;
+  --cds-spacing-02: 4px;
+  --cds-spacing-03: 8px;
+  --cds-spacing-04: 12px;
+  --cds-spacing-05: 16px;
+  --cds-spacing-06: 24px;
+  --cds-spacing-07: 32px;
+  --cds-spacing-08: 40px;
+  --cds-spacing-09: 48px;
+  --cds-spacing-10: 64px;
+  
+  /* Carbon Colors - Gray 10 Theme (Main Content) */
+  --cds-background: #f4f4f4;
+  --cds-layer: #ffffff;
+  --cds-layer-accent: #e0e0e0;
+  --cds-layer-hover: rgba(22,22,22,0.12);
+  --cds-layer-selected: rgba(22,22,22,0.24);
+  --cds-field: #f4f4f4;
+  --cds-text-primary: #161616;
+  --cds-text-secondary: #525252;
+  --cds-text-on-color: #ffffff;
+  --cds-icon-primary: #161616;
+  --cds-icon-secondary: #525252;
+  --cds-border-subtle: #e0e0e0;
+  
+  /* Carbon Colors - Gray 100 Theme (Header & Navigation) */
+  --cds-header-background: #161616;
+  --cds-header-layer: #262626;
+  --cds-header-layer-accent: #393939;
+  --cds-header-layer-hover: rgba(141,141,141,0.12);
+  --cds-header-layer-selected: rgba(141,141,141,0.24);
+  --cds-header-field: #161616;
+  --cds-header-text-primary: #f4f4f4;
+  --cds-header-text-secondary: #c6c6c6;
+  --cds-header-text-on-color: #ffffff;
+  --cds-header-icon-primary: #f4f4f4;
+  --cds-header-icon-secondary: #8d8d8d;
+  --cds-header-border-subtle: #393939;
+  --cds-interactive: #0f62fe;
+  --cds-focus: #0f62fe;
+  --cds-support-success: #198038;
+  --cds-tag-background-blue: #005d5d;
+  --cds-tag-color-blue: #9ef0f0;
+  
+  /* Carbon Motion */
+  --cds-productive-01: 70ms;
+  --cds-productive-02: 110ms;
+  
+  /* Carbon v11 Typography Tokens */
+  --cds-body-compact-01-font-size: 14px;
+  --cds-body-compact-01-font-weight: 400;
+  --cds-body-compact-01-line-height: 18px;
+  --cds-body-compact-01-letter-spacing: 0.16px;
+  
+  --cds-body-01-font-size: 14px;
+  --cds-body-01-font-weight: 400;
+  --cds-body-01-line-height: 20px;
+  --cds-body-01-letter-spacing: 0.16px;
+  
+  --cds-heading-compact-01-font-size: 14px;
+  --cds-heading-compact-01-font-weight: 600;
+  --cds-heading-compact-01-line-height: 18px;
+  --cds-heading-compact-01-letter-spacing: 0.16px;
+
+  /* heading-02 — used in panel placeholder titles (16px/600/24px) */
+  --cds-heading-02-font-size: 16px;
+  --cds-heading-02-font-weight: 600;
+  --cds-heading-02-line-height: 24px;
+  --cds-heading-02-letter-spacing: 0px;
+
+  /* code-01 — used in panel code/endpoint values (12px monospace) */
+  --cds-code-01-font-size: 12px;
+  --cds-code-01-font-weight: 400;
+  --cds-code-01-line-height: 16px;
+  --cds-code-01-letter-spacing: 0.32px;
+  
+  --cds-label-01-font-size: 12px;
+  --cds-label-01-font-weight: 400;
+  --cds-label-01-line-height: 16px;
+  --cds-label-01-letter-spacing: 0.32px;
+  
+  --cds-heading-03-font-size: 20px;
+  --cds-heading-03-font-weight: 400;
+  --cds-heading-03-line-height: 28px;
+  --cds-heading-03-letter-spacing: 0px;
+  
+  --cds-heading-04-font-size: 28px;
+  --cds-heading-04-font-weight: 400;
+  --cds-heading-04-line-height: 36px;
+  --cds-heading-04-letter-spacing: 0px;
+  
+  --cds-heading-05-font-size: 32px;
+  --cds-heading-05-font-weight: 400;
+  --cds-heading-05-line-height: 40px;
+  --cds-heading-05-letter-spacing: 0px;
+  
+  /* Carbon Radius */
+  --cds-radius: 4px;
+
+  /* ── Panel system z-index & dimension tokens ───────────────────────────────
+     Single source of truth for all panel-system stacking and sizing.
+     Renderers reference these vars rather than bare numbers.              */
+  --header-height: 48px;
+  --breadcrumb-height: 40px;
+
+  /* Z-index ladder — higher numbers render on top */
+  --z-panel-section:            1;
+  --z-panel-page:             100;
+  --z-panel-page-backdrop:     99;
+  --z-panel-automation-shell: 6000;
+  --z-panel-global:           9000;
+  --z-panel-global-backdrop:  8999;
+  --z-modal:                 10000;
+
+  /* Panel width scale */
+  --panel-width-narrow:   240px;
+  --panel-width-standard: 320px;
+  --panel-width-wide:     384px;
+
+  /* Custom design system variables and overrides */
+  
+  /* Typography Variables */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --text-2xl: 28px;
+  
+  /* The default background color for the application. */
+  --background: rgba(22, 22, 22, 1);
+  /* The default color for elements or text that appears on top of the background. */
+  --foreground: rgba(198, 198, 198, 1);
+  /* The background color for cards, modals, and other containers. */
+  --card: rgba(0, 0, 0, 0);
+  /* The default color for text or elements that appear on top of cards, modals and other background containers. */
+  --card-foreground: rgba(198, 198, 198, 1);
+  /* The background color for dropdowns and tooltips. */
+  --popover: rgba(0, 0, 0, 0);
+  /* The default color for text or elements that appear on top of dropdowns and tooltips. */
+  --popover-foreground: rgba(22, 22, 22, 1);
+  /* The primary color used for buttons, links, and other interactive elements. */
+  --primary: rgba(15, 98, 254, 1);
+  /* The default color for text or elements that appear on top of primary colored elements. */
+  --primary-foreground: rgba(255, 255, 255, 1);
+  /* The secondary color used for secondary(but NOT-DESTRUCTIVE) buttons and interactive elements. */
+  --secondary: rgba(141, 141, 141, 0.12);
+  /* The default color for text or elements that appear on top of secondary colored elements. */
+  --secondary-foreground: rgba(22, 22, 22, 1);
+  /* The muted color used for less prominent elements, such as disabled buttons or disabled text. */
+  --muted: rgba(82, 82, 82, 1);
+  /* The default color for text or elements that appear on top of muted colored elements. */
+  --muted-foreground: rgba(198, 198, 198, 1);
+  /* The accent color used for highlights, links, and other interactive elements. */
+  --accent: rgba(158, 240, 240, 1);
+  /* The default color for text or elements that appear on top of accent colored elements. */
+  --accent-foreground: rgba(0, 93, 93, 1);
+  /* The color used for background in destructive actions, such as delete buttons or error messages. */
+  --destructive: rgba(218, 30, 40, 1);
+  /* The default color for text or elements that appear on top of destructive colored elements. */
+  --destructive-foreground: rgba(255, 255, 255, 1);
+  /* The default border color for elements such as inputs, buttons, and other containers. */
+  --border: rgba(57, 57, 57, 1);
+  /* The default background color for input fields once the text has been filled. Should be either transparent or match the input-background. */
+  --input: rgba(244, 244, 244, 1);
+  /* The default background color for input fields, text areas, and other input elements. */
+  --input-background: rgba(244, 244, 244, 1);
+  /* The default font weight for medium text. */
+  --font-weight-medium: 600;
+  /* The default font weight for normal text. */
+  --font-weight-normal: 400;
+  /* The color for focus rings, outlines, and other focus indicators. */
+  --ring: rgba(15, 98, 254, 1);
+  /* Shadow for small elevations, such as cards or modals. */
+  --elevation-sm: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  /* Box shadow for elevated elements */
+  --box-shadow-elevation-sm: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  /* The color for chart elements, such as a bar or line in a chart. */
+  --chart-1: rgba(15, 98, 254, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-2: rgba(158, 240, 240, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-3: rgba(25, 128, 56, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-4: rgba(218, 30, 40, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-5: rgba(111, 111, 111, 1);
+  /* The default border radius for elements such as buttons, tooltip, and other containers. */
+  --radius: 9px;
+  /* The background color for sidebars, navigation menus, and other persistent elements. */
+  --sidebar: rgba(22, 22, 22, 1);
+  /* The default color for text or elements that appear on top of sidebars, navigation menus, and other persistent elements. */
+  --sidebar-foreground: rgba(198, 198, 198, 1);
+  /* The primary color used for buttons, links, and other interactive elements in sidebars and navigation menus. */
+  --sidebar-primary: rgba(15, 98, 254, 1);
+  /* The default color for text or elements that appear on top of primary colored elements in sidebars and navigation menus. */
+  --sidebar-primary-foreground: rgba(255, 255, 255, 1);
+  /* The accent color used for highlights, links, and other interactive elements in sidebars and navigation menus. */
+  --sidebar-accent: rgba(158, 240, 240, 1);
+  /* The default color for text or elements that appear on top of accent colored elements in sidebars and navigation menus. */
+  --sidebar-accent-foreground: rgba(0, 93, 93, 1);
+  /* The default border color for elements in sidebars and navigation menus. */
+  --sidebar-border: rgba(57, 57, 57, 1);
+  /* The default color for focus rings, outlines, and other focus indicators in sidebars and navigation menus. */
+  --sidebar-ring: rgba(15, 98, 254, 1);
+}
+
+.dark {
+  --background: rgba(22, 22, 22, 1);
+  --foreground: rgba(198, 198, 198, 1);
+  --card: rgba(0, 0, 0, 0);
+  --card-foreground: rgba(198, 198, 198, 1);
+  --popover: rgba(0, 0, 0, 0);
+  --popover-foreground: rgba(22, 22, 22, 1);
+  --primary: rgba(15, 98, 254, 1);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --secondary: rgba(141, 141, 141, 0.12);
+  --secondary-foreground: rgba(22, 22, 22, 1);
+  --muted: rgba(82, 82, 82, 1);
+  --muted-foreground: rgba(198, 198, 198, 1);
+  --accent: rgba(158, 240, 240, 1);
+  --accent-foreground: rgba(0, 93, 93, 1);
+  --destructive: rgba(218, 30, 40, 1);
+  --destructive-foreground: rgba(255, 255, 255, 1);
+  --border: rgba(57, 57, 57, 1);
+  --input: rgba(244, 244, 244, 1);
+  --ring: rgba(15, 98, 254, 1);
+  --font-weight-medium: 600;
+  --font-weight-normal: 400;
+  --chart-1: rgba(15, 98, 254, 1);
+  --chart-2: rgba(158, 240, 240, 1);
+  --chart-3: rgba(25, 128, 56, 1);
+  --chart-4: rgba(218, 30, 40, 1);
+  --chart-5: rgba(111, 111, 111, 1);
+  --sidebar: rgba(22, 22, 22, 1);
+  --sidebar-foreground: rgba(198, 198, 198, 1);
+  --sidebar-primary: rgba(15, 98, 254, 1);
+  --sidebar-primary-foreground: rgba(255, 255, 255, 1);
+  --sidebar-accent: rgba(158, 240, 240, 1);
+  --sidebar-accent-foreground: rgba(0, 93, 93, 1);
+  --sidebar-border: rgba(57, 57, 57, 1);
+  --sidebar-ring: rgba(15, 98, 254, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--cds-body-01-line-height, 1.5);
+    }
+
+    label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    button {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+    }
+
+    input {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* ── Carbon Button overrides ────────────────────────────────────────────── */
+/* Ensure buttons use flexbox with vertical centering for text and icons.
+   Carbon v11 uses inline-flex by default, but generic baseline overrides
+   can shift text. We explicitly reset align-items to center.
+   NOTE: justify-content is intentionally NOT overridden here — Carbon's own
+   `space-between` default is correct and must be preserved so that trailing
+   icons anchor to the far-right edge of primary/secondary buttons. */
+.cds--btn {
+  align-items: center !important;
+}
+
+/* Ghost buttons with both text and a trailing icon use space-between by
+   default, which pushes the icon hard-right. Collapse to flex-start so the
+   icon sits immediately after the label text (inline behaviour).
+   We add a gap to ensure spacing between label and icon. */
+.cds--btn--ghost:not(.cds--btn--icon-only) {
+  justify-content: flex-start;
+  gap: var(--cds-spacing-03);
+}
+
+/* Carbon handles button line-height via its own body-compact-01 token
+   (~1.28 / 18px at 14px). Do NOT override it on the button element —
+   doing so shortens the button height and breaks text/icon baseline
+   alignment. The span reset below is kept only for assistive-text spans
+   (visually hidden) and has no effect on rendered text. */
+.cds--btn > span {
+  line-height: 1;
+}
+
+.cds--btn__icon {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* ── Carbon Modal / Tearsheet border fixes ──────────────────────────────── */
+/*
+ * Root cause: `@layer base { * { @apply border-border } }` sets border-color
+ * on every element. Carbon's modal/tearsheet containers have border or outline
+ * declarations (e.g. outline: 1px solid transparent used for focus) that
+ * become visible when the color is overridden. These rules restore the
+ * expected Carbon-spec appearance.
+ */
+
+/* ComposedModal container — remove the unintended 1px outer border */
+.cds--modal-container {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Tearsheet outer wrapper and its inner container */
+.cds--tearsheet,
+.cds--tearsheet__container,
+.cds--tearsheet-narrow,
+.cds--tearsheet-narrow__container {
+  border: none !important;
+  outline: none !important;
+}
+
+/* ── Carbon Button border-color fixes ───────────────────────────────────── */
+/*
+ * Carbon primary / secondary / danger / ghost buttons use
+ * `border: 1px solid transparent` internally. The global `* { border-color }`
+ * override makes those 1 px transparent borders visible in dark grey.
+ * Reset border-color to transparent so only the background fill shows.
+ *
+ * Tertiary buttons intentionally have a visible border — Carbon's own
+ * `--cds-button-tertiary` token is used so the brand colour is preserved.
+ */
+.cds--btn--primary,
+.cds--btn--secondary,
+.cds--btn--danger,
+.cds--btn--danger--primary,
+.cds--btn--danger--ghost,
+.cds--btn--ghost {
+  border-color: transparent !important;
+}
+
+.cds--btn--tertiary {
+  border-color: var(--cds-button-tertiary, var(--cds-interactive)) !important;
+}
+
+/* ========================================================================
+   Phase 7A: Custom grid CSS removed — components now use:
+   - Carbon <Grid> / <Column> from @carbon/react (CardLayoutTemplate)
+   - CSS Module container queries (CardGrid, ResourceDetailsPage)
+   - CSS Module subgrid (ResourceSection within ResourceHubPage)
+   The ~280-line custom .cds--grid / .cds--col-* / .card-grid / .cds--subgrid
+   block was deleted. Carbon's own CDN CSS (@carbon/styles@1.72.0) provides
+   the Grid/Column component styling.
+   ======================================================================== */

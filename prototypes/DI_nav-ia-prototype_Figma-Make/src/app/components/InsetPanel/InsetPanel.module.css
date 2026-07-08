@@ -1,0 +1,28 @@
+/* InsetPanel - Carbon Design System v11 */
+
+.insetPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.headerSection {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.toolbarSection {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.contentSection {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}

@@ -1,0 +1,57 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.contentWrapper {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  gap: 0;
+}
+
+/* Default Layout: Full-width content */
+.layout-default {
+  grid-template-columns: 1fr;
+  grid-template-areas: "main";
+}
+
+/* Left Panel Layout: Sidebar on left, content on right */
+.layout-left-panel {
+  grid-template-columns: 288px 1fr;
+  grid-template-areas: "left main";
+}
+
+/* Right Panel Layout: Content on left, sidebar on right */
+.layout-right-panel {
+  grid-template-columns: 1fr 288px;
+  grid-template-areas: "main right";
+}
+
+/* Split Layout: Left panel, main content, right panel */
+.layout-split {
+  grid-template-columns: 288px 1fr 288px;
+  grid-template-areas: "left main right";
+}
+
+.leftPanel {
+  grid-area: left;
+  background-color: transparent;
+  padding: var(--cds-spacing-05) 0 var(--cds-spacing-05) var(--cds-spacing-05);
+  overflow: hidden;
+}
+
+.mainContent {
+  grid-area: main;
+  background-color: var(--layer-01);
+  overflow-y: auto;
+}
+
+.rightPanel {
+  grid-area: right;
+  background-color: transparent;
+  padding: var(--cds-spacing-05) var(--cds-spacing-05) var(--cds-spacing-05) 0;
+  overflow: hidden;
+}

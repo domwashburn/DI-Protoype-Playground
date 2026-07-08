@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'demand-forecast-sc',
+  hashId: 'sdfs1',
+  name: 'Demand Forecast Service',
+  displayName: 'Supply Chain Demand Forecasting',
+  description: 'Forecasts demand for supply chain optimization',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'supply-chain-optimization',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:35:17.000Z',
+  lastUpdatedDate: '2025-06-30T10:35:17.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '1.8.0',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/sc/demand',
+  authentication: 'oauth',
+  requestCount: 120000,
+  avgResponseTime: 150,
+  successRate: 98.9,
+};

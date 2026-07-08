@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'campaign-trigger',
+  hashId: 'sct1k',
+  name: 'Campaign Trigger Service',
+  displayName: 'Campaign Trigger',
+  description: 'Triggers retention campaigns',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'customer-churn-prevention',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:23:57.000Z',
+  lastUpdatedDate: '2025-06-30T10:23:57.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '2.2.0',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/campaigns',
+  authentication: 'oauth',
+  requestCount: 89000,
+  avgResponseTime: 95,
+  successRate: 99.1,
+};

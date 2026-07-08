@@ -1,0 +1,26 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contentLayout {
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.insetPanel {
+  background: var(--cds-layer-01);
+  border-right: 1px solid var(--cds-border-subtle-01);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.mainContent {
+  background: var(--cds-layer);
+  overflow-y: auto;
+  height: 100%;
+}

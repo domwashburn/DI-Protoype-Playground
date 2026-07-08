@@ -1,0 +1,170 @@
+/* BreadcrumbActionBar — Carbon-compliant CSS Module
+ * Phase 4C: custom breadcrumb rendering styles removed.
+ * Carbon's Breadcrumb + BreadcrumbItem now own all breadcrumb typography,
+ * separator rendering, link/current-page states, and spacing.
+ * This file retains only structural layout for the bar shell itself.
+ */
+
+/* ── Bar container ──────────────────────────────────────────────── */
+.breadcrumbActionBar {
+  background-color: var(--cds-layer);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* No longer sticky — sits above the scrollable content area,
+     so it's always visible without needing sticky positioning. */
+  flex-shrink: 0;
+  z-index: var(--z-panel-page, 10);
+  width: 100%;
+  height: 40px;
+  position: relative; /* Required so .bottomBorder (absolute) positions relative to this bar */
+}
+
+.bottomBorder {
+  position: absolute;
+  border-bottom: 1px solid var(--cds-border-subtle);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.content {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* ── Breadcrumb container — wraps Carbon <Breadcrumb> ───────────── */
+/* Grows to fill available space; Carbon owns all inner rendering.  */
+.breadcrumbContainer {
+  flex-basis: 0;
+  flex-grow: 1;
+  height: 40px;
+  min-height: 1px;
+  min-width: 1px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--cds-spacing-05);
+}
+
+/* Reset Carbon's nav/ol default margins so the breadcrumb sits flush
+   within the 40px bar without any extra vertical offset. Force a single
+   line so items never wrap; overflow is handled via the OverflowMenu
+   breadcrumb item and ellipsis truncation on the last item. */
+.breadcrumbContainer :global(.cds--breadcrumb) {
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Individual items must not shrink below their content except for the
+   truncating last item; this keeps separators aligned on a single line. */
+.breadcrumbContainer :global(.cds--breadcrumb-item) {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Last (active) item: allow it to shrink and truncate with ellipsis. */
+.breadcrumbItemTruncate {
+  min-width: 0;
+  flex-shrink: 1 !important;
+  overflow: hidden;
+}
+
+.breadcrumbItemTruncate :global(.cds--link),
+.breadcrumbItemTruncate :global(.cds--link__overflow-menu),
+.breadcrumbItemTruncate > :global(span),
+.breadcrumbItemTruncate > :global(a) {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+/* ── Action buttons (Carbon ghost via @carbon/react Button) ─────── */
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ── Instance level items ────────────────────────────────────────── */
+.instanceLevelItems {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.instanceBorder {
+  position: absolute;
+  border-left: 1px solid var(--cds-border-subtle);
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  right: 0;
+  top: 0;
+}
+
+.instanceContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: stretch;
+}
+
+.selectedInstanceName {
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  max-width: 160px;
+  padding: 0 var(--cds-spacing-03) 0 var(--cds-spacing-05);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.instanceText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  max-width: 128px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* ── Panel triggers (Carbon ghost icon-only via @carbon/react Button) */
+.panelTriggers {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.panelTriggersBorder {
+  position: absolute;
+  border-left: 1px solid var(--cds-border-subtle);
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  right: 0;
+  top: 0;
+}

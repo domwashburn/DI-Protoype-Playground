@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'churn-prediction',
+  hashId: 'scp1k',
+  name: 'Churn Prediction Service',
+  displayName: 'Churn Prediction',
+  description: 'Predicts customer churn using ML',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'customer-churn-prevention',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:23:57.000Z',
+  lastUpdatedDate: '2025-06-30T10:23:57.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '2.2.0',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/churn',
+  authentication: 'oauth',
+  requestCount: 125000,
+  avgResponseTime: 140,
+  successRate: 98.9,
+};

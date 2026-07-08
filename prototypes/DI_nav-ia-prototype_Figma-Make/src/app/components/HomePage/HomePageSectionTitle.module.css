@@ -1,0 +1,46 @@
+/* Home Page Section Title - Left column title/subtitle area
+ *
+ * Grid positioning: Always spans 4 columns.
+ * At sm (4-col grid): 4 of 4 = full width
+ * At md (8-col grid): 4 of 8 = half width (stacks above content)
+ * At lg (16-col grid): 4 of 16 = quarter width (side-by-side with content)
+ */
+
+.titleArea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+
+  /* Always 4 columns wide — column positioning handled by grid flow */
+  grid-column: span 4;
+}
+
+.title {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);
+  line-height: var(--cds-heading-03-line-height);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* lg breakpoint: Explicit positioning for side-by-side layout */
+@media (min-width: 1056px) {
+  .titleArea {
+    grid-column: 1 / 5; /* Explicitly position in columns 1-4 */
+  }
+}
+
+.actions {
+  display: flex;
+  gap: var(--cds-spacing-03);
+  align-items: center;
+}

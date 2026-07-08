@@ -1,0 +1,103 @@
+/* Recent Decision Automations Section */
+
+/* ============================================
+   SECTION ACTIONS (VIEW ALL / NEW BUTTONS)
+   ============================================ */
+
+/* Section actions - buttons bar at top of content area */
+.sectionActions {
+  height: 32px;
+  position: relative;
+  width: 100%;
+  /* Gap is handled by parent contentArea flex gap */
+}
+
+/* View all button - left aligned */
+.viewAllButton {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* New button - right aligned */
+.newButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* ============================================
+   CARD GRID (CONTAINER QUERY)
+   ============================================ */
+
+/* Container query context for decision projects grid.
+ * Uses container queries instead of media queries so the grid
+ * responds to available width (panel-aware) not viewport width.
+ * Matches the CardGrid container query pattern. */
+.decisionProjectsContext {
+  width: 100%;
+  container-type: inline-size;
+  container-name: recent-automations-grid;
+}
+
+/* Decision projects list - responsive card grid
+   Layout: Horizontal wrapping grid, most recent item appears first (leftmost)
+   Grid flow: Left-to-right, top-to-bottom (default row flow)
+*/
+.decisionProjectsList {
+  display: grid;
+  gap: var(--cds-spacing-05); /* 16px */
+  width: 100%;
+  grid-auto-rows: 172px; /* Fixed card height — matches taskTile01/02 height in HomePageHeader */
+  grid-auto-flow: row; /* Explicitly set: fill left-to-right, wrap to new rows */
+
+  /* Default: 1 column */
+  grid-template-columns: repeat(1, 1fr);
+}
+
+/* md: 3 columns */
+@container recent-automations-grid (min-width: 672px) {
+  .decisionProjectsList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* lg: 3 columns */
+@container recent-automations-grid (min-width: 1056px) {
+  .decisionProjectsList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* max: 4 columns */
+@container recent-automations-grid (min-width: 1584px) {
+  .decisionProjectsList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+/* Empty state - shown when no recent automations */
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 168px;
+  padding: var(--cds-spacing-07);
+  background: var(--cds-layer);
+  border: 1px dashed var(--cds-border-subtle);
+}
+
+.emptyStateText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  text-align: center;
+  margin: 0;
+}

@@ -1,0 +1,32 @@
+/* Home Page Section Content - Right column content area
+ *
+ * Grid positioning:
+ * At sm/md: Full width (stacks below title in a new row)
+ * At lg: Columns 5-16 (12 of 16 columns, side-by-side with 4-col title)
+ */
+
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05); /* 16px gap between action bar and content */
+
+  /* sm/md: Full width, stacks below title */
+  grid-column: 1 / -1;
+
+  min-height: 1px;
+  width: 100%;
+}
+
+/* md: Still full width, stacks below title */
+@media (min-width: 672px) {
+  .contentArea {
+    grid-column: 1 / -1;
+  }
+}
+
+/* lg: Columns 5-16, same row as title = 12 columns */
+@media (min-width: 1056px) {
+  .contentArea {
+    grid-column: 5 / 17;
+  }
+}

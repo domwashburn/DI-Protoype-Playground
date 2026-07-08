@@ -1,0 +1,64 @@
+/* AppLayout — Shell layout styles
+ * Extracted from App.module.css (Phase 1A).
+ * All values use Carbon tokens; no hardcoded hex or px for spacing/colour. */
+
+.appContainer {
+  background-color: var(--cds-layer-accent);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.userInterface {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  isolation: isolate;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.appContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+  /* Push content below the fixed Carbon Header (position: fixed; height: 48px) */
+  padding-top: var(--header-height, 48px);
+}
+
+.pageContentWrapper {
+  background-color: var(--cds-background);
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation open overlay — covers page content behind the side nav */
+.contentOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--cds-overlay);
+  z-index: 2;
+  top: 48px; /* below header */
+  transition: opacity var(--cds-productive-02) ease-in-out;
+  cursor: pointer;
+}
+
+/* Shift overlay down when a BreadcrumbActionBar is present (48px header + 40px bar) */
+.contentOverlayWithBreadcrumb {
+  top: 88px;
+}

@@ -1,0 +1,519 @@
+/* Pinned Decision Automation Section */
+
+/* ============================================
+   TITLE CUSTOMIZATION
+   ============================================ */
+
+/* Title with pin icon */
+.titleWithPin {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+}
+
+.pinIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.pinIcon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Project info in subtitle area */
+.projectInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  width: 100%;
+}
+
+.projectName {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);
+  line-height: var(--cds-heading-03-line-height);
+  color: var(--cds-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  margin: 0;
+}
+
+.projectDescription {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0;
+}
+
+/* ============================================
+   CONTENT INTERNAL GRID (SERVICES + DASHBOARDS)
+   ============================================ */
+
+/* Content grid - responsive internal grid for services and dashboards */
+.contentGrid {
+  display: grid;
+  gap: var(--cds-spacing-05);
+  width: 100%;
+  
+  /* Small: Single column (stack) */
+  grid-template-columns: 1fr;
+}
+
+/* Medium: 8 column internal grid (672px - 1055px) */
+@media (min-width: 672px) {
+  .contentGrid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+/* Large: 12 column internal grid (1056px+) */
+@media (min-width: 1056px) {
+  .contentGrid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* ============================================
+   SERVICES SECTION
+   ============================================ */
+
+/* Services section - responsive column spans */
+.servicesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--cds-layer);
+  
+  /* Small: Full width */
+  grid-column: span 1;
+}
+
+/* Medium: 5 of 8 columns */
+@media (min-width: 672px) {
+  .servicesSection {
+    grid-column: span 5;
+  }
+}
+
+/* Large: 8 of 12 columns */
+@media (min-width: 1056px) {
+  .servicesSection {
+    grid-column: span 8;
+  }
+}
+
+/* ============================================
+   DASHBOARDS SECTION
+   ============================================ */
+
+/* Dashboards section - responsive column spans */
+.dashboardsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--cds-layer);
+  
+  /* Small: Full width */
+  grid-column: span 1;
+}
+
+/* Medium: 3 of 8 columns */
+@media (min-width: 672px) {
+  .dashboardsSection {
+    grid-column: span 3;
+  }
+}
+
+/* Large: 4 of 12 columns */
+@media (min-width: 1056px) {
+  .dashboardsSection {
+    grid-column: span 4;
+  }
+}
+
+/* ============================================
+   TITLE BLOCK (COMMON FOR BOTH SECTIONS)
+   ============================================ */
+
+/* Title block - for both sections */
+.titleBlock {
+  background: var(--cds-background);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.titleBlockInner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.titleBlockContent {
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cds-spacing-05);
+  padding-left: var(--cds-spacing-05);
+  padding-right: var(--cds-spacing-05);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 100%;
+}
+
+.titleBlockLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  flex: 1;
+  min-width: 0;
+}
+
+.titleBlockText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  font-style: normal;
+  color: var(--cds-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.titleBlockRight {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  flex-shrink: 0;
+}
+
+.titleBlockActions {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   BUTTONS (NEW SERVICE / ADD DASHBOARD)
+   ============================================ */
+
+/* Button styles removed - replaced with Carbon Button */
+
+/* ============================================
+   DATA TABLE (SERVICES)
+   ============================================ */
+
+.dataTable {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--cds-layer);
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr; /* Small: Name only */
+  gap: var(--cds-spacing-05);
+  padding: 12px var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-layer-accent);
+  background: var(--cds-layer);
+}
+
+/* Medium: Show Name + Status */
+@media (min-width: 672px) {
+  .tableHeader {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Large: Show all columns */
+@media (min-width: 1056px) {
+  .tableHeader {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+
+.headerCol1,
+.headerCol2,
+.headerCol3,
+.headerCol4 {
+  display: flex;
+  align-items: center;
+}
+
+/* Hide columns 3 & 4 at small */
+.headerCol3,
+.headerCol4 {
+  display: none;
+}
+
+/* Show column 3 & 4 at large */
+@media (min-width: 1056px) {
+  .headerCol3,
+  .headerCol4 {
+    display: flex;
+  }
+}
+
+/* Hide column 2 at small */
+.headerCol2 {
+  display: none;
+}
+
+/* Show column 2 at medium+ */
+@media (min-width: 672px) {
+  .headerCol2 {
+    display: flex;
+  }
+}
+
+.headerText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.tableRow {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+  transition: background 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.tableRow:hover {
+  background: var(--cds-layer-hover);
+}
+
+.divider {
+  height: 1px;
+  background: var(--cds-layer-accent);
+  width: 100%;
+}
+
+.rowContent {
+  display: grid;
+  grid-template-columns: 1fr; /* Small: Name only */
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-05);
+  align-items: center;
+}
+
+/* Medium: Show Name + Status */
+@media (min-width: 672px) {
+  .rowContent {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Large: Show all columns */
+@media (min-width: 1056px) {
+  .rowContent {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+
+.cellName,
+.cellStatus,
+.cellEditedBy,
+.cellEditedOn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+  min-width: 0;
+}
+
+/* Hide columns 3 & 4 at small */
+.cellEditedBy,
+.cellEditedOn {
+  display: none;
+}
+
+/* Show columns 3 & 4 at large */
+@media (min-width: 1056px) {
+  .cellEditedBy,
+  .cellEditedOn {
+    display: flex;
+  }
+}
+
+/* Hide column 2 at small */
+.cellStatus {
+  display: none;
+}
+
+/* Show column 2 at medium+ */
+@media (min-width: 672px) {
+  .cellStatus {
+    display: flex;
+  }
+}
+
+.cellContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+  width: 100%;
+  min-width: 0;
+}
+
+.serviceName {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.serviceMetadata {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statusWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+}
+
+.statusIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.statusIcon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.statusText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.cellText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   TABLE FOOTER
+   ============================================ */
+
+.tableFooter,
+.dashboardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--cds-spacing-03); /* Reduced padding to match small button height */
+  background: var(--cds-layer);
+  border-top: 1px solid var(--cds-layer-accent);
+}
+
+/* Removed .viewAllText as it is handled by Button component */
+
+/* ============================================
+   DASHBOARDS LIST
+   ============================================ */
+
+.dashboardList {
+  display: flex;
+  flex-direction: column;
+  background: var(--cds-layer);
+}
+
+.dashboardItem {
+  display: flex;
+  padding: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-layer-accent);
+  cursor: pointer;
+  transition: background 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.dashboardItem:hover {
+  background: var(--cds-layer-hover);
+}
+
+.dashboardItem:last-child {
+  border-bottom: none;
+}
+
+.dashboardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboardName {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboardDescription {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'logistics-routing',
+  hashId: 'slr1k',
+  name: 'Logistics Routing Service',
+  displayName: 'Logistics Routing',
+  description: 'Optimizes logistics and delivery routing',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'supply-chain-optimization',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:35:17.000Z',
+  lastUpdatedDate: '2025-06-30T10:35:17.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '1.8.0',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/sc/routing',
+  authentication: 'oauth',
+  requestCount: 78000,
+  avgResponseTime: 180,
+  successRate: 98.5,
+};

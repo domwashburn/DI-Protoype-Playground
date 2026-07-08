@@ -1,0 +1,194 @@
+/* AssistantCustomHeader — Carbon-token-driven styles.
+   All color/spacing/typography values are sourced from Carbon v11 CSS custom
+   properties exposed by `@carbon/react/css/styles.css`. */
+
+.root {
+  background: var(--cds-layer-, #ffffff);
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-shrink: 0;
+  position: relative;
+  height: 40px;
+  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
+}
+
+/* ---------- Icon button slot ----------
+   Wraps Carbon `<IconButton kind="ghost" size="md">` (32×32) and centers it
+   inside the 40px header row so hover/disabled states come from Carbon. */
+
+.iconBtnSlot {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBtnInvisible {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Overflow menu ---------- */
+
+.menuAnchor {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Disabled state for the Carbon OverflowMenu trigger (used while editing). */
+.menuAnchorDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Carbon menu popover — passed to OverflowMenu via menuOptionsClass.
+   Carbon's tokens already handle background/hover; we just floor the z-index
+   and clamp the width range to match the Figma spec (160–288px). */
+.menuOptions {
+  z-index: 50;
+  min-inline-size: 160px;
+  max-inline-size: 288px;
+}
+
+/* Row layout for menu items that render a trailing shortcut icon (e.g. Reset chat). */
+.menuItemRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.menuItemLabel {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Title block ---------- */
+
+.titleBlock {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 8px;
+  gap: 4px;
+}
+
+.title {
+  font-family: var(--cds-heading-compact-01-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-heading-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-heading-compact-01-font-weight, 600);
+  line-height: var(--cds-heading-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-heading-compact-01-letter-spacing, 0.16px);
+  color: var(--cds-text-primary, #161616);
+  max-width: 280px;
+  min-width: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chatModeTag {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background: var(--cds-layer-accent-01, #e0e0e0);
+  border-radius: 12px;
+  height: 24px;
+  padding: 3px 8px;
+  font-family: var(--cds-label-01-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.33333);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  color: var(--cds-text-primary, #161616);
+}
+
+.renameBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: var(--cds-layer-hover-01, #e8e8e8);
+  border: 0;
+  cursor: pointer;
+  color: var(--cds-icon-primary, #161616);
+}
+
+/* ---------- Title edit mode ---------- */
+
+.editWrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.editInput {
+  flex: 1;
+  min-width: 0;
+  background: var(--cds-background, #ffffff);
+  outline: none;
+  font-family: var(--cds-heading-compact-01-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-heading-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-heading-compact-01-font-weight, 600);
+  line-height: var(--cds-heading-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-heading-compact-01-letter-spacing, 0.16px);
+  color: var(--cds-text-primary, #161616);
+  border: 1px solid var(--cds-border-strong-01, #8d8d8d);
+  border-radius: 2px;
+  height: 24px;
+  padding: 0 8px;
+}
+
+.editActions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 24px;
+}
+
+.editIconBtn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--cds-icon-primary, #161616);
+}
+
+/* ---------- Trailing actions ---------- */
+
+.trailing {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--cds-border-subtle-01, #c6c6c6);
+  flex-shrink: 0;
+}
+
+.dividerDisabled {
+  background: var(--cds-border-subtle-00, #e0e0e0);
+}

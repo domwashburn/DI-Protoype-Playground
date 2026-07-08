@@ -1,0 +1,58 @@
+/* App Component Styles - Carbon Design System Gray 10 Theme */
+.appContainer {
+  background-color: var(--cds-layer-accent);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.userInterface {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  isolation: isolate;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.appContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.pageContentWrapper {
+  background-color: var(--cds-background);
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(22, 22, 22, 0.5);
+  z-index: 2;
+  top: 48px;
+  transition: opacity var(--cds-productive-02) ease-in-out;
+  cursor: pointer;
+}
+
+/* Content overlay for pages with breadcrumb bar */
+.contentOverlayWithBreadcrumb {
+  top: 88px; /* 48px header + 40px breadcrumb */
+}

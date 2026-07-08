@@ -1,0 +1,106 @@
+/**
+ * SettingsPanel — Carbon-compliant CSS Module
+ *
+ * Phase 6B: removed hand-rolled .closeButton, .buttonPrimary, .buttonSecondary.
+ *           Fixed bare px input padding → spacing token.
+ *           Fixed bare transition durations → Carbon motion tokens.
+ *
+ * Phase 7:  removed all hand-rolled form element styles (.label, .input,
+ *           .textarea, .select, .checkboxLabel, .checkbox and their
+ *           :hover/:focus variants). Carbon TextInput / TextArea / NumberInput /
+ *           Select / Checkbox own all their internal styling.
+ *           .field is now a pure spacing wrapper.
+ *
+ *           NumberInput width override: Carbon renders NumberInput with a
+ *           constrained max-width by default. The scoped :global override
+ *           below ensures it fills the panel.
+ */
+
+/* ── Panel shell ─────────────────────────────────────────────────────────── */
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--cds-layer);
+  font-family: var(--cds-font-family);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  padding: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cds-spacing-05);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--cds-heading-03-font-size);
+  font-weight: var(--cds-heading-03-font-weight);
+  line-height: var(--cds-heading-03-line-height);
+  letter-spacing: var(--cds-heading-03-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+/* ── Scrollable content area ─────────────────────────────────────────────── */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--cds-spacing-05);
+}
+
+/* ── Form sections ───────────────────────────────────────────────────────── */
+.section {
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  margin: 0 0 var(--cds-spacing-04) 0;
+  font-size: var(--cds-heading-compact-01-font-size);
+  font-weight: var(--cds-heading-compact-01-font-weight);
+  line-height: var(--cds-heading-compact-01-line-height);
+  letter-spacing: var(--cds-heading-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+/* ── Field spacing wrapper ───────────────────────────────────────────────── */
+/*
+ * Carbon form components own their own label + control rendering.
+ * .field is only responsible for vertical rhythm between fields.
+ */
+.field {
+  margin-bottom: var(--cds-spacing-05);
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+/*
+ * NumberInput width: Carbon renders .cds--number with a constrained
+ * max-width. Override to fill the panel at all sizes.
+ */
+.field :global(.cds--number) {
+  max-width: 100%;
+  width: 100%;
+}
+
+.field :global(.cds--number input[type='number']) {
+  max-width: 100%;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+/* Carbon Button handles own sizing; we just provide flex row + gap. */
+.footer {
+  padding: var(--cds-spacing-05);
+  border-top: 1px solid var(--cds-border-subtle);
+  display: flex;
+  gap: var(--cds-spacing-03);
+  justify-content: flex-end;
+}

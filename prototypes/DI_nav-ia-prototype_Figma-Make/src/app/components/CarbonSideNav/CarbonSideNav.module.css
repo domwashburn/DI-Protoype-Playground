@@ -1,0 +1,42 @@
+/**
+ * CarbonSideNav.module.css
+ *
+ * Minimal overrides on top of @carbon/react SideNav defaults.
+ * All colour/spacing values use Carbon tokens via var(--cds-*).
+ */
+
+/* ── Beta badge on "Decision assistant" link ─────────────────────────────── */
+.labelWithBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03, 8px);
+}
+
+.betaBadge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--cds-tag-background-blue, #005d5d);
+  color: var(--cds-tag-color-blue, #9ef0f0);
+  font-family: var(--cds-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-label-01-font-size, 12px);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.33333);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  height: 18px;
+  padding: 0 var(--cds-spacing-03, 8px);
+  border-radius: var(--cds-radius, 4px);
+  flex-shrink: 0;
+}
+
+/* ── External link items (Documentation, Give feedback) ─────────────────── */
+.externalItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.launchIcon {
+  flex-shrink: 0;
+  margin-left: var(--cds-spacing-03, 8px);
+  color: var(--cds-icon-secondary, #8d8d8d);
+}

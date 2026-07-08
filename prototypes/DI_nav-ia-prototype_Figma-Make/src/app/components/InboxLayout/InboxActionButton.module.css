@@ -1,0 +1,121 @@
+/* InboxActionButton — Custom Carbon-compliant
+ * Wrapper for action buttons (primary and combo) in inbox panels.
+ * Uses @carbon/react Button (Phase 3A) and @carbon/ibm-products Tearsheet (Phase 3D).
+ * All values use Carbon tokens from globals.css.
+ */
+
+/* Full-width button override — applied via className when fullWidth prop is true.
+   Carbon Button has a max-width of 32rem by default; this removes that constraint. */
+.fullWidthButton {
+  max-width: none;
+  width: 100%;
+}
+
+/* Panel Action - Wrapper for action buttons in inbox panels */
+.panelAction {
+  padding: var(--cds-spacing-05) var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  flex-shrink: 0;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  /* Ensure tooltips from child buttons are not clipped */
+  overflow: visible;
+}
+
+/* Carbon v11 Combo Button wrapper */
+.comboButtonWrapper {
+  display: flex;
+  flex: 1;
+  position: relative;
+  gap: 0;
+  width: 100%;
+}
+
+/* Ensure primary button in combo fills available space without overflow */
+.comboButtonWrapper > button:first-child,
+.comboButtonWrapper > .cds--btn:first-child {
+  flex: 1;
+  max-width: none;
+  width: 100%;
+}
+
+/* Ensure the dropdown button doesn't shrink and has a clean border */
+.comboButtonWrapper > button:nth-child(2),
+.comboButtonWrapper > .cds--btn:nth-child(2) {
+  flex-shrink: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  /* Ensure tooltip doesn't get clipped by parent overflow if any exists */
+  overflow: visible;
+}
+
+/* ============================================================================
+   Combo Dropdown — Phase 3C inline replacement for root OverflowMenu
+   ============================================================================ */
+
+.comboDropdown {
+  background-color: var(--cds-layer);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  min-width: 160px;
+  max-width: 288px;
+  border: none;
+  animation: comboFadeIn var(--cds-productive-02, 110ms)
+    cubic-bezier(0, 0, 0.38, 0.9);
+}
+
+@keyframes comboFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comboDropdownItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 32px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--cds-font-family);
+  text-align: left;
+  transition: background-color var(--cds-productive-02, 110ms)
+    cubic-bezier(0, 0, 0.38, 0.9);
+  outline: none;
+  color: var(--cds-text-primary);
+}
+
+.comboDropdownItem:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.comboDropdownItem:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+.comboDropdownItem:active {
+  background-color: var(--cds-layer-selected);
+}
+
+.comboDropdownItem > span {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--cds-spacing-03) var(--cds-spacing-05);
+  gap: var(--cds-spacing-03);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

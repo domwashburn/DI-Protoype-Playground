@@ -1,0 +1,51 @@
+/* ResourceHubPage - Carbon Design System v11 */
+
+.resourceHubPage {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cds-background);
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sectionsContainer {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+  width: 100%;
+  min-width: 0;
+  align-content: start;
+  padding: var(--cds-spacing-05);
+  overflow-y: auto;
+}
+
+.sectionShell {
+  flex-shrink: 0; /* Prevent flex from squashing sections when list is tall */
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 1px;
+  background-color: var(--cds-layer-accent-01);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.loadingMessage,
+.emptyMessage {
+  padding: var(--cds-spacing-09);
+  text-align: center;
+  color: var(--cds-text-secondary);
+  font-family: var(--cds-font-family);
+}
+
+/* Cards live on the shell's gray bg with 1px gutters between them. */
+.tightCardGrid {
+  gap: 1px !important;
+  background-color: transparent;
+}

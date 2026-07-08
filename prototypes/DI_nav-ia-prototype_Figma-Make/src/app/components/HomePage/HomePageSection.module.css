@@ -1,0 +1,65 @@
+/* Home Page Section - Full-width content section
+ *
+ * GRID DECISION: Uses CSS Grid instead of Carbon <Grid> component.
+ * Reason: Carbon Grid's gutter model uses column-level padding (16px per side
+ * = 32px between adjacent columns). This section uses `gap: 16px` for the
+ * spacing between title and content columns. Switching to Carbon Grid would
+ * either double the gutter width (visual regression) or require overriding
+ * all of Carbon Grid's padding (negating the benefit).
+ *
+ * This CSS Grid is Carbon-compliant: it uses Carbon breakpoints (672, 1056,
+ * 1584px), Carbon column counts (4→8→16), and Carbon spacing tokens.
+ */
+
+.section {
+  width: 100%;
+  box-sizing: border-box;
+
+  /* Horizontal padding matches Carbon Grid margin (--cds-grid-margin = 16px) */
+  padding-left: var(--cds-spacing-05);
+  padding-right: var(--cds-spacing-05);
+  padding-top: var(--cds-spacing-09);
+  padding-bottom: var(--cds-spacing-09);
+
+  /* Carbon-aligned responsive grid: 4 → 8 → 16 columns */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* sm: 4 columns */
+  gap: var(--cds-spacing-05); /* 16px — matches Carbon Grid gutter intent without double-padding */
+  align-items: flex-start;
+}
+
+/* md breakpoint: 8 columns (672px - 1055px) */
+@media (min-width: 672px) {
+  .section {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+/* lg breakpoint: 16 columns (1056px+) */
+@media (min-width: 1056px) {
+  .section {
+    grid-template-columns: repeat(16, 1fr);
+  }
+}
+
+/* max breakpoint: constrain width (1584px+) */
+@media (min-width: 1584px) {
+  .section {
+    max-width: 1584px;
+  }
+}
+
+/* Responsive vertical padding — tighter at smaller breakpoints */
+@media (max-width: 1055px) {
+  .section {
+    padding-top: var(--cds-spacing-08);
+    padding-bottom: var(--cds-spacing-08);
+  }
+}
+
+@media (max-width: 671px) {
+  .section {
+    padding-top: var(--cds-spacing-07);
+    padding-bottom: var(--cds-spacing-07);
+  }
+}

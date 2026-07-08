@@ -1,0 +1,50 @@
+/**
+ * InboxPanelToolbar — Custom Carbon-compliant CSS Module
+ *
+ * Phase 8: removed all hand-rolled search field + filter button styles
+ * (~80 lines: .searchField, .searchIcon, .searchInput, .filterButton and
+ * their :hover/:focus/:focus-within variants).
+ *
+ * @carbon/react Search and Button (ghost, icon-only) own all internal
+ * styling. This module is now structural layout + scoped token overrides only.
+ */
+
+/* ── Toolbar container ───────────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--cds-border-subtle);
+  flex-shrink: 0;
+}
+
+/* ── Carbon Search width ─────────────────────────────────────────────────── */
+/*
+ * Carbon Search renders as display:flex by default but does not set flex: 1.
+ * Without this, the Search collapses to min-content next to the filter Button.
+ */
+.toolbar :global(.cds--search) {
+  flex: 1;
+}
+
+/* ── Carbon Search inner bottom border ──────────────────────────────────── */
+/*
+ * Carbon's Search input has `border-bottom: 1px solid var(--cds-border-strong)`.
+ * The toolbar already provides a bottom separator via .toolbar's border-bottom.
+ * Suppressing the input's own bottom border avoids a double-line artefact when
+ * the Search fills the full 40px toolbar height.
+ */
+.toolbar :global(.cds--search-input) {
+  border-bottom: none;
+  background-color: var(--cds-layer);
+}
+
+/* ── Filter Button sizing ────────────────────────────────────────────────── */
+/*
+ * Carbon Button (ghost, icon-only, size="md") defaults to 40px × 40px which
+ * already matches the toolbar height. The :global override is a safety net
+ * for any theme or breakpoint that might alter the default dimensions.
+ */
+.toolbar :global(.cds--btn--ghost.cds--btn--icon-only) {
+  min-height: var(--cds-spacing-08); /* 40px */
+  width: var(--cds-spacing-08);      /* 40px */
+}

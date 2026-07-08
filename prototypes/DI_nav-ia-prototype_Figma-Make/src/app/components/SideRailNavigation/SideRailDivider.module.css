@@ -1,0 +1,61 @@
+/* SideRailDivider — Custom Carbon-compliant divider styles
+ * All spacing/color values use Carbon tokens with fallbacks. */
+
+/* ── Plain divider ──────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* ── Labeled divider (section header) ───────────────────────────── */
+.labeledDivider {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  margin: var(--cds-spacing-04, 12px) 0 var(--cds-spacing-03, 8px) 0;
+  min-height: 20px;
+}
+
+.sectionLabel {
+  padding: 0 var(--cds-spacing-05, 16px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.labelText {
+  font-family: var(--cds-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-label-01-font-size, 12px);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 16px);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  color: var(--cds-text-secondary, #525252);
+  text-transform: uppercase;
+}
+
+/* ── Divider line content ───────────────────────────────────────── */
+.dividerContent {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  background-color: var(--cds-layer, #ffffff);
+  box-sizing: border-box;
+  padding: var(--cds-spacing-03, 8px) var(--cds-spacing-05, 16px);
+  position: relative;
+  width: 100%;
+}
+
+.dividerLine {
+  background-color: var(--cds-border-subtle, #c6c6c6);
+  height: 1px;
+  flex-shrink: 0;
+  width: 100%;
+}

@@ -1,0 +1,151 @@
+/**
+ * ServiceDetailsPanel — Carbon-compliant CSS Module
+ * Phase 6B: removed hand-rolled .closeButton (×2 duplicate), .buttonPrimary,
+ * .buttonSecondary blocks. Replaced bare transition durations with tokens.
+ * All button rendering delegated to @carbon/react Button.
+ */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--cds-layer);
+  font-family: var(--cds-font-family);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  padding: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--cds-spacing-05);
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.title {
+  margin: 0 0 var(--cds-spacing-02) 0;
+  font-size: var(--cds-heading-03-font-size);
+  font-weight: var(--cds-heading-03-font-weight);
+  line-height: var(--cds-heading-03-line-height);
+  letter-spacing: var(--cds-heading-03-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-secondary);
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--cds-spacing-05);
+}
+
+.section {
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  margin: 0 0 var(--cds-spacing-04) 0;
+  font-size: var(--cds-heading-compact-01-font-size);
+  font-weight: var(--cds-heading-compact-01-font-weight);
+  line-height: var(--cds-heading-compact-01-line-height);
+  letter-spacing: var(--cds-heading-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.field {
+  margin-bottom: var(--cds-spacing-04);
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  display: block;
+  margin-bottom: var(--cds-spacing-02);
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  color: var(--cds-text-secondary);
+}
+
+.value {
+  margin: 0;
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.valueCode {
+  margin: 0;
+  padding: var(--cds-spacing-03);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--cds-code-01-font-size);
+  font-weight: var(--cds-code-01-font-weight);
+  line-height: var(--cds-code-01-line-height);
+  letter-spacing: var(--cds-code-01-letter-spacing);
+  color: var(--cds-text-primary);
+  background: var(--cds-layer-accent);
+  border-radius: var(--cds-radius);
+  word-break: break-all;
+}
+
+.metrics {
+  display: flex;
+  gap: var(--cds-spacing-05);
+  flex-wrap: wrap;
+}
+
+.metric {
+  flex: 1;
+  min-width: 100px;
+  padding: var(--cds-spacing-04);
+  background: var(--cds-layer-accent);
+  border-radius: var(--cds-radius);
+}
+
+.metricValue {
+  margin: 0 0 var(--cds-spacing-02) 0;
+  font-size: var(--cds-heading-04-font-size);
+  font-weight: var(--cds-heading-04-font-weight);
+  line-height: var(--cds-heading-04-line-height);
+  letter-spacing: var(--cds-heading-04-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.metricLabel {
+  margin: 0;
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  color: var(--cds-text-secondary);
+}
+
+/* Footer — Carbon Button handles own sizing; we just provide flex row + gap */
+.footer {
+  padding: var(--cds-spacing-05);
+  border-top: 1px solid var(--cds-border-subtle);
+  display: flex;
+  gap: var(--cds-spacing-03);
+  justify-content: flex-end;
+}

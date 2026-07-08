@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'reporting-engine',
+  hashId: 'sre1k',
+  name: 'Reporting Engine Service',
+  displayName: 'Reporting Engine',
+  description: 'Generates compliance reports',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'regulatory-compliance-monitoring',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:24:49.000Z',
+  lastUpdatedDate: '2025-06-30T10:24:49.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '1.0.5',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/reports',
+  authentication: 'oauth',
+  requestCount: 12000,
+  avgResponseTime: 350,
+  successRate: 99.2,
+};

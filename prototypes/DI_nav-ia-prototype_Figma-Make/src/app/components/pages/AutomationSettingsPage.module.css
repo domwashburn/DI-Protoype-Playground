@@ -1,0 +1,19 @@
+/* Automation Settings Page - Using Carbon Design System Variables */
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background-color: var(--cds-background);
+}
+
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--cds-spacing-06);
+  padding-bottom: var(--cds-spacing-09);
+}

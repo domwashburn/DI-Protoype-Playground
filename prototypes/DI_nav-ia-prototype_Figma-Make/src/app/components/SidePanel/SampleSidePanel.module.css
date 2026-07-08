@@ -1,0 +1,87 @@
+/**
+ * SampleSidePanel — Carbon-compliant CSS Module
+ * Phase 6B: removed hand-rolled .closeButton block (replaced with Carbon Button).
+ * Fixed bare transition durations → Carbon motion tokens.
+ */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--cds-layer);
+  font-family: var(--cds-font-family);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  padding: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cds-spacing-05);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--cds-heading-03-font-size);
+  font-weight: var(--cds-heading-03-font-weight);
+  line-height: var(--cds-heading-03-line-height);
+  letter-spacing: var(--cds-heading-03-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--cds-spacing-05);
+}
+
+.section {
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  margin: 0 0 var(--cds-spacing-04) 0;
+  font-size: var(--cds-heading-compact-01-font-size);
+  font-weight: var(--cds-heading-compact-01-font-weight);
+  line-height: var(--cds-heading-compact-01-line-height);
+  letter-spacing: var(--cds-heading-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.text {
+  margin: 0 0 var(--cds-spacing-04) 0;
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.text:last-child {
+  margin-bottom: 0;
+}
+
+.list {
+  margin: 0;
+  padding-left: var(--cds-spacing-06);
+  list-style-type: disc;
+}
+
+.listItem {
+  margin-bottom: var(--cds-spacing-03);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.listItem:last-child {
+  margin-bottom: 0;
+}

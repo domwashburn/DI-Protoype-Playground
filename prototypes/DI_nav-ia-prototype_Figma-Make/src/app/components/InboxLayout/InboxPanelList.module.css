@@ -1,0 +1,13 @@
+/* InboxPanelList - Carbon Clone
+ * Scrollable list container for inbox panel items.
+ * All values use Carbon tokens from globals.css.
+ */
+
+.listContainer {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}

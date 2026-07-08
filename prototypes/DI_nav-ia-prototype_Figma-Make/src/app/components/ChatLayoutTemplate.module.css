@@ -1,0 +1,11 @@
+/* Chat Layout Template - hosts CarbonDecisionAssistant (full-page variant) */
+
+.chatLayoutContent {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 48px); /* Account for global header */
+  background-color: var(--cds-background);
+  isolation: isolate;
+}

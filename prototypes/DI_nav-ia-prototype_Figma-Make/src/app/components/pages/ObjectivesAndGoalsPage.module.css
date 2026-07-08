@@ -1,0 +1,796 @@
+/* Objectives and Goals Page - Carbon Design System */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background-color: var(--cds-background);
+}
+
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Tab Content Area */
+.tabContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--cds-spacing-06);
+  background-color: var(--cds-background);
+  padding-bottom: var(--cds-spacing-09);
+}
+
+/* Overview Tab */
+.overviewTab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-07);
+  max-width: 672px;
+}
+
+.objectiveSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+.sectionTitle {
+  font-family: var(--cds-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.sectionText {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* Key Results */
+.keyResultsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+.keyResultItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  padding: var(--cds-spacing-05);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+}
+
+.keyResultHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.keyResultTitle {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+.keyResultProgress {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--cds-layer-02);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--cds-interactive);
+  transition: width 300ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+/* Team List */
+.teamList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-04);
+}
+
+.teamMember {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-04);
+  padding: var(--cds-spacing-04);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+}
+
+.memberAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--cds-interactive);
+  color: var(--cds-text-on-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.memberInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.memberName {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+.memberRole {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+}
+
+/* Detail Grid */
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--cds-spacing-05);
+  margin-bottom: var(--cds-spacing-05);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.detailLabel {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+  text-transform: uppercase;
+}
+
+.detailValue {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+  text-transform: capitalize;
+}
+
+/* Status Colors */
+.status-on-track {
+  color: #24a148;
+}
+
+.status-at-risk {
+  color: #da1e28;
+}
+
+.status-active {
+  color: #0f62fe;
+}
+
+.status-achieved {
+  color: #198038;
+}
+
+.status-delayed {
+  color: #f1c21b;
+}
+
+/* Priority Colors */
+.priority-critical {
+  color: #da1e28;
+}
+
+.priority-high {
+  color: #ff832b;
+}
+
+.priority-medium {
+  color: #0f62fe;
+}
+
+.priority-low {
+  color: #8d8d8d;
+}
+
+/* Goal Card */
+.goalCard {
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+  padding: var(--cds-spacing-05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-04);
+}
+
+.goalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.goalName {
+  font-family: var(--cds-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: var(--cds-text-primary);
+}
+
+.goalProgress {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+.goalDescription {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.goalMeta {
+  display: flex;
+  gap: var(--cds-spacing-04);
+  align-items: center;
+}
+
+.goalImpact {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+  text-transform: capitalize;
+}
+
+.goalStatus {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  text-transform: capitalize;
+}
+
+/* Automations List */
+.automationsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-04);
+}
+
+.automationCard {
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+  padding: var(--cds-spacing-05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  transition: all var(--cds-productive-02) ease-in-out;
+  cursor: pointer;
+}
+
+.automationCard:hover {
+  background-color: var(--cds-layer-hover-01);
+  border-color: var(--cds-interactive);
+}
+
+.automationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cds-spacing-04);
+}
+
+.automationName {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+.aiGeneratedBadge {
+  font-family: var(--cds-font-family);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: #ffffff;
+  background-color: #8a3ffc;
+  padding: 2px var(--cds-spacing-03);
+  border-radius: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.automationDescription {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.automationMeta {
+  display: flex;
+  gap: var(--cds-spacing-04);
+  align-items: center;
+}
+
+.automationStatus {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  text-transform: capitalize;
+}
+
+.automationServices {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+}
+
+.memberTeam {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-04);
+}
+
+.timelineItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--cds-spacing-04);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+}
+
+.timelineLabel {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+}
+
+.timelineValue {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+/* Placeholder Tabs */
+.placeholderTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-09);
+  text-align: center;
+}
+
+.placeholderTitle {
+  font-family: var(--cds-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.placeholderText {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* Detail Grid */
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--cds-spacing-05);
+  margin-bottom: var(--cds-spacing-04);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.detailLabel {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+  text-transform: uppercase;
+}
+
+.detailValue {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+  text-transform: capitalize;
+}
+
+/* Status & Priority Styles */
+.status-draft,
+.status-active {
+  color: var(--cds-text-primary);
+}
+
+.status-on-track {
+  color: #24a148;
+}
+
+.status-at-risk {
+  color: #da1e28;
+}
+
+.status-achieved {
+  color: #24a148;
+}
+
+.status-deployed {
+  color: #24a148;
+}
+
+.priority-critical {
+  color: #da1e28;
+}
+
+.priority-high {
+  color: #ff832b;
+}
+
+.priority-medium {
+  color: var(--cds-text-primary);
+}
+
+.priority-low {
+  color: var(--cds-text-secondary);
+}
+
+/* Goal Card */
+.goalCard {
+  padding: var(--cds-spacing-05);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-04);
+}
+
+.goalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.goalName {
+  font-family: var(--cds-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: var(--cds-text-primary);
+}
+
+.goalProgress {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+}
+
+.goalDescription {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.goalMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-04);
+}
+
+.goalImpact {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+}
+
+.goalStatus {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  text-transform: capitalize;
+}
+
+/* Automations List */
+.automationsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-04);
+}
+
+.automationCard {
+  padding: var(--cds-spacing-05);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  cursor: pointer;
+  transition: all var(--cds-productive-02) ease-in-out;
+}
+
+.automationCard:hover {
+  background-color: var(--cds-layer-hover-01);
+  border-color: var(--cds-interactive);
+}
+
+.automationHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cds-spacing-03);
+}
+
+.automationName {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+.aiGeneratedBadge {
+  padding: 0 var(--cds-spacing-03);
+  background-color: #8a3ffc;
+  color: var(--cds-text-on-color);
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.automationDescription {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.automationMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-04);
+}
+
+.automationStatus {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  text-transform: capitalize;
+}
+
+.automationServices {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-04);
+}
+
+.timelineItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cds-spacing-04);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+}
+
+.timelineLabel {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+}
+
+.timelineValue {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary);
+}
+
+.memberTeam {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--cds-text-secondary);
+}
+
+/* Automations Tab */
+.automationsTab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-06);
+  width: 100%;
+}
+
+.automationsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  max-width: 896px;
+}
+
+.automationsTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.automationsDescription {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-09);
+  text-align: center;
+}
+
+.emptyStateTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.emptyStateText {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+  max-width: 480px;
+}
+
+/* Associated Tab */
+.associatedTab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-06);
+}

@@ -1,0 +1,310 @@
+/* Environments List Styles - Using Carbon Design System Variables */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-06);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle-01);
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.title {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.environmentsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+/* Environment Card */
+.environmentCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-06);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+  border-radius: 4px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--cds-spacing-05);
+}
+
+.cardHeaderLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cds-spacing-04);
+}
+
+.environmentIcon {
+  color: var(--cds-icon-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cardHeaderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+}
+
+.environmentName {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.cardHeaderRight {
+  display: flex;
+  gap: var(--cds-spacing-03);
+}
+
+/* Status Badge */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  padding: 0 var(--cds-spacing-03);
+  height: 24px;
+  border-radius: 12px;
+  font-family: var(--cds-font-family);
+  text-transform: capitalize;
+}
+
+.statusBadge.active {
+  background-color: rgba(36, 161, 72, 0.1);
+  color: var(--cds-support-success);
+}
+
+.statusBadge.inactive {
+  background-color: rgba(141, 141, 141, 0.1);
+  color: var(--cds-text-secondary);
+}
+
+.statusBadge.maintenance {
+  background-color: rgba(255, 131, 43, 0.1);
+  color: var(--cds-support-warning);
+}
+
+/* Type Badge */
+.typeBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--cds-spacing-03);
+  height: 24px;
+  border-radius: 12px;
+  font-family: var(--cds-font-family);
+  border: 1px solid;
+}
+
+.typeBadge.development {
+  background-color: rgba(141, 141, 141, 0.1);
+  color: var(--cds-text-secondary);
+  border-color: var(--cds-border-subtle-01);
+}
+
+.typeBadge.staging {
+  background-color: rgba(255, 131, 43, 0.1);
+  color: var(--cds-support-warning);
+  border-color: var(--cds-support-warning);
+}
+
+.typeBadge.production {
+  background-color: rgba(36, 161, 72, 0.1);
+  color: var(--cds-support-success);
+  border-color: var(--cds-support-success);
+}
+
+.description {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* Environment Details */
+.environmentDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+  padding-top: var(--cds-spacing-05);
+  border-top: 1px solid var(--cds-border-subtle-01);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--cds-spacing-05);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.detailLabel {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+}
+
+.detailValue {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+}
+
+/* Approval Section */
+.approvalSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  padding: var(--cds-spacing-04);
+  background-color: var(--cds-layer-02);
+  border-radius: 4px;
+}
+
+.approvalHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  color: var(--cds-icon-primary);
+}
+
+.approvalLabel {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+}
+
+.approversList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cds-spacing-02);
+}
+
+.approverBadge {
+  padding: 0 var(--cds-spacing-03);
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle-01);
+  border-radius: 12px;
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+}
+
+/* Last Deployment */
+.lastDeployment {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  padding: var(--cds-spacing-04);
+  background-color: var(--cds-layer-02);
+  border-radius: 4px;
+}
+
+.deploymentHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  color: var(--cds-icon-primary);
+}
+
+.deploymentLabel {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+}
+
+.deploymentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.deploymentRow {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+}
+
+.deploymentKey {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  min-width: 100px;
+}
+
+.deploymentValue {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+}
+
+.deploymentStatus {
+  font-family: var(--cds-font-family);
+  text-transform: capitalize;
+}
+
+.deploymentStatus.success {
+  color: var(--cds-support-success);
+}
+
+.deploymentStatus.failed {
+  color: var(--cds-support-error);
+}
+
+.deploymentStatus.in-progress {
+  color: var(--cds-support-warning);
+}
+
+/* Card Actions */
+.cardActions {
+  display: flex;
+  gap: var(--cds-spacing-03);
+  padding-top: var(--cds-spacing-05);
+  border-top: 1px solid var(--cds-border-subtle-01);
+}
+
+.actionButton {
+  height: 32px;
+  padding: 0 var(--cds-spacing-05);
+  background-color: transparent;
+  color: var(--cds-interactive);
+  border: 1px solid var(--cds-interactive);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--cds-font-family);
+  transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
+}
+
+.actionButton:hover {
+  background-color: var(--cds-layer-hover-01);
+}
+
+.actionButton:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}

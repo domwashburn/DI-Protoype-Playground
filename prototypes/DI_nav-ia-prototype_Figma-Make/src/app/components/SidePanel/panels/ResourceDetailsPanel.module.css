@@ -1,0 +1,141 @@
+/* Resource Details Panel — Carbon-compliant CSS Module
+ * Phase 6B: replaced hand-rolled .actionButton Carbon clone (.actionButton,
+ * .actionButton:hover, .actionButton:focus, .actionIcon) with @carbon/react
+ * Button (kind="ghost"). Width override added via :global(.cds--btn).
+ */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--cds-layer);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  padding: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.title {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);
+  font-weight: var(--cds-heading-03-font-weight);
+  line-height: var(--cds-heading-03-line-height);
+  letter-spacing: var(--cds-heading-03-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--cds-spacing-05);
+}
+
+.section {
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-compact-01-font-size);
+  font-weight: var(--cds-heading-compact-01-font-weight);
+  line-height: var(--cds-heading-compact-01-line-height);
+  letter-spacing: var(--cds-heading-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0 0 var(--cds-spacing-04) 0;
+  padding-bottom: var(--cds-spacing-03);
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.field {
+  margin-bottom: var(--cds-spacing-04);
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  color: var(--cds-text-secondary);
+  margin: 0 0 var(--cds-spacing-02) 0;
+  display: block;
+}
+
+.value {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: var(--cds-spacing-03);
+  padding: 0 var(--cds-spacing-03);
+  height: 18px;
+  line-height: 18px;
+  background-color: var(--cds-tag-background-gray);
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-family);
+  border-radius: 9px;
+}
+
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cds-spacing-02);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--cds-spacing-03);
+  height: 24px;
+  background-color: var(--cds-tag-background-gray);
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-family);
+  border-radius: 12px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.listItem {
+  padding: var(--cds-spacing-03);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle);
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+}
+
+/* Force Carbon ghost buttons to fill the panel width.
+   Mirrors the same pattern used in AssetDetailsPanel. */
+.actions :global(.cds--btn) {
+  width: 100%;
+  max-width: 100%;
+}

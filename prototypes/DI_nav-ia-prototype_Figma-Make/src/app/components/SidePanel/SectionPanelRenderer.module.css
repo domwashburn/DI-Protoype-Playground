@@ -1,0 +1,66 @@
+/* Section Panel Renderer - Renders section-level panels below PageHeader */
+
+.sectionPanel {
+  position: relative;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--cds-layer);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  transition: max-height var(--cds-productive-02) ease-in-out;
+  z-index: 10;
+}
+
+.sectionPanel[data-panel-open="true"] {
+  max-height: 600px;
+  overflow: visible;
+}
+
+.sectionPanelInner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: 
+    transform var(--cds-productive-02) ease-in-out,
+    opacity var(--cds-productive-02) ease-in-out;
+}
+
+.sectionPanel[data-panel-open="true"] .sectionPanelInner {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Panel width variants - slide in from right */
+.panel-narrow .sectionPanelInner > * {
+  width: 240px;
+}
+
+.panel-standard .sectionPanelInner > * {
+  width: 320px;
+}
+
+.panel-wide .sectionPanelInner > * {
+  width: 384px;
+}
+
+/* Mobile responsive */
+@media (max-width: 672px) {
+  .sectionPanel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    z-index: 100;
+    border: none;
+  }
+
+  .sectionPanelInner > * {
+    width: 100% !important;
+  }
+}

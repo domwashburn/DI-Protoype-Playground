@@ -1,0 +1,50 @@
+/* Panel Trigger Button
+ * Phase 6B: bare 200ms transition → var(--cds-productive-02);
+ *           bare 40px dimensions → var(--cds-spacing-08).
+ */
+
+.triggerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cds-spacing-02);
+  /* 40px = var(--cds-spacing-08) — Carbon icon-button standard size */
+  width: var(--cds-spacing-08);
+  height: var(--cds-spacing-08);
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--cds-font-family);
+  color: var(--cds-icon-primary);
+  transition: background-color var(--cds-productive-02) ease-in-out;
+  border-radius: var(--cds-radius);
+}
+
+.triggerButton:hover {
+  background: var(--cds-layer-hover);
+}
+
+.triggerButton:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+.triggerButton:active {
+  background: var(--cds-layer-selected);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.label {
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+}

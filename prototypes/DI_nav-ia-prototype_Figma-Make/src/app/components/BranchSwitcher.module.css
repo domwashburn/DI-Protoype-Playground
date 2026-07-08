@@ -1,0 +1,166 @@
+/* Branch Switcher - Carbon Design System Overflow Menu Pattern */
+
+/* Trigger Button */
+.triggerButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: var(--cds-spacing-03);
+  position: relative;
+  transition: background-color var(--cds-productive-02) ease-in-out;
+  color: var(--cds-icon-primary);
+}
+
+.triggerButton:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.triggerButton:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+.triggerButton:active {
+  background-color: var(--cds-layer-selected);
+}
+
+/* Menu Container - Portal wrapper */
+.menuContainer {
+  z-index: 9999;
+}
+
+/* Menu - Carbon v11 Gray 10 Theme Overflow Menu */
+.menu {
+  background-color: #ffffff;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--cds-border-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 160px;
+  max-width: 288px;
+  position: relative;
+}
+
+/* Spacer - 4px top/bottom spacing */
+.spacer {
+  height: 4px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Menu Items Container */
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+/* Menu Item - Individual branch button */
+.menuItem {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 11px 16px;
+  position: relative;
+  transition: background-color var(--cds-productive-02) ease-in-out;
+  text-align: left;
+}
+
+.menuItem:hover {
+  background-color: #f4f4f4;
+}
+
+.menuItem:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+/* Active Menu Item */
+.menuItemActive {
+  background-color: var(--cds-layer-selected);
+}
+
+.menuItemActive:hover {
+  background-color: var(--cds-layer-selected);
+}
+
+/* Menu Item Text - Carbon v11 Gray 10 Theme */
+.menuItemText {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menuItemActive .menuItemText {
+  color: var(--cds-text-primary);
+  font-weight: 600;
+}
+
+/* Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--cds-border-subtle);
+  flex-shrink: 0;
+}
+
+/* Action Button - View Branches */
+.actionButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 11px 16px;
+  position: relative;
+  transition: background-color var(--cds-productive-02) ease-in-out;
+  gap: var(--cds-spacing-03);
+}
+
+.actionButton:hover {
+  background-color: #f4f4f4;
+}
+
+.actionButton:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+/* Action Button Text - Carbon v11 Gray 10 Theme */
+.actionButtonText {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+/* Action Button Icon - Carbon v11 Gray 10 Theme */
+.actionButtonIcon {
+  color: var(--cds-icon-secondary);
+  flex-shrink: 0;
+}

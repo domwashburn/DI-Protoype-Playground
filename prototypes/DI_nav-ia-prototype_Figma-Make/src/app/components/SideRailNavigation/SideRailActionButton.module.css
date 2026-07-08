@@ -1,0 +1,118 @@
+/**
+ * SideRailActionButton — Custom Carbon-compliant collapsible button styles
+ *
+ * Implements Carbon tertiary button visual language with a collapsible
+ * text transition for the SideRail expand/collapse pattern.
+ * All spacing/color values use Carbon tokens.
+ * @carbon/react Tooltip (autoAlign) provides styled hover label in collapsed state.
+ */
+
+/* ── Wrapper ────────────────────────────────────────────────────── */
+.actionButtonWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Carbon Tooltip wrapper override — fill container width */
+.actionButtonWrapper :global(.cds--popover-container) {
+  display: flex;
+  width: 100%;
+}
+
+/* ── Base action button (expanded state) ────────────────────────── */
+.actionButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  min-height: 32px;
+  width: 100%;
+  padding: calc(var(--cds-spacing-03, 0.5rem) - 1px) calc(var(--cds-spacing-04, 0.75rem) - 1px);
+  font-family: var(--cds-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
+  color: var(--cds-interactive, #0f62fe);
+  background-color: transparent;
+  border: 1px solid var(--cds-interactive, #0f62fe);
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    background-color 110ms cubic-bezier(0.2, 0, 0.38, 0.9),
+    border-color 110ms cubic-bezier(0.2, 0, 0.38, 0.9),
+    width 150ms cubic-bezier(0.2, 0, 0.38, 0.9),
+    min-width 150ms cubic-bezier(0.2, 0, 0.38, 0.9),
+    padding 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  appearance: none;
+  outline: none;
+  margin: 0;
+}
+
+.actionButton:hover:not(:disabled) {
+  background-color: var(--cds-interactive, #0f62fe);
+  border-color: var(--cds-interactive, #0f62fe);
+  color: var(--cds-text-on-color, #ffffff);
+}
+
+.actionButton:active:not(:disabled) {
+  background-color: #002d9c;
+  border-color: #002d9c;
+  color: var(--cds-text-on-color, #ffffff);
+}
+
+.actionButton:focus-visible {
+  outline: 2px solid var(--cds-focus, #0f62fe);
+  outline-offset: -2px;
+}
+
+/* ── Collapsed state (icon-only) ────────────────────────────────── */
+.actionButton.collapsed {
+  width: 32px;
+  min-width: 32px;
+  padding: calc(var(--cds-spacing-03, 0.5rem) - 1px);
+  justify-content: center;
+}
+
+/* ── Icon wrapper ───────────────────────────────────────────────── */
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: margin 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+.iconWrapper svg {
+  fill: currentColor;
+}
+
+.actionButton:not(.collapsed) .iconWrapper {
+  margin-right: var(--cds-spacing-03, 0.5rem);
+}
+
+.actionButton.collapsed .iconWrapper {
+  margin-right: 0;
+}
+
+/* ── Text wrapper ───────────────────────────────────────────────── */
+.textWrapper {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    opacity 150ms cubic-bezier(0.2, 0, 0.38, 0.9),
+    width 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  opacity: 1;
+  width: auto;
+}
+
+.actionButton.collapsed .textWrapper {
+  opacity: 0;
+  width: 0;
+  pointer-events: none;
+}

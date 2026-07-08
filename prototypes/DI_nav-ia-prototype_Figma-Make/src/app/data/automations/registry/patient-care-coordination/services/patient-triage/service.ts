@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'patient-triage',
+  hashId: 'spt1k',
+  name: 'Patient Triage Service',
+  displayName: 'Patient Triage',
+  description: 'Triages patients based on urgency',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'patient-care-coordination',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:35:05.000Z',
+  lastUpdatedDate: '2025-06-30T10:35:05.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '1.3.0',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/triage',
+  authentication: 'oauth',
+  requestCount: 45000,
+  avgResponseTime: 90,
+  successRate: 99.3,
+};

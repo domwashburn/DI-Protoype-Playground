@@ -1,0 +1,76 @@
+/* Placeholder Content - Exact replica of original styling */
+.placeholderContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.placeholderTitle {
+  font-family: var(--cds-font-family);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.4;
+  color: #6929c4;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.placeholderDescription {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-01-font-size);
+  font-weight: var(--cds-body-01-font-weight);
+  line-height: var(--cds-body-01-line-height);
+  letter-spacing: var(--cds-body-01-letter-spacing);
+  color: #6929c4;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Optional icon for placeholder */
+.placeholderIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6929c4;
+  margin-bottom: var(--cds-spacing-03);
+}
+
+/* Size variants - only apply if needed, default is exact original */
+.size-small .placeholderTitle {
+  font-size: var(--text-base);
+}
+
+.size-small .placeholderDescription {
+  font-size: var(--text-sm);
+}
+
+.size-large .placeholderTitle {
+  font-size: var(--text-2xl);
+}
+
+.size-large .placeholderDescription {
+  font-size: var(--text-lg);
+}
+
+/* Variant styles - only apply if specifically requested */
+.variant-card {
+  padding: var(--cds-spacing-05);
+  background-color: var(--cds-layer-01);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: var(--cds-radius);
+}
+
+.variant-section {
+  padding: var(--cds-spacing-05);
+  background-color: var(--cds-layer-01);
+  border: 1px dashed var(--cds-border-subtle);
+  border-radius: var(--cds-radius);
+}

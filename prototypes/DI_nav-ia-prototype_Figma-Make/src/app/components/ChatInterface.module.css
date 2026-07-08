@@ -1,0 +1,243 @@
+/* Chat Interface Component */
+.chatInterface {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--cds-background);
+}
+
+.chatHeader {
+  background: var(--cds-layer);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  padding: var(--cds-spacing-05) var(--cds-spacing-07);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+}
+
+.chatTitle {
+  color: var(--cds-text-primary);
+  font-size: var(--cds-heading-04-font-size);
+  font-weight: var(--cds-heading-04-font-weight);
+  line-height: var(--cds-heading-04-line-height);
+  letter-spacing: var(--cds-heading-04-letter-spacing);
+  margin: 0;
+}
+
+.chatDescription {
+  color: var(--cds-text-secondary);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  margin: var(--cds-spacing-02) 0 0 0;
+}
+
+.chatDescription {
+  color: var(--cds-text-secondary);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  margin: 0;
+}
+
+.chatContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--cds-spacing-05) var(--cds-spacing-07);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+.welcomeMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.welcomeTitle {
+  color: var(--cds-text-primary);
+  font-size: var(--cds-heading-04-font-size);
+  font-weight: var(--cds-heading-04-font-weight);
+  line-height: var(--cds-heading-04-line-height);
+  letter-spacing: var(--cds-heading-04-letter-spacing);
+  margin-bottom: var(--cds-spacing-05);
+}
+
+.welcomeDescription {
+  color: var(--cds-text-secondary);
+  font-size: var(--cds-body-01-font-size);
+  font-weight: var(--cds-body-01-font-weight);
+  line-height: var(--cds-body-01-line-height);
+  letter-spacing: var(--cds-body-01-letter-spacing);
+  margin-bottom: var(--cds-spacing-07);
+}
+
+.suggestedPrompts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--cds-spacing-04);
+  width: 100%;
+  max-width: 800px;
+}
+
+.promptCard {
+  background: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: var(--cds-radius);
+  padding: var(--cds-spacing-05);
+  cursor: pointer;
+  transition: all var(--cds-productive-02) ease-in-out;
+  text-align: left;
+}
+
+.promptCard:hover {
+  background: var(--cds-layer-hover);
+  border-color: var(--cds-interactive);
+}
+
+.promptTitle {
+  color: var(--cds-text-primary);
+  font-size: var(--cds-body-01-font-size);
+  font-weight: var(--cds-heading-compact-01-font-weight);
+  line-height: var(--cds-body-01-line-height);
+  letter-spacing: var(--cds-body-01-letter-spacing);
+  margin-bottom: var(--cds-spacing-02);
+}
+
+.promptDescription {
+  color: var(--cds-text-secondary);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+}
+
+.inputContainer {
+  background: var(--cds-layer);
+  border-top: 1px solid var(--cds-border-subtle);
+  padding: var(--cds-spacing-05) var(--cds-spacing-07);
+}
+
+.inputWrapper {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.messageInput {
+  width: 100%;
+  background: var(--cds-field);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: var(--cds-radius);
+  padding: var(--cds-spacing-04) var(--cds-spacing-09) var(--cds-spacing-04) var(--cds-spacing-04);
+  font-size: var(--cds-body-01-font-size);
+  font-weight: var(--cds-body-01-font-weight);
+  line-height: var(--cds-body-01-line-height);
+  letter-spacing: var(--cds-body-01-letter-spacing);
+  color: var(--cds-text-primary);
+  resize: none;
+  min-height: 48px;
+  max-height: 200px;
+  transition: border-color var(--cds-productive-01) ease-in-out;
+}
+
+.messageInput:focus {
+  outline: none;
+  border-color: var(--cds-interactive);
+  box-shadow: 0 0 0 2px var(--cds-focus);
+}
+
+.messageInput::placeholder {
+  color: var(--cds-text-secondary);
+}
+
+.sendButton {
+  position: absolute;
+  right: var(--cds-spacing-02);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--cds-interactive);
+  border: none;
+  border-radius: var(--cds-radius);
+  padding: var(--cds-spacing-02);
+  color: var(--cds-text-on-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--cds-productive-01) ease-in-out;
+}
+
+.sendButton:hover {
+  background: #0353e9;
+}
+
+.sendButton:disabled {
+  background: var(--cds-text-secondary);
+  cursor: not-allowed;
+}
+
+.message {
+  display: flex;
+  gap: var(--cds-spacing-04);
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.messageContent {
+  background: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: var(--cds-radius);
+  padding: var(--cds-spacing-04);
+  flex: 1;
+}
+
+.messageText {
+  color: var(--cds-text-primary);
+  font-size: var(--cds-body-01-font-size);
+  font-weight: var(--cds-body-01-font-weight);
+  line-height: var(--cds-body-01-line-height);
+  letter-spacing: var(--cds-body-01-letter-spacing);
+  margin: 0;
+}
+
+.userMessage .messageContent {
+  background: var(--cds-layer-accent);
+}
+
+.assistantAvatar,
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.assistantAvatar {
+  background: var(--cds-interactive);
+  color: var(--cds-text-on-color);
+}
+
+.userAvatar {
+  background: var(--cds-text-secondary);
+  color: var(--cds-text-on-color);
+}

@@ -1,0 +1,25 @@
+/* InsetPanelHeader - Carbon Design System v11 */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cds-spacing-05);
+  gap: var(--cds-spacing-03);
+  background-color: var(--cds-layer);
+}
+
+.title {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  flex-shrink: 0;
+}

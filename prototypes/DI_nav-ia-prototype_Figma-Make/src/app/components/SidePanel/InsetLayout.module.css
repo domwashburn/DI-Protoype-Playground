@@ -1,0 +1,177 @@
+/* InsetLayout — section content + a single overlaid side-panel wrapper.
+   The wrapper slides/fades in at panel width, then expands in place to host
+   the section sub-view and one nested inset panel. */
+
+.container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+}
+
+.overlay.wrapperRight { right: 0; }
+.overlay.wrapperLeft  { left: 0; }
+
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelWrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: row;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    width var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    transform var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    opacity var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.panelWrapper[data-panel-open="true"] {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panelWrapper[data-expanded="true"] {
+  width: calc(100% - var(--cds-spacing-09, 96px));
+}
+
+.wrapperRight {
+  right: 0;
+  padding: var(--cds-spacing-05) var(--cds-spacing-05) var(--cds-spacing-05) 0;
+}
+
+.wrapperLeft {
+  left: 0;
+  padding: var(--cds-spacing-05) 0 var(--cds-spacing-05) var(--cds-spacing-05);
+  transform: translateX(-100%);
+}
+
+.wrapperLeft[data-panel-open="true"] {
+  transform: translateX(0);
+}
+
+.panelWrapper[data-width="narrow"] { width: calc(240px + var(--cds-spacing-05)); }
+.panelWrapper[data-width="standard"] { width: calc(320px + var(--cds-spacing-05)); }
+.panelWrapper[data-width="wide"] { width: calc(384px + var(--cds-spacing-05)); }
+
+.panelWrapper[data-expanded="true"][data-width="narrow"],
+.panelWrapper[data-expanded="true"][data-width="standard"],
+.panelWrapper[data-expanded="true"][data-width="wide"] {
+  width: calc(100% - var(--cds-spacing-09, 96px));
+}
+
+.panelSlot {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transition:
+    padding var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    flex-basis var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.panelWrapper[data-width="narrow"] .panelSlot { flex: 0 0 240px; }
+.panelWrapper[data-width="standard"] .panelSlot { flex: 0 0 320px; }
+.panelWrapper[data-width="wide"] .panelSlot { flex: 0 0 384px; }
+
+.panelShell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition:
+    border-color var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    border-radius var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.subViewSlot {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: var(--cds-spacing-05);
+  opacity: 1;
+  transition:
+    flex-basis var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    padding var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    opacity var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.subViewSlot[data-visible="false"] {
+  flex: 0 0 0;
+  min-width: 0;
+  padding: var(--cds-spacing-05) 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nestedSlot {
+  flex-shrink: 0;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: var(--cds-spacing-05) var(--cds-spacing-05) var(--cds-spacing-05) 0;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    opacity var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    flex-basis var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.nestedSlot[data-panel-open="true"] {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nestedSlot[data-width="narrow"] { flex: 0 0 calc(240px + var(--cds-spacing-05)); }
+.nestedSlot[data-width="standard"] { flex: 0 0 calc(320px + var(--cds-spacing-05)); }
+.nestedSlot[data-width="wide"] { flex: 0 0 calc(384px + var(--cds-spacing-05)); }
+
+.panelWrapper[data-attached="true"] .panelSlot {
+  padding-right: 0;
+}
+
+.panelWrapper[data-attached="true"] .panelSlot .panelShell {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.panelWrapper[data-attached="true"] .subViewSlot {
+  padding-left: 0;
+}

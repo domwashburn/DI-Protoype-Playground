@@ -1,0 +1,35 @@
+# Changelog
+
+## v2.49 — Resource Hub 1:1 Figma refactor + InsetContentArea primitive
+- **InsetContentArea:** New reusable layout primitive at `src/app/components/layouts/InsetContentArea/` that renders a Carbon `--cds-layer` card inset by 16px on top/left/right, with a sticky toolbar slot and a scrollable content slot that establishes a `container-type: inline-size` boundary so children reflow to available width.
+- **PageHeaderWrapper:** Added `breadcrumbOnly` prop — when true the wrapper returns `null` (the global breadcrumb bar from `AppLayout` provides the chrome).
+- **ResourceHubPage:** Refactored to match Figma — removed the "Add resource" button, removed the page-title row, replaced custom tabs with Carbon contained `Tabs`, added an inline-expanding `Search` toolbar control, wired the filter trigger to a section-level `PanelManager` panel (`ResourceFiltersPanel`) with a dirty-dot indicator. Card grid now reflows inside the inset container via container queries.
+
+## v2.48 — Test suite layout refinement
+- **TestAutomationPage:** Adjusted layout and padding to match latest Figma specification. Wrapped the `splitLayout` in a container to add `16px` padding around the split view. Moved the sub-tab bar (`Test Cases` / `Test Runs`) and play button to live *inside* the 256px wide left panel area, fixing the previous full-width implementation. Increased left panel width from 240px to 256px. Adjusted `Play` icon button to an exact 48x48 square. Re-aligned the main content header (`Test Case 1-A`), `ContentSwitcher`, and "Run test case" button to sit flush horizontally using `flex-1` space-between rules.
+
+## v2.47 — Test suite page: replace content area with Figma design
+
+- **TestAutomationPage rewrite:** Replaced the placeholder `PageHeader` + `PlaceholderContent` layout with the full Figma design — a contained sub-tab bar (Test Cases | Test Runs + Play icon button) above a split layout composed of a 240 px tree-navigation left panel (Carbon `TreeView`/`TreeNode` with `Search`, `Filter`, `Add` toolbar) and a right content area that shows a `ContentSwitcher` (Data & Assertions / Test Results) + "Run test case" ghost button when a leaf test-case node is selected. All styling uses Carbon CSS tokens via CSS Modules; zero Tailwind arbitrary values; `SectionInfluencedLayout` retained for section-panel support.
+
+## v2.46 — Nav CSS fix: swap CDN imports for local package imports
+
+- **Root cause fixed:** Carbon UI Shell (Header, SideNav) was rendering completely unstyled because `globals.css` loaded `@carbon/styles` and `@carbon/ibm-products` via CDN `@import url(...)` — CDN access is blocked in this sandbox. Replaced both CDN `@import url()` calls with bare-specifier `@import '@carbon/ibm-products/css/carbon.css'` and `@import '@carbon/ibm-products/css/index-without-carbon.min.css'`, which Vite/PostCSS resolves from the locally-installed package at build time. Fixed structural issue where individual `<Theme theme="g100">` wrappers on `CarbonHeader` and `CarbonSideNav` broke the `.cds--header ~ .cds--side-nav` CSS sibling selector; lifted the single `<Theme>` to `AppLayout` so both shell elements are direct DOM siblings and the SideNav auto-offsets below the 48px header correctly.
+
+## v2.45 — Phase 6 Grid Migration: Step 6.5 complete
+
+- **Step 6.5 (DashboardsPage + RulesAndPoliciesPage Verification):** Fixed `overflow-y: auto` misplaced on `.pageContainer` (outside `SectionInfluencedLayout`) in both pages — moved scroll boundary inside a new `.pageContent` wrapper div within `SectionInfluencedLayout` so the absolute-positioned section panel correctly overlays the visible content area (matches `ResourceDetailsPage` pattern). Removed 4 dead CSS classes per file (`.pageHeader`, `.pageTitle`, `.placeholderContent`, `.placeholderText`) that contained non-Carbon Tailwind tokens. Fixed `RulesAndPoliciesPage` `variant="page"` → `variant="section"` (`PlaceholderContent` has no `variant-page` CSS class; was silently rendering unstyled).
+
+## v2.44 — Phase 6 Grid Migration: Step 6.4 complete
+
+- **Step 6.4 (ResourceDetailsPage Verification):** Container query pattern verified correct — breakpoints (672/1056/1584px) and gap (`spacing-05`) are consistent with project standard. Removed four dead CSS classes (`.contentGrid`, `.section`, `.sectionTitle`, `.sectionDescription`) — stale pre-Phase-7A styles unreferenced in the TSX. Added documentation comment block to the `.tileGridContext` section explaining the container query rationale and why Carbon `<Grid>` is not appropriate here. Zero structural changes — zero regression.
+
+## v2.43 — Phase 6 Grid Migration: Steps 6.2–6.3 complete
+
+- **Step 6.2 (DecisionAutomationsPage Verification):** Verified Carbon Grid via `CardLayoutTemplate` is correct. Applied grid alignment fixes to `DecisionAutomationsPage.tsx`, `DecisionAutomationsPage.module.css`, and `RecentDecisionAutomationsSection.module.css` so automation cards match the `HomePageHeader` tile column spans (`<Column max={3} lg={4} md={4} sm={4}>`). Zero regression.
+- **Step 6.3 (ResourceHubPage Grid Evaluation):** Verified the 16-column CSS Grid + CSS subgrid pattern is correct and must stay as CSS Grid (Carbon `<Grid>` has no subgrid support). Refactored ambiguous `gap` + `row-gap` override to explicit `column-gap` / `row-gap` declarations in `sectionsContainer`. Added file-header documentation to `ResourceHubPage.module.css` and `ResourceSection.module.css` explaining the subgrid rationale and the `grid-column: 1 / -1` direct-assignment requirement. No structural changes — zero regression.
+
+## v2.42 — Phase 6 Grid Migration: Steps 6.0–6.1 complete
+
+- **Step 6.0 (Layout Shell Audit):** Verified the full flex chain from viewport to page content — all containers have `flex: 1; min-height: 0`, scroll boundaries are at the page level, panel overlays don't affect content height, header/breadcrumb offsets are correct. PASS, no fixes needed.
+- **Step 6.1 (HomePage Grid Standardization):** Kept `HomePageSection` as CSS Grid (Carbon Grid's 32px gutter model would cause visual regression vs the current 16px gap); added documentation comments explaining the decision. Converted `RecentDecisionAutomationsSection.decisionProjectsList` from media queries to container queries (panel-aware responsive). Converted `HomePage.exploreGrid` from media queries to container queries (ready for future Figma import replacement). Cleaned up debug comments from `HomePageSectionTitle` and `HomePageSectionContent` CSS Modules.

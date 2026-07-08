@@ -1,0 +1,137 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+  background-color: var(--cds-layer, #ffffff);
+  color: var(--cds-text-primary, #161616);
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  block-size: 40px;
+  padding: 0 1rem;
+  border-block-end: 1px solid var(--cds-border-subtle, #e0e0e0);
+}
+
+.headerTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary, #161616);
+}
+
+.searchRow {
+  flex-shrink: 0;
+  border-block-end: 1px solid var(--cds-border-subtle, #e0e0e0);
+}
+
+/* Carbon Search overrides — flatten chrome to match Figma */
+.searchRow :global(.cds--search--sm) {
+  block-size: 40px;
+}
+.searchRow :global(.cds--search-input) {
+  background-color: transparent;
+  border-block-end: 0;
+}
+
+.list {
+  flex: 1;
+  min-block-size: 0;
+  overflow-y: auto;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupHeader {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-block-end: 1px solid var(--cds-border-subtle, #e0e0e0);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  inline-size: 100%;
+  block-size: 40px;
+  padding: 0 1rem;
+  cursor: pointer;
+  color: var(--cds-text-secondary, #525252);
+}
+
+.groupHeader:hover {
+  background-color: var(--cds-layer-hover, #e8e8e8);
+}
+
+.groupIcon {
+  flex-shrink: 0;
+  color: var(--cds-text-secondary, #525252);
+}
+
+.groupLabel {
+  flex: 1;
+  text-align: start;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-secondary, #525252);
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--cds-text-secondary, #525252);
+}
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  block-size: 40px;
+  padding-inline: 1rem 0.25rem;
+}
+
+.row:hover {
+  background-color: var(--cds-layer-hover, #e8e8e8);
+}
+
+.rowActive,
+.rowActive:hover {
+  background-color: var(--cds-layer-selected, #e0e0e0);
+}
+
+.rowLabel {
+  flex: 1;
+  min-inline-size: 0;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-align: start;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  color: var(--cds-text-primary, #161616);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.rowMenu {
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 60ms ease;
+}
+
+.row:hover .rowMenu,
+.rowActive .rowMenu,
+.rowMenu:focus-within {
+  opacity: 1;
+}

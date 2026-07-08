@@ -1,0 +1,70 @@
+/* Page Structure - for Section Panel Support */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  background-color: var(--cds-background);
+}
+
+.pageContent {
+  padding: var(--cds-spacing-05);
+  min-height: 0;
+}
+
+/* Linked Objectives Tab */
+.linkedObjectivesTab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-06);
+  width: 100%;
+}
+
+.linkedObjectivesHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  max-width: 896px;
+}
+
+.linkedObjectivesTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.linkedObjectivesDescription {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.linkedObjectivesList {
+  width: 100%;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-09);
+  text-align: center;
+}
+
+.emptyStateTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.emptyStateText {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+  max-width: 480px;
+}

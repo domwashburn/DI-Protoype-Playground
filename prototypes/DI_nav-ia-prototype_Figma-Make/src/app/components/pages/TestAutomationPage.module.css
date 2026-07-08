@@ -1,0 +1,489 @@
+/* ============================================================================
+   TestAutomationPage — Carbon Design System v11
+   Implements the "Test suite" content area from the Figma design:
+   sub-tab bar (Test Cases | Test Runs | Play) + split layout (tree + detail)
+   ============================================================================ */
+
+/* ── Page container ──────────────────────────────────────────────────────── */
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background-color: var(--cds-background);
+}
+
+/* ── Sub-tab bar ─────────────────────────────────────────────────────────── */
+
+.subTabBar {
+  display: flex;
+  align-items: stretch;
+  height: var(--cds-spacing-09); /* 48px — matches Carbon contained tab height */
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.subTabsList {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.subTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px var(--cds-spacing-04); /* 15px top/bottom; 16px left/right -> 16px left/right adjusted */
+  border: none;
+  cursor: pointer;
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);      /* 14px */
+  line-height: var(--cds-body-compact-01-line-height);  /* 18px */
+  letter-spacing: var(--cds-body-compact-01-letter-spacing); /* 0.16px */
+  white-space: nowrap;
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color var(--cds-productive-01);
+}
+
+/* Active tab: white background + blue top border */
+.subTabActive {
+  background-color: var(--cds-layer);  /* #ffffff */
+  color: var(--cds-text-primary);
+  font-weight: var(--cds-heading-compact-01-font-weight); /* 600 */
+}
+
+.subTabActive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--cds-interactive); /* #0f62fe */
+}
+
+/* Inactive tab: gray background */
+.subTabInactive {
+  background-color: var(--cds-layer-accent); /* #e0e0e0 */
+  color: var(--cds-text-secondary);
+  font-weight: var(--font-weight-medium); /* 600 — matches Figma bold treatment */
+}
+
+.subTabInactive:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+/* Play button: dark background, icon-only, 128px wide */
+.playButton {
+  width: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: var(--cds-header-layer-accent); /* #393939 */
+  color: var(--cds-text-on-color); /* #ffffff */
+  cursor: pointer;
+  transition: background-color var(--cds-productive-01);
+}
+
+.playButton:hover {
+  background-color: var(--cds-header-layer); /* #262626 */
+}
+
+.splitLayoutWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 0; /* removed 16px inset — left panel is now flush */
+  background-color: var(--cds-background);
+}
+
+/* ── Split layout (SectionInfluencedLayout children) ─────────────────────── */
+/* SectionInfluencedLayout wraps this in a flex-1 column; we go flex-row.    */
+
+.splitLayout {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Left panel: tree navigation ─────────────────────────────────────────── */
+
+.leftPanel {
+  width: 256px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--cds-border-subtle);
+  background-color: var(--cds-layer);
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Toolbar row: search input + filter + add */
+.panelToolbar {
+  display: flex;
+  align-items: stretch;
+  height: var(--cds-spacing-08); /* 40px */
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.searchWrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Magnifying glass icon sits inside the input */
+.searchIconWrap {
+  position: absolute;
+  left: var(--cds-spacing-04); /* 12px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: var(--cds-icon-secondary);
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  /* 12px left-gutter + 16px icon + 4px gap = 32px  */
+  padding: 0 var(--cds-spacing-03) 0 calc(var(--cds-spacing-04) + var(--cds-spacing-06));
+  outline: none;
+  /* Override browser default search-cancel button */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.searchInput::placeholder {
+  color: var(--cds-text-secondary);
+}
+
+.searchInput::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Icon-only toolbar buttons: filter and add */
+.toolbarIconBtn {
+  width: var(--cds-spacing-08); /* 40px */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-left: 1px solid var(--cds-border-subtle);
+  background: transparent;
+  color: var(--cds-icon-primary);
+  cursor: pointer;
+  transition: background-color var(--cds-productive-01);
+}
+
+.toolbarIconBtn:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+/* Tree wrapper: the scrollable content below the toolbar */
+.treeWrapper {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
+/* ── Right content area ──────────────────────────────────────────────────── */
+
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--cds-background);
+}
+
+/* Content header: title on the left, actions on the right */
+.contentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 var(--cds-spacing-05); /* 0 0 0 16px */
+  border-bottom: 1px solid var(--cds-border-subtle);
+  flex-shrink: 0;
+  gap: var(--cds-spacing-03); /* 8px */
+  flex-wrap: nowrap;
+  height: var(--cds-spacing-09); /* 48px */
+}
+
+.contentHeaderLeft {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contentTitle {
+  margin: 0;
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);   /* 20px */
+  font-weight: var(--cds-heading-03-font-weight); /* 400 */
+  line-height: var(--cds-heading-03-line-height); /* 28px */
+  color: var(--cds-text-primary);
+}
+
+/* "Run test case ▷" ghost link button */
+.runTestBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cds-spacing-03); /* 8px */
+  padding: 15px var(--cds-spacing-05); /* 15px top/bottom, 16px left/right */
+  border: none;
+  background: transparent;
+  color: var(--cds-interactive); /* #0f62fe */
+  cursor: pointer;
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  white-space: nowrap;
+  border-color: transparent;
+  height: var(--cds-spacing-09); /* 48px */
+}
+
+.runTestBtn:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+/* Content body: two-column layout — 16px padding on top / left / right */
+.contentBody {
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-05) var(--cds-spacing-05) 0 var(--cds-spacing-05);
+  background-color: var(--cds-background);
+}
+
+/* ── Two-column layout ───────────────────────────────────────────────────── */
+
+/* Left: grows to fill remaining width; scrolls vertically */
+.contentMain {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+/* Right: fixed 320px aside; scrolls independently */
+.contentAside {
+  width: 320px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+/* ── Card (main content) ─────────────────────────────────────────────────── */
+
+.contentCard {
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  /* Override Carbon Tile default padding */
+  padding: 0 !important;
+}
+
+/* Card header: actions left, contained tabs right */
+.cardHeader {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  height: var(--cds-spacing-09); /* 48px */
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.cardHeaderActions {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--cds-spacing-03);
+  gap: var(--cds-spacing-02);
+  flex-shrink: 0;
+}
+
+/* Contained tab list sits flush against the right of the card header */
+.cardHeaderTabs {
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+.cardBody {
+  flex: 1;
+  padding: var(--cds-spacing-05);
+  overflow-y: auto;
+}
+
+/* Remove TabPanel's default padding so .cardBody controls it */
+.contentCard :global(.cds--tab-content) {
+  padding: 0;
+}
+
+/* ── Assertion cards (right aside) ───────────────────────────────────────── */
+
+.assertionCard {
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+}
+
+.assertionCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cds-spacing-03) var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  gap: var(--cds-spacing-03);
+  min-height: var(--cds-spacing-08); /* 40px */
+}
+
+.assertionCardTitle {
+  margin: 0;
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-heading-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  color: var(--cds-text-primary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.assertionStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  flex-shrink: 0;
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  line-height: var(--cds-label-01-line-height);
+}
+
+.assertionStatusPass {
+  color: var(--cds-support-success);
+}
+
+.assertionStatusFail {
+  color: var(--cds-support-error);
+}
+
+.assertionCardBody {
+  padding: var(--cds-spacing-04) var(--cds-spacing-05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+}
+
+.assertionRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-01);
+}
+
+.assertionLabel {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  line-height: var(--cds-label-01-line-height);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.assertionValue {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  line-height: var(--cds-body-compact-01-line-height);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+/* ── Mock data table inside card body ────────────────────────────────────── */
+
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+}
+
+.dataTable th {
+  text-align: left;
+  color: var(--cds-text-secondary);
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-heading-compact-01-font-weight);
+  padding: var(--cds-spacing-03) var(--cds-spacing-04);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  background-color: var(--cds-layer-accent);
+  white-space: nowrap;
+}
+
+.dataTable td {
+  padding: var(--cds-spacing-03) var(--cds-spacing-04);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  color: var(--cds-text-primary);
+  vertical-align: top;
+}
+
+.dataTable tr:last-child td {
+  border-bottom: none;
+}
+
+.jsonBlock {
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--cds-text-primary);
+  background-color: var(--cds-layer-accent);
+  padding: var(--cds-spacing-04);
+  border-radius: 2px;
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+}
+
+/* Empty state when a folder / overview node is selected */
+.emptyContent {
+  flex: 1;
+  min-height: 0;
+  background-color: var(--cds-layer);
+}

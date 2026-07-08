@@ -1,0 +1,813 @@
+/* HomePageHeader - Carbon Design System v11 Grid Implementation */
+
+/* ============================================
+   CONTAINER STRUCTURE
+   ============================================ */
+
+/* Main container - enables container queries */
+.homePageHeader {
+  background: linear-gradient(
+    to bottom,
+    var(--cds-layer),
+    var(--cds-layer-accent)
+  );
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  padding-bottom: var(--cds-spacing-09);
+
+  /* Enable container queries */
+  container-type: inline-size;
+  container-name: header-container;
+}
+
+/* Header Actions - Display Settings and Expand/Collapse */
+.headerActions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  gap: var(--cds-spacing-03);
+  align-items: center;
+}
+
+/* Header inner container - Carbon grid with padding */
+.headerContainer {
+  width: 100%;
+  padding-left: var(--cds-spacing-05);
+  padding-right: var(--cds-spacing-05);
+  padding-top: var(--cds-spacing-08);
+  box-sizing: border-box;
+
+  /* Carbon grid - responsive column count */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Small: 4 columns */
+  gap: var(--cds-spacing-05);
+  align-items: flex-start;
+
+  transition:
+    max-height 240ms cubic-bezier(0.2, 0, 0.38, 0.9),
+    opacity 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  max-height: 1000px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+/* Collapsed state */
+.headerContainer.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Responsive padding */
+@container header-container (max-width: 671px) {
+  .headerContainer {
+    padding-top: var(--cds-spacing-06);
+  }
+}
+
+/* Medium breakpoint: 8 columns (672px - 1055px) */
+@container header-container (min-width: 672px) {
+  .headerContainer {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+/* Large breakpoint: 16 columns (1056px+) */
+@container header-container (min-width: 1056px) {
+  .headerContainer {
+    grid-template-columns: repeat(16, 1fr);
+  }
+}
+
+/* Max-width constraint at 1584px+ */
+@container header-container (min-width: 1584px) {
+  .headerContainer {
+    max-width: 1584px;
+  }
+}
+
+/* ============================================
+   HERO IMAGE (DECORATIVE BACKGROUND)
+   ============================================ */
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.heroImageBackground {
+  position: absolute;
+  inset: 0;
+  background: var(--cds-layer-accent);
+}
+
+.heroImageText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* ============================================
+   WELCOME TEXT AREA (LEFT SIDE)
+   ============================================ */
+
+/* Welcome text wrapper */
+.welcomeTextWrapperOuter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-07);
+
+  /* Small & Medium: Full width (stacked layout) */
+  grid-column: 1 / -1;
+}
+
+/* Large: Columns 1-4 (4 of 16 columns) - side-by-side with tiles */
+@container header-container (min-width: 1056px) {
+  .welcomeTextWrapperOuter {
+    grid-column: 1 / 5;
+  }
+}
+
+.welcomeTextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-07);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-07);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-07);
+  align-items: flex-start;
+  max-width: 288px;
+  width: 100%;
+}
+
+.titleText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);
+  line-height: var(--cds-heading-03-line-height);
+  color: var(--cds-text-primary);
+  width: 100%;
+  margin: 0;
+}
+
+/* ============================================
+   TILES AREA (RIGHT SIDE)
+   ============================================ */
+
+/* Section tile group wrapper */
+.sectionTileGroup {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  align-items: flex-start;
+  position: relative;
+
+  /* Small & Medium: Full width below welcome text (stacked layout) */
+  grid-column: 1 / -1;
+  padding-top: var(--cds-spacing-07);
+}
+
+/* Large: Columns 5-16 (12 of 16 columns) - side-by-side with welcome text */
+@container header-container (min-width: 1056px) {
+  .sectionTileGroup {
+    grid-column: 5 / 17;
+    padding-top: 0;
+  }
+}
+
+/* ============================================
+   TASK TILES GRID
+   ============================================ */
+
+/* Task sets - tiles container */
+.taskSets {
+  display: grid;
+  gap: var(--cds-spacing-05); /* 16px */
+  width: 100%;
+  grid-auto-rows: 172px; /* Fixed card height */
+
+  /* Small (< 672px): 1 column */
+  grid-template-columns: repeat(1, 1fr);
+}
+
+/* Medium (672px - 1055px): 2 columns */
+@container header-container (min-width: 672px) {
+  .taskSets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large (1056px - 1583px): 3 columns */
+@container header-container (min-width: 1056px) {
+  .taskSets {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* XLarge (1584px+): 4 columns */
+@container header-container (min-width: 1584px) {
+  .taskSets {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   INDIVIDUAL TILES
+   ============================================ */
+
+/* Chat Tile (AI Assistant) - spans 2 columns */
+.headerChatTile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  min-height: 172px;
+
+  /* Small: Full width (1 column total) */
+  grid-column: span 1;
+}
+
+/* Medium: Span 2 of 2 columns = full width */
+@container header-container (min-width: 672px) {
+  .headerChatTile {
+    grid-column: span 2;
+  }
+}
+
+/* Large: Span 2 of 3 columns */
+@container header-container (min-width: 1056px) {
+  .headerChatTile {
+    grid-column: span 2;
+  }
+}
+
+/* XLarge: Span 2 of 4 columns */
+@container header-container (min-width: 1584px) {
+  .headerChatTile {
+    grid-column: span 2;
+  }
+}
+
+/* New Project Tile - standard width (1 column) */
+.newDecisionProject {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+
+  /* Auto positioning - flows naturally in grid */
+  grid-column: span 1;
+}
+
+/* New Service Tile - standard width (1 column) */
+.newDecisionService {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+
+  /* Auto positioning - flows naturally in grid */
+  grid-column: span 1;
+}
+
+/* ============================================
+   TILE STYLING (Common)
+   ============================================ */
+
+.taskTile01,
+.taskTile02 {
+  background: var(--cds-background);
+  height: 172px;
+  min-height: 172px;
+  min-width: 176px;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.taskTileInner {
+  min-height: inherit;
+  min-width: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.taskTileContent {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+  height: 172px;
+  align-items: flex-start;
+  min-height: inherit;
+  min-width: inherit;
+  padding: var(--cds-spacing-05);
+  position: relative;
+  width: 100%;
+}
+
+.taskTileIconWrapper {
+  display: flex;
+  gap: 42px;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.taskTileIcon {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.taskTileIcon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.taskTileTextContent {
+  font-family: var(--cds-font-family);
+  flex: 0 1 0%;
+  flex-grow: 1;
+  line-height: 22px;
+  min-height: 1px;
+  min-width: 1px;
+  font-style: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  flex-shrink: 0;
+  color: var(--cds-text-primary);
+  font-size: 16px;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  margin: 0;
+}
+
+/* ============================================
+   CHAT TILE SPECIFIC STYLING
+   ============================================ */
+
+.chatTileInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 172px;
+  overflow: hidden;
+  position: relative;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+/* AI Layer - background with gradient */
+.aiLayer {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  align-items: flex-start;
+  padding-bottom: 172px;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.aiBackground {
+  position: absolute;
+  background: var(--cds-background);
+  inset: 0;
+  box-shadow: 0px 4px 8px 0px rgba(15, 98, 254, 0.1);
+}
+
+.gradient {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  align-items: flex-start;
+}
+
+.gradientInner {
+  flex: 0 1 0%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(69, 137, 255, 0.05)
+  );
+  flex-grow: 1;
+  min-height: 1px;
+  min-width: 1px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.gradientBorder {
+  position: absolute;
+  border: 1px solid #78a9ff;
+  inset: 0;
+}
+
+.gradientShadow {
+  position: absolute;
+  inset: 0;
+  box-shadow: 0px -80px 70px -65px rgba(15, 98, 254, 0.1) inset;
+}
+
+/* Chat tile content */
+.chatTileContentWrapper {
+  height: 172px;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.chatTileContentInner {
+  width: 100%;
+  height: 100%;
+}
+
+.chatTileContent {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  height: 172px;
+  align-items: flex-start;
+  padding-bottom: 0;
+  padding-top: var(--cds-spacing-05);
+  padding-left: var(--cds-spacing-05);
+  padding-right: var(--cds-spacing-05);
+  position: relative;
+  width: 100%;
+}
+
+.chatTileTop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.iconBadgesRow {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.termIconWrapper {
+  flex: 0 1 0%;
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start;
+  min-height: 1px;
+  min-width: 1px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.termIcon {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.termIcon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.aiTileBeta {
+  display: flex;
+  gap: var(--cds-spacing-03);
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.betaTagCustom {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.betaTag {
+  background: var(--cds-tag-color-blue);
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  border-radius: 9px;
+  flex-shrink: 0;
+}
+
+.betaTagContent {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  padding-right: var(--cds-spacing-02);
+  padding-top: 0;
+  padding-bottom: 0;
+  position: relative;
+  border-radius: 24px;
+  flex-shrink: 0;
+}
+
+.betaLabel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: -4px;
+  padding-bottom: 2px;
+  padding-top: 0;
+  padding-left: var(--cds-spacing-03);
+  padding-right: var(--cds-spacing-03);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.betaText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  color: var(--cds-tag-background-blue);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.aiSlug {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.aiSlugBase {
+  position: absolute;
+  inset: 0;
+}
+
+.aiSlugBorder {
+  position: absolute;
+  border: 1px solid var(--cds-text-primary);
+  inset: 0;
+  pointer-events: none;
+}
+
+.aiSlugText {
+  position: absolute;
+  bottom: 6.25%;
+  font-family: var(--cds-font-family);
+  font-weight: 600;
+  line-height: 14px;
+  left: 8px;
+  font-style: normal;
+  color: var(--cds-text-primary);
+  font-size: 9px;
+  text-align: center;
+  top: 6.25%;
+  transform: translateX(-50%);
+  width: 14px;
+  margin: 0;
+}
+
+/* Chat tile body */
+.chatTileBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.chatTileTitle {
+  font-family: var(--cds-font-family);
+  line-height: 22px;
+  font-style: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  flex-shrink: 0;
+  color: var(--cds-text-primary);
+  font-size: 16px;
+  white-space: nowrap;
+  width: 100%;
+  margin: 0;
+}
+
+.chatPromptGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.chatPromptLine {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.chatPrompt {
+  flex: 0 1 0%;
+  background: var(--cds-background);
+  flex-grow: 1;
+  min-height: 1px;
+  min-width: 1px;
+  position: relative;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.chatPromptBorder {
+  position: absolute;
+  border: 1px solid var(--cds-border-subtle);
+  inset: 0;
+  pointer-events: none;
+  border-radius: 6px;
+}
+
+.chatPromptContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.chatPromptInner {
+  box-sizing: border-box;
+  display: flex;
+  gap: var(--cds-spacing-05);
+  align-items: center;
+  padding-left: var(--cds-spacing-05);
+  padding-right: var(--cds-spacing-05);
+  padding-top: 7px;
+  padding-bottom: 7px;
+  position: relative;
+  width: 100%;
+}
+
+.chatPromptText {
+  flex: 0 1 0%;
+  font-family: var(--cds-font-family);
+  flex-grow: 1;
+  height: 18px;
+  line-height: 18px;
+  min-height: 1px;
+  min-width: 1px;
+  font-style: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  flex-shrink: 0;
+  color: #a8a8a8;
+  font-size: var(--cds-body-compact-01-font-size);
+  white-space: nowrap;
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  margin: 0;
+}
+
+.sendIconWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.sendIcon {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.sendIcon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Open Assistant Button */
+.openAssistantButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.openAssistantButton {
+  /* Carbon button overrides if needed */
+}
+
+/* Chat tile border */
+.chatTileBorder {
+  position: absolute;
+  border: 1px solid #78a9ff;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: 0px 4px 8px 0px rgba(15, 98, 254, 0.1);
+}
+
+/* ============================================
+   HEADER ACTIONS (WELCOME TEXT AT TOP)
+   ============================================ */
+
+/* Welcome header wrapper - contains welcome text */
+.welcomeHeaderWrapper {
+  box-sizing: border-box;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding-bottom: var(--cds-spacing-07);
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+  flex-shrink: 0;
+  grid-column: 1 / -1;
+  z-index: 4;
+}
+
+/* Responsive padding for welcome header */
+@container header-container (max-width: 671px) {
+  .welcomeHeaderWrapper {
+    padding-bottom: var(--cds-spacing-06);
+  }
+}
+
+.welcomeText {
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-05-font-size);
+  line-height: var(--cds-heading-05-line-height);
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  color: var(--cds-text-primary);
+  width: auto;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Responsive font size for welcome text */
+@container header-container (max-width: 671px) {
+  .welcomeText {
+    font-size: var(--cds-heading-04-font-size);
+    line-height: var(--cds-heading-04-line-height);
+  }
+}

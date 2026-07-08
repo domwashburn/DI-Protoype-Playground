@@ -1,0 +1,92 @@
+/* Grid Layout - Overlay Pattern */
+
+/* 
+  IMPORTANT: All transitions use --cds-productive-02 to match Carbon Design System timing
+  This ensures panel content remains visible throughout the entire close animation.
+*/
+
+.gridLayoutOverlay {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.hasOverlay {
+  /* Additional class for when overlay is active */
+}
+
+/* Backdrop */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--cds-overlay, rgba(22, 22, 22, 0.5));
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--cds-productive-02) ease-in-out, visibility var(--cds-productive-02);
+}
+
+.backdrop[data-visible="true"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Full-width content area */
+.contentArea {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  z-index: 0;
+}
+
+/* Overlay panel */
+.overlayPanel {
+  position: fixed;
+  top: var(--panel-top-offset, 48px);
+  /* Shift left by the Assistant panel width when it's open & not expanded */
+  right: var(--assistant-panel-offset, 0);
+  height: calc(100vh - var(--panel-top-offset, 48px));
+  z-index: 10;
+  transform: translateX(100%);
+  transition:
+    transform var(--cds-productive-02) ease-in-out,
+    right var(--cds-productive-02) ease-in-out;
+  background: var(--cds-layer);
+  border-left: 1px solid var(--cds-border-subtle);
+}
+
+.overlayPanel[data-panel-open="true"] {
+  transform: translateX(0);
+}
+
+.overlayPanelInner {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Panel width variants */
+.panel-narrow {
+  width: 240px;
+}
+
+.panel-standard {
+  width: 320px;
+}
+
+.panel-wide {
+  width: 384px;
+}
+
+/* Mobile responsive (<672px) */
+@media (max-width: 672px) {
+  .overlayPanel {
+    width: 100% !important;
+  }
+}

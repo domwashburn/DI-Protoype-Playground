@@ -1,0 +1,67 @@
+/* Sub-view shell — the right-hand area when a section-inset panel expands.
+   Lives inside the unified `.panelWrapper` from InsetLayout. */
+
+.subView {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition:
+    border-color 240ms cubic-bezier(0.4, 0.14, 0.3, 1),
+    border-radius 240ms cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+/* Attached state: flatten left edge so the sub-view card meets the panel
+   rail flush — the InsetLayout overlay coordinates the matching flatten on
+   the panel rail's right edge. */
+.subView[data-attached="true"] {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-color: transparent;
+}
+
+.subViewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cds-spacing-04);
+  padding: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  flex-shrink: 0;
+  background-color: var(--cds-layer);
+}
+
+.subViewTitle {
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);
+  font-weight: var(--cds-heading-03-font-weight);
+  line-height: var(--cds-heading-03-line-height);
+  letter-spacing: var(--cds-heading-03-letter-spacing);
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subViewActions {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  flex-shrink: 0;
+}
+
+.subViewBody {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--cds-spacing-05);
+}

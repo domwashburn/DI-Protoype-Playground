@@ -1,0 +1,491 @@
+/* Page Header Component - Carbon Design System - Following Figma DataTypeDetailsHeader */
+
+/* Main Header Wrapper - White background with bottom border */
+.headerWrapper {
+  background-color: var(--cds-layer);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+/* Header Content - Main content area with 32px left, 16px right, 16px top, 8px bottom */
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cds-spacing-05) var(--cds-spacing-05) var(--cds-spacing-03) var(--cds-spacing-07);
+  position: relative;
+  width: 100%;
+}
+
+/* Left side content - Following Figma HeaderWrapper specifications */
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--cds-spacing-03);
+  flex-grow: 1;
+}
+
+/* Subheading section - Figma: 12px, #525252 (neutral-600), 16px line-height, 0.32px letter-spacing */
+.subHeading {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.subheadingText {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: #525252;
+  margin: 0;
+  position: relative;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* Title and status wrapper - 8px gap between title and tag */
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Page title - Figma: 20px, #161616, 28px line-height, 400 font-weight */
+.pageTitle {
+  font-family: var(--cds-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  color: var(--cds-text-primary);
+  margin: 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Status tag - Figma: #d0e2ff background, #0043ce color, 9px border-radius */
+.statusTag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px var(--cds-spacing-03);
+  border-radius: 9px;
+  position: relative;
+  flex-shrink: 0;
+  height: 20px;
+}
+
+.status-published {
+  background-color: #d0e2ff;
+  color: #0043ce;
+  border-radius: 9px;
+  height: 20px;
+  padding: 2px 8px;
+}
+
+.status-draft {
+  background-color: var(--cds-layer-accent);
+  color: var(--cds-text-primary);
+}
+
+.status-archived {
+  background-color: var(--cds-layer-accent);
+  color: var(--cds-text-secondary);
+}
+
+.status-pending {
+  background-color: var(--cds-support-success);
+  color: var(--cds-text-on-color);
+}
+
+/* Branch type badges */
+.status-main {
+  background-color: var(--cds-tag-background-gray);
+  color: var(--cds-text-primary);
+}
+
+.status-develop {
+  background-color: var(--cds-tag-background-green);
+  color: var(--cds-text-primary);
+}
+
+.status-feature {
+  background-color: var(--cds-tag-background-blue);
+  color: var(--cds-text-primary);
+}
+
+.status-hotfix {
+  background-color: var(--cds-tag-background-red);
+  color: var(--cds-text-primary);
+}
+
+.status-release {
+  background-color: var(--cds-tag-background-purple);
+  color: var(--cds-text-primary);
+}
+
+.status-protected {
+  background-color: var(--cds-tag-background-red);
+  color: var(--cds-text-primary);
+}
+
+/* Tag text - Figma: 12px, matches tag color */
+.tagText {
+  font-family: var(--cds-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Header actions */
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  padding: var(--cds-spacing-03) var(--cds-spacing-05);
+  border: none;
+  border-radius: var(--cds-radius);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  cursor: pointer;
+  transition: all var(--cds-productive-02) ease-in-out;
+  white-space: nowrap;
+  height: 40px;
+}
+
+.button-primary {
+  background-color: var(--cds-interactive);
+  color: var(--cds-text-on-color);
+}
+
+.button-primary:hover {
+  background-color: var(--cds-interactive);
+  filter: brightness(0.9);
+}
+
+.button-primary:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: 2px;
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: #0f62fe;
+  border: 2px solid #0f62fe;
+  border-radius: 4px;
+  height: 32px;
+  padding: 2px 18px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-secondary:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.button-secondary:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: 2px;
+}
+
+.button-tertiary {
+  background-color: transparent;
+  color: var(--cds-interactive);
+}
+
+.button-tertiary:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.button-tertiary:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: 2px;
+}
+
+/* Tab Wrapper - Contains the tab navigation and panel triggers */
+.tabWrapper {
+  background-color: var(--cds-layer);
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.tabWrapperInner {
+  background-clip: padding-box;
+  border: 0;
+  border-color: transparent;
+  border-style: solid;
+  box-sizing: border-box;
+  display: flex;
+  isolation: isolate;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+}
+
+.tabsContainer {
+  flex-basis: 0;
+  flex-grow: 1;
+  min-height: 1px;
+  min-width: 1px;
+  position: relative;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.tabsContainerInner {
+  width: 100%;
+  height: 100%;
+}
+
+.tabsContainerContent {
+  box-sizing: border-box;
+  display: flex;
+  gap: 1px;
+  align-items: flex-start;
+  padding: 0 0 0 16px;
+  position: relative;
+  width: 100%;
+}
+
+.tabsInner {
+  flex-basis: 0;
+  display: flex;
+  gap: 1px;
+  flex-grow: 1;
+  align-items: flex-start;
+  min-height: 1px;
+  min-width: 1px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.panelTriggers {
+  height: 40px;
+  position: relative;
+  flex-shrink: 0;
+  width: 120px;
+  z-index: 3;
+}
+
+.panelTriggerButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  top: 0;
+  color: var(--cds-icon-primary);
+  transition: background var(--cds-productive-02);
+  border-radius: var(--cds-radius-sm);
+}
+
+.panelTriggerButton:hover {
+  background: var(--cds-layer-hover-01);
+}
+
+.panelTriggerButton:active {
+  background: var(--cds-layer-active-01);
+}
+
+.panelTriggerActive {
+  background: var(--cds-layer-selected-01);
+  color: var(--cds-icon-on-color);
+}
+
+.panelTriggerButton:first-child {
+  left: 0;
+}
+
+.panelTriggerButton:nth-child(2) {
+  left: 40px;
+}
+
+.panelTriggerButton:nth-child(3) {
+  left: 80px;
+}
+
+.panelTriggerIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Panel groups (trailing edge) — flex layout with a small gap between groups */
+.panelGroups {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-04);
+  height: 40px;
+  flex-shrink: 0;
+  z-index: 3;
+  padding-right: var(--cds-spacing-03);
+}
+
+.panelGroup {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Static (non-absolute) variant of trigger button used inside flex groups. */
+.panelTriggerButtonStatic {
+  position: static;
+  left: auto;
+}
+
+/* Tab List - Figma: flex with 1px gap, no left padding */
+.tabList {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  position: relative;
+  width: 100%;
+  gap: 1px;
+}
+
+/* Tab Items - Figma: _Tabs items with exact styling */
+.tabsItems {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  mix-blend-mode: multiply;
+  padding: 11px 16px;
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.tabsItems:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.tabsItems:focus {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+/* Text overflow - Figma: height 18px, overflow clip */
+.textOverflow {
+  display: flex;
+  align-items: flex-start;
+  height: 18px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Tab text - Figma: exact font specifications */
+.tabText {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  margin: 0;
+  white-space: nowrap;
+  position: relative;
+  flex-shrink: 0;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+}
+
+/* Tab count badge */
+.tabCount {
+  font-family: var(--cds-font-family);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.16px;
+  margin: 0;
+  white-space: nowrap;
+  color: inherit;
+  font-weight: inherit;
+}
+
+/* Active tab - Figma: IBM_Plex_Sans:SemiBold, #161616, #0f62fe border */
+.tabActive {
+  border: 0px solid transparent;
+  border-bottom: 2px solid #0f62fe;
+}
+
+.tabActive .tabText {
+  color: #161616;
+  font-weight: 600;
+}
+
+/* Inactive tab - Figma: IBM_Plex_Sans:Regular, neutral-600, #c6c6c6 border */
+.tabInactive {
+  border: 0px solid transparent;
+  border-bottom: 2px solid #c6c6c6;
+}
+
+.tabInactive .tabText {
+  color: #525252;
+  font-weight: 400;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .headerContent {
+    flex-direction: column;
+    gap: var(--cds-spacing-04);
+    align-items: stretch;
+    padding: var(--cds-spacing-05);
+  }
+  
+  .headerActions {
+    justify-content: flex-start;
+  }
+  
+  .tabList {
+    padding: 0 var(--cds-spacing-05);
+    overflow-x: auto;
+  }
+}
+.tabLeadingControls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: var(--cds-spacing-09);
+}

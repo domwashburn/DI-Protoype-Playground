@@ -1,0 +1,44 @@
+.shell {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  padding: var(--cds-spacing-05) var(--cds-spacing-05) 0;
+}
+
+.shellFlushBottom {
+  padding-bottom: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: var(--cds-spacing-04); /* Hi-fi corner radius */
+  overflow: hidden;
+}
+
+.shellFlushBottom .card {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+}
+
+.toolbarSlot {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  min-height: var(--cds-spacing-09);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  background-color: var(--cds-layer);
+}
+
+.contentSlot {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  container-type: inline-size;
+  container-name: inset-content;
+}

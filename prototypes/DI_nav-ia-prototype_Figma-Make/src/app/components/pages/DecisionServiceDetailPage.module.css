@@ -1,0 +1,126 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.pageContent {
+  width: 100%;
+  height: 100%;
+  background-color: var(--cds-background);
+  padding: var(--cds-spacing-06);
+  overflow-y: auto;
+}
+
+/* Linked Objectives Tab */
+.linkedObjectivesTab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-06);
+  max-width: 896px;
+}
+
+.linkedObjectivesHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+}
+
+.linkedObjectivesTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.linkedObjectivesDescription {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.linkedObjectivesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-09);
+  text-align: center;
+}
+
+.emptyStateTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.emptyStateText {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+  max-width: 480px;
+}
+
+/* Linked Objectives Tab */
+.linkedObjectivesTab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-06);
+  max-width: 896px;
+}
+
+.linkedObjectivesHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+}
+
+.linkedObjectivesTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.linkedObjectivesDescription {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.linkedObjectivesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-05);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cds-spacing-05);
+  padding: var(--cds-spacing-09);
+  text-align: center;
+}
+
+.emptyStateTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.emptyStateText {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+  max-width: 480px;
+}

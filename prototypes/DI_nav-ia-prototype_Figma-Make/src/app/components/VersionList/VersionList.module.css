@@ -1,0 +1,29 @@
+/* Version List Styles */
+
+.versionListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background-color: var(--cds-layer-01);
+}
+
+.versionList {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--cds-spacing-09);
+  text-align: center;
+}
+
+.emptyStateText {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}

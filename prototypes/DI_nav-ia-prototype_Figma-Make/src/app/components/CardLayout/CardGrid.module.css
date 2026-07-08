@@ -1,0 +1,23 @@
+/* CardGrid Module CSS — Phase 7A: Responsive card grid with container queries
+   Previously relied on global .card-grid / .container-query-context classes.
+   Now fully self-contained in CSS Module. */
+
+/* Container query context — establishes containment for responsive columns */
+.cardGridContext {
+  width: 100%;
+  container-type: inline-size;
+  container-name: card-grid;
+}
+
+/* Auto-fill grid: cards are never narrower than 240px; columns fill available space. */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--cds-spacing-05);
+  width: 100%;
+}
+
+/* List View Mode Override — always single column */
+.listView {
+  grid-template-columns: 1fr !important;
+}

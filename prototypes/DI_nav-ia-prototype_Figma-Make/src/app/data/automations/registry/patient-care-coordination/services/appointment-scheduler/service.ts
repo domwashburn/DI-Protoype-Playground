@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'appointment-scheduler',
+  hashId: 'sas1k',
+  name: 'Appointment Scheduler Service',
+  displayName: 'Appointment Scheduling',
+  description: 'Schedules patient appointments',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'patient-care-coordination',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:35:05.000Z',
+  lastUpdatedDate: '2025-06-30T10:35:05.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '1.3.0',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/appointments',
+  authentication: 'oauth',
+  requestCount: 56000,
+  avgResponseTime: 75,
+  successRate: 99.5,
+};

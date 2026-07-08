@@ -1,0 +1,169 @@
+/* Chat Sidebar Component - Now handled by SideRailNavigation */
+.chatSidebar {
+  background: var(--cds-layer);
+  border-right: 1px solid var(--cds-border-subtle);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: width var(--cds-productive-02) ease-in-out;
+  overflow: hidden;
+}
+
+.sidebarExpanded {
+  width: 260px;
+}
+
+.sidebarCollapsed {
+  width: 48px;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cds-spacing-05) var(--cds-spacing-04);
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.toggleButton {
+  background: transparent;
+  border: none;
+  color: var(--cds-icon-primary);
+  cursor: pointer;
+  padding: var(--cds-spacing-02);
+  border-radius: var(--cds-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--cds-productive-01) ease-in-out;
+}
+
+.toggleButton:hover {
+  background: var(--cds-layer-hover);
+}
+
+.newChatButton {
+  background: var(--cds-interactive);
+  border: none;
+  color: var(--cds-text-on-color);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  padding: var(--cds-spacing-03) var(--cds-spacing-04);
+  border-radius: var(--cds-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  width: 100%;
+  justify-content: center;
+  transition: background-color var(--cds-productive-01) ease-in-out;
+  margin-bottom: var(--cds-spacing-05);
+  white-space: nowrap;
+}
+
+.newChatButton:hover {
+  background: #0353e9;
+}
+
+.sidebarContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--cds-spacing-04);
+}
+
+.sidebarSection {
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.sectionHeader {
+  color: var(--cds-text-secondary);
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  margin-bottom: var(--cds-spacing-03);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.historyGroup {
+  margin-bottom: var(--cds-spacing-05);
+}
+
+.historyGroupHeader {
+  color: var(--cds-text-secondary);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  margin-bottom: var(--cds-spacing-02);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.historyItem {
+  background: transparent;
+  border: none;
+  color: var(--cds-text-primary);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  padding: var(--cds-spacing-02) var(--cds-spacing-03);
+  border-radius: var(--cds-radius);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color var(--cds-productive-01) ease-in-out;
+  margin-bottom: var(--cds-spacing-01);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historyItem:hover {
+  background: var(--cds-layer-hover);
+}
+
+.historyItem.active {
+  background: var(--cds-layer-selected);
+}
+
+.navItem {
+  background: transparent;
+  border: none;
+  color: var(--cds-text-primary);
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  padding: var(--cds-spacing-03);
+  border-radius: var(--cds-radius);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color var(--cds-productive-01) ease-in-out;
+  margin-bottom: var(--cds-spacing-01);
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.navItem:hover {
+  background: var(--cds-layer-hover);
+}
+
+.collapsedContent {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.expandedContent {
+  opacity: 1;
+  pointer-events: all;
+}

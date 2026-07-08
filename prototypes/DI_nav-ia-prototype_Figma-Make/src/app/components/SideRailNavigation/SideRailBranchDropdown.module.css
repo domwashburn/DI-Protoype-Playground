@@ -1,0 +1,152 @@
+/* SideRailBranchDropdown — Custom Carbon-compliant branch switcher styles
+ * All spacing/color values use Carbon tokens. No inline styles. */
+
+/* ── Dropdown container ─────────────────────────────────────────── */
+.dropdownContainer {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Collapsed state — hide entire dropdown */
+.dropdownContainerHidden {
+  opacity: 0;
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── Trigger button ─────────────────────────────────────────────── */
+.dropdownTrigger {
+  background: transparent;
+  border: none;
+  border-radius: var(--cds-radius, 4px);
+  color: var(--cds-text-primary, #161616);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02, 4px);
+  padding: var(--cds-spacing-02, 4px) var(--cds-spacing-03, 8px);
+  transition: background-color var(--cds-productive-02, 110ms) ease;
+  width: 100%;
+  min-height: 24px;
+  font-family: var(--cds-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-body-compact-01-font-size, 14px);
+  font-weight: var(--font-weight-medium, 600);
+  line-height: var(--cds-body-compact-01-line-height, 18px);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
+  appearance: none;
+  outline: none;
+  margin: 0;
+}
+
+.dropdownTrigger:hover {
+  background-color: var(--cds-layer-hover, rgba(22,22,22,0.12));
+}
+
+.dropdownTriggerOpen {
+  background-color: var(--cds-layer-hover, rgba(22,22,22,0.12));
+}
+
+.dropdownTrigger:focus-visible {
+  outline: 2px solid var(--cds-focus, #0f62fe);
+  outline-offset: 2px;
+}
+
+/* ── Branch name text ───────────────────────────────────────────── */
+.branchName {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--cds-text-primary, #161616);
+}
+
+/* ── Chevron icon ───────────────────────────────────────────────── */
+.chevron {
+  flex-shrink: 0;
+  transition: transform var(--cds-productive-02, 110ms) ease;
+  color: var(--cds-icon-secondary, #525252);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ── Click-away overlay ─────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+/* ── Dropdown menu ──────────────────────────────────────────────── */
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + var(--cds-spacing-01, 2px));
+  left: 0;
+  right: 0;
+  background-color: var(--cds-layer, #ffffff);
+  border: 1px solid var(--cds-border-subtle, #e0e0e0);
+  border-radius: var(--cds-radius, 4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* ── Dropdown items ─────────────────────────────────────────────── */
+.dropdownItem {
+  background: transparent;
+  border: none;
+  color: var(--cds-text-primary, #161616);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cds-spacing-03, 8px) var(--cds-spacing-04, 12px);
+  transition: background-color var(--cds-productive-02, 110ms);
+  width: 100%;
+  text-align: left;
+  font-family: var(--cds-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-body-compact-01-font-size, 14px);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 18px);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
+  appearance: none;
+  outline: none;
+  margin: 0;
+}
+
+.dropdownItem:hover {
+  background-color: var(--cds-layer-hover, rgba(22,22,22,0.12));
+}
+
+.dropdownItem:focus-visible {
+  outline: 2px solid var(--cds-focus, #0f62fe);
+  outline-offset: -2px;
+}
+
+.dropdownItem.selected {
+  background-color: var(--cds-layer-selected, rgba(22,22,22,0.24));
+}
+
+/* ── Branch text + badge ────────────────────────────────────────── */
+.branchText {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.activeBadge {
+  font-size: var(--cds-label-01-font-size, 12px);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  color: var(--cds-support-success, #198038);
+  flex-shrink: 0;
+}

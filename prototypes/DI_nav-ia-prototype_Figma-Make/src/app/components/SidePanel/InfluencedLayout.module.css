@@ -1,0 +1,145 @@
+/* Influenced Layout - Push/Influence Pattern */
+
+/* 
+  IMPORTANT: All transitions use --cds-expressive-02 to match Carbon Design System expressive timing
+  for smoother macro-interaction expand/collapse animations.
+*/
+
+/* Outer container */
+.outerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Panel container */
+.panelContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Main content area */
+.mainContent {
+  flex: 1;
+  min-height: 0;
+  min-width: 0; /* Prevents flex min-size overflow pushing content off-screen */
+  margin-right: 0;
+  display: flex;
+  flex-direction: column;
+  transition: margin-right var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+  will-change: margin-right;
+}
+
+.mainContent[data-panel-open="true"] {
+  margin-right: 320px;
+}
+
+/* Side panel — page/section level (position: absolute within panelContainer) */
+.sidePanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 320px;
+  z-index: var(--z-panel-page, 100);
+  transform: translateX(100%);
+  transition: transform var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+  background: var(--cds-layer);
+  border-left: 1px solid var(--cds-border-subtle);
+  box-shadow: var(--box-shadow-elevation-sm);
+}
+
+.sidePanel[data-panel-open="true"] {
+  transform: translateX(0);
+}
+
+/*
+ * Global side panel — position: fixed so it always anchors to the true
+ * viewport right edge, independent of any intermediate flex/overflow containers.
+ *
+ * Expansion: when data-panel-expanded="true" the panel transitions to full
+ * viewport width by animating `width` from 320px to 100%.
+ */
+.globalSidePanel {
+  position: fixed;
+  top: var(--header-height, 48px);
+  left: auto;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  z-index: var(--z-panel-global, 9000);
+  transform: translateX(100%);
+  transition:
+    transform var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1),
+    width var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+  background: var(--cds-layer);
+  border-left: 1px solid var(--cds-border-subtle);
+  box-shadow: var(--box-shadow-elevation-sm);
+}
+
+.globalSidePanel[data-panel-open="true"] {
+  transform: translateX(0);
+}
+
+/* Full-width expansion — panel takes the entire viewport width */
+.globalSidePanel[data-panel-open="true"][data-panel-expanded="true"] {
+  width: 100%;
+  border-left: none;
+  box-shadow: none;
+}
+
+.sidePanelInner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Mobile responsive - Tablet breakpoint (<672px) */
+@media (max-width: 672px) {
+  .mainContent[data-panel-open="true"] {
+    margin-right: 0;
+  }
+
+  .sidePanel {
+    width: calc(100% - 32px);
+    max-width: 320px;
+    right: 16px;
+  }
+
+  .globalSidePanel {
+    width: 100%;
+    right: 0;
+  }
+
+  /* Add backdrop for influence panels on tablet */
+  .panelContainer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--cds-overlay, rgba(22, 22, 22, 0.5));
+    z-index: var(--z-panel-page-backdrop, 99);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--cds-expressive-02, 240ms) cubic-bezier(0.4, 0.14, 0.3, 1);
+  }
+
+  .panelContainer:has(.sidePanel[data-panel-open="true"])::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Mobile responsive - Mobile breakpoint (<320px) */
+@media (max-width: 320px) {
+  .sidePanel {
+    width: 100%;
+    max-width: none;
+    right: 0;
+  }
+}

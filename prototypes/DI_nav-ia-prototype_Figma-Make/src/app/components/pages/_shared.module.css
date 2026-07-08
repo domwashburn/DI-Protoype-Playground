@@ -1,0 +1,46 @@
+/**
+ * Shared Page Styles for Section-Level Panel Support
+ * 
+ * These styles provide the proper container structure for pages that use
+ * SectionInfluencedLayout. Import and use these classes to ensure panels work correctly.
+ * 
+ * Usage:
+ * import styles from './_shared.module.css';
+ * 
+ * <div className={styles.pageContainer}>
+ *   <PageHeader ... />
+ *   <SectionInfluencedLayout>
+ *     <div className={styles.pageContent}>
+ *       // Your content here
+ *     </div>
+ *   </SectionInfluencedLayout>
+ * </div>
+ */
+
+/* Page Container - establishes flex layout for the page */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-height: 0; /* Critical for flex children to scroll */
+  background-color: var(--cds-background);
+}
+
+/* Page Content - scrollable content area inside SectionInfluencedLayout */
+.pageContent {
+  padding: var(--cds-spacing-05);
+  min-height: 0; /* Allows scrolling when content overflows */
+}
+
+/* Alternative: Page Content with specific padding adjustments */
+.pageContentWithPadding {
+  padding: var(--cds-spacing-05) var(--cds-spacing-07);
+  min-height: 0;
+}
+
+/* For pages without padding (full bleed content) */
+.pageContentNoPadding {
+  padding: 0;
+  min-height: 0;
+}

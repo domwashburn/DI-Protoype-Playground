@@ -1,0 +1,208 @@
+/* Resource Details Page - Carbon Design System v11 */
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background-color: var(--cds-background);
+}
+
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--cds-spacing-06);
+  padding-bottom: var(--cds-spacing-09);
+}
+
+/* Page Header */
+.pageHeader {
+  margin-bottom: var(--cds-spacing-06);
+  padding-bottom: var(--cds-spacing-05);
+  border-bottom: 1px solid var(--cds-border-subtle);
+}
+
+.pageTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0 0 var(--cds-spacing-03) 0;
+}
+
+.pageDescription {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* Placeholder Content */
+.placeholderSection {
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  padding: var(--cds-spacing-07);
+  text-align: center;
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.placeholderTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0 0 var(--cds-spacing-03) 0;
+}
+
+.placeholderText {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+/* Tags Display */
+.tagsSection {
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.tagsLabel {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0 0 var(--cds-spacing-03) 0;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cds-spacing-02);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--cds-spacing-03);
+  height: 24px;
+  background-color: var(--cds-tag-background-gray);
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-family);
+  border-radius: 12px;
+}
+
+/* Carbon Tile Styles */
+.tile {
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  padding: var(--cds-spacing-05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  min-height: 120px;
+  transition: background-color var(--cds-productive-02);
+}
+
+.tile:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.fullWidthTile {
+  background-color: var(--cds-layer);
+  border: 1px solid var(--cds-border-subtle);
+  padding: var(--cds-spacing-05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-03);
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.tileLabel {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.tileValue {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.tileTitle {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+  margin: 0;
+}
+
+.tileDescription {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: 0;
+}
+
+.tileList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cds-spacing-02);
+  margin-top: var(--cds-spacing-03);
+}
+
+.tileListItem {
+  padding: var(--cds-spacing-02) var(--cds-spacing-03);
+  background-color: var(--cds-layer-01);
+  border-left: 2px solid var(--cds-border-subtle);
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-primary);
+}
+
+.tileListMore {
+  font-family: var(--cds-font-family);
+  color: var(--cds-text-secondary);
+  margin: var(--cds-spacing-02) 0 0 0;
+  padding-left: var(--cds-spacing-03);
+}
+
+/* ── Responsive tile grid (Phase 7A — verified Step 6.4) ──────────────────────
+   Container queries so the grid responds to the page content width (available
+   inline-size), NOT the viewport width. This is intentional: when a section
+   panel opens/closes via SectionInfluencedLayout the content area narrows or
+   widens, and tiles reflow automatically without any JS or resize observers.
+
+   WHY container queries instead of Carbon <Grid> / <Column>:
+   Carbon Grid breakpoints are viewport-relative — they would NOT react to the
+   panel shrinking the content area. Container queries are the correct tool here.
+
+   Breakpoints mirror the project standard (matching CardGrid.module.css):
+     sm  < 672px  → 1 column
+     md  ≥ 672px  → 2 columns
+     lg  ≥ 1056px → 3 columns
+     xl  ≥ 1584px → 4 columns
+   ──────────────────────────────────────────────────────────────────────────── */
+.tileGridContext {
+  width: 100%;
+  container-type: inline-size;
+  container-name: detail-tile-grid;
+  margin-bottom: var(--cds-spacing-06);
+}
+
+.tileGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--cds-spacing-05); /* 16px — matches Carbon narrow grid gutter */
+  width: 100%;
+}
+
+@container detail-tile-grid (min-width: 672px) {
+  .tileGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container detail-tile-grid (min-width: 1056px) {
+  .tileGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@container detail-tile-grid (min-width: 1584px) {
+  .tileGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

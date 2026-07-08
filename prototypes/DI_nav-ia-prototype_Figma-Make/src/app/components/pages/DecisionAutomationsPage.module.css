@@ -1,0 +1,19 @@
+/* Decision Automations Page - Carbon Design System v11 */
+.pageContainer {
+  background-color: var(--cds-background);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Custom Grid for Automation Cards */
+.cardsGrid {
+  row-gap: var(--cds-spacing-05);
+}
+
+.cardColumn {
+  display: flex;
+  flex-direction: column;
+}

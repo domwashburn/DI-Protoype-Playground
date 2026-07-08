@@ -1,0 +1,288 @@
+.themeRoot {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  width: 320px;
+}
+
+.content {
+  min-height: 0;
+}
+
+.content:first-child {
+  margin-top: var(--cds-spacing-04);
+}
+
+.content:last-child {
+  margin-bottom: var(--cds-spacing-04);
+}
+
+.search {
+  flex-shrink: 0;
+}
+
+.backButton {
+  margin-right: var(--cds-spacing-02);
+}
+
+.titleRow .title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: var(--cds-spacing-05);
+  background-color: var(--cds-background);
+  border-bottom: 1px solid var(--cds-border-subtle);
+  flex-shrink: 0;
+  transition: padding 240ms cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.headerCondensed {
+  padding: var(--cds-spacing-03) var(--cds-spacing-05);
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--cds-spacing-03);
+  transition: margin-bottom 200ms cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.titleRowCondensed {
+  margin-bottom: 0;
+  align-items: center;
+}
+
+.title {
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-heading-03-font-size);
+  font-weight: var(--cds-heading-03-font-weight);
+  line-height: var(--cds-heading-03-line-height);
+  letter-spacing: var(--cds-heading-03-letter-spacing);
+  margin: 0;
+  transition:
+    font-size 240ms cubic-bezier(0.4, 0.14, 0.3, 1),
+    line-height 240ms cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.titleCondensed {
+  font-size: var(--cds-heading-02-font-size, 1rem);
+  line-height: var(--cds-heading-02-line-height, 1.375rem);
+}
+
+.subtitleWrapper {
+  overflow: hidden;
+  max-height: 60px;
+  opacity: 1;
+  transition:
+    max-height 240ms cubic-bezier(0.4, 0.14, 0.3, 1),
+    opacity 160ms cubic-bezier(0.4, 0.14, 0.3, 1);
+}
+
+.subtitleHidden {
+  max-height: 0;
+  opacity: 0;
+}
+
+.subtitle {
+  color: var(--cds-text-secondary);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-body-01-font-size);
+  font-weight: var(--cds-body-01-font-weight);
+  line-height: var(--cds-body-01-line-height);
+  letter-spacing: var(--cds-body-01-letter-spacing);
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.content .section:first-of-type {
+  margin-top: var(--cds-spacing-05);
+}
+
+.content .section:last-of-type {
+  margin-bottom: var(--cds-spacing-05);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--cds-spacing-05) 0;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: var(--cds-spacing-03) var(--cds-spacing-05);
+}
+
+.sectionTitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+}
+
+.sectionTitle {
+  color: var(--cds-text-secondary);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  margin: 0;
+}
+
+.sectionAction {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--cds-link-primary);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  cursor: pointer;
+}
+
+.sectionAction:hover {
+  text-decoration: underline;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--cds-spacing-05);
+  gap: 1px; /* 1px gap to show the subtle border if needed, or no gap */
+}
+
+/* Link component */
+.link {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cds-spacing-05);
+  padding: 10px var(--cds-spacing-05);
+  background-color: transparent;
+  border: none;
+  color: var(--cds-text-primary);
+  font-family: var(--cds-font-family);
+  cursor: pointer;
+  transition:
+    background-color var(--cds-productive-01),
+    color var(--cds-productive-01);
+  text-align: left;
+  width: 100%;
+  text-decoration: none;
+}
+
+.linkContained {
+  background-color: var(--cds-layer);
+  padding: 10px var(--cds-spacing-05);
+}
+
+.linkWithDescription {
+  padding: 14px var(--cds-spacing-05);
+}
+
+.link:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--cds-focus);
+  outline-offset: -2px;
+}
+
+.linkContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--cds-spacing-01);
+}
+
+.linkTitle {
+  font-size: var(--cds-body-compact-01-font-size);
+  font-weight: var(--cds-body-compact-01-font-weight);
+  line-height: var(--cds-body-compact-01-line-height);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing);
+  color: var(--cds-text-primary);
+}
+
+.linkTitleTruncated {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+.linkDescription {
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  color: var(--cds-text-secondary);
+}
+
+.linkIconLeft {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--cds-icon-primary);
+  margin-top: 2px;
+}
+
+.linkIconRight {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--cds-icon-primary);
+  margin-top: 2px;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--cds-border-subtle);
+  margin: var(--cds-spacing-05) var(--cds-spacing-05) 0
+    var(--cds-spacing-05);
+}
+
+.footer {
+  padding: var(--cds-spacing-05);
+  background-color: var(--cds-background);
+  border-top: 1px solid var(--cds-border-subtle);
+  flex-shrink: 0;
+}
+
+.footerText {
+  color: var(--cds-text-secondary);
+  font-family: var(--cds-font-family);
+  font-size: var(--cds-label-01-font-size);
+  font-weight: var(--cds-label-01-font-weight);
+  line-height: var(--cds-label-01-line-height);
+  letter-spacing: var(--cds-label-01-letter-spacing);
+  text-align: center;
+  margin: 0;
+}

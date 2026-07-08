@@ -1,0 +1,52 @@
+/* Global Panel Renderer - For global-level panels */
+
+/* 
+  Global panels are positioned fixed to the viewport and sit outside the normal
+  content flow as siblings to the app content.
+*/
+
+/* Global Panel */
+.globalPanel {
+  position: fixed;
+  top: var(--header-height, 48px);
+  right: 0;
+  height: calc(100vh - var(--header-height, 48px));
+  /* +1 over --z-panel-global so global-overlay panels (Help) sit ON TOP of
+     the Assistant push-panel when both are visible. */
+  z-index: calc(var(--z-panel-global, 9000) + 1);
+  transform: translateX(100%);
+  transition: transform var(--cds-productive-02) ease-in-out;
+  background: var(--cds-header-layer);
+  border-left: 1px solid var(--cds-header-border-subtle);
+}
+
+.globalPanel[data-panel-open="true"] {
+  transform: translateX(0);
+}
+
+.globalPanelInner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Panel width variants */
+.panel-narrow {
+  width: 240px;
+}
+
+.panel-standard {
+  width: 320px;
+}
+
+.panel-wide {
+  width: 384px;
+}
+
+/* Mobile responsive (<672px) */
+@media (max-width: 672px) {
+  .globalPanel {
+    width: 100% !important;
+  }
+}

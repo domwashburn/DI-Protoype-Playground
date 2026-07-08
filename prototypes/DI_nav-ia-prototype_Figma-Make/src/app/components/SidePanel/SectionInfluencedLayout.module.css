@@ -1,0 +1,104 @@
+/* Section Influenced Layout - Push/Influence Pattern for Section-Level Panels */
+
+/* 
+  This layout creates a flex container where the side panel overlays the section content.
+  The panel uses position: absolute within a bounded, overflow-hidden container so it
+  never affects the layout height or width of the content area.
+*/
+
+/* Section container — overflow: hidden is critical: it clips the absolute panel and
+   prevents any stray height growth that would impact the overall UI height. */
+.sectionContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Main content area — no margin changes when panel opens (overlay pattern).
+   Content width and height remain constant, ensuring zero layout impact. */
+.mainContent {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Side panel - positioned absolutely within the container, overlay pattern */
+.sidePanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%);
+  transition: transform var(--cds-productive-02) ease-in-out;
+  background: var(--cds-layer);
+  border-left: 1px solid var(--cds-border-subtle);
+  box-shadow: var(--box-shadow-elevation-sm, -2px 0 8px rgba(0,0,0,0.12));
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: var(--z-panel-page, 100);
+}
+
+.sidePanel[data-panel-open="true"] {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Panel width variants */
+.panel-narrow {
+  width: 240px;
+}
+
+.panel-standard {
+  width: 320px;
+}
+
+.panel-wide {
+  width: 384px;
+}
+
+.sidePanelInner {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Mobile responsive - Tablet breakpoint (<672px) */
+@media (max-width: 672px) {
+  .sidePanel {
+    width: calc(100% - 32px) !important;
+    max-width: 320px;
+    right: 16px;
+  }
+
+  /* Add backdrop for overlay panels on tablet */
+  .sectionContainer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--cds-overlay, rgba(22, 22, 22, 0.5));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--cds-productive-02) ease-in-out;
+    z-index: calc(var(--z-panel-page, 100) - 1);
+  }
+
+  .sectionContainer:has(.sidePanel[data-panel-open="true"])::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Mobile responsive - Mobile breakpoint (<320px) */
+@media (max-width: 320px) {
+  .sidePanel {
+    width: 100% !important;
+    max-width: none;
+    right: 0;
+  }
+}

@@ -1,0 +1,107 @@
+/* SideRailHeader — Custom Carbon-compliant header styles
+ * All spacing/color values use Carbon tokens.
+ * Toggle button uses custom Carbon ghost icon-only styling.
+ * @carbon/react Tooltip (autoAlign) provides styled hover label in collapsed state. */
+
+/* ── Header container ───────────────────────────────────────────── */
+.header {
+  background-color: transparent;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.headerContent {
+  box-sizing: border-box;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: var(--cds-spacing-03, 8px);
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* ── Carbon Tooltip wrapper override ─────────────────────────────── */
+/* Prevent Carbon's inline-flex wrapper from breaking the header flex layout */
+.headerContent :global(.cds--popover-container) {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* ── Toggle button — Carbon ghost icon-only pattern ─────────────── */
+.toggleButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--cds-icon-primary, #161616);
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  margin: 0;
+  flex-shrink: 0;
+  transition: background-color var(--cds-productive-02, 110ms) ease;
+}
+
+.toggleButton:hover {
+  background-color: var(--cds-layer-hover, rgba(22,22,22,0.12));
+}
+
+.toggleButton:focus-visible {
+  outline: 2px solid var(--cds-focus, #0f62fe);
+  outline-offset: -2px;
+}
+
+.toggleButton svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Header title ───────────────────────────────────────────────── */
+.headerTitle {
+  flex: 1;
+  min-height: 1px;
+  min-width: 1px;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 32px;
+  font-family: var(--cds-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--cds-body-01-font-size, 14px);
+  font-weight: var(--font-weight-medium, 600);
+  line-height: var(--cds-body-01-line-height, 20px);
+  letter-spacing: var(--cds-body-01-letter-spacing, 0.16px);
+  color: var(--cds-text-primary, #161616);
+  padding-left: 0;
+  padding-right: var(--cds-spacing-05, 16px);
+  padding-top: 0;
+  padding-bottom: 0;
+  white-space: nowrap;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity var(--cds-productive-02, 110ms) ease-in-out,
+    transform var(--cds-productive-02, 110ms) ease-in-out;
+  transform-origin: left center;
+}
+
+/* Collapsed state — hide title */
+.headerTitleHidden {
+  opacity: 0;
+  width: 0;
+  min-width: 0;
+  padding-right: 0;
+  pointer-events: none;
+  transform: translateX(-8px);
+  overflow: hidden;
+}

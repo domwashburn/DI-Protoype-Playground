@@ -1,0 +1,27 @@
+import type { DecisionService } from '../../../../shared/types';
+
+export const service: DecisionService = {
+  id: 'resource-allocation',
+  hashId: 'sra1k',
+  name: 'Resource Allocation Service',
+  displayName: 'Resource Allocation',
+  description: 'Allocates medical resources optimally',
+  status: 'deployed',
+  type: 'decision-service',
+  automationId: 'patient-care-coordination',
+  assetIds: [],
+  functionIds: [],
+  dataModelIds: [],
+  tags: [],
+  branch: 'main',
+  createdDate: '2025-06-30T10:35:05.000Z',
+  lastUpdatedDate: '2025-06-30T10:35:05.000Z',
+  lastUpdatedBy: 'domwashburn@us.ibm.com',
+  createdBy: 'domwashburn@us.ibm.com',
+  version: '1.3.0',
+  endpoint: 'https://api.decision-intelligence.ibm.com/v1/resources',
+  authentication: 'oauth',
+  requestCount: 32000,
+  avgResponseTime: 110,
+  successRate: 98.7,
+};
