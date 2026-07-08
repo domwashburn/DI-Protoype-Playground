@@ -16,6 +16,7 @@
     "install:all": "npm install --workspaces --include-workspace-root",
     "dev": "npm run dev:hub",
     "dev:hub": "npm run dev -w @platform/playground-app",
+    "dev:di-nav-ia": "npm run dev -w figma-make-di-nav-ia",
     "dev:ui": "npm run storybook -w @platform/ui-components",
     "storybook:ui": "npm run storybook -w @platform/ui-components",
     "build": "npm run build --workspaces --if-present",
