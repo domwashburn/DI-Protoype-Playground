@@ -11,3 +11,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 docs/screenshots/
+
+# Bob agent temp files
+.tmp/tasks
+
+# Next.js build output
+**/.next/
+
+# Playwright test artifacts (failure screenshots, last-run state)
+**/test-results/
+playwright-report/
