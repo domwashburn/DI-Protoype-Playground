@@ -425,6 +425,17 @@ export default function BranchesPage() {
     }
   };
 
+  const getChangeTypeClass = (type: FileChange['type']) => {
+    switch (type) {
+      case 'added':
+        return styles.changeTypeAdded;
+      case 'modified':
+        return styles.changeTypeModified;
+      case 'removed':
+        return styles.changeTypeRemoved;
+    }
+  };
+
   const renderBranchItem = (branch: Branch, isSelected: boolean) => {
     // Format the description using the data from the branch
     const statusText = branch.status;
@@ -610,28 +621,19 @@ export default function BranchesPage() {
                 {/* Changes Summary */}
                 <div className={styles.changesSummary}>
                   <div className={styles.summaryItem}>
-                    <span
-                      className={styles.summaryCount}
-                      style={{ color: getChangeTypeColor('added') }}
-                    >
+                    <span className={`${styles.summaryCount} ${styles.changeTypeAdded}`}>
                       {fileChanges.filter((c) => c.type === 'added').length}
                     </span>
                     <span className={styles.summaryLabel}>Added</span>
                   </div>
                   <div className={styles.summaryItem}>
-                    <span
-                      className={styles.summaryCount}
-                      style={{ color: getChangeTypeColor('modified') }}
-                    >
+                    <span className={`${styles.summaryCount} ${styles.changeTypeModified}`}>
                       {fileChanges.filter((c) => c.type === 'modified').length}
                     </span>
                     <span className={styles.summaryLabel}>Modified</span>
                   </div>
                   <div className={styles.summaryItem}>
-                    <span
-                      className={styles.summaryCount}
-                      style={{ color: getChangeTypeColor('removed') }}
-                    >
+                    <span className={`${styles.summaryCount} ${styles.changeTypeRemoved}`}>
                       {fileChanges.filter((c) => c.type === 'removed').length}
                     </span>
                     <span className={styles.summaryLabel}>Removed</span>
@@ -643,10 +645,7 @@ export default function BranchesPage() {
                   <div className={styles.changesList}>
                     {fileChanges.map((change) => (
                       <div key={change.id} className={styles.changeItem}>
-                        <div
-                          className={styles.changeIcon}
-                          style={{ color: getChangeTypeColor(change.type) }}
-                        >
+                        <div className={`${styles.changeIcon} ${getChangeTypeClass(change.type)}`}>
                           {getChangeTypeIcon(change.type)}
                         </div>
                         <div className={styles.changeContent}>
@@ -704,17 +703,17 @@ export default function BranchesPage() {
                             <span className={styles.changeCount}>{commit.changesCount}</span>
                             {commit.deletions > 0 ? (
                               <div className={styles.changeBadges}>
-                                <div 
-                                  className={styles.changeBadge} 
-                                  style={{ background: '#24a148', width: `${addPercent}%` }}
+                                <div
+                                  className={`${styles.changeBadge} ${styles.changeBadgeAdded}`}
+                                  style={{ width: `${addPercent}%` }}
                                 ></div>
-                                <div 
-                                  className={styles.changeBadge} 
-                                  style={{ background: '#da1e28', width: `${delPercent}%` }}
+                                <div
+                                  className={`${styles.changeBadge} ${styles.changeBadgeRemoved}`}
+                                  style={{ width: `${delPercent}%` }}
                                 ></div>
                               </div>
                             ) : (
-                              <div className={styles.changeBadge} style={{ background: '#24a148' }}></div>
+                              <div className={`${styles.changeBadge} ${styles.changeBadgeAdded}`}></div>
                             )}
                           </div>
                           <div className={styles.authorColumn}>{commit.author}</div>
