@@ -1,0 +1,139 @@
+/**
+ * BlockTypeMenu Styles
+ * 
+ * Slash command menu for block type selection.
+ * 
+ * CARBON_CONVERT: This uses temporary CSS replacements.
+ * See /carbon-conversion.md for complete conversion mapping.
+ */
+
+.blockTypeMenu {
+  /* Override component defaults */
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  max-width: 320px;
+  max-height: 400px;
+  overflow: hidden;
+  z-index: 1000;
+  /* Smooth appearance */
+  animation: menuAppear 0.15s ease-out;
+}
+
+@keyframes menuAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blockTypeMenuHeader {
+  /* Override component defaults */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-03) var(--spacing-04);
+  border-bottom: 1px solid var(--border-subtle-01);
+  background: var(--background-secondary);
+}
+
+.blockTypeMenuTitle {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: inherit;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.blockTypeMenuHint {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: inherit;
+  color: var(--text-placeholder);
+}
+
+.blockTypeMenuList {
+  /* Override component defaults */
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: var(--spacing-02);
+}
+
+.blockTypeMenuItem {
+  /* Override component defaults - explicit reset */
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+  padding: var(--spacing-03) var(--spacing-04);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.1s;
+  /* Ensure text inherits */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.blockTypeMenuItem:hover {
+  /* Override component defaults */
+  background: var(--background-hover);
+}
+
+.blockTypeMenuItem.selected {
+  /* Override component defaults */
+  background: var(--background-selected);
+}
+
+.blockTypeIcon {
+  /* Override component defaults */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-secondary);
+}
+
+.blockTypeInfo {
+  /* Override component defaults */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-01);
+  flex: 1;
+}
+
+.blockTypeLabel {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.blockTypeDescription {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}

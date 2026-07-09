@@ -1,0 +1,194 @@
+/**
+ * BAL Data Model Styles
+ */
+
+.dataModelContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dataModelHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f4f4f4;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dataModelHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #161616;
+}
+
+.dataModelAccordion {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sectionTrigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #161616;
+}
+
+.count {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 400;
+  color: #525252;
+}
+
+.vocabularyList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 16px 16px 16px;
+}
+
+.vocabularyItem {
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.vocabularyItem:hover {
+  background: #f4f4f4;
+}
+
+.vocabularyItem code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.keyword {
+  background: #d0e2ff;
+  color: #0043ce;
+}
+
+.operator {
+  background: #ffd6e8;
+  color: #9f1853;
+}
+
+.attributeList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 16px 16px 16px;
+}
+
+.attributeItem {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.attributeItem:hover {
+  border-color: #0f62fe;
+}
+
+.attributeHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  background: #ffffff;
+  transition: background 0.2s;
+}
+
+.attributeHeader:hover {
+  background: #f4f4f4;
+}
+
+.expandIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 20px;
+  color: #525252;
+  flex-shrink: 0;
+}
+
+.attributeInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.attributeName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.attributeName code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f62fe;
+}
+
+.attributeType {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: #e0e0e0;
+  color: #161616;
+  border-radius: 3px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.attributeDescription {
+  font-size: 12px;
+  color: #525252;
+  line-height: 1.4;
+}
+
+.subAttributeList {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: #f4f4f4;
+  border-top: 1px solid #e0e0e0;
+}
+
+.subAttributeItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 8px 40px;
+  background: white;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.subAttributeItem:hover {
+  background: #f4f4f4;
+}
+
+.subAttributeItem code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #0043ce;
+  white-space: nowrap;
+}
+
+.subAttributeDescription {
+  color: #525252;
+  flex: 1;
+}

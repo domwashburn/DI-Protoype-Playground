@@ -1,0 +1,126 @@
+/* CustomAttributeList Component Styles */
+
+.customAttributeList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-04);
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.title {
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-03) var(--spacing-04);
+  background: var(--interactive-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-on-color);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.addButton:hover {
+  background: var(--interactive-primary-hover);
+}
+
+.addButton:active {
+  background: var(--interactive-primary-active);
+}
+
+/* Attribute list */
+.attributeList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+}
+
+/* Empty state */
+.emptyState {
+  padding: var(--spacing-07);
+  background: var(--background-subtle);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-04);
+}
+
+.emptyStateText {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.emptyStateHint {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.emptyStateButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-03) var(--spacing-04);
+  background: var(--interactive-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-on-color);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.emptyStateButton:hover {
+  background: var(--interactive-primary-hover);
+}
+
+.emptyStateButton:active {
+  background: var(--interactive-primary-active);
+}

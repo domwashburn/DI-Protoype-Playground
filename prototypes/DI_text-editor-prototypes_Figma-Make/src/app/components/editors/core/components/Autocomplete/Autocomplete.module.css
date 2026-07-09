@@ -1,0 +1,87 @@
+/**
+ * Autocomplete Styles
+ * 
+ * Styled to match shadcn Popover appearance
+ * Portal-rendered to avoid clipping and z-index issues
+ */
+
+/* Main container - matches Popover styling */
+.autocomplete {
+  /* Base styling from shadcn Popover */
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  
+  /* Sizing */
+  width: 320px;
+  max-width: 90vw;
+  
+  /* Ensure proper stacking */
+  position: fixed;
+  z-index: 9999;
+  
+  /* Override any component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* List container */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-02) 0;
+  max-height: 280px;
+  overflow-y: auto;
+  
+  /* Override any default gap */
+  gap: 0;
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+/* List item */
+.item {
+  padding: var(--spacing-03) var(--spacing-04);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+  
+  /* Typography override - critical for consistency */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 20px;
+  
+  /* Color from CSS variables */
+  color: var(--text-primary);
+  
+  /* Ensure no inherited spacing */
+  margin: 0;
+  gap: 0;
+}
+
+.item:hover,
+.item.selected {
+  background: var(--background-hover);
+}
+
+/* Keyboard hint footer */
+.hint {
+  padding: var(--spacing-03) var(--spacing-04);
+  border-top: 1px solid var(--border-subtle);
+  
+  /* Typography override */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  
+  /* Center text */
+  text-align: center;
+  
+  /* No inherited spacing */
+  margin: 0;
+  gap: 0;
+}

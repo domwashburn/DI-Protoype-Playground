@@ -1,0 +1,297 @@
+/**
+ * Data Model Panel Styles
+ * Carbon XL side panel inspired design
+ */
+
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  animation: fadeIn 0.24s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Panel Container */
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80vw;
+  max-width: 1200px;
+  background: var(--background-primary);
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.24s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-05);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--background-primary);
+}
+
+.title {
+  font-family: var(--font-family-sans);
+  margin: 0;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  background: var(--background-hover);
+  color: var(--text-primary);
+}
+
+/* Content - Two columns */
+.content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Left Column: Model List */
+.modelList {
+  border-right: 1px solid var(--border-subtle);
+  overflow-y: auto;
+  background: var(--background-secondary);
+}
+
+.modelItem {
+  padding: var(--spacing-04);
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modelItem:hover {
+  background: var(--background-hover);
+}
+
+.modelItem.selected {
+  background: var(--background-selected);
+  border-left: 3px solid var(--interactive-primary);
+}
+
+.modelItem.active {
+  background: var(--background-primary);
+}
+
+.modelItemHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+}
+
+.modelIcon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.modelName {
+  font-family: var(--font-family-sans);
+  color: var(--text-primary);
+}
+
+.modelDescription {
+  margin-top: var(--spacing-03);
+  padding-left: 24px;
+  font-family: var(--font-family-sans);
+  color: var(--text-secondary);
+}
+
+/* Right Column: Attributes Panel */
+.attributesPanel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--background-primary);
+}
+
+.attributesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-05);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.attributesHeader h3 {
+  font-family: var(--font-family-sans);
+  margin: 0;
+}
+
+.attributeCount {
+  font-family: var(--font-family-sans);
+  color: var(--text-secondary);
+}
+
+.tableWrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Attributes Table */
+.attributeTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attributeTable thead {
+  position: sticky;
+  top: 0;
+  background: var(--background-secondary);
+  z-index: 1;
+}
+
+.attributeHeader,
+.vocabularyHeader {
+  padding: var(--spacing-04);
+  text-align: left;
+  font-family: var(--font-family-sans);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.attributeHeader {
+  width: 40%;
+}
+
+.vocabularyHeader {
+  width: 60%;
+}
+
+.attributeRow {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.attributeRow:hover {
+  background: var(--background-hover);
+}
+
+.attributeCell,
+.vocabularyCell {
+  padding: var(--spacing-04);
+  vertical-align: top;
+  font-family: var(--font-family-sans);
+}
+
+.attributeName {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.expandButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.expandButton:hover {
+  background: var(--background-hover);
+}
+
+.attributeType {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-mono);
+}
+
+/* Vocabulary */
+.vocabularyList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-02);
+}
+
+.vocabularyTag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--background-info);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-sans);
+}
+
+.noVocabulary {
+  color: var(--text-disabled);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .panel {
+    width: 90vw;
+  }
+  
+  .content {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .panel {
+    width: 100vw;
+  }
+  
+  .content {
+    grid-template-columns: 1fr;
+  }
+  
+  .modelList {
+    display: none;
+  }
+}

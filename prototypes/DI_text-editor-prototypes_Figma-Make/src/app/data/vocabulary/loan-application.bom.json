@@ -1,0 +1,257 @@
+{
+  "id": "loan-application",
+  "name": "Loan Application",
+  "description": "Data model for loan application processing and credit evaluation",
+  "namespace": "applicant",
+  "version": "1.0.0",
+  "status": "published",
+  "attributes": [
+    {
+      "jsonName": "creditScore",
+      "type": "number",
+      "isList": false,
+      "documentation": "Credit score (300-850) from credit bureau",
+      "singular": {
+        "definite": "the credit score",
+        "indefinite": "a credit score",
+        "bare": "credit score",
+        "variants": ["the FICO score", "the credit rating"]
+      },
+      "plural": {
+        "definite": "the credit scores",
+        "bare": "credit scores",
+        "variants": ["FICO scores", "credit ratings"]
+      },
+      "expressions": {
+        "template": "{credit score} of {this}",
+        "examples": [
+          "the credit score of the applicant",
+          "a credit score of an applicant",
+          "the FICO score of the applicant"
+        ]
+      },
+      "actions": {
+        "template": "set the credit score of {this} to {value}",
+        "examples": [
+          "set the credit score of the applicant to 750",
+          "set the FICO score of the applicant to 800"
+        ]
+      },
+      "validation": {
+        "required": true,
+        "min": 300,
+        "max": 850,
+        "errorMessage": "Credit score must be between 300 and 850"
+      },
+      "scope": "global",
+      "tags": ["financial", "required", "credit"]
+    },
+    {
+      "jsonName": "debtToIncomeRatio",
+      "type": "number",
+      "isList": false,
+      "documentation": "Debt-to-income ratio as a percentage (e.g., 0.43 = 43%)",
+      "singular": {
+        "definite": "the debt-to-income ratio",
+        "indefinite": "a debt-to-income ratio",
+        "bare": "debt-to-income ratio",
+        "variants": ["the DTI", "the DTI ratio"]
+      },
+      "plural": {
+        "definite": "the debt-to-income ratios",
+        "bare": "debt-to-income ratios",
+        "variants": ["DTI ratios"]
+      },
+      "expressions": {
+        "template": "{debt-to-income ratio} of {this}",
+        "examples": [
+          "the debt-to-income ratio of the applicant",
+          "the DTI of the applicant"
+        ]
+      },
+      "actions": {
+        "template": "set the debt-to-income ratio of {this} to {value}",
+        "examples": [
+          "set the debt-to-income ratio of the applicant to 0.43",
+          "set the DTI of the applicant to 0.35"
+        ]
+      },
+      "validation": {
+        "required": true,
+        "min": 0,
+        "max": 1,
+        "errorMessage": "Debt-to-income ratio must be between 0 and 1"
+      },
+      "scope": "global",
+      "tags": ["financial", "required"]
+    },
+    {
+      "jsonName": "annualIncome",
+      "type": "number",
+      "isList": false,
+      "documentation": "Annual income in dollars",
+      "singular": {
+        "definite": "the annual income",
+        "indefinite": "an annual income",
+        "bare": "annual income",
+        "variants": ["the yearly income", "the income"]
+      },
+      "plural": {
+        "definite": "the annual incomes",
+        "bare": "annual incomes"
+      },
+      "expressions": {
+        "template": "{annual income} of {this}",
+        "examples": [
+          "the annual income of the applicant",
+          "the yearly income of the applicant"
+        ]
+      },
+      "actions": {
+        "template": "set the annual income of {this} to {value}",
+        "examples": [
+          "set the annual income of the applicant to 75000"
+        ]
+      },
+      "validation": {
+        "required": true,
+        "min": 0,
+        "errorMessage": "Annual income must be a positive number"
+      },
+      "scope": "global",
+      "tags": ["financial", "required", "income"]
+    },
+    {
+      "jsonName": "employmentHistory",
+      "type": "string",
+      "isList": true,
+      "elementType": "string",
+      "documentation": "List of previous employers",
+      "singular": {
+        "definite": "the employer",
+        "indefinite": "an employer",
+        "bare": "employer"
+      },
+      "plural": {
+        "definite": "the employers",
+        "bare": "employers",
+        "variants": ["employment history"]
+      },
+      "expressions": {
+        "template": "{employers} of {this}",
+        "examples": [
+          "the employers of the applicant",
+          "the employment history of the applicant"
+        ]
+      },
+      "actions": {
+        "template": "set the employers of {this} to {value}",
+        "examples": [
+          "set the employers of the applicant to employers"
+        ]
+      },
+      "listActions": {
+        "add": {
+          "template": "add {0} to the employers of {this}",
+          "examples": [
+            "add an employer to the employers of the applicant",
+            "add \"Acme Corp\" to the employers of the applicant"
+          ]
+        },
+        "remove": {
+          "template": "remove {0} from the employers of {this}",
+          "examples": [
+            "remove an employer from the employers of the applicant",
+            "remove \"Acme Corp\" from the employers of the applicant"
+          ]
+        },
+        "clear": {
+          "template": "clear the employers of {this}",
+          "examples": [
+            "clear the employers of the applicant"
+          ]
+        }
+      },
+      "validation": {
+        "minItems": 0,
+        "maxItems": 10
+      },
+      "scope": "global",
+      "tags": ["employment", "history"]
+    },
+    {
+      "jsonName": "loanAmount",
+      "type": "number",
+      "isList": false,
+      "documentation": "Requested loan amount in dollars",
+      "singular": {
+        "definite": "the loan amount",
+        "indefinite": "a loan amount",
+        "bare": "loan amount",
+        "variants": ["the amount", "the requested amount"]
+      },
+      "plural": {
+        "definite": "the loan amounts",
+        "bare": "loan amounts"
+      },
+      "expressions": {
+        "template": "{loan amount} of {this}",
+        "examples": [
+          "the loan amount of the application",
+          "the requested amount"
+        ]
+      },
+      "actions": {
+        "template": "set the loan amount of {this} to {value}",
+        "examples": [
+          "set the loan amount of the application to 250000"
+        ]
+      },
+      "validation": {
+        "required": true,
+        "min": 1000,
+        "errorMessage": "Loan amount must be at least $1,000"
+      },
+      "scope": "global",
+      "tags": ["financial", "required", "loan"]
+    },
+    {
+      "jsonName": "approved",
+      "type": "boolean",
+      "isList": false,
+      "documentation": "Whether the loan application is approved",
+      "singular": {
+        "definite": "the approval status",
+        "indefinite": "an approval status",
+        "bare": "approval status",
+        "variants": ["approved", "the approval"]
+      },
+      "plural": {
+        "definite": "the approval statuses",
+        "bare": "approval statuses"
+      },
+      "expressions": {
+        "template": "{approval status} of {this}",
+        "examples": [
+          "the approval status of the application",
+          "whether the application is approved"
+        ]
+      },
+      "actions": {
+        "template": "set the approval status of {this} to {value}",
+        "examples": [
+          "set the approval status of the application to true",
+          "approve the application"
+        ]
+      },
+      "scope": "global",
+      "tags": ["decision", "status"]
+    }
+  ],
+  "tags": ["financial", "lending", "credit"],
+  "author": {
+    "name": "Vocabulary System"
+  },
+  "createdAt": "2025-01-15T00:00:00.000Z",
+  "updatedAt": "2025-01-15T00:00:00.000Z"
+}

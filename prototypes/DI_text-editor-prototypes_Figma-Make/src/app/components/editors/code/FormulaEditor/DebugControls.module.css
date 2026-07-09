@@ -1,0 +1,196 @@
+/* DebugControls.module.css — matches Figma design exactly */
+
+.controls {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 17px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Inset border overlay (matches Figma border pattern) */
+.border {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* Toolbar: left pill | center buttons | right speed */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Step counter pill */
+.stepCounter {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 32px;
+  padding: 4px 8px;
+  background: #e5e5e5;
+  border-radius: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.stepCurrent {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  line-height: 18px;
+  color: #161616;
+}
+
+.stepSep {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  line-height: 18px;
+  color: #525252;
+}
+
+.stepTotal {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  line-height: 18px;
+  color: #525252;
+}
+
+/* Button group: the five transport buttons */
+.buttonGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* Ghost nav buttons */
+.controlButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #161616;
+  cursor: pointer;
+  transition: background 90ms ease-out;
+  flex-shrink: 0;
+}
+
+.controlButton:hover:not(:disabled) {
+  background: #e8e8e8;
+}
+
+.controlButton:active:not(:disabled) {
+  background: #c6c6c6;
+}
+
+.controlButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.controlButton:focus-visible {
+  outline: 2px solid #0f62fe;
+  outline-offset: -2px;
+}
+
+/* Play button wrapper (adds horizontal margin to match Figma ButtonMargin) */
+.playWrapper {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+}
+
+/* Blue play/pause button */
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 12px;
+  background: #0f62fe;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background 90ms ease-out;
+  flex-shrink: 0;
+}
+
+.playButton:hover:not(:disabled) {
+  background: #0353e9;
+}
+
+.playButton:active:not(:disabled) {
+  background: #002d9c;
+}
+
+.playButton:disabled {
+  background: #c6c6c6;
+  cursor: not-allowed;
+}
+
+.playButton:focus-visible {
+  outline: 2px solid #0f62fe;
+  outline-offset: 2px;
+}
+
+/* Speed selector trigger — 53px wide, compact */
+.speedTrigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 53px;
+  height: 32px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  line-height: 17.143px;
+  color: #161616;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: none;
+}
+
+.speedTrigger:hover {
+  background: #e8e8e8;
+}
+
+.speedTrigger:focus-visible {
+  outline: 2px solid #0f62fe;
+  outline-offset: -2px;
+}
+
+/* Progress bar */
+.progress {
+  position: relative;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.progressFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: #0f62fe;
+  border-radius: 2px;
+  transition: width 150ms ease-out;
+}

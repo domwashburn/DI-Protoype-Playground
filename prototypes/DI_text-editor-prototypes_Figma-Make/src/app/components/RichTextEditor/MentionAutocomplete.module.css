@@ -1,0 +1,137 @@
+/**
+ * Mention Autocomplete Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ * Explicitly overrides component defaults to match IBM Carbon Design System.
+ * Matches BAL/Formula editor autocomplete styling for consistency.
+ */
+
+.mentionPopover {
+  position: absolute; /* Positioned relative to parent block */
+  z-index: 1000;
+  /* Override component defaults - use CSS variables */
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow to match BAL */
+  min-width: 280px; /* Slightly smaller to match Formula editor */
+  max-width: 360px;
+  overflow: hidden;
+  pointer-events: auto; /* Changed from none to auto */
+}
+
+.suggestionList {
+  max-height: 300px;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+
+.suggestionItem {
+  /* Override component defaults */
+  padding: var(--spacing-03) var(--spacing-04);
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--border-subtle-01);
+  pointer-events: auto;
+}
+
+.suggestionItem:last-child {
+  border-bottom: none;
+}
+
+.suggestionItem:hover,
+.suggestionItem.selected {
+  background: var(--background-hover);
+}
+
+.suggestionMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Override component defaults */
+  gap: var(--spacing-03);
+  margin-bottom: var(--spacing-02);
+}
+
+.suggestionLabel {
+  display: flex;
+  align-items: center;
+  /* Override component defaults */
+  gap: var(--spacing-02);
+  flex: 1;
+}
+
+.entityIcon {
+  /* Override component defaults */
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.entityName {
+  /* Override component defaults - explicit font styling */
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  line-height: inherit;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.entityBadge {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: inherit;
+  font-weight: 600;
+  padding: var(--spacing-01) var(--spacing-03);
+  background: var(--background-interactive);
+  color: var(--text-inverse);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.suggestionDescription {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.autocompleteHint {
+  /* Override component defaults */
+  padding: var(--spacing-03) var(--spacing-04);
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: inherit;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  pointer-events: auto;
+}
+
+.autocompleteHint kbd {
+  /* Override component defaults */
+  display: inline-block;
+  padding: var(--spacing-01) var(--spacing-03);
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  line-height: inherit;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.separator {
+  /* Override component defaults */
+  color: var(--text-disabled);
+  margin: 0 var(--spacing-01);
+}

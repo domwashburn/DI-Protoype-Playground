@@ -1,0 +1,137 @@
+/**
+ * FeatureList Component Styles
+ * Following IBM Carbon Design System principles
+ */
+
+.featureList {
+  height: calc(100vh - 300px);
+  min-height: 600px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.featureHeader {
+  padding: 16px;
+  background: #f4f4f4;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.featureTitle {
+  margin: 0 0 12px 0;
+  color: #161616;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.featureProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progressText {
+  color: #525252;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.progressBar {
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #0f62fe;
+  transition: width 0.3s ease;
+}
+
+.featureAccordion {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.categoryTrigger {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #ffffff;
+}
+
+.categoryTrigger:hover {
+  background: #e5e5e5;
+}
+
+.featureCategory {
+  padding: 8px 0;
+}
+
+.featureItem {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.featureItem:last-child {
+  border-bottom: none;
+}
+
+.featureItemHeader {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.featureCheckbox {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.featureInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.featureName {
+  display: block;
+  color: #161616;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.featureDescription {
+  color: #525252;
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 6px;
+}
+
+.featureTest {
+  color: #525252;
+  font-size: 12px;
+  line-height: 16px;
+  font-style: italic;
+}
+
+.featureTest strong {
+  color: #161616;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Responsive */
+@media (max-width: 1056px) {
+  .featureList {
+    height: auto;
+    min-height: 400px;
+  }
+}

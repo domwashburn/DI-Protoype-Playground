@@ -1,0 +1,331 @@
+/**
+ * ThresholdConfig Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ * Follows Carbon Design System spacing and color principles.
+ */
+
+.thresholdConfig {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-03);
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.title {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin: 0 0 var(--spacing-02) 0;
+}
+
+.subtitle {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.addButton {
+  /* Override shadcn/ui Button defaults */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  padding: var(--spacing-02);
+  gap: var(--spacing-02);
+  min-height: 28px;
+  height: 28px;
+}
+
+/* Validation */
+.validation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  padding: var(--spacing-03);
+  background: var(--background-error);
+  border-left: 3px solid var(--border-error);
+  border-radius: var(--radius-sm);
+}
+
+.validationError {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  color: var(--text-error);
+  line-height: 1.4;
+}
+
+/* Visual Preview */
+.preview {
+  display: flex;
+  height: 24px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.previewSegment {
+  transition: opacity 200ms ease;
+  cursor: help;
+}
+
+.previewSegment:hover {
+  opacity: 0.8;
+}
+
+/* Threshold List */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.empty {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+  text-align: center;
+  padding: var(--spacing-05);
+}
+
+/* Threshold Row (Read-only) */
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+  padding: var(--spacing-03);
+  background: var(--background-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color 200ms ease;
+}
+
+.row:hover {
+  border-color: var(--border-strong);
+}
+
+.colorIndicator {
+  width: 4px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.rowContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-01);
+  min-width: 0;
+}
+
+.rowLabel {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowRange {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.rowSeverity {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rowSeverity.error {
+  color: #DA1E28;
+}
+
+.rowSeverity.warning {
+  color: #F1C21B;
+}
+
+.rowSeverity.info {
+  color: #0F62FE;
+}
+
+.rowSeverity.success {
+  color: #24A148;
+}
+
+.rowActions {
+  display: flex;
+  gap: var(--spacing-02);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.row:hover .rowActions {
+  opacity: 1;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-02);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: 1;
+}
+
+.iconButton:hover {
+  background: var(--background-hover);
+  color: var(--text-primary);
+}
+
+/* Edit Row */
+.editRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+  padding: var(--spacing-04);
+  background: var(--background-secondary);
+  border: 2px solid var(--border-interactive);
+  border-radius: var(--radius-md);
+}
+
+.editField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.editLabel {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--border-interactive);
+}
+
+.checkboxLabel {
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.editInput {
+  /* Override shadcn/ui Input defaults */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-03);
+}
+
+.editInput:focus {
+  outline: 2px solid var(--border-interactive);
+  outline-offset: -2px;
+  border-color: transparent;
+}
+
+.editInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.editSelect {
+  /* Override shadcn/ui Select defaults */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-03);
+}
+
+.editRangeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-03);
+}
+
+.editActions {
+  display: flex;
+  gap: var(--spacing-02);
+  justify-content: flex-end;
+  padding-top: var(--spacing-02);
+}
+
+.saveButton {
+  color: var(--text-success);
+}
+
+.saveButton:hover {
+  background: var(--background-success);
+}
+
+.cancelButton {
+  color: var(--text-error);
+}
+
+.cancelButton:hover {
+  background: var(--background-error);
+}
+
+/* Help Text */
+.help {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: var(--spacing-04);
+  background: var(--background-secondary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--border-interactive);
+}
+
+.help strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}

@@ -1,0 +1,482 @@
+/**
+ * BAL Editor Styles
+ * 
+ * Architecture: Textarea + Overlay Pattern
+ * - Real textarea for input (browser-managed cursor)
+ * - Overlay div for syntax highlighting
+ * - Synchronized scroll and layout
+ * 
+ * Design System: IBM Carbon Design System v11
+ * - All colors from Carbon color tokens (CSS variables)
+ * - All spacing from Carbon spacing scale
+ * - Typography: IBM Plex Mono (monospace)
+ * 
+ * Reference: https://carbondesignsystem.com/
+ * 
+ * NOTE: Would be better as SCSS when build environment supports it.
+ */
+
+/* ========================================
+   Container
+   ======================================== */
+
+.balEditorContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--cds-background);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+/* ========================================
+   Error Display
+   ======================================== */
+
+.balErrors {
+  padding: var(--cds-spacing-04);
+  background: #fff1f1; /* Carbon error background */
+  border-bottom: 1px solid var(--cds-support-error);
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.balError {
+  margin-bottom: var(--cds-spacing-03);
+}
+
+.balError:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   Editor Wrapper & Layout
+   ======================================== */
+
+.balEditorWrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ========================================
+   Line Numbers
+   ======================================== */
+
+.balLineNumbers {
+  flex-shrink: 0;
+  width: var(--editor-line-number-width);
+  background: var(--cds-layer-01);
+  border-right: 1px solid var(--cds-border-subtle);
+  padding: var(--editor-padding) 0;
+  overflow: hidden; /* No scrollbar - scrolls programmatically via scrollTop sync */
+  user-select: none;
+}
+
+.balLineNumber {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height);
+  color: var(--cds-text-secondary);
+  text-align: right;
+  padding-right: var(--cds-spacing-03);
+  min-height: calc(var(--editor-font-size) * var(--editor-line-height));
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.balLineNumber.hasError {
+  background: #fff1f1; /* Carbon error background */
+  color: var(--cds-support-error);
+  font-weight: 600;
+  cursor: help;
+}
+
+/* ========================================
+   Editor Content Area
+   ======================================== */
+
+.balEditorContent {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  background: var(--cds-background);
+}
+
+/* Scrollbar styling for editor content */
+.balEditorContent::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.balEditorContent::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.balEditorContent::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 6px;
+}
+
+.balEditorContent::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* For Firefox */
+.balEditorContent {
+  scrollbar-width: auto;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* ========================================
+   Textarea + Overlay Architecture
+   ======================================== */
+
+/**
+ * Syntax Highlighting Overlay
+ * - Positioned behind textarea
+ * - Displays colored syntax highlighting
+ * - Non-interactive (pointer-events: none)
+ */
+.balHighlightOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: var(--editor-padding);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height);
+  color: var(--cds-text-primary);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/**
+ * Textarea (Input Layer)
+ * - Positioned over overlay
+ * - Transparent text (shows overlay through)
+ * - Browser manages cursor naturally
+ * - Handles all user input
+ */
+.balTextarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: var(--editor-padding);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height);
+  color: var(--cds-text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  caret-color: var(--cds-text-primary);
+  -webkit-text-fill-color: transparent;
+}
+
+.balTextarea::selection {
+  background-color: var(--cds-highlight);
+  -webkit-text-fill-color: var(--cds-text-primary);
+}
+
+/* ========================================
+   Syntax Highlighting (Overlay)
+   ======================================== */
+
+.balHighlightOverlay :global(.bal-keyword) {
+  color: var(--bal-syntax-keyword);
+  font-weight: 600;
+}
+
+.balHighlightOverlay :global(.bal-vocabulary) {
+  color: var(--bal-syntax-vocabulary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--bal-syntax-vocabulary);
+  text-underline-offset: 2px;
+}
+
+/* Defined terms from definitions section - Dynamic Keyword Highlighting */
+.balHighlightOverlay :global(.bal-definition-term) {
+  color: var(--bal-definition-term);
+  font-weight: 600;
+  background: var(--bal-definition-term-bg);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.balHighlightOverlay :global(.bal-verbalization) {
+  color: var(--bal-syntax-verbalization);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.balHighlightOverlay :global(.bal-string) {
+  color: var(--bal-syntax-string);
+}
+
+.balHighlightOverlay :global(.bal-template-literal) {
+  color: var(--bal-syntax-string);
+  font-style: italic;
+}
+
+.balHighlightOverlay :global(.bal-number) {
+  color: var(--bal-syntax-number);
+}
+
+.balHighlightOverlay :global(.bal-operator) {
+  color: var(--bal-syntax-operator);
+  font-weight: 600; /* Bold for symbolic operators */
+}
+
+.balHighlightOverlay :global(.bal-nl-operator) {
+  color: var(--bal-syntax-nl-operator);
+  font-weight: 400; /* Normal weight for natural language operators */
+  font-style: italic; /* Distinguish from symbolic operators */
+}
+
+.balHighlightOverlay :global(.bal-comment) {
+  color: var(--bal-syntax-comment);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* ========================================
+   Content Lines (for hanging indent)
+   ======================================== */
+
+.balContentLine {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-height: calc(var(--editor-font-size) * var(--editor-line-height));
+  color: var(--cds-text-primary);
+}
+
+/* ========================================
+   Autocomplete Dropdown
+   ======================================== */
+
+.balAutocomplete {
+  position: absolute;
+  z-index: 1000;
+  min-width: 280px;
+  max-width: 400px;
+  background: var(--cds-background);
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.balSuggestionList {
+  max-height: 256px;
+  overflow-y: auto;
+}
+
+.balSuggestionItem {
+  padding: var(--cds-spacing-03) var(--cds-spacing-04);
+  cursor: pointer;
+  border-bottom: 1px solid var(--cds-layer-01);
+  transition: background-color 0.1s ease;
+}
+
+.balSuggestionItem:last-child {
+  border-bottom: none;
+}
+
+.balSuggestionItem:hover,
+.balSuggestionItem.selected {
+  background: var(--cds-background-hover);
+}
+
+.balSuggestionMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--cds-spacing-03);
+  margin-bottom: var(--cds-spacing-01);
+}
+
+.balSuggestionText {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  font-weight: 500;
+  flex: 1;
+}
+
+.balSuggestionText.keyword {
+  color: var(--bal-syntax-keyword);
+}
+
+.balSuggestionText.operator {
+  color: var(--bal-syntax-operator);
+}
+
+.balSuggestionText.attribute {
+  color: var(--bal-syntax-vocabulary);
+}
+
+.balSuggestionType {
+  font-size: 11px;
+  color: var(--cds-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.balSuggestionDescription {
+  font-size: 12px;
+  color: var(--cds-text-secondary);
+  margin-top: var(--cds-spacing-01);
+}
+
+.balAutocompleteHint {
+  padding: var(--cds-spacing-02) var(--cds-spacing-04);
+  background: var(--cds-layer-01);
+  border-top: 1px solid var(--cds-border-subtle);
+  font-size: 11px;
+  color: var(--cds-text-secondary);
+  text-align: center;
+}
+
+/* ========================================
+   Tooltip
+   ======================================== */
+
+.balTooltip {
+  position: absolute;
+  z-index: 999;
+  min-width: 200px;
+  max-width: 350px;
+  background: var(--cds-interactive-02);
+  color: var(--cds-text-on-color);
+  border-radius: var(--radius-sm);
+  padding: var(--cds-spacing-03) var(--cds-spacing-04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.balTooltipText {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  font-weight: 600;
+  margin-bottom: var(--cds-spacing-02);
+}
+
+.balTooltipType {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--cds-text-placeholder);
+  margin-bottom: var(--cds-spacing-02);
+}
+
+.balTooltipDetail {
+  font-size: 12px;
+  color: var(--cds-text-on-color);
+  line-height: 1.4;
+  border-top: 1px solid var(--cds-border-strong);
+  padding-top: var(--cds-spacing-02);
+  margin-top: var(--cds-spacing-02);
+}
+
+/* ========================================
+   Legacy ContentEditable Styles
+   (Kept for other editor implementations)
+   ======================================== */
+
+.balContentEditable {
+  padding: var(--editor-padding);
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height);
+  color: var(--cds-text-primary);
+  outline: none;
+  min-height: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.balContentEditable :global(.bal-keyword) {
+  color: var(--bal-syntax-keyword);
+  font-weight: 600;
+}
+
+.balContentEditable :global(.bal-vocabulary) {
+  color: var(--bal-syntax-vocabulary);
+  font-weight: 500;
+  cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--bal-syntax-vocabulary);
+}
+
+.balContentEditable :global(.bal-string) {
+  color: var(--bal-syntax-string);
+}
+
+.balContentEditable :global(.bal-number) {
+  color: var(--bal-syntax-number);
+}
+
+.balContentEditable :global(.bal-operator) {
+  color: var(--bal-syntax-operator);
+}
+
+.balContentEditable :global(.bal-comment) {
+  color: var(--bal-syntax-comment);
+  font-style: italic;
+}
+
+/* ========================================
+   Scrollbar Styling (Optional)
+   ======================================== */
+
+.balEditorContent::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.balEditorContent::-webkit-scrollbar-track {
+  background: var(--cds-layer-01);
+}
+
+.balEditorContent::-webkit-scrollbar-thumb {
+  background: var(--cds-border-subtle);
+  border-radius: 4px;
+}
+
+.balEditorContent::-webkit-scrollbar-thumb:hover {
+  background: var(--cds-border-strong);
+}

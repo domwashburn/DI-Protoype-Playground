@@ -1,0 +1,99 @@
+/* EvaluationResults.module.css */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+  margin-top: var(--spacing-04);
+  padding-top: var(--spacing-04);
+  border-top: 2px solid var(--border-subtle);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.sectionTitle {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+}
+
+.successIcon {
+  color: var(--support-success);
+  flex-shrink: 0;
+}
+
+.errorIcon {
+  color: var(--support-error);
+  flex-shrink: 0;
+}
+
+.debugBadge {
+  margin-left: auto;
+  padding: var(--spacing-01) var(--spacing-02);
+  background: var(--background-brand);
+  color: var(--text-on-color);
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  padding: var(--spacing-04);
+  background: var(--layer-01);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.resultValue {
+  font-family: var(--font-family-mono);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.resultType {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.thresholdContainer {
+  margin-top: var(--spacing-02);
+  display: flex;
+  align-items: center;
+}
+
+.errorContainer {
+  padding: var(--spacing-04);
+  background: var(--notification-background-error);
+  border: 1px solid var(--support-error);
+  border-radius: var(--radius-md);
+}
+
+.errorMessage {
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--text-error);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

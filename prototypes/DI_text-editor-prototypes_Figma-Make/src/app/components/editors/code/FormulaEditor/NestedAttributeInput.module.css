@@ -1,0 +1,193 @@
+/**
+ * NestedAttributeInput Styles
+ * Hierarchical attribute input with expandable/collapsible sections
+ */
+
+/* Input row for leaf nodes */
+.inputRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  padding: var(--spacing-03) var(--spacing-04);
+  border-radius: var(--radius-sm);
+  background: var(--background-secondary);
+  transition: background 120ms ease-in-out;
+}
+
+.inputRow:hover {
+  background: var(--background-hover);
+}
+
+/* Attribute label */
+.attributeLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  color: var(--text-primary);
+}
+
+.attributeName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.attributeType {
+  color: var(--text-secondary);
+  font-size: 0.8em;
+  padding: var(--spacing-01) var(--spacing-02);
+  background: var(--background-tertiary);
+  border-radius: var(--radius-xs);
+  text-transform: lowercase;
+}
+
+.attributeUnit {
+  color: var(--text-tertiary);
+  font-size: 0.85em;
+  font-style: italic;
+}
+
+.attributeDescription {
+  color: var(--text-secondary);
+  font-size: 0.85em;
+  margin-top: var(--spacing-01);
+}
+
+/* Input fields */
+.input {
+  width: 100%;
+  padding: var(--spacing-02) var(--spacing-03);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-primary);
+  background: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 1px var(--border-focus);
+}
+
+.selectTrigger {
+  width: 100%;
+  padding: var(--spacing-02) var(--spacing-03);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-primary);
+  background: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  gap: var(--spacing-02);
+}
+
+.selectTrigger:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 1px var(--border-focus);
+}
+
+.dateButton {
+  width: 100%;
+  justify-content: flex-start;
+  padding: var(--spacing-02) var(--spacing-03);
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  gap: var(--spacing-02);
+}
+
+.calendarPopover {
+  padding: var(--spacing-03);
+}
+
+/* Boolean input */
+.booleanInput {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+}
+
+.booleanLabel {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Nested object section */
+.nestedObject {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--border-secondary);
+  padding-left: var(--spacing-03);
+  margin-left: var(--spacing-02);
+  margin-bottom: var(--spacing-03);
+}
+
+/* Object header (expandable/collapsible) */
+.objectHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: background 120ms ease-in-out;
+}
+
+.objectHeader:hover {
+  background: var(--background-hover);
+}
+
+.objectHeader:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Chevron icon */
+.chevron {
+  color: var(--text-secondary);
+  transition: transform 150ms ease-in-out;
+  flex-shrink: 0;
+}
+
+.rotated {
+  color: var(--text-secondary);
+  transform: rotate(90deg);
+  transition: transform 150ms ease-in-out;
+  flex-shrink: 0;
+}
+
+/* Object name */
+.objectName {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Property count badge */
+.propertyCount {
+  margin-left: auto;
+  color: var(--text-tertiary);
+  font-size: 0.85em;
+  padding: var(--spacing-01) var(--spacing-02);
+  background: var(--background-tertiary);
+  border-radius: var(--radius-xs);
+}
+
+/* Nested content (children) */
+.nestedContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  margin-top: var(--spacing-02);
+  margin-left: var(--spacing-04);
+}
+
+/* Ensure nested objects don't add too much left padding */
+.nestedObject .nestedObject {
+  margin-left: 0;
+  padding-left: var(--spacing-03);
+}

@@ -1,0 +1,134 @@
+/**
+ * Diff Viewer Styles
+ */
+
+.diffContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+.diffHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f4f4f4;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.diffHeaderLeft,
+.diffHeaderRight {
+  padding: 12px 16px;
+  color: #161616;
+  font-size: 14px;
+}
+
+.diffHeaderRight {
+  border-left: 1px solid #e0e0e0;
+}
+
+.diffContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  overflow: auto;
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.diffPane {
+  overflow: auto;
+  background: #ffffff;
+}
+
+.diffPane:last-child {
+  border-left: 1px solid #e0e0e0;
+}
+
+.diffLine {
+  display: flex;
+  min-height: 20.8px;
+  padding: 2px 0;
+}
+
+.diffLineUnchanged {
+  background: transparent;
+}
+
+.diffLineAdded {
+  background: #d2f4d3;
+}
+
+.diffLineRemoved {
+  background: #ffd7d9;
+}
+
+.diffLineModified {
+  background: #fff1c6;
+}
+
+.diffLineNumber {
+  flex-shrink: 0;
+  width: 48px;
+  padding: 0 8px;
+  text-align: right;
+  color: #8d8d8d;
+  user-select: none;
+  background: #f4f4f4;
+  border-right: 1px solid #e0e0e0;
+}
+
+.diffLineContent {
+  flex: 1;
+  padding: 0 12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #161616;
+}
+
+.diffHighlight {
+  background: rgba(15, 98, 254, 0.15);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.diffLegend {
+  display: flex;
+  gap: 24px;
+  padding: 12px 16px;
+  background: #f4f4f4;
+  border-top: 1px solid #e0e0e0;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.diffLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #525252;
+}
+
+.diffLegendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 1px solid #e0e0e0;
+}
+
+.diffLegendAdded {
+  background: #d2f4d3;
+}
+
+.diffLegendRemoved {
+  background: #ffd7d9;
+}
+
+.diffLegendModified {
+  background: #fff1c6;
+}

@@ -1,0 +1,870 @@
+/**
+ * Formula Editor Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ * Same textarea + overlay pattern as BAL Editor.
+ * NOW WITH LINE NUMBERS like BAL Editor!
+ */
+
+/* ========================================
+   CSS-based Line Height Calculation
+   ======================================== */
+
+/**
+ * ALIGNMENT SYSTEM:
+ * All line heights, positions, and spacing use CSS calc() with these variables.
+ * This ensures perfect alignment between line numbers, textarea, and highlights.
+ * 
+ * Formula: lineHeightPx = fontSize * lineHeight
+ * Example: 14px * 1.6 = 22.4px
+ */
+:root {
+  --calculated-line-height: calc(var(--editor-font-size) * var(--editor-line-height));
+}
+
+/* Main container */
+.formulaEditor {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-05);
+  height: 100%;
+}
+
+/* Editor Section */
+.editorSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+  flex: 1;
+  min-height: 0; /* Allow shrinking */
+}
+
+.editorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-03);
+}
+
+.editorLabel {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.convertButton {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  gap: var(--spacing-02);
+}
+
+/* ========================================
+   Editor Container (NEW - wraps line numbers + content)
+   ======================================== */
+
+.editorContainer {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--background-primary);
+  min-height: 200px;
+  transition: border-color 200ms ease;
+}
+
+.editorContainer.focused {
+  border-color: var(--border-interactive);
+  box-shadow: 0 0 0 2px var(--border-focus);
+}
+
+/* ========================================
+   Line Numbers Column (NEW)
+   ======================================== */
+
+.lineNumbers {
+  flex-shrink: 0;
+  width: var(--editor-line-number-width); /* 48px */
+  height: 100%; /* Fill parent container */
+  background: var(--cds-layer-01);
+  border-right: 1px solid var(--border-subtle);
+  padding: var(--editor-padding) 0;
+  overflow: hidden; /* No scrollbar - scrolls programmatically via scrollTop sync */
+  user-select: none;
+}
+
+.lineNumber {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size); /* 14px */
+  line-height: var(--editor-line-height); /* Must match textarea exactly - 1.6 */
+  color: var(--text-secondary);
+  text-align: right;
+  padding-right: var(--cds-spacing-03);
+  box-sizing: border-box;
+  
+  /* DYNAMIC HEIGHT - Base calculation with wrap multiplier */
+  /* Base: calc(14px * 1.6) = 22.4px per line */
+  /* Multiplier: 1 for single line, 2 for wrapped to 2 lines, etc. */
+  height: calc(var(--editor-font-size) * var(--editor-line-height) * var(--line-wrap-multiplier, 1));
+}
+
+.lineNumber.hasError {
+  background: var(--validation-error-bg);
+  color: var(--cds-support-error);
+  font-weight: 600;
+  cursor: help;
+}
+
+/* CRIT-002: Line number row highlighting for errors/warnings */
+.lineNumberError {
+  background: rgba(218, 30, 40, 0.2); /* Increased from 0.1 for better visibility */
+  color: var(--cds-support-error);
+  font-weight: 600;
+}
+
+.lineNumberWarning {
+  background: rgba(247, 154, 0, 0.18); /* Increased from 0.1 for better visibility */
+  color: var(--text-warning);
+  font-weight: 600;
+}
+
+/* ========================================
+   Gutter Column (CRIT-002)
+   ======================================== */
+
+.gutter {
+  flex-shrink: 0;
+  width: 24px;
+  height: 100%; /* Fill parent container */
+  background: var(--cds-layer-01);
+  border-right: 1px solid var(--border-subtle);
+  padding: var(--editor-padding) 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+.gutterCell {
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height); /* Must match textarea exactly - 1.6 */
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  
+  /* DYNAMIC HEIGHT - Base calculation with wrap multiplier */
+  /* Base: calc(14px * 1.6) = 22.4px per line */
+  /* Multiplier: 1 for single line, 2 for wrapped to 2 lines, etc. */
+  height: calc(var(--editor-font-size) * var(--editor-line-height) * var(--line-wrap-multiplier, 1));
+  
+  /* Add top padding to center icon with first line of text */
+  padding-top: 3px; /* Visually centers 14px icon with text baseline */
+}
+
+.gutterIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+}
+
+.errorIcon {
+  color: var(--cds-support-error);
+}
+
+.warningIcon {
+  color: var(--text-warning);
+}
+
+.errorList {
+  margin: 0;
+  padding-left: var(--spacing-04);
+  list-style: disc;
+}
+
+.errorList li {
+  margin: var(--spacing-01) 0;
+}
+
+/* ========================================
+   Editor Content Area (Modified)
+   ======================================== */
+
+.editorContent {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  background: var(--background-primary);
+}
+
+/* Scrollbar styling for editor content */
+.editorContent::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.editorContent::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.editorContent::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 6px;
+}
+
+.editorContent::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* For Firefox */
+.editorContent {
+  scrollbar-width: auto;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Editor Wrapper - DEPRECATED (now editorContainer handles this) */
+.editorWrapper {
+  position: relative;
+  flex: 1;
+  min-height: 200px;
+  background: var(--background-primary);
+  /* Border and border-radius moved to editorContainer */
+  transition: border-color 200ms ease;
+  overflow: visible; /* Allow autocomplete to escape */
+}
+
+.editorWrapper.focused {
+  /* Focus styles moved to editorContainer */
+}
+
+/* Overlay - Syntax highlighting layer */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Height set dynamically via JavaScript to match textarea scrollHeight */
+  min-height: 100%;
+  padding: var(--editor-padding); /* 16px - matches BAL */
+  overflow: hidden; /* No scroll - parent .editorContent scrolls */
+  pointer-events: none; /* Let clicks pass through to textarea */
+  color: transparent; /* Hide text, only show syntax spans */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Typeahead Overlay - Ghost text layer */
+.typeaheadOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* REMOVED bottom: 0 - allows overlay to grow with content */
+  min-height: 100%; /* At least fill visible area */
+  pointer-events: none;
+  overflow: visible; /* CHANGED: Must be visible to allow content beyond viewport */
+  z-index: 2; /* Above syntax highlighting overlay */
+}
+
+/* Highlight Container - Line highlights (errors, warnings, debug) */
+.highlightContainer {
+  position: absolute;
+  top: 0;  /* Start at container top - children use lineTop which already accounts for text offset */
+  left: 0;  /* Start at left edge */
+  right: 0; /* Extend to right edge */
+  /* REMOVED bottom: 0 - allows container to grow with content */
+  min-height: 100%; /* At least fill visible area */
+  pointer-events: none; /* Let clicks pass through to textarea */
+  overflow: visible; /* CHANGED: Must be visible to allow content beyond viewport */
+  z-index: 0; /* Below syntax highlighting */
+}
+
+.overlayContent {
+  /* Explicit overrides for component defaults */
+  margin: 0;
+  padding: 0; /* NO padding - parent .overlay already has padding */
+  font-family: 'IBM Plex Mono', 'Courier New', monospace; /* Monospace like BAL */
+  font-size: var(--editor-font-size); /* 14px like BAL */
+  line-height: var(--editor-line-height); /* 1.6 like BAL */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--text-primary); /* Default text color for unhighlighted text (edge cases) */
+}
+
+/* Ghost text styling */
+.ghostText {
+  color: var(--text-placeholder);
+  opacity: 0.5;
+}
+
+/* Ghost text positioned absolutely at cursor */
+.ghostTextAbsolute {
+  position: absolute;
+  pointer-events: none;
+  color: var(--text-placeholder);
+  opacity: 0.5;
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height);
+  white-space: nowrap;
+  z-index: 3; /* Above syntax overlay */
+  
+  /* Match single row height and vertically center text */
+  height: calc(var(--editor-font-size) * var(--editor-line-height));
+  display: flex;
+  align-items: center;
+}
+
+/* Textarea - Actual input */
+.textarea {
+  /* Explicit overrides for component defaults - MONOSPACE LIKE BAL */
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size); /* 14px like BAL */
+  line-height: var(--editor-line-height); /* 1.6 like BAL */
+  
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* CRITICAL: Auto height to expand with content, not just viewport */
+  height: auto;
+  /* Keep min-height to fill viewport when content is small */
+  min-height: 100%;
+  
+  /* Styling */
+  padding: var(--editor-padding); /* 16px - matches BAL */
+  background: transparent; /* Show overlay below */
+  color: transparent; /* Hide text, overlay shows it */
+  caret-color: var(--text-primary); /* Show cursor */
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: visible; /* FIXED: Must be visible to expand beyond viewport */
+  
+  /* Text properties must match overlay exactly */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.textarea::selection {
+  background: var(--background-selected);
+  color: var(--text-on-color);
+}
+
+.textarea::placeholder {
+  color: var(--text-placeholder);
+  opacity: 1;
+}
+
+/* Syntax highlighting classes (used in overlay via dangerouslySetInnerHTML) */
+:global(.formula-keyword) {
+  color: var(--syntax-keyword);
+  font-weight: 600;
+}
+
+:global(.formula-variable) {
+  color: var(--syntax-variable);
+  font-weight: 500;
+}
+
+:global(.formula-variable-undefined) {
+  color: var(--syntax-variable-undefined);
+  font-weight: 500;
+  text-decoration: wavy underline;
+  text-decoration-color: var(--validation-error);
+}
+
+:global(.formula-verbalization) {
+  color: var(--syntax-variable);
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Phase 5.11.4: Vocabulary Terms */
+:global(.formula-vocabulary-term) {
+  color: var(--syntax-function); /* Blue like functions */
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--syntax-function);
+  text-underline-offset: 2px;
+}
+
+:global(.formula-attribute) {
+  color: var(--syntax-string); /* Green like strings */
+  font-weight: 600; /* Bold */
+}
+
+:global(.formula-property) {
+  color: var(--syntax-string); /* Green like strings */
+  font-weight: 600; /* Bold */
+}
+
+:global(.formula-object-key) {
+  color: var(--syntax-function);
+  font-weight: 500;
+}
+
+:global(.formula-operator) {
+  color: var(--syntax-operator);
+  font-weight: 600; /* Bold for symbolic operators */
+}
+
+:global(.formula-number) {
+  color: var(--syntax-number);
+}
+
+:global(.formula-function) {
+  color: var(--syntax-function);
+  font-weight: 600;
+}
+
+:global(.formula-string) {
+  color: var(--syntax-string);
+}
+
+:global(.formula-template-literal) {
+  color: var(--syntax-string);
+  font-style: italic;
+}
+
+:global(.formula-bracket) {
+  color: var(--syntax-bracket);
+  font-weight: 600;
+}
+
+:global(.formula-comma) {
+  color: var(--syntax-comma);
+}
+
+:global(.formula-comment) {
+  color: var(--syntax-comment);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* PHASE 5.3: Natural Language Operators */
+:global(.formula-nl-operator) {
+  color: var(--syntax-operator);
+  font-weight: 400; /* Normal weight for natural language operators */
+  font-style: italic; /* Distinguish from symbolic operators */
+}
+
+/* PHASE 5.3: Natural Language Functions */
+:global(.formula-nl-function) {
+  color: var(--syntax-function);
+  font-weight: 600;
+  font-style: italic; /* Distinguish from symbolic functions */
+}
+
+/* ========================================
+   BAL Mode Syntax Highlighting
+   ======================================== */
+
+:global(.bal-keyword) {
+  color: var(--bal-syntax-keyword);
+  font-weight: 600;
+}
+
+:global(.bal-variable) {
+  color: var(--bal-syntax-variable);
+  font-weight: 500;
+}
+
+:global(.bal-vocabulary) {
+  color: var(--bal-syntax-vocabulary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--bal-syntax-vocabulary);
+  text-underline-offset: 2px;
+}
+
+:global(.bal-verbalization) {
+  color: var(--bal-syntax-verbalization);
+  font-weight: 500;
+  font-style: italic;
+}
+
+:global(.bal-string) {
+  color: var(--bal-syntax-string);
+}
+
+:global(.bal-template-literal) {
+  color: var(--bal-syntax-string);
+  font-style: italic;
+}
+
+:global(.bal-number) {
+  color: var(--bal-syntax-number);
+}
+
+:global(.bal-operator) {
+  color: var(--bal-syntax-operator);
+  font-weight: 600;
+}
+
+:global(.bal-nl-operator) {
+  color: var(--bal-syntax-nl-operator);
+  font-weight: 400;
+  font-style: italic;
+}
+
+:global(.bal-comment) {
+  color: var(--bal-syntax-comment);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Validation Banner */
+.validationBanner {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  padding: var(--spacing-03) var(--spacing-04);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-03);
+}
+
+.validationBanner.error {
+  background: var(--validation-error-bg);
+  border: 1px solid var(--validation-error);
+  color: var(--validation-error);
+}
+
+.validationBanner.warning {
+  background: var(--validation-warning-bg);
+  border: 1px solid var(--validation-warning);
+  color: var(--text-primary);
+}
+
+.validationBanner.info {
+  background: var(--validation-info-bg);
+  border: 1px solid var(--validation-info);
+  color: var(--validation-info);
+}
+
+.validationBanner.success {
+  background: var(--validation-success-bg);
+  border: 1px solid var(--validation-success);
+  color: var(--validation-success);
+}
+
+.validationIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.validationContent {
+  flex: 1;
+}
+
+.validationMessage {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  font-weight: 500;
+  margin: 0 0 var(--spacing-02);
+}
+
+.validationDetails {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875em;
+}
+
+.validationDetails li {
+  margin-top: var(--spacing-01);
+  padding-left: var(--spacing-05);
+  position: relative;
+}
+
+.validationDetails li::before {
+  content: '•';
+  position: absolute;
+  left: var(--spacing-02);
+}
+
+/* Autocomplete Dropdown */
+.autocomplete {
+  position: absolute;
+  min-width: 300px;
+  max-width: 400px;
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Autocomplete Header */
+.autocompleteHeader {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  padding: var(--spacing-03) var(--spacing-04);
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.autocompleteQuery {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-mono);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-primary);
+}
+
+/* Autocomplete List */
+.autocompleteList {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Autocomplete Item */
+.autocompleteItem {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  padding: var(--spacing-03) var(--spacing-04);
+  cursor: pointer;
+  transition: background 150ms ease;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.autocompleteItem:last-child {
+  border-bottom: none;
+}
+
+.autocompleteItem:hover {
+  background: var(--background-hover);
+}
+
+.autocompleteItem.selected {
+  background: var(--background-selected);
+}
+
+.autocompleteItemLabel {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-mono);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Autocomplete item type-specific highlighting */
+.autocompleteItemLabel.keyword {
+  color: var(--syntax-keyword);
+  font-weight: 600;
+}
+
+.autocompleteItemLabel.variable {
+  color: var(--syntax-variable);
+  font-weight: 500;
+}
+
+.autocompleteItemLabel.attribute {
+  color: var(--syntax-attribute);
+  font-weight: 500;
+}
+
+/* Highlighted matching text within autocomplete labels */
+.autocompleteItemLabel strong {
+  font-weight: 700;
+  /* Inherit color from parent (.keyword, .variable, or .attribute class) */
+}
+
+.autocompleteItemDescription {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  margin-top: var(--spacing-01);
+  color: var(--text-secondary);
+  font-size: 0.875em;
+}
+
+/* Autocomplete Footer */
+.autocompleteFooter {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  padding: var(--spacing-02) var(--spacing-04);
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.875em;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.autocompleteFooter kbd {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-mono);
+  font-size: inherit;
+  line-height: inherit;
+  
+  padding: var(--spacing-01) var(--spacing-02);
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.75em;
+}
+
+/* ========================================
+   ERROR HIGHLIGHTS
+   ======================================== */
+
+.errorLineHighlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: rgba(218, 30, 40, 0.1); /* IBM Red 60, 10% opacity */
+  border-left: 3px solid var(--support-error);
+  pointer-events: none;
+  
+  /* POSITIONING - Uses measured line heights from useLineHeights hook */
+  /* lineHeightData.top is relative to text start, so add padding to align with container */
+  top: calc(var(--highlight-top) + var(--editor-padding));
+  
+  /* HEIGHT - Uses measured line height (accounts for wrapping) */
+  height: var(--highlight-height);
+}
+
+.lineNumberWithError {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  justify-content: flex-end;
+}
+
+.errorIcon {
+  color: var(--support-error);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   WARNING HIGHLIGHTS
+   ======================================== */
+
+.warningLineHighlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: rgba(241, 194, 27, 0.1); /* IBM Yellow 30, 10% opacity */
+  border-left: 3px solid var(--support-warning);
+  pointer-events: none;
+  
+  /* POSITIONING - Uses measured line heights from useLineHeights hook */
+  /* lineHeightData.top is relative to text start, so add padding to align with container */
+  top: calc(var(--highlight-top) + var(--editor-padding));
+  
+  /* HEIGHT - Uses measured line height (accounts for wrapping) */
+  height: var(--highlight-height);
+}
+
+.lineNumberWithWarning {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02);
+  justify-content: flex-end;
+}
+
+.warningIcon {
+  color: var(--support-warning);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   DEBUG HIGHLIGHTS
+   ======================================== */
+
+.currentLineHighlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: rgba(66, 133, 244, 0.15); /* IBM Blue 60, 15% opacity */
+  border-left: 3px solid var(--cds-interactive-01); /* Blue */
+  pointer-events: none;
+  z-index: 1; /* Above error highlights */
+  
+  /* POSITIONING - Uses measured line heights from useLineHeights hook */
+  /* lineHeightData.top is relative to text start, so add padding to align with container */
+  top: calc(var(--highlight-top) + var(--editor-padding));
+  
+  /* HEIGHT - Uses measured line height (accounts for wrapping) */
+  height: var(--highlight-height);
+}
+
+/* ========================================
+   Debug Output Column Wrapper (CRIT-003)
+   ======================================== */
+
+.debugOutputWrapper {
+  flex-shrink: 0;
+  height: 100%; /* Fill parent container - MUST match .lineNumbers */
+  overflow: hidden; /* No scrollbar - scrolls programmatically via scrollTop sync */
+  user-select: none;
+  
+  /* NO padding here - padding moved to .debugOutputColumn to match .lineNumbers structure */
+}
+
+/* ========================================
+   OLD OVERLAY SYSTEM (REMOVE - replaced by highlightContainer)
+   ======================================== */
+
+/* These classes are no longer used but kept for reference during migration */
+.errorOverlay,
+.debugOverlay {
+  /* DEPRECATED: Replaced by .highlightContainer */
+  display: none;
+}

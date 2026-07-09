@@ -1,0 +1,288 @@
+/**
+ * Markdown Editor Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ * Explicitly overrides component defaults to match IBM Carbon Design System.
+ */
+
+.mdEditorContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--background-primary);
+  overflow: hidden;
+}
+
+.mdToolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-05);
+  padding: var(--spacing-04) var(--spacing-05);
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  /* Explicitly override component defaults per Guidelines */
+  font-family: var(--font-family-sans);
+  line-height: inherit;
+}
+
+.mdToolbarGroup {
+  display: flex;
+  gap: var(--spacing-02);
+  align-items: center;
+}
+
+.mdToolbarBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-primary);
+  /* Explicitly override font defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  transition: all 0.15s ease;
+}
+
+.mdToolbarBtn:hover {
+  background: var(--background-hover);
+  border-color: var(--border-subtle);
+}
+
+.mdToolbarBtn:active {
+  background: var(--background-selected);
+}
+
+.mdViewBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  /* Explicitly override font defaults per Guidelines */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.mdViewBtn:hover {
+  background: var(--background-hover);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.mdViewBtn.active {
+  background: var(--background-interactive);
+  border-color: var(--background-interactive);
+  color: var(--text-on-color);
+}
+
+.mdViewBtn.active:hover {
+  background: var(--background-interactive-hover);
+  border-color: var(--background-interactive-hover);
+}
+
+.mdToolbarSpacer {
+  flex: 1;
+}
+
+.mdContent {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.mdModePlain .mdEditorPane,
+.mdModePreview .mdPreviewPane {
+  flex: 1;
+}
+
+.mdModeSplit .mdEditorPane,
+.mdModeSplit .mdPreviewPane {
+  flex: 1;
+}
+
+.mdEditorPane {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: var(--background-primary);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.mdEditorPane:last-child {
+  border-right: none;
+}
+
+.mdTextarea {
+  flex: 1;
+  width: 100%;
+  padding: var(--spacing-05);
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: var(--font-family-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.mdTextarea::placeholder {
+  color: var(--text-placeholder);
+}
+
+.mdPreviewPane {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: var(--background-primary);
+}
+
+.mdPreview {
+  flex: 1;
+  padding: var(--spacing-05);
+  overflow: auto;
+}
+
+.mdPreviewContent {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.mdPreviewContent h1 {
+  margin-top: var(--spacing-06);
+  margin-bottom: var(--spacing-05);
+  padding-bottom: var(--spacing-03);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mdPreviewContent h2 {
+  margin-top: var(--spacing-06);
+  margin-bottom: var(--spacing-05);
+}
+
+.mdPreviewContent h3 {
+  margin-top: var(--spacing-05);
+  margin-bottom: var(--spacing-04);
+}
+
+.mdPreviewContent p {
+  margin-bottom: var(--spacing-05);
+}
+
+.mdPreviewContent ul,
+.mdPreviewContent ol {
+  margin-bottom: var(--spacing-05);
+  padding-left: var(--spacing-07);
+}
+
+.mdPreviewContent li {
+  margin-bottom: var(--spacing-03);
+}
+
+.mdPreviewContent code {
+  padding: var(--spacing-01) var(--spacing-02);
+  background: var(--background-secondary);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+  color: var(--validation-error);
+}
+
+.mdPreviewContent pre {
+  margin-bottom: var(--spacing-05);
+  padding: var(--spacing-05);
+  background: var(--background-secondary);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+}
+
+.mdPreviewContent pre code {
+  padding: 0;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.mdPreviewContent blockquote {
+  margin: var(--spacing-05) 0;
+  padding: var(--spacing-04) var(--spacing-05);
+  border-left: 4px solid var(--border-interactive);
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+}
+
+.mdPreviewContent a {
+  color: var(--text-interactive);
+  text-decoration: none;
+}
+
+.mdPreviewContent a:hover {
+  text-decoration: underline;
+}
+
+.mdPreviewContent hr {
+  margin: var(--spacing-06) 0;
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.mdPreviewContent img {
+  max-width: 100%;
+  height: auto;
+  margin: var(--spacing-05) 0;
+  border-radius: var(--radius-sm);
+}
+
+.mdPreviewContent table {
+  width: 100%;
+  margin-bottom: var(--spacing-05);
+  border-collapse: collapse;
+  border: 1px solid var(--border-subtle);
+}
+
+.mdPreviewContent th,
+.mdPreviewContent td {
+  padding: var(--spacing-04);
+  border: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.mdPreviewContent th {
+  background: var(--background-secondary);
+  font-weight: 600;
+}
+
+.mdPreviewContent tr:nth-child(even) {
+  background: var(--background-secondary);
+}
+
+.mdPreviewContent :global(.task-item) {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+  margin-bottom: var(--spacing-03);
+  cursor: pointer;
+}
+
+.mdPreviewContent :global(.task-item) input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+}

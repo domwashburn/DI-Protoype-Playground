@@ -1,0 +1,173 @@
+/* VocabularyEditor Component Styles */
+
+.vocabularyEditor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-03);
+  margin-bottom: var(--spacing-02);
+}
+
+.customIndicator {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.resetButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.resetButton:hover {
+  background: var(--background-hover);
+  border-color: var(--border-strong);
+}
+
+.resetButton:active {
+  background: var(--background-active);
+}
+
+/* Tag container */
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-02);
+  padding: var(--spacing-03);
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  min-height: 40px;
+  cursor: text;
+  transition: border-color 0.15s ease;
+}
+
+.tagContainer:hover:not(.readOnly) {
+  border-color: var(--border-strong);
+}
+
+.tagContainer.focused {
+  border-color: var(--interactive-primary);
+  outline: 2px solid var(--interactive-focus);
+  outline-offset: -1px;
+}
+
+.tagContainer.readOnly {
+  background: var(--background-disabled);
+  cursor: default;
+}
+
+/* Individual tag */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: 2px var(--spacing-02);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  height: 24px;
+  transition: all 0.15s ease;
+}
+
+.baseTag {
+  background: var(--background-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.customTag {
+  background: var(--interactive-primary-subtle);
+  color: var(--interactive-primary);
+  border: 1px solid var(--interactive-primary);
+  font-weight: 500;
+}
+
+.tagText {
+  user-select: none;
+}
+
+.tagRemove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.tagRemove:hover {
+  opacity: 1;
+}
+
+/* Input for adding terms */
+.tagInput {
+  flex: 1;
+  min-width: 120px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-primary);
+}
+
+.tagInput::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* Add button */
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  background: var(--interactive-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-on-color);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  align-self: flex-start;
+}
+
+.addButton:hover {
+  background: var(--interactive-primary-hover);
+}
+
+.addButton:active {
+  background: var(--interactive-primary-active);
+}

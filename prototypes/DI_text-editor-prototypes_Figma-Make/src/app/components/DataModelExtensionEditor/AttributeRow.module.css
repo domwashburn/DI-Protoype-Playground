@@ -1,0 +1,180 @@
+/* AttributeRow Component Styles */
+
+.attributeRow {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--background-primary);
+  transition: all 0.15s ease;
+}
+
+.attributeRow:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.attributeRow.hidden {
+  opacity: 0.5;
+  background: var(--background-subtle);
+}
+
+/* Main row */
+.mainRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+  padding: var(--spacing-04);
+}
+
+.expandButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+
+.expandButton:hover {
+  color: var(--text-primary);
+}
+
+.sourceIndicator {
+  font-size: 20px;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Attribute info */
+.attributeInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  min-width: 0;
+}
+
+.attributeName {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.attributeType {
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.attributeDescription {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-02);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+}
+
+.actionButton:hover {
+  background: var(--background-hover);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.actionButton:active {
+  background: var(--background-active);
+}
+
+.deleteButton {
+  color: var(--support-error);
+}
+
+.deleteButton:hover {
+  background: var(--support-error-subtle);
+  border-color: var(--support-error);
+  color: var(--support-error);
+}
+
+/* Vocabulary section */
+.vocabularySection {
+  padding: 0 var(--spacing-04) var(--spacing-04) var(--spacing-04);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--spacing-03);
+  padding-top: var(--spacing-03);
+}
+
+.vocabularyLabel {
+  display: block;
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-02);
+}
+
+/* Sub-attributes */
+.subAttributes {
+  padding: 0 var(--spacing-04) var(--spacing-04) var(--spacing-04);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--spacing-03);
+  padding-top: var(--spacing-03);
+}
+
+.subAttributeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) 0;
+}
+
+.subAttributeDot {
+  color: var(--text-secondary);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.subAttributeName {
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.subAttributeDescription {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  margin-left: auto;
+}

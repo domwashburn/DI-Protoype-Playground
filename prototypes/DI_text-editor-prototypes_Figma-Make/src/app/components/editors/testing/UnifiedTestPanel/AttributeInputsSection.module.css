@@ -1,0 +1,66 @@
+/* AttributeInputsSection.module.css */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-01);
+  padding-bottom: var(--spacing-02);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sectionTitle {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+}
+
+.sectionHint {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.inputList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-01);
+}
+
+.nestedList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  background: var(--layer-accent-01);
+  border-radius: var(--radius-sm);
+  margin-top: var(--spacing-02);
+}
+
+.customBadge {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.legendText {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}

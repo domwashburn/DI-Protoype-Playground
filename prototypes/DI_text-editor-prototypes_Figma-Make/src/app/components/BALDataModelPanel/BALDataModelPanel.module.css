@@ -1,0 +1,25 @@
+/* BALDataModelPanel Styles */
+
+.dataModelPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Context Switcher (Sticky) */
+.contextSwitcher {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: var(--spacing-04) var(--spacing-05);
+  background: var(--background-primary);
+  border-bottom: 1px solid var(--border-subtle-01);
+}
+
+/* Panel Content */
+.panelContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

@@ -1,0 +1,183 @@
+/**
+ * KeyboardShortcutsHelp Styles
+ * 
+ * CARBON_CONVERT: Uses CSS variables from globals.css with Carbon Design System tokens
+ */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-05);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.title {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  padding: var(--spacing-02);
+  cursor: pointer;
+  color: var(--icon-secondary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.closeButton:hover {
+  background: var(--background-hover);
+  color: var(--icon-primary);
+}
+
+.closeButton:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-05);
+}
+
+.section {
+  margin-bottom: var(--spacing-06);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.categoryTitle {
+  margin: 0 0 var(--spacing-04) 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.shortcutsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+}
+
+.shortcutRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-03);
+  background: var(--background-subtle);
+  border-radius: var(--radius-md);
+}
+
+.keys {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.key {
+  display: inline-block;
+  padding: var(--spacing-01) var(--spacing-03);
+  background: var(--background-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  min-width: 32px;
+  text-align: center;
+}
+
+.plus {
+  margin: 0 var(--spacing-02);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.description {
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
+}
+
+.footer {
+  padding: var(--spacing-04) var(--spacing-05);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--background-subtle);
+}
+
+.hint {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+.keySmall {
+  display: inline-block;
+  padding: 2px var(--spacing-02);
+  background: var(--background-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}

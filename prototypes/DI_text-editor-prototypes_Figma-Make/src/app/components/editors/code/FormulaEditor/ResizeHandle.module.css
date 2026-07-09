@@ -1,0 +1,47 @@
+/**
+ * ResizeHandle Styles
+ * 
+ * Simple draggable handle for resizing the debug output column.
+ * Carbon Design System compliant styling.
+ */
+
+.resizeHandle {
+  width: 8px;
+  cursor: col-resize;
+  background: transparent;
+  border-right: 1px solid transparent;
+  transition: background 150ms ease, border-color 150ms ease;
+  position: relative;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.resizeHandle:hover,
+.resizeHandle.dragging {
+  background: var(--background-hover);
+  border-right-color: var(--border-subtle);
+}
+
+.resizeHandle.dragging {
+  background: var(--background-active);
+}
+
+/* Visual indicator on hover - vertical grip dots */
+.resizeHandle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 24px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.resizeHandle:hover::before,
+.resizeHandle.dragging::before {
+  opacity: 1;
+}

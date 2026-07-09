@@ -1,0 +1,200 @@
+/**
+ * BAL Dictionary Styles
+ */
+
+.dictionaryContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.dictionaryHeader {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.dictionaryTitle {
+  margin: 0 0 8px 0;
+  color: #161616;
+}
+
+.dictionaryDescription {
+  margin: 0;
+  color: #525252;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.searchWrapper {
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: #525252;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.searchInput {
+  padding-left: 40px;
+  width: 100%;
+}
+
+.resultsCount {
+  padding: 12px 24px;
+  color: #525252;
+  font-size: 13px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.vocabularyList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #525252;
+  font-size: 14px;
+}
+
+.vocabularyItem {
+  padding: 16px;
+  margin-bottom: 8px;
+  background: #f4f4f4;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.15s ease;
+}
+
+.vocabularyItem:hover {
+  background: #e8e8e8;
+  border-color: #c6c6c6;
+}
+
+.termHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.termName {
+  font-weight: 600;
+  color: #0f62fe;
+  font-size: 15px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.termBadge {
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.variantsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.variantsLabel {
+  font-size: 13px;
+  color: #525252;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.variantsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.variant {
+  padding: 2px 8px;
+  background: #ffffff;
+  border: 1px solid #c6c6c6;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #161616;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.mappingRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mappingLabel {
+  font-size: 13px;
+  color: #525252;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.attributePath {
+  padding: 4px 8px;
+  background: #ffffff;
+  border: 1px solid #8a3ffc;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #8a3ffc;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.description {
+  padding: 8px 0;
+  color: #161616;
+  font-size: 13px;
+  line-height: 1.5;
+  border-top: 1px solid #c6c6c6;
+  margin-top: 8px;
+}
+
+.validValuesRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #c6c6c6;
+}
+
+.validValuesLabel {
+  font-size: 13px;
+  color: #525252;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.validValuesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.validValue {
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
+}

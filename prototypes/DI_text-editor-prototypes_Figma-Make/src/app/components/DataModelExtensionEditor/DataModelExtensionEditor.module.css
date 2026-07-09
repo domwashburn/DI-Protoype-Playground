@@ -1,0 +1,314 @@
+/* DataModelExtensionEditor Component Styles */
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-06);
+  padding: var(--spacing-06);
+  background: var(--background-primary);
+  border-radius: var(--radius-lg);
+  max-width: 1200px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.title {
+  font-family: var(--font-family-sans);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Mode selector */
+.modeSelector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+  padding: var(--spacing-05);
+  background: var(--background-subtle);
+  border-radius: var(--radius-md);
+}
+
+.modeLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-03);
+  padding: var(--spacing-04);
+  background: var(--background-primary);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modeLabel:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modeLabel:has(input:checked) {
+  border-color: var(--interactive-primary);
+  background: var(--interactive-primary-subtle);
+}
+
+.modeRadio {
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.modeOption {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.modeTitle {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+.modeDescription {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+/* Base model selector */
+.baseModelSelector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+  padding: var(--spacing-05);
+  background: var(--background-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.label {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+.baseModelSelectRow {
+  display: flex;
+  gap: var(--spacing-03);
+  align-items: center;
+}
+
+.select {
+  flex: 1;
+  padding: var(--spacing-03);
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.select:hover {
+  border-color: var(--border-strong);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 2px var(--interactive-focus);
+}
+
+.createButton {
+  padding: var(--spacing-03) var(--spacing-05);
+  background: var(--interactive-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-on-color);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.createButton:hover:not(:disabled) {
+  background: var(--interactive-primary-hover);
+}
+
+.createButton:active:not(:disabled) {
+  background: var(--interactive-primary-active);
+}
+
+.createButton:disabled {
+  background: var(--background-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Extension editor */
+.extensionEditor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-06);
+}
+
+.extensionInfo {
+  display: flex;
+  gap: var(--spacing-05);
+  padding: var(--spacing-04);
+  background: var(--background-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.extensionInfoText {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.extensionInfoText strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Global message */
+.globalMessage {
+  padding: var(--spacing-06);
+  background: var(--background-subtle);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.globalMessageText {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-02) 0;
+}
+
+.globalMessageHint {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-03);
+  padding-top: var(--spacing-05);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.cancelButton,
+.saveButton {
+  padding: var(--spacing-03) var(--spacing-05);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.cancelButton:hover {
+  background: var(--background-hover);
+  border-color: var(--border-strong);
+}
+
+.cancelButton:active {
+  background: var(--background-active);
+}
+
+.saveButton {
+  background: var(--interactive-primary);
+  border: none;
+  color: var(--text-on-color);
+}
+
+.saveButton:hover {
+  background: var(--interactive-primary-hover);
+}
+
+.saveButton:active {
+  background: var(--interactive-primary-active);
+}
+
+/* Error */
+.error {
+  padding: var(--spacing-05);
+  background: var(--support-error-subtle);
+  border: 1px solid var(--support-error);
+  border-radius: var(--radius-md);
+}
+
+.errorTitle {
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--support-error);
+  margin: 0 0 var(--spacing-02) 0;
+}
+
+.errorMessage {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+  margin: 0;
+}

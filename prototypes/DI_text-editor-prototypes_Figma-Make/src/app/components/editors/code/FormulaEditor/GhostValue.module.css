@@ -1,0 +1,84 @@
+/**
+ * GhostValue Component Styles
+ * 
+ * Inline value annotations for debugger mode.
+ * Uses Carbon Design System tokens for consistency.
+ */
+
+.ghostValue {
+  /* DYNAMIC POSITIONING - Uses measured line heights for wrapping support */
+  /* Positions at the top of the line (even if wrapped) */
+  position: absolute;
+  right: var(--spacing-05);
+  /* CRITICAL: Use --line-top from measured heights + editor padding offset */
+  /* lineHeightData.top is relative to text start, so add padding to align with container */
+  top: calc(var(--line-top) + var(--editor-padding));
+  
+  /* FIXED HEIGHT - Ghost value is a compact badge, doesn't expand with line wrapping */
+  /* Add top padding to center with first line of text (like gutter icons) */
+  height: auto;
+  padding-top: 3px;
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding-left: var(--spacing-03);
+  padding-right: var(--spacing-03);
+  padding-bottom: var(--spacing-02);
+  
+  /* Styling */
+  background: var(--layer-01);
+  border: 1px solid var(--border-subtle-01);
+  border-radius: var(--radius-sm);
+  
+  /* Typography */
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  
+  /* Interaction - Allow pointer events for tooltip */
+  pointer-events: auto;
+  user-select: none;
+  cursor: help;
+  
+  /* Animation - fade in from right */
+  opacity: 0;
+  animation: fadeInGhost 240ms cubic-bezier(0.2, 0, 0.38, 0.9) forwards;
+  animation-delay: 60ms; /* Slight delay for smoother feel */
+}
+
+@keyframes fadeInGhost {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+}
+
+.ghostValueText {
+  color: #8d8d8d; /* Gray 60 - current/active step */
+  font-weight: 600;
+}
+
+/* Previous/inactive steps get lighter color */
+.ghostValue.previous .ghostValueText {
+  color: #a8a8a8; /* Gray 50 - previous steps */
+}
+
+.ghostValueType {
+  color: var(--text-helper);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Hover state (even though pointer-events: none, can still apply via parent) */
+.ghostValue:hover {
+  opacity: 1;
+  border-color: var(--border-strong-01);
+}

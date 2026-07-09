@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tokenizer Test</title>
+</head>
+<body>
+    <h1>Tokenizer Test for Natural Language Operators</h1>
+    <pre id="output"></pre>
+    
+    <script type="module">
+        import { tokenize } from './services/evaluationEngine/parsers/Tokenizer.js';
+        
+        const testCases = [
+            "'subtotal' multiplied by 'tax rate'",
+            "'base amount' times 'quantity'",
+            "'total' divided by 10",
+            "multiply 'price' by 'quantity'",
+            "divide 'total' by 'count'"
+        ];
+        
+        let output = '';
+        
+        for (const test of testCases) {
+            output += `\\nTest: ${test}\\n`;
+            output += '='.repeat(60) + '\\n';
+            
+            try {
+                const tokens = tokenize(test);
+                tokens.forEach((token, i) => {
+                    output += `${i}: ${token.type.padEnd(20)} | ${token.value}\\n`;
+                });
+            } catch (error) {
+                output += `ERROR: ${error.message}\\n`;
+            }
+            
+            output += '\\n';
+        }
+        
+        document.getElementById('output').textContent = output;
+    </script>
+</body>
+</html>

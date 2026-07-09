@@ -1,0 +1,249 @@
+/**
+ * App Component Styles
+ * Following IBM Carbon Design System principles
+ */
+
+/* App Container */
+.appContainer {
+  min-height: 100vh;
+  background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header - Carbon style */
+.header {
+  background: #161616;
+  border-bottom: 1px solid #393939;
+  height: 48px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.headerContent {
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.headerTitle {
+  color: #f4f4f4;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.headerAction {
+  background: transparent;
+  border: none;
+  color: #f4f4f4;
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 110ms;
+}
+
+.headerAction:hover {
+  background: #353535;
+}
+
+.headerAction:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: -2px;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  padding-top: 0;
+}
+
+.contentWrapper {
+  padding: 32px;
+  max-width: 1584px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.pageHeader {
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  margin: 0 0 8px 0;
+  color: #161616;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.pageDescription {
+  margin: 0;
+  color: #525252;
+  max-width: 800px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Editor Tabs */
+.editorTabs {
+  width: 100%;
+}
+
+.tabsList {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
+  padding: 0;
+  height: auto;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.tabTrigger {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: #525252;
+  padding: 13px 16px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  transition: all 110ms;
+}
+
+.tabTrigger:hover {
+  background: #e5e5e5;
+  color: #161616;
+}
+
+.tabTrigger[data-state="active"] {
+  background: transparent;
+  border-bottom-color: #0f62fe;
+  color: #161616;
+  box-shadow: none;
+}
+
+.tabTrigger:focus-visible {
+  outline: 2px solid #0f62fe;
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+/* Tab Content */
+.tabContent {
+  padding-top: 24px;
+  outline: none;
+}
+
+/* Editor Grid */
+.editorGrid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 16px;
+  width: 100%;
+}
+
+.editorColumn {
+  min-width: 0;
+}
+
+.featuresColumn {
+  flex: 0 0 400px;
+  background: #f4f4f4;
+  border-left: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 300px);
+  min-height: 600px;
+}
+
+/* Sidebar Tabs */
+.sidebarTabs {
+  display: flex;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0;
+}
+
+.sidebarTab {
+  flex: 1;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #525252;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebarTab:hover {
+  background: #f4f4f4;
+  color: #161616;
+}
+
+.sidebarTab.active {
+  color: #0f62fe;
+  border-bottom-color: #0f62fe;
+  font-weight: 600;
+}
+
+.sidebarContent {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  min-height: 0; /* Allow flex to shrink */
+  background: var(--background-primary); /* Background on container */
+}
+
+/* Editor Wrapper */
+.editorWrapper {
+  height: calc(100vh - 300px);
+  min-height: 600px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  overflow: visible; /* Changed from 'hidden' - allows autocomplete dropdowns to escape */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive */
+@media (max-width: 1056px) {
+  .editorGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .editorWrapper {
+    height: auto;
+    min-height: 500px;
+  }
+
+  .contentWrapper {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 672px) {
+  .tabTrigger span {
+    display: none;
+  }
+
+  .tabTrigger {
+    padding: 13px 12px;
+  }
+}

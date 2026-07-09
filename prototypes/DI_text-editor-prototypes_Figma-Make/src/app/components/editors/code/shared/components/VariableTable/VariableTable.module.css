@@ -1,0 +1,444 @@
+/**
+ * VariableTable Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ * Explicitly overrides component defaults to match IBM Carbon Design System.
+ * 
+ * LAYOUT: Card-based design for better readability and no text truncation.
+ */
+
+.variableTable {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-05);
+  padding: var(--spacing-05);
+  /* Background removed - container handles it */
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-04);
+  padding-bottom: var(--spacing-04);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.title {
+  /* Use default h3 typography from globals.css */
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.addButton {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  gap: var(--spacing-02);
+  padding: var(--spacing-03) var(--spacing-05);
+  background: var(--background-interactive);
+  color: var(--text-on-color);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.addButton:hover {
+  background: var(--background-interactive-hover);
+}
+
+.addButton:disabled {
+  background: var(--background-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-09);
+  color: var(--text-secondary);
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  text-align: center;
+  gap: var(--spacing-03);
+}
+
+/* Variable List */
+.variableList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+}
+
+/* Variable Card */
+.variableCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+  padding: var(--spacing-05);
+  background: var(--background-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.variableCard:hover {
+  border-color: var(--border-interactive);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.addingCard {
+  border-color: var(--border-interactive);
+  background: var(--background-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header Row */
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-03);
+}
+
+.variableNameSection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-03);
+  flex: 1;
+  min-width: 0;
+}
+
+.dollarIcon {
+  flex-shrink: 0;
+  color: var(--text-interactive);
+}
+
+.variableName {
+  font-family: var(--font-family-mono);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: var(--spacing-02) var(--spacing-03);
+  border-radius: var(--radius-sm);
+  transition: background 200ms ease;
+  word-break: break-word;
+  flex: 1;
+}
+
+.variableName:hover {
+  background: var(--background-hover);
+}
+
+/* Editing Input in Card Header */
+.editInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  flex: 1;
+  min-width: 0;
+}
+
+.editInput {
+  /* Override component defaults */
+  font-family: var(--font-family-mono);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-02) var(--spacing-03);
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-interactive);
+  border-radius: var(--radius-sm);
+}
+
+.editInput:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+  border-color: var(--border-interactive);
+}
+
+/* Actions in Card Header */
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  flex-shrink: 0;
+}
+
+.iconButton {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  padding: var(--spacing-02);
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.iconButton:hover {
+  background: var(--background-hover);
+  color: var(--text-primary);
+}
+
+.deleteButton {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  padding: var(--spacing-02);
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.deleteButton:hover {
+  background: var(--background-hover);
+  color: var(--text-error);
+}
+
+/* Card Rows */
+.cardRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.cardLabel {
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+}
+
+.cardValue {
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* Type Selector */
+.typeSelector {
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  line-height: 18px;
+  background: var(--field-01);
+  border: 1px solid var(--border-subtle-01);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: var(--spacing-02) var(--spacing-03);
+  flex: 1;
+}
+
+/* Date Format Example */
+.dateFormatExample {
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  padding: var(--spacing-02) 0;
+  font-style: italic;
+}
+
+/* Data Source */
+.dataSourceSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  flex: 1;
+}
+
+.dataSourceInput {
+  /* Override component defaults */
+  font-family: var(--font-family-mono);
+  font-size: inherit;
+  line-height: inherit;
+  padding: var(--spacing-02) var(--spacing-03);
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: border-color 200ms ease;
+}
+
+.dataSourceInput:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+  border-color: var(--border-interactive);
+}
+
+.dataSourceInput::placeholder {
+  color: var(--text-placeholder);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--text-secondary);
+  user-select: none;
+  padding-left: var(--spacing-02);
+}
+
+.checkbox {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Parameter Badge */
+.parameterBadge {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+  padding: 2px var(--spacing-03);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.parameterBadge[data-type="required"] {
+  background: var(--background-interactive);
+  color: var(--text-on-color);
+}
+
+.parameterBadge[data-type="optional"] {
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.parameterBadge[data-type="locked"] {
+  background: var(--background-warning);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.parameterBadge[data-type="defined"] {
+  background: var(--background-success);
+  color: var(--text-on-color);
+  border: 1px solid var(--border-success);
+}
+
+.linkButton {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  color: var(--text-interactive);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.linkButton:hover {
+  background: var(--background-hover);
+  color: var(--text-interactive-hover);
+}
+
+/* Verbalization Section */
+.verbalizationSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  flex: 1;
+}
+
+.verbalizationInput {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  padding: var(--spacing-02) var(--spacing-03);
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: border-color 200ms ease;
+}
+
+.verbalizationInput:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+  border-color: var(--border-interactive);
+}
+
+.verbalizationInput::placeholder {
+  color: var(--text-placeholder);
+}
+
+.verbalizationInput.inputError {
+  border-color: var(--border-error);
+}
+
+.verbalizationInput.inputError:focus {
+  outline-color: var(--border-error);
+}
+
+.optionalLabel {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 400;
+  margin-left: var(--spacing-02);
+  color: var(--text-placeholder);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.helpText {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-error);
+  padding: var(--spacing-02) 0;
+}

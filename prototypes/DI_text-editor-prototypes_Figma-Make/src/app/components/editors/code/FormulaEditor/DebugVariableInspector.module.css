@@ -1,0 +1,252 @@
+/* DebugVariableInspector.module.css — Carbon tokens, world-class treatment of messy data */
+
+.inspector {
+  background: var(--cds-layer-02, #ffffff);
+  border: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: var(--cds-body-01-font-family, 'IBM Plex Sans', sans-serif);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cds-spacing-03, 0.5rem);
+  padding: var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+  background: var(--cds-layer-01, #f4f4f4);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cds-text-primary, #161616);
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+}
+
+.headerCount {
+  font-weight: 400;
+  color: var(--cds-text-secondary, #525252);
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.75rem;
+}
+
+.content {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cds-spacing-02, 0.5rem);
+  padding: var(--cds-spacing-07, 2rem) var(--cds-spacing-05, 1rem);
+  text-align: center;
+  color: var(--cds-text-secondary, #525252);
+}
+
+.empty svg {
+  color: var(--cds-icon-secondary, #525252);
+  opacity: 0.6;
+}
+
+.emptyTitle {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--cds-text-primary, #161616);
+}
+
+.emptyHint {
+  font-size: 0.75rem;
+  color: var(--cds-text-helper, #6f6f6f);
+  max-width: 32ch;
+  line-height: 1.25rem;
+}
+
+.section {
+  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cds-spacing-02, 0.5rem) var(--cds-spacing-05, 1rem);
+  background: var(--cds-layer-accent-01, #e0e0e0);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--cds-text-secondary, #525252);
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.sectionCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  background: var(--cds-layer-02, #ffffff);
+  color: var(--cds-text-primary, #161616);
+  border-radius: 9px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  /* min-width: 0 via minmax(0,...) is critical — allows ellipsis inside grid cells */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) auto;
+  gap: var(--cds-spacing-04, 1rem);
+  padding: var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+  border-bottom: 1px solid var(--cds-border-subtle-02, #e0e0e0);
+  align-items: center;
+  min-height: 36px;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: var(--cds-layer-hover-02, #e8e8e8);
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: var(--cds-spacing-02, 0.5rem);
+  font-family: var(--cds-code-01-font-family, 'IBM Plex Mono', monospace);
+  font-size: 0.8125rem;
+  color: var(--cds-text-primary, #161616);
+  min-width: 0;
+}
+
+.nameText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sigil {
+  color: var(--cds-text-helper, #6f6f6f);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.value {
+  all: unset;
+  display: block;
+  min-width: 0;
+  padding: 2px 6px;
+  margin: -2px -6px;
+  border-radius: 3px;
+  font-family: var(--cds-code-01-font-family, 'IBM Plex Mono', monospace);
+  font-size: 0.8125rem;
+  color: var(--cds-text-primary, #161616);
+  text-align: right;
+  cursor: default;
+  transition: background 90ms ease-out;
+  font-variant-numeric: tabular-nums;
+}
+
+.value[data-expandable] {
+  cursor: pointer;
+}
+
+.value[data-expandable]:hover {
+  background: var(--cds-layer-selected-hover-02, #cacaca);
+}
+
+.value[data-expandable]:focus-visible {
+  outline: 2px solid var(--cds-focus, #0f62fe);
+  outline-offset: -2px;
+}
+
+.valueText {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.value[data-expanded] .valueText {
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+
+.value[data-expanded] {
+  text-align: left;
+  background: var(--cds-layer-01, #f4f4f4);
+}
+
+/* Type chips — semantic colors, Carbon Tag styling */
+.type {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--cds-spacing-03, 0.5rem);
+  border-radius: 10px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16px;
+  text-transform: lowercase;
+  flex-shrink: 0;
+  font-family: var(--cds-body-01-font-family, 'IBM Plex Sans', sans-serif);
+}
+
+.type[data-category='number'] {
+  background: var(--cds-tag-background-blue, #d0e2ff);
+  color: var(--cds-tag-color-blue, #0043ce);
+}
+.type[data-category='string'] {
+  background: var(--cds-tag-background-purple, #e8daff);
+  color: var(--cds-tag-color-purple, #6929c4);
+}
+.type[data-category='boolean'] {
+  background: var(--cds-tag-background-green, #a7f0ba);
+  color: var(--cds-tag-color-green, #0e6027);
+}
+.type[data-category='date'] {
+  background: var(--cds-tag-background-teal, #9ef0f0);
+  color: var(--cds-tag-color-teal, #005d5d);
+}
+.type[data-category='array'] {
+  background: var(--cds-tag-background-magenta, #ffd6e8);
+  color: var(--cds-tag-color-magenta, #9f1853);
+}
+.type[data-category='object'] {
+  background: var(--cds-tag-background-cyan, #bae6ff);
+  color: var(--cds-tag-color-cyan, #00539a);
+}
+.type[data-category='null'] {
+  background: var(--cds-tag-background-gray, #e0e0e0);
+  color: var(--cds-tag-color-gray, #525252);
+  font-style: italic;
+}
+.type[data-category='unknown'] {
+  background: var(--cds-tag-background-warm-gray, #e5e0df);
+  color: var(--cds-tag-color-warm-gray, #565151);
+}
+
+/* Null values dim */
+.row[data-category='null'] .value {
+  color: var(--cds-text-placeholder, #a8a8a8);
+  font-style: italic;
+}

@@ -1,0 +1,247 @@
+/* BAL Editor Test Suite Styles */
+
+.testSuite {
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f4f4f4;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  margin: 0 0 8px 0;
+  color: #161616;
+}
+
+.header p {
+  margin: 0;
+  color: #6f6f6f;
+}
+
+.tabs {
+  background: white;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.tabContent {
+  margin-top: 16px;
+}
+
+.editorControls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #f4f4f4;
+  border-radius: 4px;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.controlGroup label {
+  font-weight: 600;
+  color: #161616;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.editorWrapper {
+  height: 500px;
+  margin-bottom: 24px;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.instructionsCard {
+  margin-top: 24px;
+}
+
+.testChecklist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testChecklist h3 {
+  margin: 0 0 8px 0;
+  color: #161616;
+  font-size: 16px;
+}
+
+.testChecklist ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.testChecklist li {
+  margin-bottom: 4px;
+  color: #525252;
+}
+
+.separator {
+  margin: 16px 0;
+}
+
+.testResults {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.testResult {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f4f4f4;
+  border-radius: 4px;
+}
+
+.passIcon {
+  color: #198038;
+  flex-shrink: 0;
+}
+
+.failIcon {
+  color: #da1e28;
+  flex-shrink: 0;
+}
+
+.testInfo {
+  flex: 1;
+}
+
+.testName {
+  font-weight: 600;
+  color: #161616;
+}
+
+.testNotes {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #6f6f6f;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.metric {
+  padding: 16px;
+  background: #f4f4f4;
+  border-radius: 4px;
+}
+
+.metricLabel {
+  font-size: 14px;
+  color: #6f6f6f;
+  margin-bottom: 4px;
+}
+
+.metricValue {
+  font-size: 24px;
+  font-weight: 600;
+  color: #161616;
+  margin-bottom: 4px;
+}
+
+.metricTarget {
+  font-size: 12px;
+  color: #8d8d8d;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.comparison .editorWrapper {
+  height: 400px;
+}
+
+.pros,
+.cons {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.pros {
+  background: #e5f6ea;
+  border: 1px solid #24a148;
+}
+
+.cons {
+  background: #fff1f1;
+  border: 1px solid #da1e28;
+}
+
+.pros h4 {
+  margin: 0 0 8px 0;
+  color: #0e6027;
+}
+
+.cons h4 {
+  margin: 0 0 8px 0;
+  color: #750e13;
+}
+
+.pros ul,
+.cons ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.pros li {
+  color: #0e6027;
+  margin-bottom: 4px;
+}
+
+.cons li {
+  color: #750e13;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 1024px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .testSuite {
+    padding: 16px;
+  }
+  
+  .editorWrapper {
+    height: 300px;
+  }
+  
+  .buttonGroup {
+    flex-direction: column;
+  }
+  
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}

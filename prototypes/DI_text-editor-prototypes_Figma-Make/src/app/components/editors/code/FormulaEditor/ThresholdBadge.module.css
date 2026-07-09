@@ -1,0 +1,81 @@
+/**
+ * ThresholdBadge Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ * Follows Carbon Design System badge/tag patterns.
+ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-sans);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 200ms ease;
+  background-color: var(--badge-color, var(--background-secondary));
+  color: #ffffff;
+}
+
+/* Size variants */
+.badge.sm {
+  font-size: var(--font-size-xs);
+  line-height: 1.2;
+  padding: var(--spacing-01) var(--spacing-02);
+  gap: var(--spacing-01);
+}
+
+.badge.md {
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.badge.lg {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  padding: var(--spacing-03) var(--spacing-04);
+  gap: var(--spacing-02);
+}
+
+/* Severity variants - provide fallback colors */
+.badge.error {
+  --badge-color: #DA1E28;
+}
+
+.badge.warning {
+  --badge-color: #F1C21B;
+  color: var(--text-primary); /* Dark text for yellow background */
+}
+
+.badge.info {
+  --badge-color: #0F62FE;
+}
+
+.badge.success {
+  --badge-color: #24A148;
+}
+
+/* Badge content */
+.value {
+  font-family: var(--font-family-mono);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.separator {
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.category {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Hover effect */
+.badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}

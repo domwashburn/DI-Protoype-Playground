@@ -1,0 +1,737 @@
+/**
+ * Rich Text Editor Styles - Version 6
+ * 
+ * Block-based rich text editor with inline @mention rendering using contentEditable.
+ * 
+ * New in v6:
+ * - Horizontal line drag indicator (not dashed border)
+ * - Simplified mention rendering
+ * - Fixed contentEditable issues
+ * 
+ * CARBON_CONVERT: This uses temporary CSS replacements.
+ * See /carbon-conversion.md for complete conversion mapping.
+ */
+
+.rteContainer {
+  /* Override component defaults */
+  width: 100%;
+  height: 100%;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  overflow-y: auto;
+}
+
+.rteBlocks {
+  /* Override component defaults */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+  padding: var(--spacing-05);
+}
+
+/* Block Container */
+.rteBlock {
+  /* Override component defaults */
+  display: flex;
+  gap: var(--spacing-03);
+  padding: var(--spacing-02);
+  border-radius: var(--radius-md);
+  transition: background 0.15s;
+  position: relative;
+}
+
+.rteBlock.focused {
+  /* Override component defaults */
+  background: var(--background-hover);
+}
+
+.rteBlock.dragging {
+  /* Override component defaults */
+  opacity: 0.5;
+}
+
+/* Horizontal drag indicator line */
+.rteDragIndicator {
+  /* Override component defaults */
+  height: 2px;
+  background: var(--border-interactive);
+  margin: var(--spacing-02) 0;
+  border-radius: 1px;
+  /* Smooth appearance animation */
+  animation: dragIndicatorAppear 0.15s ease-out;
+}
+
+@keyframes dragIndicatorAppear {
+  from {
+    opacity: 0;
+    transform: scaleX(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Block Controls */
+.rteBlockControls {
+  /* Override component defaults */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-02);
+  position: relative;
+}
+
+.rteDragHandle {
+  /* Override component defaults */
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.rteBlock:hover .rteDragHandle,
+.rteBlock.focused .rteDragHandle {
+  /* Override component defaults */
+  opacity: 1;
+}
+
+.rteDragHandle:hover {
+  /* Override component defaults */
+  background: var(--background-hover);
+  color: var(--text-primary);
+}
+
+.rteDragHandle:active {
+  /* Override component defaults */
+  cursor: grabbing;
+}
+
+/* Block Menu */
+.rteBlockMenu {
+  /* Override component defaults */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  margin-top: var(--spacing-02);
+  overflow: hidden;
+}
+
+.rteMenuSection {
+  /* Override component defaults */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-01);
+  padding: var(--spacing-03);
+  border-bottom: 1px solid var(--border-subtle-01);
+}
+
+.rteMenuSection:last-child {
+  /* Override component defaults */
+  border-bottom: none;
+}
+
+.rteMenuSection button,
+.rteMenuSection select {
+  /* Override component defaults */
+  all: unset;
+  padding: var(--spacing-02) var(--spacing-03);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  line-height: inherit;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.rteMenuSection button:hover,
+.rteMenuSection select:hover {
+  /* Override component defaults */
+  background: var(--background-hover);
+}
+
+.rteMenuSection button:disabled {
+  /* Override component defaults */
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.rteMenuLabel {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: inherit;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-01);
+}
+
+.rteDeleteBtn {
+  /* Override component defaults */
+  color: var(--text-error) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+/* Block Content */
+.rteBlockContent {
+  /* Override component defaults */
+  flex: 1;
+  position: relative;
+}
+
+/* ContentEditable Base Styles */
+.rteContentEditable {
+  /* Override component defaults - explicit reset */
+  all: unset;
+  display: block;
+  width: 100%;
+  min-height: 1.5em;
+  outline: none;
+  /* Typography from design system */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  /* Padding for breathing room */
+  padding: var(--spacing-02);
+  /* Allow text wrapping */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Placeholder styling */
+.rteContentEditable:empty:before {
+  /* Override component defaults */
+  content: attr(data-placeholder);
+  color: var(--text-placeholder);
+  pointer-events: none;
+}
+
+/* Block Type Variations */
+.rteH1 {
+  /* Override component defaults */
+  font-size: 32px !important;
+  line-height: 40px !important;
+  font-weight: 600 !important;
+}
+
+.rteH2 {
+  /* Override component defaults */
+  font-size: 24px !important;
+  line-height: 32px !important;
+  font-weight: 600 !important;
+}
+
+.rteH3 {
+  /* Override component defaults */
+  font-size: 20px !important;
+  line-height: 28px !important;
+  font-weight: 600 !important;
+}
+
+.rteCode {
+  /* Override component defaults */
+  font-family: var(--font-family-mono) !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  background: var(--background-secondary);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-04) !important;
+}
+
+.rteQuote {
+  /* Override component defaults */
+  font-style: italic;
+  padding-left: var(--spacing-05) !important;
+  border-left: 3px solid var(--border-subtle);
+}
+
+.rteCallout {
+  /* Override component defaults */
+  background: var(--background-secondary);
+  border-left: 3px solid var(--border-interactive);
+  padding: var(--spacing-04) !important;
+  border-radius: var(--radius-sm);
+}
+
+/* Checkbox Block */
+.rteCheckboxBlock {
+  /* Override component defaults */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-03);
+}
+
+.rteCheckbox {
+  /* Override component defaults */
+  margin-top: var(--spacing-02);
+  cursor: pointer;
+}
+
+.rteCheckboxText {
+  /* Override component defaults */
+  flex: 1;
+}
+
+/* List Block */
+.rteListBlock {
+  /* Override component defaults */
+  display: flex;
+  gap: var(--spacing-03);
+  align-items: flex-start;
+}
+
+.rteListMarker {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  margin-top: var(--spacing-02);
+}
+
+/* Divider */
+.rteDivider {
+  /* Override component defaults */
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--spacing-04) 0;
+}
+
+/* Table Block */
+.rteTableWrapper {
+  /* Override component defaults */
+  width: 100%;
+  overflow-x: auto;
+}
+
+.rteTableControls {
+  /* Override component defaults */
+  display: flex;
+  gap: var(--spacing-02);
+  margin-bottom: var(--spacing-03);
+  padding: var(--spacing-02);
+  background: var(--background-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.rteTableBtn {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  padding: var(--spacing-02) var(--spacing-03);
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.rteTableBtn:hover {
+  background: var(--background-hover);
+  border-color: var(--border-strong);
+}
+
+.rteTable {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border-subtle);
+}
+
+.rteTableCell {
+  /* Override component defaults */
+  border: 1px solid var(--border-subtle);
+  padding: 0;
+  position: relative;
+  min-width: 120px;
+}
+
+.rteTableHeaderRow .rteTableCell {
+  background: var(--background-subtle);
+  font-weight: 600;
+}
+
+.rteTableInput {
+  /* Override component defaults */
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  width: 100%;
+  padding: var(--spacing-03);
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.rteTableInput:focus {
+  background: var(--background-hover);
+}
+
+.rteTableDeleteCol,
+.rteTableDeleteRow {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 400;
+  position: absolute;
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.rteTableDeleteCol {
+  top: -10px;
+  right: 4px;
+}
+
+.rteTableDeleteRow {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 4px;
+}
+
+.rteTableCell:hover .rteTableDeleteCol,
+.rteTableActionCell:hover .rteTableDeleteRow {
+  opacity: 1;
+}
+
+.rteTableDeleteCol:hover,
+.rteTableDeleteRow:hover {
+  background: var(--background-hover);
+  color: var(--text-error);
+}
+
+.rteTableActionCell {
+  /* Override component defaults */
+  border: 1px solid var(--border-subtle);
+  padding: 0;
+  width: 32px;
+  position: relative;
+  background: var(--background-subtle);
+}
+
+/* Autocomplete Dropdown (inline, like FormulaEditor) */
+.autocomplete {
+  position: absolute;
+  min-width: 300px;
+  max-width: 400px;
+  max-height: 300px;
+  background: var(--background-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.autocompleteHeader {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  padding: var(--spacing-03) var(--spacing-04);
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.autocompleteQuery {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-mono);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-primary);
+}
+
+.autocompleteList {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.autocompleteItem {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  padding: var(--spacing-03) var(--spacing-04);
+  cursor: pointer;
+  transition: background 150ms ease;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.autocompleteItem:last-child {
+  border-bottom: none;
+}
+
+.autocompleteItem:hover {
+  background: var(--background-hover);
+}
+
+.autocompleteItem.selected {
+  background: var(--background-selected);
+}
+
+.autocompleteFooter {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: inherit;
+  
+  padding: var(--spacing-03) var(--spacing-04);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.autocompleteFooter kbd {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-mono);
+  font-size: inherit;
+  line-height: inherit;
+  
+  background: var(--background-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 2px 4px;
+  font-size: 11px;
+}
+
+/* Suggestion item styles */
+.suggestionMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-02);
+}
+
+.suggestionLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+}
+
+.entityIcon {
+  font-size: 14px;
+}
+
+.entityName {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.entityBadge {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: var(--background-secondary);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+
+.suggestionDescription {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-01);
+}
+
+/* ===========================
+   SLACK-STYLE MENTION PILLS
+   =========================== */
+
+.mention {
+  /* Override component defaults - explicit inline styling */
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
+  /* Slack-style pill appearance */
+  background: #0f62fe; /* IBM Blue 60 */
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  /* Interactive */
+  cursor: pointer;
+  user-select: none;
+  /* Smooth transitions */
+  transition: background 0.15s, transform 0.1s;
+  /* Prevent line breaking */
+  white-space: nowrap;
+  /* Ensure it flows inline */
+  vertical-align: baseline;
+}
+
+.mention:hover {
+  /* Override component defaults */
+  background: #0353e9; /* IBM Blue 70 */
+  transform: translateY(-1px);
+}
+
+.mention:active {
+  /* Override component defaults */
+  background: #002d9c; /* IBM Blue 80 */
+  transform: translateY(0);
+}
+
+/* Color-coded mentions by entity type */
+.mention[data-mention-type="kpi"] {
+  /* Override component defaults */
+  background: #0f62fe; /* IBM Blue 60 */
+}
+
+.mention[data-mention-type="kpi"]:hover {
+  background: #0353e9; /* IBM Blue 70 */
+}
+
+.mention[data-mention-type="dashboard"] {
+  background: #8a3ffc; /* IBM Purple 60 */
+}
+
+.mention[data-mention-type="dashboard"]:hover {
+  background: #6929c4; /* IBM Purple 70 */
+}
+
+.mention[data-mention-type="document"] {
+  background: #198038; /* IBM Green 60 */
+}
+
+.mention[data-mention-type="document"]:hover {
+  background: #0e6027; /* IBM Green 70 */
+}
+
+.mention[data-mention-type="automation"] {
+  background: #fa4d56; /* IBM Red 50 */
+}
+
+.mention[data-mention-type="automation"]:hover {
+  background: #da1e28; /* IBM Red 60 */
+}
+
+/* ===========================
+   MENTION AUTOCOMPLETE STYLES
+   =========================== */
+
+.suggestionMain {
+  /* Override component defaults */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-03);
+  margin-bottom: var(--spacing-02);
+}
+
+.suggestionLabel {
+  /* Override component defaults */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-02);
+  flex: 1;
+}
+
+.entityIcon {
+  /* Override component defaults */
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.entityName {
+  /* Override component defaults - explicit font styling */
+  font-family: var(--font-family-sans);
+  font-size: 13px;
+  line-height: inherit;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.entityBadge {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 11px;
+  line-height: inherit;
+  font-weight: 600;
+  padding: var(--spacing-01) var(--spacing-03);
+  background: var(--background-interactive);
+  color: var(--text-inverse);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.suggestionDescription {
+  /* Override component defaults */
+  font-family: var(--font-family-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* ===========================
+   GHOST TYPEAHEAD TEXT
+   =========================== */
+
+.rteGhostText {
+  /* Override component defaults */
+  position: absolute;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--text-disabled);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 10; /* Above content, below autocomplete */
+}

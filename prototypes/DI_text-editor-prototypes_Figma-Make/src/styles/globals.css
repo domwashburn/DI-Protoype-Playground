@@ -1,0 +1,187 @@
+/**
+ * IBM Plex fonts for Carbon Design System
+ */
+
+/**
+ * Carbon Design System Color Tokens (Light theme)
+ * Following IBM Carbon Design System v11 color palette
+ * Reference: https://carbondesignsystem.com/elements/color/tokens/
+ */
+:root {
+  /* Carbon UI Colors */
+  --cds-background: #ffffff;
+  --cds-background-hover: #e8e8e8;
+  --cds-background-selected: #e0e0e0;
+  --cds-layer-01: #f4f4f4;
+  --cds-layer-02: #ffffff;
+  --cds-layer-03: #f4f4f4;
+  --cds-field-01: #f4f4f4;
+  --cds-field-02: #ffffff;
+  
+  /* Carbon Text Colors */
+  --cds-text-primary: #161616;
+  --cds-text-secondary: #525252;
+  --cds-text-placeholder: #a8a8a8;
+  --cds-text-on-color: #ffffff;
+  --cds-text-helper: #6f6f6f;
+  --cds-text-error: #da1e28;
+  
+  /* Carbon Border Colors */
+  --cds-border-subtle: #e0e0e0;
+  --cds-border-strong: #8d8d8d;
+  --cds-border-interactive: #0f62fe;
+  
+  /* Carbon Interactive Colors */
+  --cds-interactive-01: #0f62fe; /* Primary button */
+  --cds-interactive-02: #393939; /* Secondary button */
+  --cds-interactive-03: #0f62fe; /* Links */
+  --cds-interactive-04: #0f62fe; /* Selected UI elements */
+  
+  /* Carbon Support Colors */
+  --cds-support-error: #da1e28;
+  --cds-support-success: #24a148;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #0043ce;
+  
+  /* Carbon Highlight Colors */
+  --cds-highlight: #d0e2ff;
+  
+  /* Carbon Spacing Scale (in px) */
+  --cds-spacing-01: 2px;
+  --cds-spacing-02: 4px;
+  --cds-spacing-03: 8px;
+  --cds-spacing-04: 12px;
+  --cds-spacing-05: 16px;
+  --cds-spacing-06: 24px;
+  --cds-spacing-07: 32px;
+  --cds-spacing-08: 40px;
+  --cds-spacing-09: 48px;
+  --cds-spacing-10: 64px;
+  
+  /* Carbon Layout */
+  --cds-layout-01: 16px;
+  --cds-layout-02: 24px;
+  --cds-layout-03: 32px;
+  --cds-layout-04: 48px;
+  
+  /* Carbon Border Radius */
+  --cds-radius-sm: 4px;
+  --cds-radius-md: 8px;
+  
+  /* Carbon Typography */
+  --cds-font-family-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --cds-font-family-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  
+  /* Carbon Interactive Hover States */
+  --cds-interactive-01-hover: #0353e9;
+  --cds-interactive-02-hover: #4c4c4c;
+  
+  /* BAL Editor Specific */
+  --bal-syntax-keyword: #0f62fe;
+  --bal-syntax-string: #198038;
+  --bal-syntax-verbalization: #198038; /* Green - verbalizations like 'variable name'.property */
+  --bal-syntax-number: #8a3ffc;
+  --bal-syntax-operator: #d12771;
+  --bal-syntax-nl-operator: #d12771; /* Pink - natural language operators like "is greater than" */
+  --bal-syntax-comment: #6f6f6f;
+  --bal-syntax-vocabulary: #8a3ffc;
+  --bal-syntax-variable: #8a3ffc; /* Purple - internal variables like 'bonus', 'cost' */
+  
+  /* BAL Dynamic Keyword Highlighting */
+  --bal-definition-term: #0f62fe;        /* Cyan/Blue - user-defined terms from definitions section */
+  --bal-definition-term-bg: #d0e2ff;     /* Light cyan background for definition declarations */
+  --bal-vocabulary-term: #8a3ffc;        /* Purple - data model attributes and vocabulary */
+  --bal-vocabulary-term-bg: #f6f2ff;     /* Light purple background */
+  
+  /* Generic Syntax Highlighting (for Formula, Function editors, etc.) */
+  --syntax-keyword: #0f62fe;       /* Blue - keywords like IF, THEN, ELSE */
+  --syntax-variable: #8a3ffc;      /* Purple - matches BAL vocabulary */
+  --syntax-attribute: #0f62fe;     /* Blue - matches BAL keyword */
+  --syntax-operator: #d12771;      /* Pink - matches BAL operator */
+  --syntax-number: #8a3ffc;        /* Purple */
+  --syntax-function: #0f62fe;      /* Blue */
+  --syntax-string: #198038;        /* Green - matches BAL string */
+  --syntax-comment: #6f6f6f;       /* Gray - matches BAL comment */
+  --syntax-bracket: #525252;       /* Dark gray for brackets/parens */
+  --syntax-comma: #525252;         /* Dark gray for commas */
+  --syntax-variable-undefined: #da1e28;  /* Red for undefined variables */
+  
+  /* Validation State Colors */
+  --validation-error: #da1e28;     /* Red */
+  --validation-error-bg: #fff1f1;  /* Light red background */
+  --validation-warning: #f1c21b;   /* Yellow */
+  --validation-warning-bg: #fcf4d6; /* Light yellow background */
+  --validation-info: #0043ce;      /* Blue */
+  --validation-info-bg: #edf5ff;   /* Light blue background */
+  --validation-success: #24a148;   /* Green */
+  --validation-success-bg: #defbe6; /* Light green background */
+  
+  /* Editor Specific */
+  --editor-line-height: 1.6;
+  --editor-font-size: 14px;
+  --editor-line-number-width: 48px;
+  --editor-padding: var(--cds-spacing-05);
+  
+  /* Scrollbar Colors (Light Theme) */
+  --scrollbar-track: #f4f4f4;
+  --scrollbar-thumb: #8d8d8d;
+  --scrollbar-thumb-hover: #6f6f6f;
+  
+  /**
+   * Convenient Aliases (for readability in component CSS)
+   * These map to Carbon Design System tokens above
+   */
+  
+  /* Background aliases */
+  --background-primary: var(--cds-background);
+  --background-secondary: var(--cds-layer-01);
+  --background-hover: var(--cds-background-hover);
+  --background-selected: var(--cds-background-selected);
+  --background-interactive: var(--cds-interactive-01);
+  --background-interactive-hover: var(--cds-interactive-01-hover);
+  --background-disabled: var(--cds-layer-01);
+  
+  /* Text aliases */
+  --text-primary: var(--cds-text-primary);
+  --text-secondary: var(--cds-text-secondary);
+  --text-placeholder: var(--cds-text-placeholder);
+  --text-on-color: var(--cds-text-on-color);
+  --text-helper: var(--cds-text-helper);
+  --text-error: var(--cds-text-error);
+  --text-disabled: var(--cds-text-placeholder);
+  --text-interactive: var(--cds-interactive-03);
+  --text-interactive-hover: var(--cds-interactive-01-hover);
+  
+  /* Border aliases */
+  --border-subtle: var(--cds-border-subtle);
+  --border-strong: var(--cds-border-strong);
+  --border-interactive: var(--cds-border-interactive);
+  --border-focus: var(--cds-highlight);
+  
+  /* Spacing aliases */
+  --spacing-01: var(--cds-spacing-01);
+  --spacing-02: var(--cds-spacing-02);
+  --spacing-03: var(--cds-spacing-03);
+  --spacing-04: var(--cds-spacing-04);
+  --spacing-05: var(--cds-spacing-05);
+  --spacing-06: var(--cds-spacing-06);
+  --spacing-07: var(--cds-spacing-07);
+  --spacing-08: var(--cds-spacing-08);
+  --spacing-09: var(--cds-spacing-09);
+  --spacing-10: var(--cds-spacing-10);
+  
+  /* Radius aliases */
+  --radius-sm: var(--cds-radius-sm);
+  --radius-md: var(--cds-radius-md);
+  
+  /* Font family aliases */
+  --font-family-sans: var(--cds-font-family-sans);
+  --font-family-mono: var(--cds-font-family-mono);
+}
+
+/**
+ * Global overrides for Carbon components
+ */
+body {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}

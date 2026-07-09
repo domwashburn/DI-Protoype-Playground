@@ -1,0 +1,135 @@
+/**
+ * FormulaDetailsPanel Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ * Follows Carbon Design System spacing and color principles.
+ */
+
+.detailsPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-05);
+  padding: var(--spacing-05);
+  /* Background removed - container handles it */
+  /* Overflow removed - container handles scrolling */
+}
+
+/* Field container */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+}
+
+/* Label styling */
+.label {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* Input overrides */
+.input {
+  /* Override shadcn/ui defaults with our design system */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-03);
+}
+
+.input:focus {
+  outline: 2px solid var(--border-interactive);
+  outline-offset: -2px;
+  border-color: transparent;
+}
+
+/* Select overrides */
+.select {
+  /* Override shadcn/ui defaults with our design system */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-03);
+}
+
+/* Textarea overrides */
+.textarea {
+  /* Override shadcn/ui defaults with our design system */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-03);
+  resize: vertical;
+  min-height: 80px;
+}
+
+.textarea:focus {
+  outline: 2px solid var(--border-interactive);
+  outline-offset: -2px;
+  border-color: transparent;
+}
+
+/* Hint text */
+.hint {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Section divider and container */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+}
+
+.sectionDivider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: var(--spacing-04) 0;
+}
+
+/* Test Section */
+.testSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+  padding: var(--spacing-04);
+  background: var(--background-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.evaluationResult {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-03) 0;
+}
+
+.noMatch {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--spacing-03);
+  background: var(--background-warning);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--border-warning);
+}

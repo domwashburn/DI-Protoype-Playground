@@ -1,0 +1,91 @@
+/* ContentSwitcher - Carbon Design System Component */
+
+.contentSwitcher {
+  display: inline-flex;
+  height: 40px;
+  background: var(--layer-01);
+  border: 1px solid var(--border-strong-01);
+}
+
+/* Size variants */
+.size-sm {
+  height: 32px;
+}
+
+.size-md {
+  height: 40px;
+}
+
+.size-lg {
+  height: 48px;
+}
+
+/* Switch button */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-05);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border-strong-01);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 70ms cubic-bezier(0, 0, 0.38, 0.9);
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  line-height: 18px;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1 1 0%;
+}
+
+.switch:last-child {
+  border-right: none;
+}
+
+.switch:hover {
+  background: var(--layer-01-hover);
+  color: var(--text-primary);
+}
+
+.switch:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.switch:active {
+  background: var(--layer-selected);
+}
+
+/* Selected state */
+.switchSelected {
+  background: var(--layer-selected);
+  color: var(--text-primary);
+  z-index: 0;
+}
+
+.switchSelected:hover {
+  background: var(--layer-selected-hover);
+}
+
+.switchText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Small size adjustments */
+.size-sm .switch {
+  padding: 0 var(--spacing-04);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* Large size adjustments */
+.size-lg .switch {
+  padding: 0 var(--spacing-06);
+  font-size: 16px;
+  line-height: 20px;
+}

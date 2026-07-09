@@ -1,0 +1,1 @@
+export { HeadingBlock } from './HeadingBlock';

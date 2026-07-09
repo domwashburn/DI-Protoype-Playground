@@ -1,0 +1,138 @@
+/**
+ * ErrorWarningList Styles
+ * 
+ * Uses CSS variables from /styles/globals.css for all design system values.
+ */
+
+.container {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--spacing-04);
+  margin-top: var(--spacing-04);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-02);
+}
+
+.title {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.count {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.errorCount {
+  color: var(--text-error);
+}
+
+.warningCount {
+  color: var(--text-warning);
+}
+
+.separator {
+  color: var(--text-secondary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-02);
+}
+
+.issue {
+  display: flex;
+  gap: var(--spacing-03);
+  padding: var(--spacing-03);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.issue:hover {
+  background: var(--background-hover);
+}
+
+.issue.error {
+  background: rgba(218, 30, 40, 0.05);
+}
+
+.issue.error:hover {
+  background: rgba(218, 30, 40, 0.1);
+}
+
+.issue.warning {
+  background: rgba(247, 154, 0, 0.05);
+}
+
+.issue.warning:hover {
+  background: rgba(247, 154, 0, 0.1);
+}
+
+.issueIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2px; /* Align with text */
+}
+
+.issue.error .issueIcon {
+  color: var(--text-error);
+}
+
+.issue.warning .issueIcon {
+  color: var(--text-warning);
+}
+
+.issueContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-01);
+}
+
+.issueLine {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.issueMessage {
+  /* Explicit overrides for component defaults */
+  font-family: var(--font-family-sans);
+  font-size: inherit;
+  line-height: inherit;
+  
+  color: var(--text-primary);
+  font-size: 13px;
+}

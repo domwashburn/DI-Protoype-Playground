@@ -1,0 +1,78 @@
+/**
+ * DebugOutputColumn Styles
+ * 
+ * Right-side column showing computed debug values during formula execution.
+ * Uses Carbon Design System tokens for consistency.
+ */
+
+.debugOutputColumn {
+  /* Layout - Simple block container that grows with content */
+  /* NO height constraint - must be taller than wrapper for scrolling to work */
+  /* Wrapper handles the scrolling window, column provides the scrollable content */
+  box-sizing: border-box;
+  user-select: none;
+  
+  /* Styling - slightly darker than editor background */
+  background: var(--background-secondary);
+  border-left: 1px solid var(--border-subtle);
+  
+  /* Typography - matches editor font */
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: var(--editor-font-size);
+  
+  /* Padding HERE (not on wrapper) to match .lineNumbers exact structure */
+  padding: var(--editor-padding) 0;
+  
+  /* NOTE: overflow and scroll managed by parent wrapper for scroll sync */
+}
+
+.debugOutputCell {
+  /* Line height MUST match textarea exactly for baseline alignment */
+  line-height: calc(var(--editor-font-size) * var(--editor-line-height)); /* 14px * 1.6 = 22.4px */
+  box-sizing: border-box;
+  
+  /* Layout - right-justified text */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  
+  /* Padding - horizontal only, NO vertical padding for alignment (CRIT-003 compliance) */
+  padding-left: var(--spacing-02);
+  padding-right: var(--spacing-03);
+  
+  /* DYNAMIC HEIGHT - Matches line numbers pattern with wrap multiplier */
+  /* Base: calc(14px * 1.6) = 22.4px per line */
+  /* Multiplier: 1 for single line, 2 for wrapped to 2 lines, etc. */
+  height: calc(var(--editor-font-size) * var(--editor-line-height) * var(--line-wrap-multiplier, 1));
+  
+  /* Text overflow handling - single line with ellipsis */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  /* Color - Gray 70 for all non-final values */
+  color: #8d8d8d; /* Gray 70 */
+  
+  /* Bold for any cell with a value (intermediate steps) */
+  font-weight: 600;
+}
+
+.debugOutputCell.error {
+  /* Error values - red and italic */
+  color: var(--cds-support-error);
+  font-style: italic;
+}
+
+/* Final result - bold and green (ONLY the last output) */
+.debugOutputCell.finalResult {
+  font-weight: 600;
+  color: var(--cds-support-success); /* Green 60 */
+}
+
+/* Empty cells (no value for this line) */
+.debugOutputCell:empty {
+  /* Maintain height but show no content */
+  /* Remove bold for empty cells */
+  font-weight: 400;
+  visibility: hidden;
+}
