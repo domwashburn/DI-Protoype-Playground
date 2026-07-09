@@ -4,9 +4,8 @@ import {
   HomePageSectionContent,
 } from "./index";
 import styles from "./PinnedDecisionAutomationSection.module.css";
-import svgPaths from "../../imports/svg-69dlgpfzto";
 import { Button } from "@carbon/react";
-import { Add } from "@carbon/icons-react";
+import { Add, PinFilled, CircleDash, PlayFilledAlt } from "@carbon/icons-react";
 
 export interface DecisionService {
   id: string;
@@ -112,22 +111,7 @@ export function PinnedDecisionAutomationSection({
         title={
           <div className={styles.titleWithPin}>
             <div className={styles.pinIcon}>
-              <svg
-                fill="none"
-                preserveAspectRatio="none"
-                viewBox="0 0 16 16"
-              >
-                <g>
-                  <rect
-                    fill="white"
-                    fillOpacity="0.01"
-                    height="16"
-                    style={{ mixBlendMode: "multiply" }}
-                    width="16"
-                  />
-                  <path d={svgPaths.p3bf33a00} fill="#161616" />
-                </g>
-              </svg>
+              <PinFilled size={16} fill="#161616" />
             </div>
           </div>
         }
@@ -215,53 +199,9 @@ export function PinnedDecisionAutomationSection({
                         <div className={styles.statusWrapper}>
                           <div className={styles.statusIcon}>
                             {service.status === "running" ? (
-                              <svg
-                                fill="none"
-                                preserveAspectRatio="none"
-                                viewBox="0 0 16 16"
-                              >
-                                <g>
-                                  <rect
-                                    fill="white"
-                                    fillOpacity="0.01"
-                                    height="16"
-                                    style={{
-                                      mixBlendMode: "multiply",
-                                    }}
-                                    width="16"
-                                  />
-                                  <path
-                                    d={svgPaths.p342c1580}
-                                    fill="#0043CE"
-                                  />
-                                  <path
-                                    d={svgPaths.p1195fc00}
-                                    fill="#0043CE"
-                                  />
-                                </g>
-                              </svg>
+                              <PlayFilledAlt size={16} fill="#0043CE" />
                             ) : (
-                              <svg
-                                fill="none"
-                                preserveAspectRatio="none"
-                                viewBox="0 0 16 16"
-                              >
-                                <g>
-                                  <rect
-                                    fill="white"
-                                    fillOpacity="0.01"
-                                    height="16"
-                                    style={{
-                                      mixBlendMode: "multiply",
-                                    }}
-                                    width="16"
-                                  />
-                                  <path
-                                    d={svgPaths.p6cba200}
-                                    fill="#6F6F6F"
-                                  />
-                                </g>
-                              </svg>
+                              <CircleDash size={16} fill="#6F6F6F" />
                             )}
                           </div>
                           <p className={styles.statusText}>

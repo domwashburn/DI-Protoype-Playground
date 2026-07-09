@@ -113,7 +113,7 @@
 }
 
 .statusTag {
-  background-color: #d0e2ff;
+  background-color: var(--cds-highlight);
   border-radius: 9px;
   display: flex;
   align-items: center;
@@ -125,7 +125,7 @@
   font-weight: var(--cds-label-01-font-weight);
   line-height: var(--cds-label-01-line-height);
   letter-spacing: var(--cds-label-01-letter-spacing);
-  color: #0043ce;
+  color: var(--cds-interactive);
   padding: var(--cds-spacing-02) var(--cds-spacing-03);
   border-radius: 24px;
   text-align: center;
@@ -292,7 +292,7 @@
 
 /* Notification Banner */
 .notificationBanner {
-  background-color: #fff1f1;
+  background-color: var(--cds-support-error-inverse);
   border: 1px solid rgba(218, 30, 40, 0.3);
   display: flex;
   gap: var(--cds-spacing-05);
@@ -406,7 +406,7 @@
   font-size: var(--text-xl);
   font-weight: var(--font-weight-normal);
   line-height: 1.4;
-  color: #6929c4;
+  color: var(--cds-support-info-inverse);
   margin: 0;
   width: 100%;
   position: relative;
@@ -419,7 +419,7 @@
   font-weight: var(--cds-body-01-font-weight);
   line-height: var(--cds-body-01-line-height);
   letter-spacing: var(--cds-body-01-letter-spacing);
-  color: #6929c4;
+  color: var(--cds-support-info-inverse);
   margin: 0;
   width: 100%;
   position: relative;
@@ -494,7 +494,7 @@
 }
 
 .rightPanelToggle:hover {
-  background-color: #0050e6;
+  background-color: var(--cds-interactive);
 }
 
 .rightPanelToggle svg {

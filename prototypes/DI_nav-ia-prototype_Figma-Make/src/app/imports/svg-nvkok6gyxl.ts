@@ -1,3 +1,0 @@
-export default {
-p22ea8600: "M4.5 3.5V0H3.5V3.5H0V4.5H3.5V8H4.5V4.5H8V3.5H4.5Z",
-}

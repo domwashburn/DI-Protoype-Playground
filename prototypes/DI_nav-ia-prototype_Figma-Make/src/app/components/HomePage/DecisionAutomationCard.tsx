@@ -1,5 +1,5 @@
 import styles from './DecisionAutomationCard.module.css';
-import svgPaths from '../../imports/svg-19c7tsrlrh';
+import { ArrowRight } from '@carbon/icons-react';
 
 export interface DecisionAutomationCardProps {
   name: string;
@@ -29,13 +29,8 @@ export function DecisionAutomationCard({
             <div className={styles.secondaryInner}>
               <div className={styles.secondaryContentBox}>
                 <p className={styles.serviceCount}>{serviceCount}</p>
-                <div className={styles.arrowIcon}>
-                  <svg fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-                    <g>
-                      <rect fill="white" fillOpacity="0.01" height="16" style={{ mixBlendMode: "multiply" }} width="16" />
-                      <path d={svgPaths.pfec3600} fill="#525252" />
-                    </g>
-                  </svg>
+                <div className={styles.arrowIcon} data-testid="card-arrow-icon">
+                  <ArrowRight size={16} fill="#525252" />
                 </div>
               </div>
             </div>

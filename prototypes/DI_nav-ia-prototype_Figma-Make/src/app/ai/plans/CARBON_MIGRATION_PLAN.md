@@ -813,7 +813,7 @@ export { Button, IconButton, OverflowMenu, OverflowMenuItem } from '@carbon/reac
 | 4A | ✅ Complete | v2.24 | CarbonHeader created; GlobalHeader deleted |
 | 4B | ✅ Complete | v2.24 | CarbonSideNav created; NavigationPanel deleted |
 | 4C | ✅ Complete | v2.34 | BreadcrumbActionBar → @carbon/react Breadcrumb + BreadcrumbItem |
-| 5A | Not started | — | SideRail Tooltip (previously reverted) |
+| 5A | ✅ Complete | v2.x | Carbon Tooltip already in use across all SideRail components; no custom Tooltip.tsx ever existed |
 | 5B | ✅ Complete | v2.24 | Carbon TreeView in TaskModelPage; TreeNavigation deleted |
 | 6A | ✅ Complete | v2.24 | Panel z-index/dim tokens in globals.css; all panel CSS updated |
 | 6B | ✅ Complete | v2.35–2.38 | Panel content token audit; final actionButton clone removed v2.38 |
@@ -821,8 +821,8 @@ export { Button, IconButton, OverflowMenu, OverflowMenuItem } from '@carbon/reac
 | 7B | ⏸ Deferred | — | Spacing tokens retained as fallbacks; CDN load-order makes removal risky |
 | 8A | ✅ Complete | v2.37 | InboxPanelToolbar → Carbon Search + Button; all 5 components relabeled Custom Carbon-compliant |
 | 9A | Not started | — | Deferred |
-| 10A | Not started | — | |
-| 10B | Not started | — | |
+| 10A | ✅ Complete | v2.50 | Dead imports dir deleted, lucide eliminated, SVG path files removed, dead deps pruned |
+| 10B | ✅ Complete | v2.50 | CHANGELOG updated, plan docs updated, readme.agents.md files created for 7 components |
 
 **Total: 24 sub-phases across 10 phases**
 **Estimated: ~18-20 sessions** (some sub-phases can be combined if simple)

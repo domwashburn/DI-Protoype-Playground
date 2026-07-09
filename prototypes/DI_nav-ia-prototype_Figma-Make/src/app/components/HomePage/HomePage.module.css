@@ -81,3 +81,29 @@
   color: var(--cds-text-secondary);
   margin: 0;
 }
+
+/* ============================================
+   EXPLORE TILES LAYOUT (ResourceHubTile + WhatsNewTile)
+   Mirrors the original Figma 8-col / 4-col split within the 12-col
+   content area of HomePageSectionContent.
+   ============================================ */
+
+/* Default: stacked */
+.exploreTiles {
+  display: grid;
+  gap: var(--cds-spacing-05);
+  width: 100%;
+  grid-template-columns: 1fr;
+}
+
+/* lg+: side-by-side — ResourceHub takes ~2/3, WhatsNew ~1/3 */
+@media (min-width: 1056px) {
+  .exploreTiles {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.exploreTileResource,
+.exploreTileWhatsNew {
+  min-width: 0;
+}

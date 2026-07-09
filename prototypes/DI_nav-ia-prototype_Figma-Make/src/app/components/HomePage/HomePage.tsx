@@ -1,7 +1,8 @@
 import styles from "./HomePage.module.css";
 import { HomePageHeader, HomePageSection, HomePageSectionTitle, HomePageSectionContent, PinnedDecisionAutomationSection, RecentDecisionAutomationsSection } from "./";
 import { Card, CardGrid } from "../CardLayout";
-import HomePageRecentProjectsProjectGrid4X2 from "../../imports/HomePageRecentProjectsProjectGrid4X2";
+import { ResourceHubTile } from "../ResourceHubTile";
+import { WhatsNewTile } from "../WhatsNewTile";
 import { useRecentAutomations, usePinnedAutomations } from "../../data/hooks";
 import { useAutomations, useServices } from "../../data/hooks";
 import { useMemo } from "react";
@@ -117,12 +118,19 @@ export default function HomePage() {
 
       {/* Explore section */}
       <HomePageSection backgroundColor="var(--cds-background)">
-        <HomePageSectionTitle 
+        <HomePageSectionTitle
           title="Explore"
           subtitle="Quick access to resources and tools"
         />
         <HomePageSectionContent>
-          <HomePageRecentProjectsProjectGrid4X2 />
+          <div className={styles.exploreTiles}>
+            <div className={styles.exploreTileResource}>
+              <ResourceHubTile />
+            </div>
+            <div className={styles.exploreTileWhatsNew}>
+              <WhatsNewTile />
+            </div>
+          </div>
         </HomePageSectionContent>
       </HomePageSection>
     </div>

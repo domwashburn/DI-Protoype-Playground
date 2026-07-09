@@ -1,7 +1,7 @@
 # InboxLayout — Agent Context
 
 > **For humans:** see `README.md`
-> **Last updated:** 2026-03-05 (Phase 8A)
+> **Last updated:** 2026-03-05 (Phase 8A — confirmed complete)
 
 ---
 
@@ -138,6 +138,11 @@ Always import from the barrel (`../InboxLayout`), never from individual files.
 1. **`InboxActionButton` has an inline `style` prop** — the dropdown-separator
    border (`borderLeft: '1px solid rgba(255,255,255,0.3)'`) is a hardcoded
    value in `InboxActionButton.module.css`. Track for cleanup in Phase 10.
+
+0. **`InboxPanelToolbar` has a hardcoded `id="inbox-panel-search"`** — the Carbon
+   `Search` component requires an `id` prop for its `<label>` association. Currently
+   hardcoded; if multiple toolbars render on the same page, the duplicate `id` will
+   fail accessibility checks. Pass a unique `id` prop or generate one with `useId()`.
 
 2. ~~**`InboxPanelToolbar` is a custom `<input>`**~~ — **Resolved in Phase 8A.**
    Now uses `@carbon/react` `Search` + `Button`.

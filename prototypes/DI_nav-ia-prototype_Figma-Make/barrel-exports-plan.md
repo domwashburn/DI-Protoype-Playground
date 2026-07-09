@@ -1,5 +1,7 @@
 # Barrel Export Refactoring Plan
 
+> **Status: ✅ Complete** — Completed organically during Carbon migration phases — all components already in folder+barrel form. All six sub-tasks are done.
+
 ## Overview
 
 **Goal:** Convert all loose component files at the top of `src/app/components/` into
@@ -32,7 +34,7 @@ Playwright must be installed as a dev dependency before Sub-Task 1 begins.
 
 ## Sub-Task 1 — Add barrel to `ChatHistoryPanel/`
 
-**Status:** `[ ] pending`
+**Status:** `[x] done`
 
 **Intent:**
 `ChatHistoryPanel/` is already a folder with a `.tsx` and `.module.css` but lacks an
@@ -61,7 +63,7 @@ the clean `'./ChatHistoryPanel'` path.
 
 ## Sub-Task 2 — Wrap & barrel: simple default-export components (Group A)
 
-**Status:** `[ ] pending`
+**Status:** `[x] done`
 
 **Intent:**
 Move 9 loose, purely default-exported components that each have exactly one `.tsx` +
@@ -123,7 +125,7 @@ For each of the 9 components:
 
 ## Sub-Task 3 — Wrap & barrel: components with named exports (Group B)
 
-**Status:** `[ ] pending`
+**Status:** `[x] done`
 
 **Intent:**
 These components export both a default AND named exports (interfaces, types, or named
@@ -204,7 +206,7 @@ all public symbols so consuming code continues to work without any import-side c
 
 ## Sub-Task 4 — Wrap & barrel: `ApplicationLayoutTemplate` and `CarbonDecisionAssistant`
 
-**Status:** `[ ] pending`
+**Status:** `[x] done`
 
 **Intent:**
 These two are the most heavily internally-coupled top-level loose components.
@@ -279,7 +281,7 @@ already in their final folder locations.
 
 ## Sub-Task 5 — Wrap & barrel: orphaned/unused loose components
 
-**Status:** `[ ] pending`
+**Status:** `[x] done`
 
 **Intent:**
 Four loose components have no consumers and are unused. They still need to be wrapped
@@ -330,7 +332,7 @@ moved to its own folder in this sub-task, its internal CSS import must be update
 
 ## Sub-Task 0 — Install Playwright and capture baseline snapshots
 
-**Status:** `[ ] pending`
+**Status:** `[x] done`
 
 **Intent:**
 Before any files are moved, install Playwright as a dev dependency and capture full-page
@@ -381,7 +383,7 @@ regression. Playwright is installed once here and reused by Sub-Tasks 1–6.
 
 ## Sub-Task 6 — Final audit and verification
 
-**Status:** `[ ] pending`
+**Status:** `[x] done`
 
 **Intent:**
 After all moves and barrel creations, do a focused sweep to confirm zero broken imports,

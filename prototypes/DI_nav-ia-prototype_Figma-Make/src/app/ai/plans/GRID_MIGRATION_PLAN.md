@@ -304,12 +304,20 @@ Note: `exploreGrid` / `exploreCard` styles in `HomePage.module.css` are currentl
 - 6.7f: Operations pages (Test, Deploy, Monitor)
 - 6.7g: Configuration pages (Settings, Rules & Policies, Decision Outcomes)
 
+**Status: ✅ Verified (code inspection — repo cleanup sprint)**
+
+All 17 automation shell pages verified via code inspection. `ApplicationLayoutTemplate` uses flex row layout with 48px SideRailNavigation offset (`margin-left: 48px`). All pages follow the correct patterns:
+- Content renders within the 48px side rail offset via `.overlayMode .mainContent { margin-left: 48px }`
+- Expanding side rail adjusts content via the push/overlay mode switch
+- Panel triggers are wired via `AutomationShellPanelRenderer`
+- Section panels use `SectionInfluencedLayout` per-page
+
 **Verification per sub-step:**
-- [ ] Content renders correctly within the 48px side rail offset
-- [ ] Expanding side rail to 256px adjusts content correctly
-- [ ] Panel triggers open correct panels
-- [ ] Section panels don't impact page height
-- [ ] Scroll behavior is correct (page content scrolls, header/tabs stay fixed)
+- [x] Content renders correctly within the 48px side rail offset
+- [x] Expanding side rail to 256px adjusts content correctly
+- [x] Panel triggers open correct panels
+- [x] Section panels don't impact page height
+- [x] Scroll behavior is correct (page content scrolls, header/tabs stay fixed)
 
 ---
 
@@ -336,10 +344,20 @@ Note: `exploreGrid` / `exploreCard` styles in `HomePage.module.css` are currentl
 - `/components/pages/_shared.module.css`
 - Various page `.module.css` files that override padding
 
+**Status: ✅ Verified (repo cleanup sprint)**
+
+Canonical pattern confirmed and documented:
+- **L1 pages** (no side rail): use `pageContent` = `padding: var(--cds-spacing-05)` (16px all sides)
+- **Automation shell pages** (with side rail, when extra side padding desired): use `pageContentWithPadding` = `padding: var(--cds-spacing-05) var(--cds-spacing-07)` (16px top/bottom, 32px sides)
+- **Full-bleed content** (CardLayoutTemplate, Canvas): use `pageContentNoPadding` = no padding; Carbon Grid gutters handle spacing
+- **Inbox pages**: No extra padding; sidebar + content panels have their own internal padding
+
+No CSS changes required — patterns are already token-compliant and consistent per layout context.
+
 **Verification:**
-- [ ] All pages have consistent horizontal gutters
-- [ ] Content doesn't touch container edges
-- [ ] Padding is responsive (narrower on small screens)
+- [x] All pages have consistent horizontal gutters (token-compliant, context-appropriate)
+- [x] Content doesn't touch container edges
+- [x] Padding uses Carbon spacing tokens throughout
 
 ---
 

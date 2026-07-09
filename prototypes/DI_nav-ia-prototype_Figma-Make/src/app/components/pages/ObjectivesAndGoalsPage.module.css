@@ -39,7 +39,7 @@
 
 .sectionTitle {
   font-family: var(--cds-font-family);
-  font-size: 20px;
+  font-size: var(--cds-heading-03-font-size);
   font-weight: 400;
   line-height: 28px;
   letter-spacing: 0px;
@@ -49,7 +49,7 @@
 
 .sectionText {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -81,7 +81,7 @@
 
 .keyResultTitle {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -90,7 +90,7 @@
 
 .keyResultProgress {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -137,7 +137,7 @@
   align-items: center;
   justify-content: center;
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   flex-shrink: 0;
 }
@@ -150,7 +150,7 @@
 
 .memberName {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -159,7 +159,7 @@
 
 .memberRole {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -182,7 +182,7 @@
 
 .detailLabel {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -192,7 +192,7 @@
 
 .detailValue {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -202,40 +202,40 @@
 
 /* Status Colors */
 .status-on-track {
-  color: #24a148;
+  color: var(--cds-support-success);
 }
 
 .status-at-risk {
-  color: #da1e28;
+  color: var(--cds-support-error);
 }
 
 .status-active {
-  color: #0f62fe;
+  color: var(--cds-interactive);
 }
 
 .status-achieved {
-  color: #198038;
+  color: var(--cds-support-success);
 }
 
 .status-delayed {
-  color: #f1c21b;
+  color: var(--cds-support-warning);
 }
 
 /* Priority Colors */
 .priority-critical {
-  color: #da1e28;
+  color: var(--cds-support-error);
 }
 
 .priority-high {
-  color: #ff832b;
+  color: var(--cds-support-warning-inverse);
 }
 
 .priority-medium {
-  color: #0f62fe;
+  color: var(--cds-interactive);
 }
 
 .priority-low {
-  color: #8d8d8d;
+  color: var(--cds-text-secondary);
 }
 
 /* Goal Card */
@@ -256,7 +256,7 @@
 
 .goalName {
   font-family: var(--cds-font-family);
-  font-size: 16px;
+  font-size: var(--cds-heading-compact-01-font-size);
   font-weight: 600;
   line-height: 22px;
   letter-spacing: 0px;
@@ -265,7 +265,7 @@
 
 .goalProgress {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -274,7 +274,7 @@
 
 .goalDescription {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -290,7 +290,7 @@
 
 .goalImpact {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -300,7 +300,7 @@
 
 .goalStatus {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -339,7 +339,7 @@
 
 .automationName {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -348,12 +348,12 @@
 
 .aiGeneratedBadge {
   font-family: var(--cds-font-family);
-  font-size: 11px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
-  line-height: 16px;
+  line-height: var(--cds-label-01-line-height);
   letter-spacing: 0.32px;
-  color: #ffffff;
-  background-color: #8a3ffc;
+  color: var(--cds-text-inverse);
+  background-color: var(--cds-support-info-inverse);
   padding: 2px var(--cds-spacing-03);
   border-radius: 2px;
   text-transform: uppercase;
@@ -362,7 +362,7 @@
 
 .automationDescription {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -378,7 +378,7 @@
 
 .automationStatus {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -387,7 +387,7 @@
 
 .automationServices {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -396,7 +396,7 @@
 
 .memberTeam {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -421,7 +421,7 @@
 
 .timelineLabel {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -430,7 +430,7 @@
 
 .timelineValue {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -450,7 +450,7 @@
 
 .placeholderTitle {
   font-family: var(--cds-font-family);
-  font-size: 20px;
+  font-size: var(--cds-heading-03-font-size);
   font-weight: 400;
   line-height: 28px;
   letter-spacing: 0px;
@@ -460,7 +460,7 @@
 
 .placeholderText {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -484,7 +484,7 @@
 
 .detailLabel {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -494,7 +494,7 @@
 
 .detailValue {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -509,27 +509,27 @@
 }
 
 .status-on-track {
-  color: #24a148;
+  color: var(--cds-support-success);
 }
 
 .status-at-risk {
-  color: #da1e28;
+  color: var(--cds-support-error);
 }
 
 .status-achieved {
-  color: #24a148;
+  color: var(--cds-support-success);
 }
 
 .status-deployed {
-  color: #24a148;
+  color: var(--cds-support-success);
 }
 
 .priority-critical {
-  color: #da1e28;
+  color: var(--cds-support-error);
 }
 
 .priority-high {
-  color: #ff832b;
+  color: var(--cds-support-warning-inverse);
 }
 
 .priority-medium {
@@ -558,7 +558,7 @@
 
 .goalName {
   font-family: var(--cds-font-family);
-  font-size: 16px;
+  font-size: var(--cds-heading-compact-01-font-size);
   font-weight: 600;
   line-height: 22px;
   letter-spacing: 0px;
@@ -567,7 +567,7 @@
 
 .goalProgress {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -576,7 +576,7 @@
 
 .goalDescription {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -592,7 +592,7 @@
 
 .goalImpact {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -601,7 +601,7 @@
 
 .goalStatus {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -640,7 +640,7 @@
 
 .automationName {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -649,10 +649,10 @@
 
 .aiGeneratedBadge {
   padding: 0 var(--cds-spacing-03);
-  background-color: #8a3ffc;
+  background-color: var(--cds-support-info-inverse);
   color: var(--cds-text-on-color);
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -662,7 +662,7 @@
 
 .automationDescription {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -678,7 +678,7 @@
 
 .automationStatus {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 600;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -687,7 +687,7 @@
 
 .automationServices {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;
@@ -712,7 +712,7 @@
 
 .timelineLabel {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -721,7 +721,7 @@
 
 .timelineValue {
   font-family: var(--cds-font-family);
-  font-size: 14px;
+  font-size: var(--cds-body-01-font-size);
   font-weight: 600;
   line-height: 18px;
   letter-spacing: 0.16px;
@@ -730,7 +730,7 @@
 
 .memberTeam {
   font-family: var(--cds-font-family);
-  font-size: 12px;
+  font-size: var(--cds-label-01-font-size);
   font-weight: 400;
   line-height: 16px;
   letter-spacing: 0.32px;

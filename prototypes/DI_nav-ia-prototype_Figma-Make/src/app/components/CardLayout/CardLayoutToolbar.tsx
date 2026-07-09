@@ -1,4 +1,5 @@
-import { ChevronDown, Search, LayoutGrid, List } from "lucide-react";
+import { Select, SelectItem, Search } from "@carbon/react";
+import { Grid, List } from "@carbon/icons-react";
 import styles from "./CardLayoutToolbar.module.css";
 
 export interface SortOption {
@@ -33,10 +34,10 @@ export interface CardLayoutToolbarProps {
 
 /**
  * CardLayoutToolbar Component
- * 
+ *
  * Provides sorting, searching, and view mode controls for card layouts.
  * All sections are optional and can be hidden via props.
- * 
+ *
  * @example
  * <CardLayoutToolbar
  *   sortOptions={[
@@ -62,7 +63,7 @@ export default function CardLayoutToolbar({
   onViewModeChange,
   hideSort = false,
   hideSearch = false,
-  hideViewToggle = false
+  hideViewToggle = false,
 }: CardLayoutToolbarProps) {
   return (
     <div className={styles.toolbar}>
@@ -72,18 +73,25 @@ export default function CardLayoutToolbar({
           <div className={styles.sortSection}>
             <label className={styles.sortLabel}>Sort by:</label>
             <div className={styles.sortDropdown}>
-              <select
+              <Select
+                id="card-layout-sort"
+                labelText="Sort by:"
+                hideLabel
+                size="md"
                 value={sortValue}
-                onChange={(e) => onSortChange?.(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  onSortChange?.(e.target.value)
+                }
                 className={styles.sortSelect}
               >
                 {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    text={option.label}
+                  />
                 ))}
-              </select>
-              <ChevronDown className={styles.sortChevron} />
+              </Select>
             </div>
           </div>
         )}
@@ -91,16 +99,17 @@ export default function CardLayoutToolbar({
         {/* Search Section */}
         {!hideSearch && (
           <div className={styles.searchSection}>
-            <div className={styles.searchContainer}>
-              <Search className={styles.searchIcon} />
-              <input
-                type="text"
-                placeholder={searchPlaceholder}
-                value={searchValue}
-                onChange={(e) => onSearchChange?.(e.target.value)}
-                className={styles.searchInput}
-              />
-            </div>
+            <Search
+              id="card-layout-search"
+              labelText="Search"
+              placeholder={searchPlaceholder}
+              value={searchValue}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onSearchChange?.(e.target.value)
+              }
+              size="md"
+              data-testid="toolbar-search-icon"
+            />
           </div>
         )}
       </div>
@@ -114,14 +123,16 @@ export default function CardLayoutToolbar({
               onClick={() => onViewModeChange?.("grid")}
               aria-label="Grid view"
               type="button"
+              data-testid="toolbar-grid-btn"
             >
-              <LayoutGrid className={styles.viewIcon} />
+              <Grid className={styles.viewIcon} />
             </button>
             <button
               className={`${styles.viewButton} ${viewMode === "list" ? styles.viewButtonActive : ""}`}
               onClick={() => onViewModeChange?.("list")}
               aria-label="List view"
               type="button"
+              data-testid="toolbar-list-btn"
             >
               <List className={styles.viewIcon} />
             </button>

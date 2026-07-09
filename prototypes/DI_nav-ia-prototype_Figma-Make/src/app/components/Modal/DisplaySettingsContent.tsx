@@ -11,31 +11,23 @@
  * - Drag and drop re-ordering using react-dnd
  */
 
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { usePinnedAutomations, useAutomations, useServices } from '../../data/hooks';
 import styles from './DisplaySettingsContent.module.css';
-import { 
-  Search, 
-  X, 
-  GripVertical
-} from 'lucide-react';
+import { DragVertical, Pin, PinFilled } from '@carbon/icons-react';
+import { Search } from '@carbon/react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import svgPaths from '../../imports/svg-wxegm48afc';
 
 interface DisplaySettingsContentProps {
   onApply?: () => void;
   isOpen?: boolean;
+  applyRef?: React.MutableRefObject<(() => void) | undefined>;
 }
 
 const ItemTypes = {
   AUTOMATION: 'automation',
 };
-
-// Original path from Figma/imports
-const PIN_PATH_OUTLINE = svgPaths.p1057a580;
-// Filled version: Remove the inner hole (ZM...Z)
-const PIN_PATH_FILLED = PIN_PATH_OUTLINE.split('ZM')[0] + 'Z';
 
 interface DraggableItemProps {
   id: string;
@@ -82,7 +74,7 @@ function DraggableItem({
   });
 
   return (
-    <div 
+    <div
       ref={(node) => {
         if (node) {
           drag(drop(node));
@@ -92,8 +84,8 @@ function DraggableItem({
       style={{ opacity: isDragging ? 0.4 : 1 }}
     >
       <div className={styles.listItemContent}>
-        <div className={styles.dragIcon}>
-          <GripVertical size={16} />
+        <div className={styles.dragIcon} data-testid="drag-handle">
+          <DragVertical size={16} />
         </div>
         <p className={styles.listItemText}>{name}</p>
         <button
@@ -101,22 +93,17 @@ function DraggableItem({
           onClick={() => (isPinned || canPin) && onTogglePin(id)}
           disabled={!isPinned && !canPin}
           type="button"
+          data-testid="pin-btn"
           title={isPinned ? "Unpin" : canPin ? "Pin to home" : "Maximum of 4 items reached"}
         >
-          <svg fill="none" preserveAspectRatio="none" viewBox="0 0 16 16" width="16" height="16">
-            <rect fill="white" fillOpacity="0.01" height="16" width="16" />
-            <path 
-              d={isPinned ? PIN_PATH_FILLED : PIN_PATH_OUTLINE} 
-              fill="currentColor"
-            />
-          </svg>
+          {isPinned ? <PinFilled size={16} /> : <Pin size={16} />}
         </button>
       </div>
     </div>
   );
 }
 
-export function DisplaySettingsContent({ onApply, isOpen }: DisplaySettingsContentProps) {
+export function DisplaySettingsContent({ onApply, isOpen, applyRef }: DisplaySettingsContentProps) {
   const [activeTab, setActiveTab] = useState<'all' | 'pinned'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -185,28 +172,30 @@ export function DisplaySettingsContent({ onApply, isOpen }: DisplaySettingsConte
     });
   }, [orderedAutomations, searchTerm, activeTab, stagedPinnedIds]);
 
-  // Expose apply function to parent via window (standard pattern in this project)
+  // Expose apply function via ref instead of window global
   useEffect(() => {
-    if (onApply) {
-      (window as any).__displaySettingsApply = () => {
-        const finalPinnedIdsInOrder = orderedAutomations
-          .filter(a => stagedPinnedIds.includes(a.id))
-          .map(a => a.id);
+    const applyFn = () => {
+      const finalPinnedIdsInOrder = orderedAutomations
+        .filter(a => stagedPinnedIds.includes(a.id))
+        .map(a => a.id);
 
-        setPinnedAutomationsList(finalPinnedIdsInOrder.map(id => {
-          const automation = automations.find(a => a.id === id);
-          return {
-            id: automation?.id || '',
-            name: automation?.displayName || automation?.name || '',
-            description: automation?.description || '',
-            serviceCount: `${serviceCountsByAutomation.get(automation?.id || '') || 0} decision services`
-          };
-        }));
+      setPinnedAutomationsList(finalPinnedIdsInOrder.map(id => {
+        const automation = automations.find(a => a.id === id);
+        return {
+          id: automation?.id || '',
+          name: automation?.displayName || automation?.name || '',
+          description: automation?.description || '',
+          serviceCount: `${serviceCountsByAutomation.get(automation?.id || '') || 0} decision services`
+        };
+      }));
 
-        onApply();
-      };
+      onApply?.();
+    };
+
+    if (applyRef) {
+      applyRef.current = applyFn;
     }
-  }, [stagedPinnedIds, orderedAutomations, automations, serviceCountsByAutomation, setPinnedAutomationsList, onApply]);
+  }, [stagedPinnedIds, orderedAutomations, automations, serviceCountsByAutomation, setPinnedAutomationsList, onApply, applyRef]);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -244,28 +233,16 @@ export function DisplaySettingsContent({ onApply, isOpen }: DisplaySettingsConte
         </div>
 
         {/* Search */}
-        <div className={styles.searchWrapper}>
-          <div className={styles.searchInput}>
-            <div className={styles.searchIcon}>
-              <Search size={16} color="var(--cds-icon-primary)" />
-            </div>
-            <input
-              type="text"
-              placeholder="Find a decision project"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={styles.searchField}
-            />
-            {searchTerm && (
-              <button 
-                className={styles.clearButton}
-                onClick={() => setSearchTerm('')}
-                type="button"
-              >
-                <X size={16} color="var(--cds-icon-primary)" />
-              </button>
-            )}
-          </div>
+        <div className={styles.searchContainer}>
+          <Search
+            id="display-settings-search"
+            labelText="Find a decision project"
+            placeholder="Find a decision project"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            size="md"
+            data-testid="search-icon"
+          />
         </div>
 
         {/* Automation List */}

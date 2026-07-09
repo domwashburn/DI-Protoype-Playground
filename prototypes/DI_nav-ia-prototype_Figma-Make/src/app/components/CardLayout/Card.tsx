@@ -1,7 +1,7 @@
 import { ReactNode, MouseEvent } from "react";
 import { Tile, ClickableTile, OverflowMenu, OverflowMenuItem } from "@carbon/react";
+import { OverflowMenuVertical } from "@carbon/icons-react";
 import styles from "./Card.module.css";
-import svgPaths from "../../imports/svg-764ter8l8r";
 
 export interface CardMenuItem {
   label: string;
@@ -123,24 +123,13 @@ export function CardHeader({
       
       {/* Legacy overflow menu button - for backwards compatibility */}
       {hasLegacyMenu && (
-        <button 
+        <button
           className={styles.overflowMenuButton}
           onClick={onMenuClick}
           type="button"
           aria-label="Card actions"
         >
-          <svg 
-            className={styles.overflowMenuIcon} 
-            fill="none" 
-            viewBox="0 0 16 16"
-          >
-            <rect fill="white" fillOpacity="0.01" height="16" width="16" />
-            <g>
-              <path d={svgPaths.p3bcaf400} fill="currentColor" />
-              <path d={svgPaths.p3af0dbf2} fill="currentColor" />
-              <path d={svgPaths.p2dfee680} fill="currentColor" />
-            </g>
-          </svg>
+          <OverflowMenuVertical className={styles.overflowMenuIcon} size={16} />
         </button>
       )}
       

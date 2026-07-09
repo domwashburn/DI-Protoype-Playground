@@ -1,3 +1,5 @@
+> ⚠️ **SUPERSEDED** — This document is no longer the authoritative plan. Refer to [`src/app/ai/plans/CARBON_MIGRATION_PLAN.md`](./ai/plans/CARBON_MIGRATION_PLAN.md) for the current execution tracker and all active sub-phases.
+
 # Carbon v11 Migration - Comprehensive Execution Plan
 
 **Purpose:** A step-by-step implementation guide with every file change, dependency, and verification step needed to migrate this codebase to IBM Carbon Design System v11 compliance using the Strangler Fig pattern.

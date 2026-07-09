@@ -858,3 +858,25 @@
   color: var(--cds-text-secondary);
   margin: 0;
 }
+
+/* Change type status colors — replaces getChangeTypeColor() inline styles */
+.changeTypeAdded {
+  color: var(--cds-support-success);
+}
+
+.changeTypeModified {
+  color: var(--cds-support-warning);
+}
+
+.changeTypeRemoved {
+  color: var(--cds-support-error);
+}
+
+/* History tab: change badge colors */
+.changeBadgeAdded {
+  background-color: var(--cds-support-success);
+}
+
+.changeBadgeRemoved {
+  background-color: var(--cds-support-error);
+}

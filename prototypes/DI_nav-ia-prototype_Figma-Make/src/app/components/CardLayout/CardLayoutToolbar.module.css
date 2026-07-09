@@ -44,29 +44,9 @@
   align-items: center;
 }
 
+/* Normalize Carbon Select to fit inline toolbar layout */
 .sortSelect {
-  font-family: var(--cds-font-family);
-  color: var(--cds-text-primary);
-  background-color: transparent;
-  border: none;
-  padding-right: var(--cds-spacing-06);
-  cursor: pointer;
-  appearance: none;
-  outline: none;
-}
-
-.sortSelect:focus-visible {
-  outline: 2px solid var(--cds-focus);
-  outline-offset: 2px;
-}
-
-.sortChevron {
-  position: absolute;
-  right: 0;
-  width: 16px;
-  height: 16px;
-  color: var(--cds-icon-primary);
-  pointer-events: none;
+  min-width: 160px;
 }
 
 /* Search Section */
@@ -74,47 +54,6 @@
   flex: 1;
   min-width: 200px;
   max-width: 400px;
-}
-
-.searchContainer {
-  display: flex;
-  align-items: center;
-  gap: var(--cds-spacing-03);
-  background-color: var(--cds-field-01);
-  border-bottom: 1px solid var(--cds-border-strong-01);
-  padding: var(--cds-spacing-03) var(--cds-spacing-04);
-  transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9),
-              border-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
-}
-
-.searchContainer:hover {
-  background-color: var(--cds-field-hover-01);
-}
-
-.searchContainer:focus-within {
-  border-bottom: 2px solid var(--cds-focus);
-  padding-bottom: calc(var(--cds-spacing-03) - 1px);
-}
-
-.searchIcon {
-  width: 16px;
-  height: 16px;
-  color: var(--cds-icon-primary);
-  flex-shrink: 0;
-}
-
-.searchInput {
-  font-family: var(--cds-font-family);
-  color: var(--cds-text-primary);
-  background-color: transparent;
-  border: none;
-  outline: none;
-  flex: 1;
-  min-width: 0;
-}
-
-.searchInput::placeholder {
-  color: var(--cds-text-placeholder);
 }
 
 /* View Toggle */

@@ -1,28 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@carbon/react";
-import svgPaths from "../../imports/svg-jon3mbttas";
-import settingsIconPaths from "../../imports/svg-8azqa4lekk";
 import styles from "./HomePageHeader.module.css";
 import { Modal, DisplaySettingsContent } from "../Modal";
-import { ChevronUp, ChevronDown } from "@carbon/icons-react";
-
-// ── Stable icon component references (defined outside render to avoid new-FC-per-render) ──
-
-/** Settings gear icon — composed from Figma-imported SVG paths.
- *  Accepts `className` so Carbon's Button can apply `.cds--btn__icon`
- *  positioning rules when this is passed as `renderIcon`. */
-const SettingsIcon = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 16 16"
-    className={className}
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d={settingsIconPaths.p2acbe800} />
-    <path d={settingsIconPaths.pb1a8400} />
-  </svg>
-);
-SettingsIcon.displayName = "SettingsIcon";
+import { ChevronUp, ChevronDown, SettingsAdjust, WatsonxAi, SendAlt, WorkflowAutomation, ServiceDesk } from "@carbon/icons-react";
 
 interface HomePageHeaderProps {
   userName?: string;
@@ -38,6 +18,7 @@ export function HomePageHeader({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isDisplaySettingsOpen, setIsDisplaySettingsOpen] =
     useState(false);
+  const displaySettingsApplyRef = useRef<(() => void) | undefined>(undefined);
 
   const handleDisplaySettings = () => {
     setIsDisplaySettingsOpen(true);
@@ -62,7 +43,8 @@ export function HomePageHeader({
             size="md"
             onClick={handleDisplaySettings}
             type="button"
-            renderIcon={SettingsIcon}
+            renderIcon={SettingsAdjust}
+            data-testid="settings-btn-icon"
           >
             Display settings
           </Button>
@@ -138,47 +120,8 @@ export function HomePageHeader({
                             <div
                               className={styles.termIconWrapper}
                             >
-                              <div className={styles.termIcon}>
-                                <svg
-                                  fill="none"
-                                  preserveAspectRatio="none"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <g>
-                                    <rect
-                                      fill="white"
-                                      fillOpacity="0.01"
-                                      height="24"
-                                      style={{
-                                        mixBlendMode:
-                                          "multiply",
-                                      }}
-                                      width="24"
-                                    />
-                                    <g>
-                                      <path
-                                        d={svgPaths.p37817100}
-                                        fill="#525252"
-                                      />
-                                      <path
-                                        d={svgPaths.p1a73cc80}
-                                        fill="#525252"
-                                      />
-                                      <path
-                                        d={svgPaths.p11e47970}
-                                        fill="#525252"
-                                      />
-                                      <path
-                                        d={svgPaths.p36b58080}
-                                        fill="#525252"
-                                      />
-                                      <path
-                                        d={svgPaths.p1697b400}
-                                        fill="#525252"
-                                      />
-                                    </g>
-                                  </g>
-                                </svg>
+                              <div className={styles.termIcon} data-testid="chat-tile-icon">
+                                <WatsonxAi size={24} fill="#525252" />
                               </div>
                             </div>
                             <div className={styles.aiTileBeta}>
@@ -276,31 +219,9 @@ export function HomePageHeader({
                                         className={
                                           styles.sendIcon
                                         }
+                                        data-testid="chat-send-icon"
                                       >
-                                        <svg
-                                          fill="none"
-                                          preserveAspectRatio="none"
-                                          viewBox="0 0 16 16"
-                                        >
-                                          <g>
-                                            <rect
-                                              fill="white"
-                                              fillOpacity="0.01"
-                                              height="16"
-                                              style={{
-                                                mixBlendMode:
-                                                  "multiply",
-                                              }}
-                                              width="16"
-                                            />
-                                            <path
-                                              d={
-                                                svgPaths.pf9d6480
-                                              }
-                                              fill="#A8A8A8"
-                                            />
-                                          </g>
-                                        </svg>
+                                        <SendAlt size={16} fill="#A8A8A8" />
                                       </div>
                                     </div>
                                   </div>
@@ -345,25 +266,8 @@ export function HomePageHeader({
                       <div
                         className={styles.taskTileIconWrapper}
                       >
-                        <div className={styles.taskTileIcon}>
-                          <svg
-                            fill="none"
-                            preserveAspectRatio="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <g>
-                              <rect
-                                fill="white"
-                                fillOpacity="0.01"
-                                height="24"
-                                width="24"
-                              />
-                              <path
-                                d={svgPaths.p2e0fc7f0}
-                                fill="#525252"
-                              />
-                            </g>
-                          </svg>
+                        <div className={styles.taskTileIcon} data-testid="new-project-icon">
+                          <WorkflowAutomation size={24} fill="#525252" />
                         </div>
                       </div>
                       <p className={styles.taskTileTextContent}>
@@ -383,25 +287,8 @@ export function HomePageHeader({
                       <div
                         className={styles.taskTileIconWrapper}
                       >
-                        <div className={styles.taskTileIcon}>
-                          <svg
-                            fill="none"
-                            preserveAspectRatio="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <g>
-                              <rect
-                                fill="white"
-                                fillOpacity="0.01"
-                                height="24"
-                                width="24"
-                              />
-                              <path
-                                d={svgPaths.p38b1e480}
-                                fill="#525252"
-                              />
-                            </g>
-                          </svg>
+                        <div className={styles.taskTileIcon} data-testid="new-service-icon">
+                          <ServiceDesk size={24} fill="#525252" />
                         </div>
                       </div>
                       <p className={styles.taskTileTextContent}>
@@ -425,10 +312,7 @@ export function HomePageHeader({
         primaryButtonText="Apply"
         secondaryButtonText="Cancel"
         onPrimaryClick={() => {
-          // Trigger the apply function from DisplaySettingsContent
-          if ((window as any).__displaySettingsApply) {
-            (window as any).__displaySettingsApply();
-          }
+          displaySettingsApplyRef.current?.();
           setIsDisplaySettingsOpen(false);
         }}
         size="large"
@@ -438,6 +322,7 @@ export function HomePageHeader({
           onApply={() => {
             // Applied successfully
           }}
+          applyRef={displaySettingsApplyRef}
         />
       </Modal>
     </>

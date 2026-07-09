@@ -93,11 +93,11 @@
 
 .timelineDot.recommendation {
   background-color: rgba(138, 63, 252, 0.1); /* Purple with transparency */
-  border-color: #8a3ffc; /* Purple */
+  border-color: var(--cds-support-info-inverse);
 }
 
 .timelineDot.recommendation svg {
-  color: #8a3ffc; /* Purple */
+  color: var(--cds-support-info-inverse);
 }
 
 .timelineLine {

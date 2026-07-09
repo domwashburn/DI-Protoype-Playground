@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.50 — Repo cleanup sprint: lucide eliminated, dead deps removed, SVG imports deleted, CSS tokens compliant, documentation added
+
+- **lucide-react eliminated:** Migrated `CardLayoutToolbar` to Carbon `Select`, `Search`, `Grid`, `List`; migrated `DisplaySettingsContent` to Carbon `DragVertical`, `Pin`, `PinFilled`, `Search`; migrated `HomePageHeader` to Carbon `SettingsAdjust`, `WatsonxAi`, `SendAlt`, `WorkflowAutomation`, `ServiceDesk`; migrated `DecisionAutomationCard` to `ArrowRight`. Zero `lucide-react` imports remain in `src/`.
+- **SVG path imports deleted:** All 4 active SVG path file consumers migrated to `@carbon/icons-react`. `PinnedDecisionAutomationSection` uses `PinFilled`, `PlayFilledAlt`, `CircleDash`. `Card.tsx` uses `OverflowMenuVertical`. `ApplicationLayoutTemplate` unused import removed. `HomePage` Figma reference component replaced with `PlaceholderContent`.
+- **Dead files deleted:** `src/app/imports/` directory (125 files — ~56 Figma Make reference `.tsx` files + ~90 SVG path `.ts` files + 1 image) deleted after confirming zero active imports.
+- **Dead dependencies removed:** 37 packages removed from `package.json` — all Radix UI (20), MUI/Emotion (4), shadcn scaffold packages (`class-variance-authority`, `cmdk`, `vaul`, `next-themes`, `embla-carousel-react`, `recharts`, `react-day-picker`, `input-otp`, `sonner`), and unused utility packages (`tailwind-merge`, `date-fns`, `react-hook-form`, `react-popper`, `react-resizable-panels`, `react-responsive-masonry`, `react-slick`). `lucide-react` removed.
+- **CSS token compliance:** Replaced hardcoded hex colors and `font-size: Npx` values in `ObjectivesAndGoalsPage.module.css`, `ApplicationLayoutTemplate.module.css`, `Timeline`, `VersionList`, `BranchesPage` with `var(--cds-*)` equivalents.
+- **`window.__displaySettingsApply` anti-pattern removed:** Replaced with `applyRef` pattern — `DisplaySettingsContent` accepts a `MutableRefObject` and the parent `HomePageHeader` calls `applyRef.current?.()` on modal confirm.
+- **Documentation:** Created `readme.agents.md` for `SidePanel`, `CarbonHeader`, `CarbonSideNav`, `ApplicationLayoutTemplate`, `CardLayout`, `Modal`, `SideRailNavigation`. Updated `InboxLayout/readme.agents.md`. Created `playwright.config.ts` and `tests/icon-baselines.spec.ts`.
+- **Plan housekeeping:** `CARBON_MIGRATION_PLAN.md` phase 5A marked complete. `barrel-exports-plan.md` all sub-tasks marked done. `MIGRATION_EXECUTION_PLAN.md` SUPERSEDED header added. Grid plan steps 6.7 and 6.8 verified and marked complete.
+
 ## v2.49 — Resource Hub 1:1 Figma refactor + InsetContentArea primitive
 - **InsetContentArea:** New reusable layout primitive at `src/app/components/layouts/InsetContentArea/` that renders a Carbon `--cds-layer` card inset by 16px on top/left/right, with a sticky toolbar slot and a scrollable content slot that establishes a `container-type: inline-size` boundary so children reflow to available width.
 - **PageHeaderWrapper:** Added `breadcrumbOnly` prop — when true the wrapper returns `null` (the global breadcrumb bar from `AppLayout` provides the chrome).

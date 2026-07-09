@@ -68,7 +68,6 @@ import GenAINodePage from "../pages/GenAINodePage";
 import RulesAndPoliciesPage from "../pages/RulesAndPoliciesPage";
 import DecisionOutcomesPage from "../pages/DecisionOutcomesPage";
 import { useServices, useAssets, useObjectives, useGoals, useAutomations } from "../../data/hooks";
-import svgPaths from "../../imports/svg-nx4jc4uvwt";
 import styles from "./ApplicationLayoutTemplate.module.css";
 
 // ============================================================================
